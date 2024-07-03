@@ -39,4 +39,4 @@ El formulario de subida será el mismo
 En mi caso tengo pensado usar la API de virustotal.com
 1. Creación de estilos.
 2. Despliegue de la aplicación.
-3. Documentación (Puede hacerse durante todo el proceso)
+3. Documentación (Puede hacerse durante todo el proceso).
