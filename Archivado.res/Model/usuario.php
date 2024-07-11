@@ -9,15 +9,37 @@
         private string $contra;
         private int $privilegio;
         private string $correo;
+        private string $descripcion;
 
-        function __construct($id, $nombre, $contra, $privilegio, $correo){
+        function __construct($id, $nombre, $contra, $privilegio, $correo, $descripcion){
             $this->id = $id;
             $this->nombre = $nombre;
             $this->contra = $contra;
             $this->privilegio = $privilegio;
             $this->correo = $correo;
+            $this->descripcion = $descripcion;
         }
 
+        // Setters
+        public function setId($id){
+            $this->id = $id;
+        }
+        public function setNombre($nombre){
+            $this->nombre = $nombre;
+        }
+        public function setContra($contra){
+            $this->contra = $contra;
+        }
+        public function setPriv($privilegio){
+            $this->privilegio = $privilegio;
+        }
+        public function setCorreo($correo){
+            $this->correo = $correo;
+        }
+        public function setDesc($desc){
+            $this->descripcion = $desc;
+        }
+        // Getters
         public function getId(){
             return $this->id;
         }
@@ -27,11 +49,14 @@
         public function getContra(){
             return $this->contra;
         }
-        public function getPrivilegio(){
+        public function getPriv(){
             return $this->privilegio;
         }
         public function getCorreo(){
             return $this->correo;
+        }
+        public function getDesc(){
+            return $this->descripcion;
         }
 
         public function registrar(){

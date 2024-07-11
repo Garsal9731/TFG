@@ -2,7 +2,7 @@
 
     abstract class ConexionDB{
         private static $server = 'localhost';
-        private static $db = 'tiendadetiendas';
+        private static $db = 'archivadores';
         private static $user = 'root';
         private static $password = '123456';
     
