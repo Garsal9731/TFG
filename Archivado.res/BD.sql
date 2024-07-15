@@ -8,7 +8,7 @@ CREATE TABLE
     idusuario int (50) NOT NULL AUTO_INCREMENT,
     nombre varchar(200) COLLATE utf8_bin NOT NULL,
     contrasenya varchar(200) COLLATE utf8_bin NOT NULL,
-    privilegio int(50) COLLATE utf8_bin NOT NULL,
+    privilegio int(50) NOT NULL,
     correo varchar(900) COLLATE utf8_bin NOT NULL,
     descripcion varchar(900) COLLATE utf8_bin,
     PRIMARY KEY (idusuario)
@@ -27,16 +27,15 @@ CREATE TABLE
 CREATE TABLE
   IF NOT EXISTS contenido (
     idpost int (50) NOT NULL AUTO_INCREMENT,
-    tipo_contenido int(50) COLLATE utf8_bin NOT NULL,
+    tipo_contenido varchar(900) COLLATE utf8_bin NOT NULL,
     nombre varchar(200) COLLATE utf8_bin NOT NULL,
     detalles varchar(900) COLLATE utf8_bin,
     Autor_original varchar(900) COLLATE utf8_bin NOT NULL,
-    Autor_post int(50) COLLATE utf8_bin NOT NULL,
-    -- Actua como un array de IDs de los archivos subidos
+    Autor_post int(50) NOT NULL,
     Archivos varchar(999) COLLATE utf8_bin NOT NULL,
-    fecha_subida Date NOT NULL,
+    fecha_subida DATE NOT NULL,
     PRIMARY KEY (idpost),
-    FOREIGN KEY (Autor_post) REFERENCES usuarios(idusuario),
+    FOREIGN KEY (Autor_post) REFERENCES usuarios(idusuario)
   );
 
 INSERT INTO usuarios (nombre, contrasenya, privilegio, correo) VALUES 
