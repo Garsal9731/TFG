@@ -19,6 +19,7 @@ CREATE TABLE
     idarchivo int (50) NOT NULL AUTO_INCREMENT,
     usuario_subida int(50) COLLATE utf8_bin NOT NULL,
     descripcion varchar(900) COLLATE utf8_bin NOT NULL,
+    ruta_archivo varchar(900) COLLATE utf8_bin NOT NULL,
     PRIMARY KEY (idarchivo),
     FOREIGN KEY (usuario_subida) REFERENCES usuarios(idusuario)
   );
