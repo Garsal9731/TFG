@@ -2,17 +2,23 @@
     <a href="../Controller/index.php"><h1>TiendaDeTiendas</h1></a>
     <div class="separador_header">
     <?php
+        // ! REVISAR LA ESTRUCTURA
             if(isset($privilegio)){
+
+                // Si es admin
                 if($privilegio==1){
                     echo '<a href="../Controller/panelAdmin.php">Panel de Administrador</a>';
                 }
             }else{
+
                 // Hacemos que se vea el panel de admin si los privilegios son los adecuados
                 if($usuarioSesion->getPrivilegio()==1){
                     echo '<a href="../Controller/panelAdmin.php">Panel de Administrador</a>';
                 }
             }
             if(isset($privilegio)){
+
+                // Si el usuario es anonimo (privilegio 2) aparece el botón para iniciar sesión o registrarse
                 if($privilegio==2){
                     echo '<a href="../Controller/login.php">Iniciar Sesión/Registrarse</a>';
                 }else{

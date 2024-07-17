@@ -25,48 +25,48 @@
         }
 
         // Setters
-        public function setId($id){
-            $this->id = $id;
-        }
-        public function setTipo($tipo){
-            $this->tipo = $tipo;
-        }
-        public function setAutor($autor){
-            $this->autor = $autor;
-        }
-        public function setAutorOg($autor_original){
-            $this->autor_original = $autor_original;
-        }
-        public function setDetalles($detalles){
-            $this->detalles = $detalles;
-        }
-        public function setIdArch($id_archivos){
-            $this->id_archivos = $id_archivos;
-        }
-        public function setIdAutor($id_autor){
-            $this->$id_autor = $id_autor;
-        }
+            public function setId($id){
+                $this->id = $id;
+            }
+            public function setTipo($tipo){
+                $this->tipo = $tipo;
+            }
+            public function setAutor($autor){
+                $this->autor = $autor;
+            }
+            public function setAutorOg($autor_original){
+                $this->autor_original = $autor_original;
+            }
+            public function setDetalles($detalles){
+                $this->detalles = $detalles;
+            }
+            public function setIdArch($id_archivos){
+                $this->id_archivos = $id_archivos;
+            }
+            public function setIdAutor($id_autor){
+                $this->$id_autor = $id_autor;
+            }
 
         // Getters
-        public function getId(){
-            return $this->id;
-        }
-        public function getTipo(){
-            return $this->tipo;
-        }
-        public function getAutor(){
-            return $this->autor;
-        }
-        public function getAutorOg(){
-            return $this->autor_original;
-        }
-        public function getDetalles(){
-            return $this->detalles;
-        }
-        public function getIdArch(){
-            return $this->id_archivos;
-        }
-        public function getIdAutor(){
-            return $this->$id_autor;
-        }
+            public function getId(){
+                return $this->id;
+            }
+            public function getTipo(){
+                return $this->tipo;
+            }
+            public function getAutor(){
+                return $this->autor;
+            }
+            public function getAutorOg(){
+                return $this->autor_original;
+            }
+            public function getDetalles(){
+                return $this->detalles;
+            }
+            public function getIdArch(){
+                return $this->id_archivos;
+            }
+            public function getIdAutor(){
+                return $this->$id_autor;
+            }
     }

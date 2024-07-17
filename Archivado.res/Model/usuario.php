@@ -1,7 +1,5 @@
 <?php
 
-    require 'producto.php';
-
     class Usuario{
 
         private int $id;

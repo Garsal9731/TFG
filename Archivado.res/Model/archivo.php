@@ -17,18 +17,18 @@
         }
 
         // Getters
-        public function getId(){
-            return $this->id;
-        }
-        public function getUsuario(){
-            return $this->usuario_subida;
-        }
-        public function getDesc(){
-            return $this->descripcion;
-        }
-        public function getRuta_archivo(){
-            return $this->ruta_archivo;
-        }
+            public function getId(){
+                return $this->id;
+            }
+            public function getUsuario(){
+                return $this->usuario_subida;
+            }
+            public function getDesc(){
+                return $this->descripcion;
+            }
+            public function getRuta_archivo(){
+                return $this->ruta_archivo;
+            }
 
         // public static function aumentarStock(int $id){
 
