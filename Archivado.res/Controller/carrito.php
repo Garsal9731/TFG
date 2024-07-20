@@ -1,5 +1,6 @@
 <?php
 
+    // ! NO CAMBIADO
     session_start();
 
     require '../Model/producto.php';

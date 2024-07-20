@@ -1,5 +1,6 @@
 <?php
 
+    // ! NO CAMBIADO
     session_start();
 
     if(!isset($_SESSION["usuario"])){

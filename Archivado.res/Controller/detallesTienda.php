@@ -1,5 +1,6 @@
 <?php
 
+    // ! NO CAMBIADO
     require '../Model/tienda.php';
 
     session_start();

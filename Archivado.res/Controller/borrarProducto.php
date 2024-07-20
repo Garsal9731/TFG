@@ -1,5 +1,6 @@
 <?php
 
+    // ! NO CAMBIADO
     include '../Model/producto.php';
 
     $producto = Producto::getProductoById($_GET["idproducto"]);

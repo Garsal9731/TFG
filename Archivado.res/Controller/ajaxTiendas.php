@@ -1,4 +1,6 @@
 <?php
+
+  // ! NO CAMBIADO
   require '../Model/tienda.php';
   $resultadoBD = Tienda::getTiendas();
 

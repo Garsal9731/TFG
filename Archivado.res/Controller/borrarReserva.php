@@ -1,5 +1,6 @@
 <?php
 
+    // ! NO CAMBIADO
     require '../Model/reserva.php';
 
     $reserva = Reserva::getReservaById($_GET["reserva"]);

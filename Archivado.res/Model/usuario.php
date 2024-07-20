@@ -1,5 +1,7 @@
 <?php
 
+    require 'conectorBD.php';
+
     class Usuario{
 
         private int $id;
@@ -85,14 +87,16 @@
         public static function getUsuariosNombre($nombre){
             $conexion = ConexionDB::connectDB();
 
-            $seleccion = "SELECT idusuario, nombre, contrasenya, privilegio, correo FROM usuarios WHERE nombre='".$nombre."';";
+            $seleccion = "SELECT idusuario, nombre, contrasenya, privilegio, correo, descripcion FROM usuarios WHERE nombre='".$nombre."';";
 
             $consulta = $conexion->query($seleccion);
             
             $usuarios = [];
             
             while($registro = $consulta->fetchObject()){
-              $usuarios[] = new Usuario($registro->idusuario, $registro->nombre, $registro->contrasenya, $registro->privilegio, $registro->correo);
+                var_dump($registro);
+
+              $usuarios[] = new Usuario($registro->idusuario, $registro->nombre, $registro->contrasenya, $registro->privilegio, $registro->correo, $registro->descripcion);
             }
            
             return $usuarios;    
@@ -118,8 +122,9 @@
                 if(password_verify($this->contra, $hash)){
                     $this->id = $usuario->getId();
                     $this->contra = $hash;
-                    $this->privilegio = $usuario->getPrivilegio();
+                    $this->privilegio = $usuario->getPriv();
                     $this->correo = $usuario->getCorreo();
+                    $this->descripcion = $usuario->getDesc();
                     return true;
                 }
             }

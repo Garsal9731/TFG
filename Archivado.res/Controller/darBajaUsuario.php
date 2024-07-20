@@ -1,4 +1,6 @@
 <?php
+
+  // ! REUTILIZAR
   require '../Model/usuario.php';
   $usuarioBorrar = Usuario::getUsuarioById($_GET['id']);
 

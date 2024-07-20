@@ -1,5 +1,6 @@
 <?php
 
+  // ! REUTILIZAR
   require '../Model/usuario.php';
 
   $resultadoBD = Usuario::getUsuarios();

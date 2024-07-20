@@ -1,5 +1,6 @@
 <?php
 
+    // ! NO CAMBIADO
     include '../Model/tienda.php';
 
     $tienda = new Tienda($_GET["idtienda"],"",0,"");

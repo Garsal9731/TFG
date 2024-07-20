@@ -3,12 +3,11 @@
     session_start();
 
     require '../Model/usuario.php';
-
-    $usuario = new Usuario("0",$_POST["nombre"],$_POST["contra"],"0","correo");
+    $usuario = new Usuario(0,$_POST["nombre"],$_POST["contra"],0,"correo","descripcion");
     
     if($usuario->validarUsuario()){
         $_SESSION["usuario"] = serialize($usuario);
-        $_SESSION["privilegio"] = $usuario->getPrivilegio();
+        $_SESSION["privilegio"] = $usuario->getPriv();
         $_SESSION["idusuario"] = $usuario->getId();
         $_SESSION["carrito"] = array();
         header('Location: index.php');
