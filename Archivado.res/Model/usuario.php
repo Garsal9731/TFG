@@ -61,7 +61,7 @@
 
         public function registrar(){
             $conexion = ConexionDB::connectDB();
-            $insercion = 'INSERT INTO usuarios (nombre, contrasenya, privilegio, correo) VALUES ("'.$this->nombre.'", "'.$this->contra.'", "'.$this->privilegio.'", "'.$this->correo.'");';
+            $insercion = 'INSERT INTO usuarios (nombre, contrasenya, privilegio, correo, descripcion) VALUES ("'.$this->nombre.'", "'.$this->contra.'", "'.$this->privilegio.'", "'.$this->correo.'", "'.$this->descripcion.'");';
             $conexion->exec($insercion);
         }
 

@@ -10,7 +10,7 @@
 
     $contra = password_hash($_POST["contra"], PASSWORD_DEFAULT);
     
-    $usuario = new Usuario("0",$_POST["nombre"],$contra,$privilegio,$_POST["correo"]);
+    $usuario = new Usuario("0",$_POST["nombre"],$contra,$privilegio,$_POST["correo"],"No hay descripción.");
 
     $usuario->registrar();
 
