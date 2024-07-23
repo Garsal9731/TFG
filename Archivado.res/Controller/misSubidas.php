@@ -1,6 +1,6 @@
 <?php
 
-    require '../Model/reserva.php';
+    require '../Model/usuario.php';
 
     session_start();
 
@@ -12,6 +12,5 @@
         $privilegio = $_SESSION["privilegio"];
     }
 
-    $reservas = Reserva::getReservasByUsuario($_SESSION["idusuario"]);
 
-    include '../View/reservas.php';
+    include '../View/subidas.php';

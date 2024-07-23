@@ -1,5 +1,5 @@
 <header>
-    <a href="../Controller/index.php"><h1>TiendaDeTiendas</h1></a>
+    <a href="../Controller/index.php"><h1>Archivado.res</h1></a>
     <div class="separador_header">
     <?php
         // ! REVISAR LA ESTRUCTURA
@@ -31,12 +31,12 @@
     </div>
 </header>
 <p class="barra_opciones">
-    <a href="../Controller/index.php">Ver productos</a>
-    <a href="../Controller/tiendas.php">Ver tiendas</a>
+    <a href="../Controller/index.php">Ver archivos</a>
+    <!-- <a href="../Controller/tiendas.php">Ver tiendas</a> -->
     <a href="../Controller/formularioProductos.php">Crear Producto</a>
     <a href="../Controller/formularioTiendas.php">Crear Tienda</a>
     <a href="../Controller/misproductos.php">Mis Productos</a>
     <a href="../Controller/mistiendas.php">Mis Tiendas</a>
-    <a href="../Controller/misReservas.php">Mis Reservas</a>
-    <a href="../Controller/carrito.php">Ver Carrito</a>
+    <a href="../Controller/misSubidas.php">Mis Subidas</a>
+    <!-- <a href="../Controller/carrito.php">Ver Carrito</a> -->
 </p>
