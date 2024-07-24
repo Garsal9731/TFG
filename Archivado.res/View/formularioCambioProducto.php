@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="../View/estilos.css">
-        <title>Registrar Producto</title>
-    </head>
+    <?php 
+        $nombrePagina="Registrar Producto";
+        include 'head.php';
+    ?>
     <body>
         <?php include 'cabecera.php';?>
         <script>

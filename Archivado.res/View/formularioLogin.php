@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link rel="stylesheet" href="../View/estilos.css">
-      <title>Login</title>
-  </head>
+  <?php 
+    $nombrePagina="Login";
+    include 'head.php';
+  ?>
   <body class="cuerpo_registro">
     <div class="formulario_login">
       <form action="../Controller/iniciarSesion.php" method="POST" autocomplete="off">
