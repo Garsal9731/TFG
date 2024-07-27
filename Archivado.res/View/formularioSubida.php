@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <?php 
-        $nombrePagina="Login";
+        $nombrePagina="Nueva Subida";
         include 'head.php';
     ?>
     <body>
@@ -21,20 +21,15 @@
                 }
             };
         </script>
-        <form action="../Controller/registrarProducto.php" method="POST" enctype="multipart/form-data" autocomplete="off">
+        <form action="../Controller/validarSubidas.php" method="POST" enctype="multipart/form-data" autocomplete="off">
             <p><img id="preview" src="#" alt="Preview Foto Nueva" width="300" height="300"/></p>
             <p>
-                <label for="file">Foto del producto:</label>
-                <input type="file" name="file" id="file" accept="image/*" onchange="loadFile(event)" required>
+                <label for="archivos">Archivo a subir:</label>
+                <input type="file" name="archivos[]" id="archivos" onchange="loadFile(event)" required multiple>
             </p>
-            <p>
-                <label for="nombre">Nombre del producto:</label>
+            <!-- <p>
+                <label for="nombre">Nombre:</label>
                 <input type="nombre" name="nombre" id="nombre" placeholder="Nombre" required>
-            </p>
-            <p>
-                <label for="precio">Precio del producto:</label>
-                <!-- Añadimos step para poder añadir decimales a la cifra -->
-                <input type="number" name="precio" id="precio" step="0.01" placeholder="Precio" required>
             </p>
             <p>
                 <label for="unidades">Unidades disponibles:</label>
@@ -43,7 +38,7 @@
             <p>
                 <label for="descripcion">Descripción del producto:</label>
                 <textarea name="descripcion" cols="60" rows="6"></textarea>
-            </p>
+            </p> -->
             <input type="submit" name="registrar" id="registrar" value="Registrar Producto">
         </form>
     </body>

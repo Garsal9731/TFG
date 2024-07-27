@@ -9,7 +9,7 @@
       <form action="../Controller/iniciarSesion.php" method="POST" autocomplete="off">
         <p>  
           <label for="nombre">Nombre Usuario:</label>
-          <input type="text" name="nombre" required>
+          <input type="text" name="nombre" required autofocus>
         </p>
         <p>
           <label for="contra">Contraseña:</label>
