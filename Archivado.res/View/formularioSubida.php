@@ -39,7 +39,7 @@
                 <label for="descripcion">Descripción del producto:</label>
                 <textarea name="descripcion" cols="60" rows="6"></textarea>
             </p> -->
-            <input type="submit" name="registrar" id="registrar" value="Registrar Producto">
+            <input type="submit" name="registrar" id="registrar" value="Subir Archivos">
         </form>
     </body>
 </html>
