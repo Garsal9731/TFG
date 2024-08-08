@@ -59,6 +59,16 @@
             return $this->descripcion;
         }
 
+        public function buscarId(){
+            $conexion = ConexionDB::connectDB();
+            $seleccion = "SELECT idusuario FROM usuarios WHERE nombre=".$this->nombre." AND privilegio=".$this->privilegio." AND correo=".$this->correo." AND contrasenya=".$this->contra.";";
+            $consulta = $conexion->query($seleccion);
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+            $this->id = $resultado["idusuario"];
+            
+            return $this->id;
+        }
+
         public function registrar(){
             $conexion = ConexionDB::connectDB();
             $insercion = 'INSERT INTO usuarios (nombre, contrasenya, privilegio, correo, descripcion) VALUES ("'.$this->nombre.'", "'.$this->contra.'", "'.$this->privilegio.'", "'.$this->correo.'", "'.$this->descripcion.'");';

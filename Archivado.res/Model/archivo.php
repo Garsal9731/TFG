@@ -5,15 +5,15 @@
     class Archivo{
 
         private int $id;
-        private string $usuario_subida;
-        private string $descripcion;
+        private int $usuario_subida;
+        private string $formato;
         private string $ruta_archivo;
         private string $nombre;
 
-        function __construct($id, $usuario_subida, $descripcion, $ruta_archivo, $nombre){
+        function __construct($id, $usuario_subida, $formato, $ruta_archivo, $nombre){
             $this->id = $id;
             $this->usuario_subida = $usuario_subida;
-            $this->getDescripcion = $descripcion;
+            $this->formato = $formato;
             $this->ruta_archivo = $ruta_archivo;
             $this->nombre = $nombre;
         }
@@ -25,8 +25,8 @@
             public function getUsuario(){
                 return $this->usuario_subida;
             }
-            public function getDesc(){
-                return $this->descripcion;
+            public function getFormato(){
+                return $this->formato;
             }
             public function getRuta_archivo(){
                 return $this->ruta_archivo;
@@ -35,11 +35,13 @@
                 return $this->nombre;
             }
 
-        public function registrar(){
-            
-            $conexion = ConexionDB::connectDB();
-            $actualizacion = 'INSERT INTO  unidades="'.$stockAumentado.'" WHERE idproducto="'.$id.'";';
-            $conexion->exec($actualizacion);
-        }
+            public function registrar(){
+                
+                $conexion = ConexionDB::connectDB();
+
+                $registro = "INSERT INTO archivos (usuario_subida, formato, ruta_archivo, nombre) VALUES ('".$this->usuario_subida."', '".$this->formato."', '".$this->ruta_archivo."','".$this->nombre."');";
+                $conexion->exec($registro);
+
+            }
 
     }

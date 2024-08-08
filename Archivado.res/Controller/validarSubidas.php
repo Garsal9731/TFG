@@ -36,7 +36,7 @@ function subirAPI($nombre, $tipoArchivo, $cifrado){
   }
 }
 
-function analizarAPI($idArchivo){
+function analizarAPI($idArchivo,$nombre){
 
   $curl = curl_init();
 
@@ -67,6 +67,7 @@ function analizarAPI($idArchivo){
     // Si el analisis no se ha completado se recarga la página
     if($analisis["data"]["attributes"]["status"] !== "completed"){
       // ! Añadir mensajes de analisis (analizando archivo (nombre))
+      echo "<p>Analizando el archivo ".$nombre."......</p>";
       header("Refresh:2");
     }
     $maliciosos = $analisis["data"]["attributes"]["stats"]["malicious"];
@@ -79,14 +80,7 @@ function analizarAPI($idArchivo){
   }
 }
 
-require '../Model/usuario.php';
-
-// ! SUBIR LOS ARCHIVOS Y ADAPTARLOS A EL ESQUEMA DE LA BASE DE DATOS
-echo "<pre>";
-    var_dump($_FILES["archivos"]);
-echo "</pre>";
-echo "<br>";
-echo "-------------------------------<br>";
+require '../Model/archivo.php';
 
 // Comprobamos que las cookies están creadas
 if(!isset($_COOKIE["nombresTemporales"])){
@@ -100,11 +94,13 @@ if(!isset($_COOKIE["nombresTemporales"])){
   }
   
   $extensiones = array();
+  $nombresOriginales = array();
   foreach($_FILES["archivos"]["name"] as $nombreArchivo){
     $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
 
     // Añadimos al array la ultima posición del array (sería la extension del archivo) junto a un punto
     array_push($extensiones,".".$extension);
+    array_push($nombresOriginales,$nombreArchivo);
   }
 
   // Preestablecemos los arrays
@@ -117,12 +113,12 @@ if(!isset($_COOKIE["nombresTemporales"])){
     array_push($nombresCompletos,$nombre);
 
     if(move_uploaded_file($_FILES['archivos']['tmp_name'][$contador],"../cuarentena/$nombre")){
-      echo "Se ha subido el archivo ".$nombre."<br>";
+      echo "Se ha subido el archivo temporal: ".$nombre."<br>";
     }else{
       echo "NO SE HA PODIDO SUBIR EL ARCHIVO A LA CUARENTENA<br>";
     }
 
-    $datos = file_get_contents($ruta);
+    $datos = file_get_contents("../cuarentena/$nombre");
     $cifrado = base64_encode($datos);
 
     $tipoArchivo = $_FILES["archivos"]["type"][$contador];
@@ -142,50 +138,68 @@ if(!isset($_COOKIE["nombresTemporales"])){
   // Creamos cookies para mantener los datos
   setcookie("nombresTemporales", json_encode($nombresCompletos), time() + (86400 * 30), "/");
   setcookie("idsAnalisis", json_encode($idsArchivos), time() + (86400 * 30), "/");
+  setcookie("nombresOriginales", json_encode($nombresOriginales), time() + (86400 * 30), "/");
 
   // Refrescamos la página
   header("Refresh:0");
 
 }else{
-  var_dump($_COOKIE["nombresTemporales"]);
-  echo "<br>";
-  var_dump($_COOKIE["idsAnalisis"]);
-  echo "<br>";
   $nombresTemporales = json_decode($_COOKIE["nombresTemporales"]);
+  $nombresOriginales = json_decode($_COOKIE["nombresOriginales"]);
   $arrayIds = json_decode($_COOKIE["idsAnalisis"]);
 }
 
   for($contador=0; $contador<count($arrayIds); $contador++){
-    $resultados = analizarAPI($arrayIds[$contador]);
 
-    var_dump($resultados);
+    $nombre = $nombresOriginales[$contador];
+    $nombreTemporal = $nombresTemporales[$contador];
+
+    echo "<p>NOMBRE: ".$nombre."</p>";
+    $resultados = analizarAPI($arrayIds[$contador],$nombre);
+
+    echo "RESULTADOS: ".var_dump($resultados);
     echo "<br>";
-
-    // ! una vez analizado todo borrar los archivos de cuarentena y registrar en la base de datos con sus nombres originales y una id
 
     // Si da afirmativo la detección o falla el analisis
     if($resultados["malicioso"]!==0 || $resultados["sospechoso"]!==0 || $resultados["fallo"]!==0){
       echo "<p>El archivo ".$_FILES["archivos"]["name"][$contador]." no se ha podido analizar o a dado positivo como amenaza.</p>";
-      echo "<p>Crea un ticket para su revisión con el nombre temporal <strong>".$nombresTemporales[$contador]."</strong> y el asunto <strong>REVISIÓN DE ARCHIVO</strong></p>";
+      echo "<p>Crea un ticket para su revisión con el nombre temporal <strong>".$nombreTemporal."</strong> y el asunto <strong>REVISIÓN MANUAL DE ARCHIVO</strong></p>";
+
+      // ! AÑADIR ENLACE DE TICKETS DIRECTOS CUANDO HAYA SIDO CREADO EL SISTEMA DE TICKETS
     }else{
       
-      $nombre = $_FILES['archivos']['name'][$contador];
-      if(move_uploaded_file($_FILES['archivos']['tmp_name'][$contador],"../subidas/$nombre")){
-        echo "¡Se ha subido el archivo ".$nombre."!<br>";
+      echo "<p>¡ANALISIS COMPLETADO!</p>";
 
-        // Borramos el archivo temporal de la cuarentena
-        unlink("../cuarentena/".$nombresTemporales[$contador]);
+      if(file_exists("../subidas/".$nombre)){
+        echo "<p>¡EL ARCHIVO YA HA SIDO SUBIDO!</p>";
 
-        // ! REGISTRAR EN LA BASE DE DATOS Y CAMBIAR EL NOMBRE DE GUARDADO POR LA ID
       }else{
-        echo "NO SE HA PODIDO SUBIR EL ARCHIVO<br>";
-      }
-      
-    }
 
+        // ! CAMBIAR NOMBRE PARA QUE SEA LA ID DEL ARCHIVO
+        // Para evitar consumo extra movemos el archivo temporal de la cuarentena a la subida y lo renombramos
+        if(rename("../cuarentena/".$nombreTemporal,"../subidas/".$nombre)){
+          echo "<p>¡Se ha subido el archivo ".$nombre."!</p>";
+
+          $extension = ".".explode(".",$nombre)[1];
+          $idUsuario = $_COOKIE["idUsuario"];
+          $ruta = "../subidas/".$nombre;
+
+          $archivo = new Archivo("0",$idUsuario,$extension,$ruta,$nombre);
+          $archivo->registrar();
+
+
+        }else{
+          echo "NO SE HA PODIDO SUBIR EL ARCHIVO<br>";
+        }
+      }
+    }
   }
 
 echo "<br><br><br>";
+
+setcookie("nombresTemporales",'',-1, "/");
+setcookie("idsAnalisis",'',-1, "/");
+setcookie("nombresOriginales",'',-1, "/");
 
 
 // header('Location: index.php');

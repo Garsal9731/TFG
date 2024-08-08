@@ -18,7 +18,7 @@ CREATE TABLE
   IF NOT EXISTS archivos (
     idarchivo int (50) NOT NULL AUTO_INCREMENT,
     usuario_subida int(50) COLLATE utf8_bin NOT NULL,
-    descripcion varchar(900) COLLATE utf8_bin NOT NULL,
+    formato varchar(15) COLLATE utf8_bin NOT NULL,
     ruta_archivo varchar(900) COLLATE utf8_bin NOT NULL,
     nombre varchar(900) COLLATE utf8_bin NOT NULL,
     PRIMARY KEY (idarchivo),
