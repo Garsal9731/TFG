@@ -7,9 +7,6 @@
         header('Location: registro.php');
         die();
     }
-    if(isset($_COOKIE["idUsuario"])){
-        setcookie('idUsuario', '', -1, '/');
-    }
 
     session_destroy();
 

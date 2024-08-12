@@ -1,6 +1,6 @@
 <?php
 
-    require 'conectorBD.php';
+    require 'archivo.php';
 
     class Contenido{
 

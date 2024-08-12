@@ -9,8 +9,6 @@
         $_SESSION["usuario"] = serialize($usuario);
         $_SESSION["privilegio"] = $usuario->getPriv();
         $_SESSION["idusuario"] = $usuario->getId();
-        setcookie("idUsuario",$usuario->getId(), time() + (86400 * 30), "/");
-        $_SESSION["carrito"] = array();
         header('Location: index.php');
         die();
     }else{

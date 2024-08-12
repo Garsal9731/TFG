@@ -35,13 +35,29 @@
                 return $this->nombre;
             }
 
-            public function registrar(){
+        public function registrar(){
                 
-                $conexion = ConexionDB::connectDB();
+            $conexion = ConexionDB::connectDB();
 
-                $registro = "INSERT INTO archivos (usuario_subida, formato, ruta_archivo, nombre) VALUES ('".$this->usuario_subida."', '".$this->formato."', '".$this->ruta_archivo."','".$this->nombre."');";
-                $conexion->exec($registro);
+            $registro = "INSERT INTO archivos (usuario_subida, formato, ruta_archivo, nombre) VALUES ('".$this->usuario_subida."', '".$this->formato."', '".$this->ruta_archivo."','".$this->nombre."');";
+            $conexion->exec($registro);
+        }
 
+        // ? Usar esta función antes de registrar el archivo o la id no será la misma
+        public static function siguienteId(){
+
+            $conexion = ConexionDB::connectDB();
+
+            $seleccion = "SELECT idarchivo FROM archivos ORDER BY -idarchivo LIMIT 1;";
+            $consulta = $conexion->query($seleccion);
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+            
+            if($resultado["idarchivo"]==null){
+                $siguienteId = 1;
+            }else{
+                $siguienteId = $resultado["idarchivo"]+1;
             }
 
+            return $siguienteId;
+        }
     }
