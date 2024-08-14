@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-  <?php 
-      $nombrePagina="Inicio";
-      include 'head.php';
-  ?>
-  <body>
 <?php
 
   function subirAPI($nombre, $tipoArchivo, $cifrado){
@@ -75,7 +68,6 @@
       if($analisis["data"]["attributes"]["status"] !== "completed"){
         // ! Añadir mensajes de analisis (analizando archivo (nombre))
         echo "<p>Analizando el archivo ".$nombre."......</p>";
-        echo "<p>ESTADO: ".$analisis["data"]["attributes"]["status"]."</p>";
         header("Refresh:2");
         die();
       }else{
@@ -183,17 +175,30 @@
 
       $arrayIdsArchivo = array();
 
-      // Creamos el nombre con la Id
+      $idUsuario = $_SESSION["idusuario"];
+
+      // Sacamos la extensión
       $extension = ".".explode(".",$nombre)[1];
-      $siguienteId = Archivo::siguienteId();
 
-      array_push($arrayIdsArchivo,$siguienteId);
+      // Registramos el archivo
+      $archivo = new Archivo("0",$idUsuario,$extension,"ruta",$nombre);
+      $archivo->registrar();
 
-      $nombreSubida = $siguienteId.$extension; 
+      // Sacamos su ID
+      $ultimaId = Archivo::ultimaId();
+
+      array_push($arrayIdsArchivo,$ultimaId);
+
+      $nombreSubida = $ultimaId.$extension; 
+
+      $ruta = "../subidas/".$nombreSubida;
+
+      Archivo::cambiarRutaId($ruta,$ultimaId);
 
       // Si existe el archivo no se subirá
       if(file_exists("../subidas/".$nombreSubida)){
         echo "<p>¡EL ARCHIVO YA HA SIDO SUBIDO!</p>";
+        Archivo::borrarPorId($ultimaId);
 
       }else{
 
@@ -201,15 +206,9 @@
         if(rename("../cuarentena/".$nombreTemporal,"../subidas/".$nombreSubida)){
           echo "<p>¡Se ha subido el archivo ".$nombre."!</p>";
 
-          $idUsuario = $_SESSION["idusuario"];
-
-          $ruta = "../subidas/".$nombreSubida;
-
-          $archivo = new Archivo($siguienteId,$idUsuario,$extension,$ruta,$nombre);
-          $archivo->registrar();
-
         }else{
           echo "NO SE HA PODIDO SUBIR EL ARCHIVO<br>";
+          Archivo::borrarPorId($ultimaId);
         }
       }
     }
@@ -227,12 +226,9 @@
     setcookie("nombresOriginales",'',-1, "/");
   }
 
-  setcookie("IdsArchivos",json_encode($arrayIdsArchivo),time() + (86400 * 30), "/");
+  setcookie("idsArchivos",json_encode($arrayIdsArchivo),time() + (86400 * 30), "/");
 
   echo '<a href="crearPost.php"><button>Ir al formulario</button></a>';
 
   // header('Location: index.php');
   // die();
-  ?>
-  </body>
-</html>

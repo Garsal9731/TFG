@@ -43,8 +43,23 @@
             $conexion->exec($registro);
         }
 
-        // ? Usar esta función antes de registrar el archivo o la id no será la misma
-        public static function siguienteId(){
+        public static function borrarPorId($id){
+            $conexion = ConexionDB::connectDB();
+
+            $registro = "DELETE FROM archivos WHERE idarchivo=".$id.";";
+            $conexion->exec($registro);
+        }
+
+        public static function cambiarRutaId($ruta,$id){
+
+            $conexion = ConexionDB::connectDB();
+
+            $actualizacion = "UPDATE archivos SET ruta_archivo='".$ruta."' WHERE idarchivo='".$id."';";
+            echo $actualizacion;
+            $conexion->exec($actualizacion);
+        }
+
+        public static function ultimaId(){
 
             $conexion = ConexionDB::connectDB();
 
@@ -53,11 +68,23 @@
             $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
             
             if($resultado["idarchivo"]==null){
-                $siguienteId = 1;
+                $ultimaId = 1;
             }else{
-                $siguienteId = $resultado["idarchivo"]+1;
+                $ultimaId = $resultado["idarchivo"];
             }
 
-            return $siguienteId;
+            return $ultimaId;
+        }
+
+        public static function getArchivoById($id){
+
+            $conexion = ConexionDB::connectDB();
+        
+            $seleccion = 'SELECT * FROM archivos WHERE idarchivo="'.$id.'";';
+
+            $consulta = $conexion->query($seleccion);
+            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+
+            var_dump($resultado);
         }
     }
