@@ -6,7 +6,9 @@
 
             // Si es admin
             if($privilegio==1){
+                echo '<a href="../Controller/subir.php"><i class="fa-solid fa-upload"></i></a>';
                 echo '<a href="../Controller/panelAdmin.php">Panel de Administrador</a>';
+                echo '<a href="../Controller/cerrarSesion.php">Cerrar Sesión</a>';
             }else{
                     
                 echo '<a href="../Controller/subir.php"><i class="fa-solid fa-upload"></i></a>';
@@ -20,12 +22,14 @@
             }
         }else{
 
-            echo '<a href="../Controller/subir.php"><i class="fa-solid fa-upload"></i></a>';
 
             // Hacemos que se vea el panel de admin si los privilegios son los adecuados
             if($usuarioSesion->getPriv()==1){
+                echo '<a href="../Controller/subir.php"><i class="fa-solid fa-upload"></i></a>';
                 echo '<a href="../Controller/panelAdmin.php">Panel de Administrador</a>';
+                echo '<a href="../Controller/cerrarSesion.php">Cerrar Sesión</a>';
             }else{
+                echo '<a href="../Controller/subir.php"><i class="fa-solid fa-upload"></i></a>';
                 echo '<a href="../Controller/cerrarSesion.php">Cerrar Sesión</a>';
             }
         }

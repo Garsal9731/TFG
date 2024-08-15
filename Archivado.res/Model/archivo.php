@@ -55,7 +55,6 @@
             $conexion = ConexionDB::connectDB();
 
             $actualizacion = "UPDATE archivos SET ruta_archivo='".$ruta."' WHERE idarchivo='".$id."';";
-            echo $actualizacion;
             $conexion->exec($actualizacion);
         }
 
@@ -77,14 +76,16 @@
         }
 
         public static function getArchivoById($id){
-
+            
             $conexion = ConexionDB::connectDB();
         
             $seleccion = 'SELECT * FROM archivos WHERE idarchivo="'.$id.'";';
 
             $consulta = $conexion->query($seleccion);
-            $resultado = $consulta->fetch(PDO::FETCH_ASSOC);
+            
+            $registro = $consulta->fetchObject();
+            $archivo = new Archivo($registro->idarchivo, $registro->usuario_subida, $registro->formato, $registro->ruta_archivo, $registro->nombre);
 
-            var_dump($resultado);
+            return $archivo;
         }
     }

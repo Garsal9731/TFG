@@ -14,12 +14,16 @@
 
     require '../Model/contenido.php';
 
-    // ! DISPARIDAD SI  NO HAY ARCHIVOS, LA ULTIMA ID SE VOLVERÁ 1 PERO SERA DISTINTA EN LA BASE DE DATOS
     if(isset($_COOKIE["idsArchivos"])){
         $archivos = json_decode($_COOKIE["idsArchivos"],true);
     }
-    var_dump($archivos);
 
+    $arrayArchivos = [];
     foreach($archivos as $id){
-        Archivo::getArchivoById($id);
+        $archivo = Archivo::getArchivoById($id);
+        var_dump($archivo);
+        array_push($arrayArchivos,$archivo);
     }
+
+    // ! AÑADIR FORMULARIO EN VISTAS Y USAR ARRAY DE OBJETOS PARA RECOGER DATOS
+    var_dump($arrayArchivos);
