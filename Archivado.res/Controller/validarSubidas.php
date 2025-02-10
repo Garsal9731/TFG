@@ -1,5 +1,8 @@
 <?php
 
+  $nombrePagina="Subiendo...";
+  include '../View/head.php';
+
   function subirAPI($nombre, $tipoArchivo, $cifrado){
 
     $curl = curl_init();
@@ -83,7 +86,8 @@
         // Si el analisis no se ha completado se recarga la página
         if($analisis["data"]["attributes"]["status"] !== "completed"){
           echo "<p>Analizando el archivo ".$nombre."...... (Este proceso podría tardar un poco).</p>";
-          header("Refresh:2");
+          echo "<p>ESTADO: ".$analisis["data"]["attributes"]["status"]."</p>";
+          header("Refresh:1");
           die();
         }else{
           $maliciosos = $analisis["data"]["attributes"]["stats"]["malicious"];
@@ -144,105 +148,109 @@
 
       $tipoArchivo = $_FILES["archivos"]["type"][$contador];
 
+
+
       // La API tiene un limite de subida de 4 archivos el minuto (el primer archivo es el 0), asi que retrasamos el programa 1 minuto
-      if($contador%3==0){
-        sleep(60);
-      }
+      // if($contador%3==0){
+      //   sleep(60);
+      // }
 
       // Subimos el archivo a la API y nos quedamos con el identificador del analisis
       $idArchivo = subirAPI($nombre, $tipoArchivo, $cifrado);
 
       array_push($idsArchivos,$idArchivo);
-
     }
 
-    // Creamos cookies para mantener los datos
-    setcookie("nombresTemporales", json_encode($nombresCompletos), time() + (86400 * 30), "/");
-    setcookie("idsAnalisis", json_encode($idsArchivos), time() + (86400 * 30), "/");
-    setcookie("nombresOriginales", json_encode($nombresOriginales), time() + (86400 * 30), "/");
+    setcookie("nombresTemporales", json_encode($nombresCompletos), time()+3600*24,"/");
+    setcookie("idsAnalisis", json_encode($idsArchivos),time()+3600*24,"/");
+    setcookie("nombresOriginales", json_encode($nombresOriginales),time()+3600*24,"/");
+
 
     // Refrescamos la página
     header("Refresh:0");
 
   }else{
+    
     $nombresTemporales = json_decode($_COOKIE["nombresTemporales"]);
     $nombresOriginales = json_decode($_COOKIE["nombresOriginales"]);
     $arrayIds = json_decode($_COOKIE["idsAnalisis"]);
-  }
+  
 
-  for($contador=0; $contador<count($arrayIds); $contador++){
+    for($contador=0; $contador<count($arrayIds); $contador++){
 
-    $nombre = $nombresOriginales[$contador];
-    $nombreTemporal = $nombresTemporales[$contador];
+      $nombre = $nombresOriginales[$contador];
+      $nombreTemporal = $nombresTemporales[$contador];
 
-    echo "<p>NOMBRE: ".$nombre."</p>";
-    $resultados = analizarAPI($arrayIds[$contador],$nombre,$nombreTemporal);
+      echo "<p>NOMBRE: ".$nombre."</p>";
+      $resultados = analizarAPI($arrayIds[$contador],$nombre,$nombreTemporal);
 
-    if($resultados!==NULL){
-      // Si da afirmativo la detección o falla el analisis
-      if($resultados["malicioso"]!==0 || $resultados["sospechoso"]!==0 || $resultados["fallo"]!==0){
-        echo "<p>El archivo ".$_FILES["archivos"]["name"][$contador]." no se ha podido analizar o a dado positivo como amenaza.</p>";
-        echo "<p>Crea un ticket para su revisión con el nombre temporal <strong>".$nombreTemporal."</strong> y el asunto <strong>REVISIÓN MANUAL DE ARCHIVO</strong></p>";
-        // ! AÑADIR BOTON DE TICKET PARO LA REVISION DEL ARCHIVO
-      }else{
-        
-        echo "<p>¡ANALISIS COMPLETADO!</p>";
-
-        $arrayIdsArchivo = array();
-
-        $idUsuario = $_SESSION["idusuario"];
-
-        // Sacamos la extensión
-        $extension = ".".explode(".",$nombre)[1];
-
-        // Registramos el archivo
-        $archivo = new Archivo("0",$idUsuario,$extension,"ruta",$nombre);
-        $archivo->registrar();
-
-        // Sacamos su ID
-        $ultimaId = Archivo::ultimaId();
-
-        array_push($arrayIdsArchivo,$ultimaId);
-
-        $nombreSubida = $ultimaId.$extension; 
-
-        $ruta = "../subidas/".$nombreSubida;
-
-        Archivo::cambiarRutaId($ruta,$ultimaId);
-
-        // Si existe el archivo no se subirá
-        if(file_exists("../subidas/".$nombreSubida)){
-          echo "<p>¡EL ARCHIVO YA HA SIDO SUBIDO!</p>";
-          Archivo::borrarPorId($ultimaId);
-
+      if($resultados!==NULL){
+        // Si da afirmativo la detección o falla el analisis
+        if($resultados["malicioso"]!==0 || $resultados["sospechoso"]!==0 || $resultados["fallo"]!==0){
+          echo "<p>El archivo ".$_FILES["archivos"]["name"][$contador]." no se ha podido analizar o a dado positivo como amenaza.</p>";
+          echo "<p>Crea un ticket para su revisión con el nombre temporal <strong>".$nombreTemporal."</strong> y el asunto <strong>REVISIÓN MANUAL DE ARCHIVO</strong></p>";
+          // ! AÑADIR BOTON DE TICKET PARO LA REVISION DEL ARCHIVO
         }else{
+          
+          echo "<p>¡ANALISIS COMPLETADO!</p>";
 
-          // Para evitar consumo extra movemos el archivo temporal de la cuarentena a la subida y lo renombramos
-          if(rename("../cuarentena/".$nombreTemporal,"../subidas/".$nombreSubida)){
-            echo "<p>¡Se ha subido el archivo ".$nombre."!</p>";
-
+          if(!isset($_COOKIE["idsArchivos"])){
+            $arrayIdsArchivo = array();
           }else{
-            echo "NO SE HA PODIDO SUBIR EL ARCHIVO<br>";
-            Archivo::borrarPorId($ultimaId);
+            $arrayIdsArchivo = json_decode($_COOKIE["idsArchivos"]);
+          }
+
+
+          $idUsuario = $_SESSION["idusuario"];
+
+          // Sacamos la extensión
+          $extension = ".".explode(".",$nombre)[1];
+
+          // Registramos el archivo
+          $archivo = new Archivo("0",$idUsuario,$extension,"ruta",$nombre);
+          $archivo->registrar();
+
+          // Sacamos su ID
+          $ultimaId = Archivo::ultimaId();
+
+          $nombreSubida = $ultimaId.$extension; 
+
+          $ruta = "../subidas/".$nombreSubida;
+
+          Archivo::cambiarRutaId($ruta,$ultimaId);
+
+  
+          // Para evitar consumo extra movemos el archivo temporal de la cuarentena a la subida y lo renombramos
+          if(rename("../cuarentena/".$nombreTemporal,$ruta)){
+            echo "<p>¡Se ha subido el archivo ".$nombre."!</p>";
+            array_push($arrayIdsArchivo,$ultimaId);
+          }else{
+            if(file_exists($ruta)){
+              echo "<p>¡EL ARCHIVO YA HA SIDO SUBIDO!</p>";
+              // Archivo::borrarPorId($ultimaId);
+    
+            }else{
+              echo "NO SE HA PODIDO SUBIR EL ARCHIVO<br>";
+              Archivo::borrarPorId($ultimaId, $ruta);
+            }
           }
         }
+        setcookie("idsArchivos",json_encode($arrayIdsArchivo),time() + (86400 * 30), "/");
       }
     }
-  }
 
-  // Borramos las cookies usadas
-  if(isset($_COOKIE["nombresTemporales"])){
-    setcookie("nombresTemporales",'',-1, "/");
-  }
-  if(isset($_COOKIE["idsAnalisis"])){
-    setcookie("idsAnalisis",'',-1, "/");    
-  }
-  if(isset($_COOKIE["nombresOriginales"])){
-    setcookie("nombresOriginales",'',-1, "/");
-  }
+    // Borramos las cookies usadas
+    if(isset($_COOKIE["nombresTemporales"])){
+      setcookie("nombresTemporales",'',-1, "/");
+    }
+    if(isset($_COOKIE["idsAnalisis"])){
+      setcookie("idsAnalisis",'',-1, "/");    
+    }
+    if(isset($_COOKIE["nombresOriginales"])){
+      setcookie("nombresOriginales",'',-1, "/");
+    }
 
-  if($resultados!==null){
-    setcookie("idsArchivos",json_encode($arrayIdsArchivo),time() + (86400 * 30), "/");
-
-    echo '<a href="crearPost.php"><button>Ir al formulario</button></a>';
+    if($resultados!==null && $arrayIdsArchivo!==null){
+      echo '<a href="crearPost.php"><button>Ir al formulario</button></a>';
+    }
   }

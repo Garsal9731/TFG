@@ -32,7 +32,20 @@
                 <p>Resultados: <span id="resultados_busqueda"></span></p>
             </div> -->
             <div class="grid">
+                <?php
+                    foreach($posts as $post){
 
+                        echo '<div class="contenido">';
+                            echo '<p>'.$post->getNombre().'</p>';
+
+                            // ! CREAR PAGINA COMPLETA EN LA QUE SE VEAN TODOS LOS DATOS DEL POST
+                            $id = $post->getAutor();
+                            $nombreAutor = Contenido::getNombreAutorById($id);
+                            echo '<p>'.ucfirst($nombreAutor).'</p>';
+                            echo '<p>'.$post->getFecha().'</p>';
+                        echo '</div>';
+                    }
+                ?>
             </div>
         </main>
 

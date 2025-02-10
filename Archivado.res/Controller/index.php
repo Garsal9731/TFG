@@ -1,6 +1,5 @@
 <?php
-
-    require '../Model/usuario.php';
+    require '../Model/contenido.php';
 
     session_start();
 
@@ -11,4 +10,7 @@
         $usuarioSesion = unserialize($_SESSION["usuario"]);
         $privilegio = $_SESSION["privilegio"];
     }
+
+    $posts = Contenido::recogerPosts();
+
     include '../View/paginaInicial.php';

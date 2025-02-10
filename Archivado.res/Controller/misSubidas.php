@@ -1,6 +1,6 @@
 <?php
 
-    require '../Model/usuario.php';
+    require '../Model/archivo.php';
 
     session_start();
 
@@ -12,5 +12,6 @@
         $privilegio = $_SESSION["privilegio"];
     }
 
+    $archivos = Archivo::getArchivosByAutor($_SESSION["idusuario"]);
 
     include '../View/subidas.php';

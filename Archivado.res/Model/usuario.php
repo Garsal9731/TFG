@@ -140,21 +140,4 @@
             }
             return false;
         }
-
-        public function getTiendasUsuario(){
-            $conexion = ConexionDB::connectDB();
-            $seleccion = 'SELECT idtienda, nombre, idpropietario, descripcion FROM tiendas WHERE idPropietario='.$this->id.';';
-            $consulta = $conexion->query($seleccion);
-            $tiendas = $consulta->fetchAll(PDO::FETCH_ASSOC);
-           
-            return $tiendas;    
-        }
-        public function getProductosUsuario(){
-            $conexion = ConexionDB::connectDB();
-            $seleccion = 'SELECT pd.nombre, pd.idproducto, pd.tienda, pd.unidades, pd.precio, pd.rutafoto, pd.descripcion FROM productos pd inner JOIN tiendas ts JOIN usuarios us ON us.idusuario=ts.idpropietario and ts.idtienda=pd.tienda WHERE us.idusuario='.$this->id.';';
-            $consulta = $conexion->query($seleccion);
-            $tiendas = $consulta->fetchAll(PDO::FETCH_ASSOC);
-           
-            return $tiendas;    
-        }
     }

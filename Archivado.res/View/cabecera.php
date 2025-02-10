@@ -38,11 +38,8 @@
 </header>
 <p class="barra_opciones">
     <a href="../Controller/index.php">Ver archivos</a>
-    <!-- <a href="../Controller/tiendas.php">Ver tiendas</a> -->
-    <!-- <a href="../Controller/formularioProductos.php">Crear Producto</a> -->
-    <!-- <a href="../Controller/formularioTiendas.php">Crear Tienda</a> -->
-    <!-- <a href="../Controller/misproductos.php">Mis Productos</a> -->
-    <!-- <a href="../Controller/mistiendas.php">Mis Tiendas</a> -->
-    <a href="../Controller/misSubidas.php">Mis Subidas</a>
-    <!-- <a href="../Controller/carrito.php">Ver Carrito</a> -->
+    <a href="../Controller/misSubidas.php">Mis Archivos</a>
+    <?php
+        echo '<a href="../Controller/perfil.php?id='.$_SESSION["idusuario"].'">Mi Perfil</a>';
+    ?>
 </p>

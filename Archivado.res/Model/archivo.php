@@ -1,6 +1,6 @@
 <?php
 
-    require 'conectorBD.php';
+    require 'usuario.php';
 
     class Archivo{
 
@@ -43,11 +43,50 @@
             $conexion->exec($registro);
         }
 
-        public static function borrarPorId($id){
+        public static function borrarPost($idpost){
             $conexion = ConexionDB::connectDB();
+            
+            $registro = "DELETE FROM contenido WHERE idpost=".$idpost.";";
+            $conexion->exec($registro);
+        }
 
+        public static function modificarArchivosPost($idpost,$arrayCodificado){
+            $conexion = ConexionDB::connectDB();
+            $actualizacion = "UPDATE contenido SET Archivos='".$arrayCodificado."' WHERE idpost=".$idpost.";";
+            $conexion->exec($actualizacion);
+        }
+
+        public static function borrarPorId($id,$ruta){
+            $conexion = ConexionDB::connectDB();
+            
             $registro = "DELETE FROM archivos WHERE idarchivo=".$id.";";
             $conexion->exec($registro);
+
+            $seleccion = 'SELECT * FROM contenido WHERE Archivos LIKE "'."[".$id.",%".'" OR Archivos LIKE "['.$id.']" OR Archivos LIKE "%,'.$id.']" OR Archivos LIKE "%,'.$id.',%";';
+
+            $consulta = $conexion->query($seleccion);
+            
+            $objetos = $consulta->fetchAll(PDO::FETCH_ASSOC);
+
+            settype($id, "integer");
+            foreach ($objetos as $objeto){
+                $arrayArchivos = array();
+                $archivos = json_decode($objeto["Archivos"]);
+
+                foreach($archivos as $archivo){
+                    if($id!==$archivo){
+                        array_push($arrayArchivos,$archivo);
+                    }
+                }
+
+                if(count($arrayArchivos)==0){
+                    Archivo::borrarPost($objeto["idpost"]);
+                }else{
+                    Archivo::modificarArchivosPost($objeto["idpost"],json_encode($arrayArchivos));
+                } 
+            }
+
+            unlink($ruta);
         }
 
         public static function cambiarRutaId($ruta,$id){
@@ -87,5 +126,19 @@
             $archivo = new Archivo($registro->idarchivo, $registro->usuario_subida, $registro->formato, $registro->ruta_archivo, $registro->nombre);
 
             return $archivo;
+        }
+
+        public static function getArchivosByAutor($idAutor){
+            $conexion = ConexionDB::connectDB();
+            $seleccion = "SELECT * FROM archivos WHERE usuario_subida=".$idAutor.";";
+            $consulta = $conexion->query($seleccion);
+            
+            $archivos = [];
+            
+            while($registro = $consulta->fetchObject()){
+                $archivos[] = new Archivo($registro->idarchivo, $registro->usuario_subida, $registro->formato, $registro->ruta_archivo, $registro->nombre);
+            }
+           
+            return $archivos; 
         }
     }
