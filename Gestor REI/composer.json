@@ -1,0 +1,17 @@
+{
+    "name": "alvaro/tfg",
+    "description": "TFG 2 DAW Álvaro García Salvatierra",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Alvaro\\Tfg\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Álvaro Salvatierra",
+            "email": "9731@cifpceuta.es"
+        }
+    ],
+    "require": {}
+}
