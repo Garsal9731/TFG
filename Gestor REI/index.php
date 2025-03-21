@@ -10,7 +10,7 @@ $userController = new UserController();
 $noteController = new NoteController();
 
 // Controlador frontal que maneja la ruta
-switch ($route) {
+switch ($route){
     case 'user/index':
         $userController->index();
         break;
