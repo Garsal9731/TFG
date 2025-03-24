@@ -117,11 +117,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `gestor_rei`.`Trabajadores asociados a Institución`
+-- Table `gestor_rei`.`Trabajadores de Institución`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `gestor_rei`.`Trabajadores asociados a Institución` ;
+DROP TABLE IF EXISTS `gestor_rei`.`Trabajadores de Institución` ;
 
-CREATE TABLE IF NOT EXISTS `gestor_rei`.`Trabajadores asociados a Institución` (
+CREATE TABLE IF NOT EXISTS `gestor_rei`.`Trabajadores de Institución` (
   `Usuario_Id Usuario` INT NOT NULL,
   `Institución_id Institución` INT NOT NULL,
   PRIMARY KEY (`Usuario_Id Usuario`, `Institución_id Institución`),

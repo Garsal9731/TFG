@@ -1,10 +1,19 @@
 <?php
+
+    // Definimos el namespace de Core
+    namespace App\Core;
+
+    // ? Por defecto si hay un namespace busca las clases en el namespace en lugar de las nativas de PHP (IDK)
+    use \PDO as PDO;
+
     class Database {
+        
         private static $instance = null;
         private $pdo;
 
         private function __construct() {
             $host = 'localhost';
+            // $dbName = 'gestor_rei';
             $dbName = 'mvc_example';
             $user = 'root';
             $password = '123456';
@@ -22,9 +31,11 @@
         }
 
         public static function getInstance() {
+
             if (self::$instance === null) {
                 self::$instance = new self();
             }
+
             return self::$instance;
         }
 
