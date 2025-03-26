@@ -18,7 +18,10 @@
 
         public function index() {
             $users = $this->userModel->getAll();
-            require 'views/user_list.php';
+
+            // ? La ruta simplificada empieza desde la pagina inicial, (/public/index.php)
+            // require "../app/views/user_list.php";
+            require __DIR__ . '/../views/user_list.php';
         }
 
         public function create() {
@@ -26,7 +29,7 @@
                 $this->userModel->create(['name' => $_POST['name']]);
                 header('Location: index.php?route=user/index');
             } else {
-                require 'views/user_create.php';
+                require __DIR__ . '/../views/user_create.php';
             }
         }
 
@@ -36,7 +39,7 @@
                 header('Location: index.php?route=user/index');
             } else {
                 $user = $this->userModel->getById($id);
-                require 'views/user_edit.php';
+                require __DIR__ . '/../views/user_edit.php';
             }
         }
 

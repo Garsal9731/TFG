@@ -7,7 +7,8 @@
     require_once __DIR__ .'/./EmptyModel.php';
 
     // Le damos un alias a EmptyModel
-    // use App\Models\EmptyModel as EmptyModel;
+    use App\Models\EmptyModel as EmptyModel;
+    
     class User extends EmptyModel {
         public function __construct() {
             parent::__construct('users');

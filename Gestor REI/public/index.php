@@ -3,28 +3,21 @@
     // Definimos el namespace Public
     namespace App\Public;
 
-    echo "Check 1<br>";
+    // Llamamos a los controladores que vamos a usar
     require_once __DIR__ . '/../app/controllers/UserController.php';
     require_once __DIR__ . '/../app/controllers/NoteController.php';
-    echo "Check 2<br>";
 
+    // Les damos alias a sus namespace
     use App\Controllers\UserController as UserController;
     use App\Controllers\NoteController as NoteController;
-
-    echo "Check 3<br>";
-
-
 
     // Obtener la ruta
     $route = $_GET['route'] ?? 'user/index';
     $id = $_GET['id'] ?? null;
-    echo "Check 4<br>";
 
+    // Creamos nuevos controladores como objetos y los metemos en variables
     $userController = new UserController();
-    echo "Check 4,5<br>";
-
     $noteController = new NoteController();
-    echo "Check 5<br>";
 
     // Controlador frontal que maneja la ruta
     switch ($route){
@@ -63,4 +56,3 @@
         default:
             echo "Ruta no encontrada.";
     }
-    echo "Check 6<br>";

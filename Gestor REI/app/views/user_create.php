@@ -11,5 +11,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-require 'views/layouts/main.php';
+require 'layouts/main.php';
 ?>

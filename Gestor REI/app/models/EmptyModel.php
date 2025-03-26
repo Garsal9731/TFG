@@ -9,6 +9,7 @@
 
     // Le damos un alias a la ruta del namespace de la base de datos
     use App\Core\Database as Database;
+    use \PDO as PDO;
 
     // ? EmptyModel actúa como plantilla para el resto de clases (Lleva funciones que usan la mayoría de clases)
     class EmptyModel {
@@ -31,7 +32,7 @@
         }
 
         // Obtener todos los registros
-        public function getAll() {
+        public function getAll(){
             $sql = "SELECT * FROM {$this->table}";
             return $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         }
