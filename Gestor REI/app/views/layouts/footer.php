@@ -1,5 +1,5 @@
 <?php    
     /**
-     * Cuerpo principal/main
+     * Pie de pagina/footer
      * 
      */

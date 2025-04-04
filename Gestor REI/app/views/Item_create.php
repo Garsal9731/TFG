@@ -1,5 +1,5 @@
 <?php    
     /**
-     * Cuerpo principal/main
+     * Vista de creación de objetos
      * 
      */

@@ -1,12 +1,12 @@
 <?php
 
-    class UserController {
+    class TaskController {
 
         // Constructor
         /**
          * VOID NULL
          * 
-         * El constructor crea un usuario nuevo usando el constructor del usuario
+         * El constructor crea un item nuevo usando el constructor del item
          */
 
 

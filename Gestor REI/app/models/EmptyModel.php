@@ -1,67 +1,62 @@
 <?php
-    
-    // ? Namespace actúa como la ruta (Define la ruta sín incluir la clase o archivo, a no ser que sea llamado por un archivo externo/no relacionado)
-    // Definimos el namespace (Será heredado por el resto de clases que se enlacen a este archivo)
-    namespace App\Models;
-
-    // Anclamos el archivo con la clase que usa la BD
-    require_once __DIR__ .'/../core/Database.php';
-
-    // Le damos un alias a la ruta del namespace de la base de datos
-    use App\Core\Database as Database;
-    use \PDO as PDO;
 
     // ? EmptyModel actúa como plantilla para el resto de clases (Lleva funciones que usan la mayoría de clases)
     class EmptyModel {
-        protected $db;
-        protected $table;
-        protected $primaryKey;
 
         // Constructor
-        public function __construct($table, $primaryKey = 'id') {
-            $this->db = Database::getInstance()->getConnection();
-            $this->table = $table;
-            $this->primaryKey = $primaryKey;
-        }
+        /**
+         * $tabla string
+         * $clavePrimaria string
+         * 
+         * Es el constructor de la clase
+         */
 
-        // Consultas preparadas
-        protected function query($sql, $params = []) {
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute($params);
-            return $stmt;
-        }
 
-        // Obtener todos los registros
-        public function getAll(){
-            $sql = "SELECT * FROM {$this->table}";
-            return $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        }
+        // Realizar Consulta
+        /**
+         * $sql string
+         * $params array
+         * 
+         * Manda consultas ya preparadas a la base de datos y devuelve la respuesta si hay una
+         */
 
-        // Obtener un registro por clave primaria
-        public function getById($id) {
-            $sql = "SELECT * FROM {$this->table} WHERE {$this->primaryKey} = ?";
-            return $this->query($sql, [$id])->fetch(PDO::FETCH_ASSOC);
-        }
 
-        // Crear un nuevo registro
-        public function create($data) {
-            $fields = implode(', ', array_keys($data));
-            $placeholders = implode(', ', array_fill(0, count($data), '?'));
-            $sql = "INSERT INTO {$this->table} ({$fields}) VALUES ({$placeholders})";
-            $this->query($sql, array_values($data));
-            return $this->db->lastInsertId();
-        }
+        // Recoger todo
+        /**
+         * VOID NULL
+         * 
+         * Recoge todos los registros de la tabla actual
+         */
 
-        // Actualizar un registro por clave primaria
-        public function update($data, $id) {
-            $setClause = implode(', ', array_map(fn($field) => "{$field} = ?", array_keys($data)));
-            $sql = "UPDATE {$this->table} SET {$setClause} WHERE {$this->primaryKey} = ?";
-            $this->query($sql, array_merge(array_values($data), [$id]));
-        }
 
-        // Eliminar un registro por clave primaria
-        public function delete($id) {
-            $sql = "DELETE FROM {$this->table} WHERE {$this->primaryKey} = ?";
-            $this->query($sql, [$id]);
-        }
+        // Registros por principal
+        /**
+         * $id int
+         * 
+         * Recoge el registro completo usando la id principal de la tabla
+         */
+
+
+        // Crear registro
+        /**
+         * $datos string
+         * 
+         * Divide el string de datos usando la , y los coloca de manera que se pueden convertir en un registro y añadirse a la base de datos
+         */
+
+
+        // Actualizar usando primaria
+        /**
+         * $datos string
+         * $id int
+         * 
+         * Divide el string de datos para adaptarlos a un registro y lo actualiza usando la id principal
+         */
+
+        // Eliminar registro usando clave primaria
+        /**
+         * $id int
+         * 
+         * Borra el registro de la tabla actual usando la id
+         */
     }

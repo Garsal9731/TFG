@@ -1,5 +1,5 @@
 <?php    
     /**
-     * Cuerpo principal/main
+     * cabecera/head
      * 
      */

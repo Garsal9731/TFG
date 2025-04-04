@@ -1,12 +1,13 @@
 <?php
 
-    class UserController {
+    // ! Solo técnicos y administradores pueden acceder a este controlador
+    class ItemController {
 
         // Constructor
         /**
          * VOID NULL
          * 
-         * El constructor crea un usuario nuevo usando el constructor del usuario
+         * El constructor crea un objeto nuevo usando el constructor del objeto
          */
 
 
