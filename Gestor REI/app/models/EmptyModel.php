@@ -1,62 +1,107 @@
 <?php
 
+    // ! METER EN CORE Y ADAPTAR RUTAS
+    // ? EmptyModel actúa como plantilla para el resto de clases (Lleva funciones que usan la mayoría de clases)
+    // ? Namespace actúa como la ruta (Define la ruta sín incluir la clase o archivo, a no ser que sea llamado por un archivo externo/no relacionado)
+    // Definimos el namespace (Será heredado por el resto de clases que se enlacen a este archivo)
+    namespace App\Models;
+
+    // Anclamos el archivo con la clase que usa la BD
+    require_once __DIR__ .'/../core/Database.php';
+
+    // Le damos un alias a la ruta del namespace de la base de datos
+    use App\Core\Database as Database;
+    use \PDO as PDO;
+
     // ? EmptyModel actúa como plantilla para el resto de clases (Lleva funciones que usan la mayoría de clases)
     class EmptyModel {
+        protected $db;
+        protected $table;
+        protected $primaryKey;
 
         // Constructor
         /**
-         * $tabla string
-         * $clavePrimaria string
+         * @param $tabla string
+         * @param $clavePrimaria string
          * 
          * Es el constructor de la clase
          */
-
+        public function __construct($table, $primaryKey = 'id') {
+            $this->db = Database::getInstance()->getConnection();
+            $this->table = $table;
+            $this->primaryKey = $primaryKey;
+        }
 
         // Realizar Consulta
         /**
-         * $sql string
-         * $params array
+         * @param $sql string
+         * @param $params array
          * 
          * Manda consultas ya preparadas a la base de datos y devuelve la respuesta si hay una
          */
-
+        protected function query($sql, $params = []) {
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute($params);
+            return $stmt;
+        }
 
         // Recoger todo
         /**
-         * VOID NULL
+         * @param VOID NULL
          * 
          * Recoge todos los registros de la tabla actual
          */
-
+        public function getAll(){
+            $sql = "SELECT * FROM {$this->table}";
+            return $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        }
 
         // Registros por principal
         /**
-         * $id int
+         * @param $id int
          * 
          * Recoge el registro completo usando la id principal de la tabla
          */
-
+        public function getById($id) {
+            $sql = "SELECT * FROM {$this->table} WHERE {$this->primaryKey} = ?";
+            return $this->query($sql, [$id])->fetch(PDO::FETCH_ASSOC);
+        }
 
         // Crear registro
         /**
-         * $datos string
+         * @param $datos string
          * 
          * Divide el string de datos usando la , y los coloca de manera que se pueden convertir en un registro y añadirse a la base de datos
          */
-
+        public function create($data) {
+            $fields = implode(', ', array_keys($data));
+            $placeholders = implode(', ', array_fill(0, count($data), '?'));
+            $sql = "INSERT INTO {$this->table} ({$fields}) VALUES ({$placeholders})";
+            $this->query($sql, array_values($data));
+            return $this->db->lastInsertId();
+        }
 
         // Actualizar usando primaria
         /**
-         * $datos string
-         * $id int
+         * @param $datos string
+         * @param $id int
          * 
          * Divide el string de datos para adaptarlos a un registro y lo actualiza usando la id principal
          */
+        public function update($data, $id) {
+            $setClause = implode(', ', array_map(fn($field) => "{$field} = ?", array_keys($data)));
+            $sql = "UPDATE {$this->table} SET {$setClause} WHERE {$this->primaryKey} = ?";
+            $this->query($sql, array_merge(array_values($data), [$id]));
+        }
 
-        // Eliminar registro usando clave primaria
+        // Eliminar un registro por clave primaria
         /**
-         * $id int
+         * @param $id int
          * 
          * Borra el registro de la tabla actual usando la id
          */
+        public function delete($id) {
+            $sql = "DELETE FROM {$this->table} WHERE {$this->primaryKey} = ?";
+            $this->query($sql, [$id]);
+        }
     }
