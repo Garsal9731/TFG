@@ -1,13 +1,12 @@
 <?php
 
-    // ! METER EN CORE Y ADAPTAR RUTAS
     // ? EmptyModel actúa como plantilla para el resto de clases (Lleva funciones que usan la mayoría de clases)
     // ? Namespace actúa como la ruta (Define la ruta sín incluir la clase o archivo, a no ser que sea llamado por un archivo externo/no relacionado)
     // Definimos el namespace (Será heredado por el resto de clases que se enlacen a este archivo)
     namespace App\Models;
 
     // Anclamos el archivo con la clase que usa la BD
-    require_once __DIR__ .'/../core/Database.php';
+    require_once __DIR__ .'/./Database.php';
 
     // Le damos un alias a la ruta del namespace de la base de datos
     use App\Core\Database as Database;

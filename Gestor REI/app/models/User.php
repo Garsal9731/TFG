@@ -4,7 +4,7 @@
     namespace App\Models;
 
     // ? Esto es lo mismo que require_once 'EmptyModel.php'
-    require_once __DIR__ .'/./EmptyModel.php';
+    require_once __DIR__ .'/../core/EmptyModel.php';
 
     // Le damos un alias a EmptyModel
     use App\Models\EmptyModel as EmptyModel;
