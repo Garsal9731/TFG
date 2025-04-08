@@ -45,7 +45,9 @@
          */ 
         public function create() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $this->userModel->create(['name' => $_POST['name']]);
+                $cifrado = password_hash($_POST['contra'], PASSWORD_DEFAULT);
+                // ! CAMBIAR PARA AÑADIR EL MULTIVALUADO CON LOS PRIVILEGIOS
+                $this->userModel->create(['Nombre' => $_POST['nombre'],'Contraseña' => $cifrado,'Correo' => $_POST['correo'],'Privilegios' => 1]);
                 header('Location: index.php?route=user/index');
             } else {
                 require __DIR__ . '/../views/user_create.php';

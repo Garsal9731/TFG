@@ -18,6 +18,6 @@
          * Extiende el constructor de EmptyModel usando la tabla de usuarios como referencia
          */
         public function __construct() {
-            parent::__construct('users');
+            parent::__construct('Usuario');
         }
     }

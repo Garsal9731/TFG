@@ -8,8 +8,21 @@
     
 <h2>Crear Usuario</h2>
 <form  method="POST">
-    <label for="name">Nombre:</label>
-    <input type="text" name="name" required>
+    <p>
+        <label for="name">Nombre:</label>
+        <input type="text" name="nombre" required>
+    </p>
+    <p>
+        <!-- AÑADIR EXPRESION REGULAR PARA CORREO -->
+        <label for="correo">Correo:</label>
+        <input type="text" name="correo" required>
+    </p>
+    <p>
+        <!-- AÑADIR BOTON DE MOSTRAR CON JS -->
+        <label for="contra">Contraseña:</label>
+        <input type="password" name="contra" required>
+    </p>
+    <!-- AÑADIR MULTIELECCION CON LOS PRIVILEGIOS -->
     <input type="submit" value="Crear Usuario">
 </form>
     

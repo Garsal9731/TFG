@@ -40,7 +40,11 @@
          */
         protected function query($sql, $params = []) {
             $stmt = $this->db->prepare($sql);
+
+            echo $sql."<br>";
+            var_dump($params);
             $stmt->execute($params);
+            echo "BFBFBFBF";
             return $stmt;
         }
 

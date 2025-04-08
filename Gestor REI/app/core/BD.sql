@@ -30,7 +30,7 @@ DROP TABLE IF EXISTS `gestor_rei`.`Usuario` ;
 CREATE TABLE IF NOT EXISTS `gestor_rei`.`Usuario` (
   `Id Usuario` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
-  `Contraseña` VARCHAR(60) NOT NULL,
+  `Contraseña` VARCHAR(100) NOT NULL,
   `Correo` VARCHAR(45) NOT NULL,
   `Privilegios` INT NOT NULL,
   INDEX `fk_Usuario_Privilegios1_idx` (`Privilegios` ASC) VISIBLE,
@@ -165,3 +165,5 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO Privilegios VALUES (1, "admin");
