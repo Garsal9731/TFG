@@ -7,7 +7,7 @@
     require_once __DIR__ .'/../core/EmptyModel.php';
 
     // Le damos un alias a EmptyModel
-    use App\Models\EmptyModel as EmptyModel;
+    use App\Core\EmptyModel as EmptyModel;
     
     class User extends EmptyModel {
 

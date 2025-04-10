@@ -6,7 +6,7 @@
     require_once __DIR__ .'/../core/EmptyModel.php';
 
     // Le damos un alias a EmptyModel
-    use App\Models\EmptyModel as EmptyModel;
+    use App\Core\EmptyModel as EmptyModel;
 
     // ! Añadir funciones extras de los objetos
     class Item extends EmptyModel {
@@ -17,4 +17,7 @@
          * 
          * Extiende el constructor de EmptyModel usando la tabla de objeto como referencia
          */
+        public function __construct() {
+            parent::__construct('Objeto');
+        }
     }

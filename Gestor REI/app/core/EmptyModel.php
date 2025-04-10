@@ -3,7 +3,7 @@
     // ? EmptyModel actúa como plantilla para el resto de clases (Lleva funciones que usan la mayoría de clases)
     // ? Namespace actúa como la ruta (Define la ruta sín incluir la clase o archivo, a no ser que sea llamado por un archivo externo/no relacionado)
     // Definimos el namespace (Será heredado por el resto de clases que se enlacen a este archivo)
-    namespace App\Models;
+    namespace App\Core;
 
     // Anclamos el archivo con la clase que usa la BD
     require_once __DIR__ .'/./Database.php';
@@ -28,7 +28,7 @@
         public function __construct($table, $primaryKey = 'id') {
             $this->db = Database::getInstance()->getConnection();
             $this->table = $table;
-            $this->primaryKey = $primaryKey;
+            $this->primaryKey = $this->getPrimary($table);
         }
 
         // Realizar Consulta
@@ -40,12 +40,20 @@
          */
         protected function query($sql, $params = []) {
             $stmt = $this->db->prepare($sql);
-
-            echo $sql."<br>";
-            var_dump($params);
             $stmt->execute($params);
-            echo "BFBFBFBF";
             return $stmt;
+        }
+
+        // Recoger Primaria
+        /**
+         * @param $table string
+         * 
+         * Manda una consulta a la base de datos y recoge la clave primaria de la tabla
+         */
+        public function getPrimary($table){
+            $sql = "SHOW KEYS FROM $table WHERE Key_name = 'PRIMARY';";
+            $claves = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+            return $claves["Column_name"];
         }
 
         // Recoger todo

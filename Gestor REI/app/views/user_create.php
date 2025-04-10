@@ -7,7 +7,7 @@
 ?>
     
 <h2>Crear Usuario</h2>
-<form  method="POST">
+<form  method="POST" autocomplete="off">
     <p>
         <label for="name">Nombre:</label>
         <input type="text" name="nombre" required>
@@ -22,7 +22,14 @@
         <label for="contra">Contraseña:</label>
         <input type="password" name="contra" required>
     </p>
-    <!-- AÑADIR MULTIELECCION CON LOS PRIVILEGIOS -->
+    <p>
+        <label for="privilegios">Tipo de usuario:</label>
+        <select name="privilegios">
+            <option value="1">Admin</option>
+            <option value="2">Técnico</option>
+            <option value="3">Usuario</option>
+        </select>
+    </p>
     <input type="submit" value="Crear Usuario">
 </form>
     
