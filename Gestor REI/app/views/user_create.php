@@ -36,4 +36,3 @@
 <?php
     $content = ob_get_clean();
     require 'layouts/main.php';
-?>

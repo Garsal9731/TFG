@@ -6,5 +6,5 @@
 ?>
 <head>
     <meta charset="UTF-8">
-    <title>MVC Example</title>
+    <title>Gestor Rei</title>
 </head>
