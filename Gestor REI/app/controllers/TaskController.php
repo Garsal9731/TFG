@@ -3,22 +3,33 @@
     // Definimos el namespace de los controladores
     namespace App\Controllers;
 
-    // Llamamos al archivo con el modelo Item
-    require_once __DIR__ . '/../models/Item.php';
+    // Llamamos al archivo con el modelo tarea
+    require_once __DIR__ . '/../models/Task.php';
 
-    use App\Models\Item as Item;
+    use App\Models\Task as Task;
 
     class TaskController {
-        private $itemModel;
+        private $taskModel;
 
         // Constructor
         /**
          * @param VOID NULL
          * 
-         * El constructor crea un item nuevo usando el constructor del item
+         * El constructor crea una tarea nueva usando el constructor del controlador
          */
         public function __construct() {
-            $this->itemModel = new Item();
+            $this->taskModel = new Task();
+        }
+
+        // Recoger Todo
+        /**
+         * @param VOID NULL
+         * 
+         * Llamamos al modelo usuario y recogemos todos los usuarios 
+         */
+        public function getAll(){
+            $tasks = $this->taskModel->getAll();
+            return $tasks;
         }
 
         // Indice
@@ -27,12 +38,11 @@
          * 
          * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los usuarios
          */ 
-
         public function index() {
 
-            // $items = $this->itemModel->getAll();
+            $tasks = $this->getAll();
 
-            require __DIR__ . '/../views/item_list.php';
+            require __DIR__ . '/../views/task_list.php';
         } 
 
         // Crear 
@@ -43,10 +53,10 @@
          */ 
         public function create() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // $this->itemModel->create(['Nombre' => $_POST['nombre'],'Contraseña' => $cifrado,'Correo' => $_POST['correo'],'Privilegios' => $_POST["privilegios"]]);
-                // header('Location: index.php?route=item/index');
+                // $this->taskModel->create(['Nombre' => $_POST['nombre'],'Contraseña' => $cifrado,'Correo' => $_POST['correo'],'Privilegios' => $_POST["privilegios"]]);
+                // header('Location: index.php?route=Task/index');
             } else {
-                require __DIR__ . '/../views/item_create.php';
+                require __DIR__ . '/../views/task_create.php';
             }
         }
 
@@ -59,13 +69,14 @@
 
         public function edit($id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // $this->itemModel->update(['Nombre' => $_POST['nombre']], $id);
-                header('Location: index.php?route=item/index');
+                // $this->taskModel->update(['Nombre' => $_POST['nombre']], $id);
+                header('Location: index.php?route=task/index');
             } else {
-                // $Item = $this->itemModel->getById($id);
-                require __DIR__ . '/../views/item_edit.php';
+                // $Task = $this->taskModel->getById($id);
+                require __DIR__ . '/../views/task_edit.php';
             }
         }
+
         // Borrar
         /**
          * @param $id int
@@ -73,7 +84,7 @@
          * Usamos el metodo borrar del EmptyModel y borramos el registro usando la id
          */
         public function delete($id) {
-            // $this->itemModel->delete($id);
-            header('Location: index.php?route=item/index');
+            // $this->taskModel->delete($id);
+            header('Location: index.php?route=task/index');
         }
     }

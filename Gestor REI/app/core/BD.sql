@@ -146,7 +146,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `gestor_rei`.`Objeto` ;
 
 CREATE TABLE IF NOT EXISTS `gestor_rei`.`Objeto` (
-  `id_Objeto` INT PRIMARY KEY AUTO_INCREMENT NOT NULL ,
+  `Id_Objeto` INT PRIMARY KEY AUTO_INCREMENT NOT NULL ,
   `Num_Inventario` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `Estado` ENUM("Alta", "Baja", "Inactivo", "Averiado") NOT NULL,

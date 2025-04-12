@@ -1,1 +1,0 @@
-<!-- CAMBIAR TODAS LAS RUTAS DE user/index CON ESTA RUTA -->

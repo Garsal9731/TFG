@@ -22,15 +22,26 @@
             $this->userModel = new User();
         }
 
+        // Recoger Todo
+        /**
+         * @param VOID NULL
+         * 
+         * Llamamos al modelo usuario y recogemos todos los usuarios 
+         */
+        public function getAll(){
+            $users = $this->userModel->getAll();
+            return $users;
+        }
+
         // Indice
         /**
          * @param VOID NULL
          * 
-         * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los usuarios
+         * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los usuarios y llamamos a la vista
          */ 
         public function index() {
 
-            $users = $this->userModel->getAll();
+            $users = $this->getAll();
 
             // ? La ruta simplificada empieza desde la pagina inicial, (/public/index.php)
             // require "../app/views/user_list.php";
