@@ -21,7 +21,31 @@
         </li>
     <?php endforeach; ?>
 </ul>
+
+<h2>Lista de Tareas</h2>
+<a href="index.php?route=task/create">Crear Tarea</a>
+<ul>
+    <?php foreach ($tasks as $task): ?>
+        <li>
+            <?php echo $task['Nombre']; ?>
+            <a href="index.php?route=task/edit&id=<?php echo $task['Id_Tarea']; ?>">Editar</a>
+            <a href="index.php?route=task/delete&id=<?php echo $task['Id_Tarea']; ?>">Eliminar</a>
+        </li>
+    <?php endforeach; ?>
+</ul>
     
+<h2>Lista de Objetos</h2>
+<a href="index.php?route=item/create">Crear Objeto</a>
+<ul>
+    <?php foreach ($items as $item): ?>
+        <li>
+            <?php echo $item['Nombre']; ?>
+            <a href="index.php?route=item/edit&id=<?php echo $item['Id_Objeto']; ?>">Editar</a>
+            <a href="index.php?route=item/delete&id=<?php echo $item['Id_Objeto']; ?>">Eliminar</a>
+        </li>
+    <?php endforeach; ?>
+</ul>
+
 <?php
     $content = ob_get_clean();
     require "layouts/main.php";

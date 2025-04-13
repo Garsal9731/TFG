@@ -66,11 +66,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `gestor_rei`.`Tareas`
+-- Table `gestor_rei`.`Tarea`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `gestor_rei`.`Tareas` ;
+DROP TABLE IF EXISTS `gestor_rei`.`Tarea` ;
 
-CREATE TABLE IF NOT EXISTS `gestor_rei`.`Tareas` (
+CREATE TABLE IF NOT EXISTS `gestor_rei`.`Tarea` (
   `Id_Tarea` INT PRIMARY KEY AUTO_INCREMENT,
   `Id_Creador_Tarea` INT NOT NULL,
   `Fecha_Creación` DATE NOT NULL,
@@ -81,22 +81,22 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `gestor_rei`.`Tareas_Asignadas`
+-- Table `gestor_rei`.`Tarea_Asignadas`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `gestor_rei`.`Tareas_Asignadas` ;
+DROP TABLE IF EXISTS `gestor_rei`.`Tarea_Asignadas` ;
 
-CREATE TABLE IF NOT EXISTS `gestor_rei`.`Tareas_Asignadas` (
-  `Tareas_Id_Tarea` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `gestor_rei`.`Tarea_Asignadas` (
+  `Tarea_Id_Tarea` INT NOT NULL,
   `Usuario_Id_Usuario` INT NOT NULL,
-  PRIMARY KEY (`Tareas_Id_Tarea`, `Usuario_Id_Usuario`),
-  INDEX `fk_Tareas_has_Usuario_Usuario1_idx` (`Usuario_Id_Usuario` ASC) VISIBLE,
-  INDEX `fk_Tareas_has_Usuario_Tareas1_idx` (`Tareas_Id_Tarea` ASC) VISIBLE,
-  CONSTRAINT `fk_Tareas_has_Usuario_Tareas1`
-    FOREIGN KEY (`Tareas_Id_Tarea`)
-    REFERENCES `gestor_rei`.`Tareas` (`Id_Tarea`)
+  PRIMARY KEY (`Tarea_Id_Tarea`, `Usuario_Id_Usuario`),
+  INDEX `fk_Tarea_has_Usuario_Usuario1_idx` (`Usuario_Id_Usuario` ASC) VISIBLE,
+  INDEX `fk_Tarea_has_Usuario_Tarea1_idx` (`Tarea_Id_Tarea` ASC) VISIBLE,
+  CONSTRAINT `fk_Tarea_has_Usuario_Tarea1`
+    FOREIGN KEY (`Tarea_Id_Tarea`)
+    REFERENCES `gestor_rei`.`Tarea` (`Id_Tarea`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Tareas_has_Usuario_Usuario1`
+  CONSTRAINT `fk_Tarea_has_Usuario_Usuario1`
     FOREIGN KEY (`Usuario_Id_Usuario`)
     REFERENCES `gestor_rei`.`Usuario` (`Id_Usuario`)
     ON DELETE NO ACTION
@@ -110,7 +110,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `gestor_rei`.`Institución` ;
 
 CREATE TABLE IF NOT EXISTS `gestor_rei`.`Institución` (
-  `id_Institución` INT PRIMARY KEY AUTO_INCREMENT,
+  `Id_Institución` INT PRIMARY KEY AUTO_INCREMENT,
   `Nombre_Institución` VARCHAR(60) NOT NULL,
   UNIQUE INDEX `Nombre_Institución_UNIQUE` (`Nombre_Institución` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -123,9 +123,9 @@ DROP TABLE IF EXISTS `gestor_rei`.`Trabajadores_Institución` ;
 
 CREATE TABLE IF NOT EXISTS `gestor_rei`.`Trabajadores_Institución` (
   `Usuario_Id_Usuario` INT NOT NULL,
-  `Institución_id_Institución` INT NOT NULL,
-  PRIMARY KEY (`Usuario_Id_Usuario`, `Institución_id_Institución`),
-  INDEX `fk_Usuario_has_Institución_Institución1_idx` (`Institución_id_Institución` ASC) VISIBLE,
+  `Institución_Id_Institución` INT NOT NULL,
+  PRIMARY KEY (`Usuario_Id_Usuario`, `Institución_Id_Institución`),
+  INDEX `fk_Usuario_has_Institución_Institución1_idx` (`Institución_Id_Institución` ASC) VISIBLE,
   INDEX `fk_Usuario_has_Institución_Usuario1_idx` (`Usuario_Id_Usuario` ASC) VISIBLE,
   CONSTRAINT `fk_Usuario_has_Institución_Usuario1`
     FOREIGN KEY (`Usuario_Id_Usuario`)
@@ -133,8 +133,8 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Trabajadores_Institución` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_has_Institución_Institución1`
-    FOREIGN KEY (`Institución_id_Institución`)
-    REFERENCES `gestor_rei`.`Institución` (`id_Institución`)
+    FOREIGN KEY (`Institución_Id_Institución`)
+    REFERENCES `gestor_rei`.`Institución` (`Id_Institución`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -147,16 +147,14 @@ DROP TABLE IF EXISTS `gestor_rei`.`Objeto` ;
 
 CREATE TABLE IF NOT EXISTS `gestor_rei`.`Objeto` (
   `Id_Objeto` INT PRIMARY KEY AUTO_INCREMENT NOT NULL ,
-  `Num_Inventario` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `Estado` ENUM("Alta", "Baja", "Inactivo", "Averiado") NOT NULL,
   `Descripción_Avería` VARCHAR(45) NULL,
-  `Institución_id_Institución` INT NOT NULL,
-  UNIQUE INDEX `Num_Inventario_UNIQUE` (`Num_Inventario` ASC) VISIBLE,
-  INDEX `fk_Objeto_Institución1_idx` (`Institución_id_Institución` ASC) VISIBLE,
+  `Institución_Id_Institución` INT NOT NULL,
+  INDEX `fk_Objeto_Institución1_idx` (`Institución_Id_Institución` ASC) VISIBLE,
   CONSTRAINT `fk_Objeto_Institución1`
-    FOREIGN KEY (`Institución_id_Institución`)
-    REFERENCES `gestor_rei`.`Institución` (`id_Institución`)
+    FOREIGN KEY (`Institución_Id_Institución`)
+    REFERENCES `gestor_rei`.`Institución` (`Id_Institución`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

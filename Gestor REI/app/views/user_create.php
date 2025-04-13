@@ -9,7 +9,7 @@
 <h2>Crear Usuario</h2>
 <form  method="POST" autocomplete="off">
     <p>
-        <label for="name">Nombre:</label>
+        <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" required>
     </p>
     <p>
@@ -23,6 +23,7 @@
         <input type="password" name="contra" required>
     </p>
     <p>
+        <!-- Preseleccionar Estado con el estado anterior en la vista de edición -->
         <label for="privilegios">Tipo de usuario:</label>
         <select name="privilegios">
             <option value="1">Admin</option>

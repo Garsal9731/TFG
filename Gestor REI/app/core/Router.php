@@ -31,10 +31,12 @@
         // ! REVISAR INDEX Y EMPEZAR CON BOCETOS
         public function index(){
             $userController = new UserController();
-
-
+            $itemController = new ItemController();
+            $taskController = new TaskController();
 
             $users = $userController->getAll();
+            $items = $itemController->getAll();
+            $tasks = $taskController->getAll();
             require __DIR__ . '/../views/index_view.php';
         }
 

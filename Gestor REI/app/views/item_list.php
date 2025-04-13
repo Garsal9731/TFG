@@ -12,8 +12,8 @@
     <?php foreach ($items as $item): ?>
         <li>
             <?php echo $item['Nombre']; ?>
-            <a href="index.php?route=item/edit&id=<?php echo $item['Id_Usuario']; ?>">Editar</a>
-            <a href="index.php?route=item/delete&id=<?php echo $item['Id_Usuario']; ?>">Eliminar</a>
+            <a href="index.php?route=item/edit&id=<?php echo $item['Id_Objeto']; ?>">Editar</a>
+            <a href="index.php?route=item/delete&id=<?php echo $item['Id_Objeto']; ?>">Eliminar</a>
         </li>
     <?php endforeach; ?>
 </ul>

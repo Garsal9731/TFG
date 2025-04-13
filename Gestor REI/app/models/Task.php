@@ -18,6 +18,6 @@
          * Extiende el constructor de EmptyModel usando la tabla de Tarea como referencia
          */
         public function __construct() {
-            parent::__construct('Tareas');
+            parent::__construct('Tarea');
         }
     }
