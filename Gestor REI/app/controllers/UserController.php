@@ -33,6 +33,17 @@
             return $users;
         }
 
+        // Recoger Todo usando correo como referencia
+        /**
+         * @param $mail
+         * 
+         * Recogemos los datos del usuario usando el correo como referencia
+         */
+        public function getByMail($mail){
+            $data = $this->userModel->getByMail($mail);
+            return $data;
+        }
+
         // Indice
         /**
          * @param VOID NULL
@@ -55,6 +66,8 @@
          * Usamos el metodo crear del EmptyModel y recogemos los datos por POST
          */ 
         public function create() {
+
+            // ! AÑADIR COMPROBACIÓN DE CORREO PARA VER SI YA EXISTE
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Ciframos la contraseña

@@ -53,6 +53,7 @@
          */ 
         public function create() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                var_dump($_POST);
                 // $this->itemModel->create(['Nombre' => $_POST['nombre'],'Contraseña' => $cifrado,'Correo' => $_POST['correo'],'Privilegios' => $_POST["privilegios"]]);
                 // header('Location: index.php?route=item/index');
             } else {

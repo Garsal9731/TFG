@@ -28,7 +28,7 @@
             $this->id = $_GET['id'] ?? null;
         }
 
-        // ! REVISAR INDEX Y EMPEZAR CON BOCETOS
+        // ! REVISAR INDEX Y EMPEZAR CON BOCETOS, Y CAMBIAR PARA NO RECOGER TODO DE TODO
         public function index(){
             $userController = new UserController();
             $itemController = new ItemController();
@@ -38,6 +38,30 @@
             $items = $itemController->getAll();
             $tasks = $taskController->getAll();
             require __DIR__ . '/../views/index_view.php';
+        }
+
+
+        public function login($data){
+            $userController = new UserController();
+            $userData = $userController->getByMail($data["correo"]);
+            var_dump($userData);
+
+            if(password_verify($data["contra"],$userData["Contraseña"])){
+                $_SESSION["loginData"] = $userData;
+                setcookie("session", 1, time() + (86400 * 30), "/");
+                header('Location: index.php?route=core/index');
+            }else{
+                // ! AÑADIR RECOGIDA DE ERRORES EN CONDICIONES
+                echo "Contraseña Invalida";
+            }
+
+            var_dump($userData);
+        }
+
+        public function logoff(){
+            $_SESSION["loginData"] = $userData;
+            setcookie("session", 0, time() + (86400 * 30), "/");
+            header('Location: index.php?route=core/index');
         }
 
         // Enrutador
@@ -54,7 +78,11 @@
             
             switch ($this->route){
                 case 'core/index':
-                        $this->index();
+                    $this->index();
+                    break;
+                
+                case 'core/logoff':
+                    $this->logoff();
                     break;
 
                 case 'user/index':

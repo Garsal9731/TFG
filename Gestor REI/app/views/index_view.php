@@ -45,7 +45,7 @@
         </li>
     <?php endforeach; ?>
 </ul>
-
+<a href="index.php?route=core/logoff">Cerrar Sesión</a>
 <?php
     $content = ob_get_clean();
     require "layouts/main.php";

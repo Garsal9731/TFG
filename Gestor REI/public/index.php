@@ -9,5 +9,26 @@
     // Les damos alias al namespace
     use App\Core\Router as Router;
 
+    session_start();
     $router = new Router();
-    $router->enroute();
+
+    if(!isset($_COOKIE["session"])){
+        setcookie("session", 0, time() + (86400 * 30), "/");
+    }
+
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION["loginData"]==null){
+        $_SESSION["loginData"] = array('correo'=>$_POST["correo"],'contra'=>$_POST["contra"]);
+    }
+
+    switch ($_SESSION["loginData"]){
+        case null:
+            require_once __DIR__ . '/../app/views/login.php';
+            break;
+
+        case !null && $_COOKIE["session"]==0 :
+            $router->login($_SESSION["loginData"]);
+            break;
+
+        default:
+            $router->enroute();
+    }

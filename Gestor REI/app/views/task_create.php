@@ -12,7 +12,7 @@
 <form  method="POST" autocomplete="off">
     <p>
         <label for="nombreTarea">Nombre:</label>
-        <input type="text" name="nombre" required>
+        <input type="text" name="nombreTarea" required>
     </p>
     <p>
         <label for="detalles">Detalles Tarea:</label>
