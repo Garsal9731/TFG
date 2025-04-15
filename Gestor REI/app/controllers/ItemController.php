@@ -53,9 +53,10 @@
          */ 
         public function create() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                var_dump($_POST);
-                // $this->itemModel->create(['Nombre' => $_POST['nombre'],'Contraseña' => $cifrado,'Correo' => $_POST['correo'],'Privilegios' => $_POST["privilegios"]]);
-                // header('Location: index.php?route=item/index');
+                $idUser = $_SESSION["loginData"]["Id_Usuario"]; 
+                $idInst = $this->itemModel->getUserInst($idUser)["Id_Institución"];
+                $this->itemModel->create(['Nombre' => $_POST['nombre'],'Estado' => $_POST["estado"],'Descripción_Avería' => $_POST['descAveria'],'Institución_Id_Institución' => $idInst]);
+                header('Location: index.php?route=item/index');
             } else {
                 require __DIR__ . '/../views/item_create.php';
             }
@@ -73,7 +74,7 @@
                 // $this->itemModel->update(['Nombre' => $_POST['nombre']], $id);
                 // header('Location: index.php?route=item/index');
             } else {
-                $Item = $this->itemModel->getById($id);
+                $item = $this->itemModel->getById($id);
                 require __DIR__ . '/../views/item_edit.php';
             }
         }

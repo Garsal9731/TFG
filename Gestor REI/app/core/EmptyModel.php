@@ -52,8 +52,20 @@
          */
         public function getPrimary($table){
             $sql = "SHOW KEYS FROM $table WHERE Key_name = 'PRIMARY';";
-            $claves = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
-            return $claves["Column_name"];
+            $keys = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+            return $keys["Column_name"];
+        }
+
+        // Recoger última id
+        /**
+         * @param VOID NULL
+         * 
+         * Manda una consulta a la base de datos y recoge el último registro de la clave primaria
+         */
+        public function getLastId(){
+            $sql = "SELECT {$this->primaryKey} FROM {$this->table} ORDER BY {$this->primaryKey} DESC LIMIT 1;";
+            $lastId = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+            return $lastId["{$this->primaryKey}"];
         }
 
         // Recoger todo
@@ -114,5 +126,17 @@
         public function delete($id) {
             $sql = "DELETE FROM {$this->table} WHERE {$this->primaryKey} = ?";
             $this->query($sql, [$id]);
+        }
+
+        // Recoger Institución del usuario actúal
+        /**
+         * @param $id int
+         * 
+         * Recoge la id de la institución en la que trabaja el usuario usando una consulta preparada (en EmptyModel porque lo usan varias clases)
+         */
+        public function getUserInst($id) {
+            $sql = "SELECT * FROM Institución WHERE Id_Institución LIKE (SELECT Institución_Id_Institución FROM Trabajadores_Institución WHERE Usuario_Id_Usuario LIKE $id);";
+            $inst = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+            return $inst;
         }
     }

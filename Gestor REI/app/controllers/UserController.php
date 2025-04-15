@@ -76,6 +76,17 @@
                 // Cambiamos el tipo de dato de privilegio (por defecto se recoge como string)
                 settype($_POST["privilegios"], "int");
                 $this->userModel->create(['Nombre' => $_POST['nombre'],'Contraseña' => $cifrado,'Correo' => $_POST['correo'],'Privilegios' => $_POST["privilegios"]]);
+
+                // Recogemos la última id de usuario registrada (el nuevo usuario)
+                $lastId = $this->userModel->getLastId();
+
+                // Rcogemos la id del usuario actual y la usamos para encontrar a que institución pertenece y después recogemos la id de la institución
+                $idUser = $_SESSION["loginData"]["Id_Usuario"]; 
+                $idInst = $this->userModel->getUserInst($idUser)["Id_Institución"];
+
+                // Registramos al usuario en la misma institución (los admin de cada institución solo pueden registrar en su institución)
+                $this->userModel->registerUserInst($lastId,$idInst);
+
                 header('Location: index.php?route=user/index');
             } else {
                 require __DIR__ . '/../views/user_create.php';

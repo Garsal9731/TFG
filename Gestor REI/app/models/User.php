@@ -21,18 +21,6 @@
             parent::__construct('Usuario');
         }
 
-        // Recoger Institución
-        /**
-         * @param $id int
-         * 
-         * Recoge la id de la institución en la que trabaja el usuario usando una consulta preparada
-         */
-        public function getUserInst($id) {
-            $sql = "SELECT * FROM Institución WHERE Id_Institución LIKE (SELECT Institución_Id_Institución FROM Trabajadores_Institución WHERE Usuario_Id_Usuario LIKE $id);";
-            $inst = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
-            return $inst;
-        }
-
         // Recoger datos por correo
         /**
          * @param $mail string
@@ -43,5 +31,17 @@
             $sql = 'SELECT * FROM Usuario WHERE Correo LIKE "'.$mail.'";';
             $data = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
             return $data;
+        }
+
+        // Registrar usuarios en Institución
+        /**
+         * @param $idUser
+         * @param $idInst
+         * 
+         * Usamos la id del usuario y la id de la institución para registrar al usuario en la institución
+         */
+        public function registerUserInst($idUser,$idInst){
+            $sql = "INSERT INTO Trabajadores_Institución VALUES ($idUser,$idInst);";
+            $this->query($sql);
         }
     }

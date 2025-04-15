@@ -44,7 +44,6 @@
         public function login($data){
             $userController = new UserController();
             $userData = $userController->getByMail($data["correo"]);
-            var_dump($userData);
 
             if(password_verify($data["contra"],$userData["Contraseña"])){
                 $_SESSION["loginData"] = $userData;
@@ -54,8 +53,6 @@
                 // ! AÑADIR RECOGIDA DE ERRORES EN CONDICIONES
                 echo "Contraseña Invalida";
             }
-
-            var_dump($userData);
         }
 
         public function logoff(){

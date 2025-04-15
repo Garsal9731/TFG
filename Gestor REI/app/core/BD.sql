@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Usuario` (
   CONSTRAINT `fk_Usuario_Privilegios1`
     FOREIGN KEY (`Privilegios`)
     REFERENCES `gestor_rei`.`Privilegios` (`id_Privilegios`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -55,12 +55,12 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Jefes` (
   CONSTRAINT `fk_Usuario_has_Usuario_Usuario`
     FOREIGN KEY (`Id_Usuario`)
     REFERENCES `gestor_rei`.`Usuario` (`Id_Usuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_has_Usuario_Usuario1`
     FOREIGN KEY (`Id_Jefe`)
     REFERENCES `gestor_rei`.`Usuario` (`Id_Usuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -94,12 +94,12 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Tarea_Asignadas` (
   CONSTRAINT `fk_Tarea_has_Usuario_Tarea1`
     FOREIGN KEY (`Tarea_Id_Tarea`)
     REFERENCES `gestor_rei`.`Tarea` (`Id_Tarea`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tarea_has_Usuario_Usuario1`
     FOREIGN KEY (`Usuario_Id_Usuario`)
     REFERENCES `gestor_rei`.`Usuario` (`Id_Usuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -130,12 +130,12 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Trabajadores_Institución` (
   CONSTRAINT `fk_Usuario_has_Institución_Usuario1`
     FOREIGN KEY (`Usuario_Id_Usuario`)
     REFERENCES `gestor_rei`.`Usuario` (`Id_Usuario`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_has_Institución_Institución1`
     FOREIGN KEY (`Institución_Id_Institución`)
     REFERENCES `gestor_rei`.`Institución` (`Id_Institución`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Objeto` (
   CONSTRAINT `fk_Objeto_Institución1`
     FOREIGN KEY (`Institución_Id_Institución`)
     REFERENCES `gestor_rei`.`Institución` (`Id_Institución`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -171,3 +171,10 @@ INSERT INTO Institución (Nombre_Institución) VALUES
   ("Hospital"),
   ("Ayuntamiento")
 ;
+
+-- La contraseña de las cuentas base son 1234
+INSERT INTO Usuario (Nombre,Contraseña,Correo,Privilegios) VALUES
+  ("Admin","$2y$10$jaPNr8/4L18u0xlL2PF0mOwcGPJEmFJedaxSv6UXR/ir.orl7qWjC","admin@correo.es",1)
+;
+
+INSERT INTO Trabajadores_Institución VALUES (1,1);
