@@ -45,7 +45,12 @@
         </li>
     <?php endforeach; ?>
 </ul>
-<a href="index.php?route=core/logoff">Cerrar Sesión</a>
+<p>
+    <a href="index.php?route=user/manage">Manejar Empleados</a>
+</p>
+<p>
+    <a href="index.php?route=core/logoff">Cerrar Sesión</a>
+</p>
 <?php
     $content = ob_get_clean();
     require "layouts/main.php";

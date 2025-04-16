@@ -71,8 +71,9 @@
 
         public function edit($id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // $this->itemModel->update(['Nombre' => $_POST['nombre']], $id);
-                // header('Location: index.php?route=item/index');
+                settype($id, "int");
+                $this->itemModel->update(['Nombre' => $_POST['nombre'],'Estado'=>$_POST['estado'],'Descripción_Avería'=>$_POST['descAveria']], $id);
+                header('Location: index.php?route=item/index');
             } else {
                 $item = $this->itemModel->getById($id);
                 require __DIR__ . '/../views/item_edit.php';

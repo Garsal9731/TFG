@@ -113,6 +113,10 @@
                 case 'user/delete':
                     $userController->delete($this->id);
                     break;
+
+                case 'user/manage':
+                    $userController->bossManage($_SESSION["loginData"]["Id_Usuario"]);
+                    break;
                     
                 case 'item/index':
                     $itemController->index();

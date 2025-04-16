@@ -51,11 +51,7 @@
          * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los usuarios y llamamos a la vista
          */ 
         public function index() {
-
             $users = $this->getAll();
-
-            // ? La ruta simplificada empieza desde la pagina inicial, (/public/index.php)
-            // require "../app/views/user_list.php";
             require __DIR__ . '/../views/user_list.php';
         }
 
@@ -99,6 +95,7 @@
          * 
          * Usamos el metodo editar del EmptyModel, recogemos los datos por POST y le pasamos la id para actualizar el registro
          */
+        // ! CAMBIAR PARA AÑADIR OTROS CAMPOS
         public function edit($id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $this->userModel->update(['Nombre' => $_POST['nombre']], $id);
@@ -118,5 +115,18 @@
         public function delete($id) {
             $this->userModel->delete($id);
             header('Location: index.php?route=user/index');
+        }
+
+        public function bossManage($idUser){
+
+            if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                var_dump($_POST);
+            }else{
+                $instInfo = $this->userModel->getUserInst($idUser);
+                $idInst = $instInfo["Id_Institución"];
+                $instName = $instInfo["Nombre_Institución"];
+                $users = $this->userModel->getAllByInst($idInst);
+                require __DIR__ . '/../views/user_manage.php';
+            }
         }
     }

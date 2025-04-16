@@ -28,7 +28,7 @@
          * Recoge el correo y la contraseña del usuario usando el correo como referencia
          */
         public function getByMail($mail){
-            $sql = 'SELECT * FROM Usuario WHERE Correo LIKE "'.$mail.'";';
+            $sql = 'SELECT * FROM Usuario WHERE Correo = "'.$mail.'";';
             $data = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
             return $data;
         }
@@ -43,5 +43,11 @@
         public function registerUserInst($idUser,$idInst){
             $sql = "INSERT INTO Trabajadores_Institución VALUES ($idUser,$idInst);";
             $this->query($sql);
+        }
+
+        public function getAllByInst($idInst){
+            $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Usuario_Id_Usuario FROM Trabajadores_Institución WHERE Institución_Id_Institución=$idInst);";
+            $users = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            return $users;
         }
     }

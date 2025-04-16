@@ -135,7 +135,7 @@
          * Recoge la id de la institución en la que trabaja el usuario usando una consulta preparada (en EmptyModel porque lo usan varias clases)
          */
         public function getUserInst($id) {
-            $sql = "SELECT * FROM Institución WHERE Id_Institución LIKE (SELECT Institución_Id_Institución FROM Trabajadores_Institución WHERE Usuario_Id_Usuario LIKE $id);";
+            $sql = "SELECT * FROM Institución WHERE Id_Institución = (SELECT Institución_Id_Institución FROM Trabajadores_Institución WHERE Usuario_Id_Usuario = $id);";
             $inst = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
             return $inst;
         }
