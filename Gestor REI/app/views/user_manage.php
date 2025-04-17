@@ -4,13 +4,14 @@
      * 
      */
     ob_start();
+    // ! CREAR CHECKEO PARA REVISAR SI EL USUARIO SELECCIONADO YA ES JEFE DE CADA 1 DE LOS OTROS USUARIOS
 ?>
 
 <h2>Lista de Usuarios de <?php echo $instName?></h2>
 <form  method="POST" autocomplete="off">
     <p>
-        <label for="Jefe">Elige el Jefe:</label>
-        <select name="Jefe">
+        <label for="jefe">Elige el Jefe:</label>
+        <select name="jefe">
             <option value="" disabled selected>Elige un Jefe</option>
             <?php foreach ($users as $user): ?>
                 <option value="<?php echo $user['Id_Usuario']; ?>"><?php echo $user['Nombre']; ?></option>

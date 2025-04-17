@@ -11,7 +11,7 @@
 <ul>
     <?php foreach ($items as $item): ?>
         <li>
-            <?php echo $item['Nombre']; ?>
+            <?php echo "{$item['Nombre']} Estado:{$item['Estado']} Avería:{$item['Descripción_Avería']}"; ?>
             <a href="index.php?route=item/edit&id=<?php echo $item['Id_Objeto']; ?>">Editar</a>
             <a href="index.php?route=item/delete&id=<?php echo $item['Id_Objeto']; ?>">Eliminar</a>
         </li>

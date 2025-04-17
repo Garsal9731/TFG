@@ -12,8 +12,10 @@
     session_start();
     $router = new Router();
 
-    if(!isset($_COOKIE["session"])){
+    if(!isset($_COOKIE["session"]) || $_COOKIE["session"]==0){
         setcookie("session", 0, time() + (86400 * 30), "/");
+        $_SESSION["loginData"] = null;
+        require_once __DIR__ . '/../app/views/login.php';
     }
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION["loginData"]==null){

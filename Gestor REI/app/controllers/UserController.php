@@ -117,10 +117,19 @@
             header('Location: index.php?route=user/index');
         }
 
+        // Manejar usuarios
+        /**
+         * @param $idUser int
+         * 
+         * Usamos la id del usuario para 
+         */
         public function bossManage($idUser){
 
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                var_dump($_POST);
+                foreach($_POST["empleado"] as $empleado){
+                    $this->userModel->employeeRegister($_POST["jefe"],$empleado);
+                }
+                header('Location: index.php?route=user/index');
             }else{
                 $instInfo = $this->userModel->getUserInst($idUser);
                 $idInst = $instInfo["Id_Institución"];
@@ -128,5 +137,10 @@
                 $users = $this->userModel->getAllByInst($idInst);
                 require __DIR__ . '/../views/user_manage.php';
             }
+        }
+
+        public function getEmployees($idJefe){
+            $employees = $this->userModel->getEmployees($idJefe);
+            return $employees;
         }
     }

@@ -48,8 +48,8 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `gestor_rei`.`Jefes` ;
 
 CREATE TABLE IF NOT EXISTS `gestor_rei`.`Jefes` (
-  `Id_Usuario` INT NULL,
   `Id_Jefe` INT NULL,
+  `Id_Usuario` INT NULL,
   INDEX `fk_Usuario_has_Usuario_Usuario1_idx` (`Id_Jefe` ASC) VISIBLE,
   INDEX `fk_Usuario_has_Usuario_Usuario_idx` (`Id_Usuario` ASC) VISIBLE,
   CONSTRAINT `fk_Usuario_has_Usuario_Usuario`

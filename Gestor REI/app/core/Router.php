@@ -35,6 +35,7 @@
             $taskController = new TaskController();
 
             $users = $userController->getAll();
+            $employees = $userController->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
             $items = $itemController->getAll();
             $tasks = $taskController->getAll();
             require __DIR__ . '/../views/index_view.php';
@@ -52,6 +53,7 @@
             }else{
                 // ! AÑADIR RECOGIDA DE ERRORES EN CONDICIONES
                 echo "Contraseña Invalida";
+                header('Location: index.php?route=core/index');
             }
         }
 
@@ -98,7 +100,7 @@
                     $userController->delete($this->id);
                     break;
 
-                    case 'user/index':
+                case 'user/index':
                     $userController->index();
                     break;
 

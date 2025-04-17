@@ -33,15 +33,24 @@
         </li>
     <?php endforeach; ?>
 </ul>
-    
+<!-- CAMBIAR PARA QUE EL USUARIO PROMEDIO NO LO PUEDA VER (SOLO TECNICOS Y ADMINS) -->
 <h2>Lista de Objetos</h2>
 <a href="index.php?route=item/create">Crear Objeto</a>
 <ul>
     <?php foreach ($items as $item): ?>
         <li>
-            <?php echo $item['Nombre']; ?>
+            <?php echo "{$item['Nombre']} Estado:{$item['Estado']} Avería:{$item['Descripción_Avería']}"; ?>
             <a href="index.php?route=item/edit&id=<?php echo $item['Id_Objeto']; ?>">Editar</a>
             <a href="index.php?route=item/delete&id=<?php echo $item['Id_Objeto']; ?>">Eliminar</a>
+        </li>
+    <?php endforeach; ?>
+</ul>
+<!-- CAMBIAR PARA QUE EL USUARIO PROMEDIO NO LO PUEDA VER (SOLO ADMINS) -->
+<h2>Lista de Empleados</h2>
+<ul>
+    <?php foreach ($employees as $employee): ?>
+        <li>
+            <?php echo $employee['Nombre']; ?>
         </li>
     <?php endforeach; ?>
 </ul>
