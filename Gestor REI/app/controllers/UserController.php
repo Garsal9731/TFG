@@ -63,27 +63,32 @@
          */ 
         public function create() {
 
-            // ! AÑADIR COMPROBACIÓN DE CORREO PARA VER SI YA EXISTE
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-                // Ciframos la contraseña
-                $cifrado = password_hash($_POST['contra'], PASSWORD_DEFAULT);
+                if($this->userModel->checkMail($_POST["correo"])==false){
 
-                // Cambiamos el tipo de dato de privilegio (por defecto se recoge como string)
-                settype($_POST["privilegios"], "int");
-                $this->userModel->create(['Nombre' => $_POST['nombre'],'Contraseña' => $cifrado,'Correo' => $_POST['correo'],'Privilegios' => $_POST["privilegios"]]);
+                    // Ciframos la contraseña
+                    $cifrado = password_hash($_POST['contra'], PASSWORD_DEFAULT);
 
-                // Recogemos la última id de usuario registrada (el nuevo usuario)
-                $lastId = $this->userModel->getLastId();
+                    // Cambiamos el tipo de dato de privilegio (por defecto se recoge como string)
+                    settype($_POST["privilegios"], "int");
+                    $this->userModel->create(['Nombre' => $_POST['nombre'],'Contraseña' => $cifrado,'Correo' => $_POST['correo'],'Privilegios' => $_POST["privilegios"]]);
 
-                // Rcogemos la id del usuario actual y la usamos para encontrar a que institución pertenece y después recogemos la id de la institución
-                $idUser = $_SESSION["loginData"]["Id_Usuario"]; 
-                $idInst = $this->userModel->getUserInst($idUser)["Id_Institución"];
+                    // Recogemos la última id de usuario registrada (el nuevo usuario)
+                    $lastId = $this->userModel->getLastId();
 
-                // Registramos al usuario en la misma institución (los admin de cada institución solo pueden registrar en su institución)
-                $this->userModel->registerUserInst($lastId,$idInst);
+                    // Rcogemos la id del usuario actual y la usamos para encontrar a que institución pertenece y después recogemos la id de la institución
+                    $idUser = $_SESSION["loginData"]["Id_Usuario"]; 
+                    $idInst = $this->userModel->getUserInst($idUser)["Id_Institución"];
 
-                header('Location: index.php?route=user/index');
+                    // Registramos al usuario en la misma institución (los admin de cada institución solo pueden registrar en su institución)
+                    $this->userModel->registerUserInst($lastId,$idInst);
+
+                    header('Location: index.php?route=user/index');
+                }else{
+                    // ! AÑADIR CONTROL DE ERRORES EN CONDICIONES
+                    echo "CORREO YA EXISTE";
+                }
             } else {
                 require __DIR__ . '/../views/user_create.php';
             }

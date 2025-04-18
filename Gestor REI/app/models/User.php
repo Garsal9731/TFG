@@ -35,8 +35,8 @@
 
         // Registrar usuarios en Institución
         /**
-         * @param $idUser
-         * @param $idInst
+         * @param $idUser int
+         * @param $idInst int
          * 
          * Usamos la id del usuario y la id de la institución para registrar al usuario en la institución
          */
@@ -47,7 +47,7 @@
 
         // Recoger usuarios de Institución
         /**
-         * @param $idInst
+         * @param $idInst int
          * 
          * Usamos la id de la institución para recoger a todos los usuarios que trabajan en ella
          */
@@ -59,8 +59,8 @@
 
         // Registrar Empleados
         /**
-         * @param $idJefe
-         * @param $idEmpleado
+         * @param $idJefe int
+         * @param $idEmpleado int
          * 
          * Usamos la id del jefe y la del empleado para registrar la relación de Jefe-Empleado en la BD
          */
@@ -69,9 +69,32 @@
             $this->query($sql);
         }
 
+        // Recoger empleados
+        /**
+         * @param $idJefe int
+         * 
+         * Recogemos los usuarios que son empleados del Jefe pasado
+         */
         public function getEmployees($idJefe){
             $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Id_Usuario FROM Jefes WHERE Id_Jefe=$idJefe);";
             $employees = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             return $employees;
+        }
+
+        // Revisar si correo existe
+        /**
+         * @param $correo string
+         * 
+         * Mandamos una query para revisar si el correo existe en la base de datos
+         */
+        public function checkMail($mail){
+            $sql = "SELECT Correo FROM Usuario WHERE Correo='$mail';";
+            $query = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+
+            if($query==false){
+                return false;
+            }else{
+                return true;
+            }
         }
     }

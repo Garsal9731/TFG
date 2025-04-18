@@ -24,6 +24,7 @@
 
     switch ($_SESSION["loginData"]){
         case null:
+            setcookie("session", 0, time() + (86400 * 30), "/");
             require_once __DIR__ . '/../app/views/login.php';
             break;
 
