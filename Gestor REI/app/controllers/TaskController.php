@@ -53,9 +53,21 @@
          */ 
         public function create() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // $this->taskModel->create(['Nombre' => $_POST['nombre'],'Contraseña' => $cifrado,'Correo' => $_POST['correo'],'Privilegios' => $_POST["privilegios"]]);
-                // header('Location: index.php?route=Task/index');
+                var_dump($_POST);
+            
+                $idCreador = $_SESSION["loginData"]["Id_Usuario"];
+                $fechaCreacion = date("Y-m-d");
+                $fechaEstimada = str_replace("T"," ",$_POST["fechaEstimada"]).":00";
+                $this->taskModel->create(['Id_Creador_Tarea' => $idCreador,'Fecha_Creación' => $fechaCreacion,'Tiempo_Estimado' => $fechaEstimada,'Nombre_Tarea' => $_POST["nombreTarea"],'Detalles' => $_POST["detalles"]]);
+                $lastId = $this->taskModel->getLastId();
+
+                foreach($_POST["empleado"] as $employeeId){
+                    $this->taskModel->asignUser($lastId,$employeeId);
+                }
+
+                header('Location: index.php?route=task/index');
             } else {
+                $employees = $this->taskModel->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
                 require __DIR__ . '/../views/task_create.php';
             }
         }

@@ -4,9 +4,6 @@
      * 
      */
     ob_start();
-    // ! RECOGER ID DEL USUARIO ACTUAL PARA REGISTRARLO COMO CREADOR DE TAREA
-    // ! CREAR UN SELECT CON LOS USUARIOS QUE SE HAN ASIGNADO COMO QUE SON EMPLEADOS DEL ACTUAL
-    // ! AÑADIR UN SELECTOR DE FECHAS PARA CONSEGIR LA EL TIEMPO ESTIMADO (restando la fecha de finalización con la actual)
 ?>
 <h2>Crear Tarea</h2>
 <form  method="POST" autocomplete="off">
@@ -17,6 +14,17 @@
     <p>
         <label for="detalles">Detalles Tarea:</label>
         <textarea name="detalles"></textarea>
+    </p>
+    <p>
+        <label for="empleados">Elige a los encargados:</label>
+            <?php foreach ($employees as $employee): ?>
+                <input type="checkbox" name="empleado[]" value="<?php echo $employee['Id_Usuario']; ?>" />
+                <label for="empleado[]"><?php echo $employee['Nombre']; ?></label>
+            <?php endforeach; ?>
+    </p>
+    <p>
+        <label for="fechaEstimada">Fecha Estimada para terminar:</label>
+        <input type="datetime-local" name="fechaEstimada" required>
     </p>
     <input type="submit" value="Crear Tarea">
 </form>

@@ -20,4 +20,16 @@
         public function __construct() {
             parent::__construct('Tarea');
         }
+
+        // Asignar tarea a usuario
+        /**
+         * @param $taskId int
+         * @param $employeeId int
+         * 
+         * Registra a quien se le ha asignado la tarea en la BD
+         */
+        public function asignUser($taskId,$employeeId){
+            $sql = "INSERT INTO Tarea_Asignadas VALUES ($taskId,$employeeId);";
+            $this->query($sql);
+        }
     }

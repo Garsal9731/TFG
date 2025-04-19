@@ -69,18 +69,6 @@
             $this->query($sql);
         }
 
-        // Recoger empleados
-        /**
-         * @param $idJefe int
-         * 
-         * Recogemos los usuarios que son empleados del Jefe pasado
-         */
-        public function getEmployees($idJefe){
-            $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Id_Usuario FROM Jefes WHERE Id_Jefe=$idJefe);";
-            $employees = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            return $employees;
-        }
-
         // Revisar si correo existe
         /**
          * @param $correo string

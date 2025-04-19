@@ -75,8 +75,8 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Tarea` (
   `Id_Creador_Tarea` INT NOT NULL,
   `Fecha_Creación` DATE NOT NULL,
   `Tiempo_Estimado` DATETIME NOT NULL,
-  `Nombre_Tarea` VARCHAR(45) NOT NULL,
-  `Detalles` VARCHAR(45) NULL)
+  `Nombre_Tarea` VARCHAR(100) NOT NULL,
+  `Detalles` VARCHAR(200) NULL)
 ENGINE = InnoDB;
 
 

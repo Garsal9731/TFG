@@ -11,7 +11,7 @@
 <ul>
     <?php foreach ($tasks as $task): ?>
         <li>
-            <?php echo $task['Nombre']; ?>
+            <?php echo  ucfirst($task['Nombre_Tarea']); ?>
             <a href="index.php?route=task/edit&id=<?php echo $task['Id_Tarea']; ?>">Editar</a>
             <a href="index.php?route=task/delete&id=<?php echo $task['Id_Tarea']; ?>">Eliminar</a>
         </li>
