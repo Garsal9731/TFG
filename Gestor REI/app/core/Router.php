@@ -53,7 +53,7 @@
             }else{
                 // ! AÑADIR RECOGIDA DE ERRORES EN CONDICIONES
                 echo "Contraseña Invalida";
-                header('Location: index.php?route=core/index');
+                // header('Location: index.php?route=core/index');
             }
         }
 

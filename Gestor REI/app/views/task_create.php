@@ -24,7 +24,7 @@
     </p>
     <p>
         <label for="fechaEstimada">Fecha Estimada para terminar:</label>
-        <input type="datetime-local" name="fechaEstimada" required>
+        <input type="datetime-local" name="fechaEstimada" min="<?php echo date("Y-m-d")."T".date("h:i");?>" required>
     </p>
     <input type="submit" value="Crear Tarea">
 </form>

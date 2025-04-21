@@ -53,8 +53,6 @@
          */ 
         public function create() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                var_dump($_POST);
-            
                 $idCreador = $_SESSION["loginData"]["Id_Usuario"];
                 $fechaCreacion = date("Y-m-d");
                 $fechaEstimada = str_replace("T"," ",$_POST["fechaEstimada"]).":00";
@@ -81,10 +79,12 @@
 
         public function edit($id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                var_dump($_POST);
                 // $this->taskModel->update(['Nombre' => $_POST['nombre']], $id);
-                header('Location: index.php?route=task/index');
+                // header('Location: index.php?route=task/index');
             } else {
-                // $Task = $this->taskModel->getById($id);
+                $task = $this->taskModel->getById($id);
+                $employees = $this->taskModel->getEmployeesByTask($id);
                 require __DIR__ . '/../views/task_edit.php';
             }
         }
@@ -96,7 +96,7 @@
          * Usamos el metodo borrar del EmptyModel y borramos el registro usando la id
          */
         public function delete($id) {
-            // $this->taskModel->delete($id);
+            $this->taskModel->delete($id);
             header('Location: index.php?route=task/index');
         }
     }

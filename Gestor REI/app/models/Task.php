@@ -32,4 +32,16 @@
             $sql = "INSERT INTO Tarea_Asignadas VALUES ($taskId,$employeeId);";
             $this->query($sql);
         }
+
+        // Recoger usuarios de tarea
+        /**
+         * @param $idTask int
+         * 
+         * Usamos la id de la tarea para recoger los usuarios a los que se le han asignado
+         */
+        public function getEmployeesByTask($idTask){
+            $sql = "SELECT Nombre FROM Usuario WHERE Id_Usuario IN (SELECT Usuario_Id_Usuario FROM Tarea_Asignadas WHERE Tarea_Id_Tarea=$idTask);";
+            $employees = $this->query($sql)->fetchAll();
+            return $employees;
+        }
     }

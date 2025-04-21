@@ -61,7 +61,7 @@
         <?php endforeach; ?>
     </ul>
     <p>
-        <a href="index.php?route=user/manage">Manejar Empleados</a>
+        <a href="index.php?route=user/manage">Asignar Empleados</a>
     </p>
 <?php }?>
 

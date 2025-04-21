@@ -103,7 +103,9 @@
         // ! CAMBIAR PARA AÑADIR OTROS CAMPOS
         public function edit($id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $this->userModel->update(['Nombre' => $_POST['nombre']], $id);
+                $contra = password_hash($_POST["contra"], PASSWORD_DEFAULT);
+
+                $this->userModel->update(['Nombre' => $_POST['nombre'],'Contraseña' => $contra], $id);
                 header('Location: index.php?route=user/index');
             } else {
                 $user = $this->userModel->getById($id);
