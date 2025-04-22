@@ -56,11 +56,12 @@
                 $idCreador = $_SESSION["loginData"]["Id_Usuario"];
                 $fechaCreacion = date("Y-m-d");
                 $fechaEstimada = str_replace("T"," ",$_POST["fechaEstimada"]).":00";
+                
                 $this->taskModel->create(['Id_Creador_Tarea' => $idCreador,'Fecha_Creación' => $fechaCreacion,'Tiempo_Estimado' => $fechaEstimada,'Nombre_Tarea' => $_POST["nombreTarea"],'Detalles' => $_POST["detalles"]]);
                 $lastId = $this->taskModel->getLastId();
 
                 foreach($_POST["empleado"] as $employeeId){
-                    $this->taskModel->asignUser($lastId,$employeeId);
+                    $this->taskModel->assignUser($lastId,$employeeId);
                 }
 
                 header('Location: index.php?route=task/index');
@@ -79,12 +80,43 @@
 
         public function edit($id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                var_dump($_POST);
-                // $this->taskModel->update(['Nombre' => $_POST['nombre']], $id);
-                // header('Location: index.php?route=task/index');
+
+                // Reformateamos la fecha para adaptarla al formato de la BD
+                $fechaEstimada = str_replace("T"," ",$_POST["fechaEstimada"]).":00";
+                
+                // Actualizamos la tarea
+                $this->taskModel->update(['Tiempo_Estimado' => $fechaEstimada,'Nombre_Tarea' => $_POST['nombreTarea'],'Detalles' => $_POST["detalles"]], $id);
+
+                // Sacamos las ids de los empleados asignados a la tarea originalmente
+                $assignedIds = array();
+                foreach($this->taskModel->getEmployeesByTask($id) as $assignedEmployee){
+                    array_push($assignedIds,$assignedEmployee["Id_Usuario"]);
+                }
+
+                // Diferenciamos los arrays y juntamos las diferencias en un solo array
+                $diffEmployee = array_diff($assignedIds,$_POST["empleado"]);
+                $employeeDiff = array_diff($_POST["empleado"],$assignedIds);
+                $differences = array_merge($employeeDiff,$diffEmployee);
+
+                // Comprobamos las diferencias y dependiendo de si están asignados los borramos, y al contrario los asignamos
+                foreach($differences as $idDiff){
+                    if($this->taskModel->checkIfAssigned($id,$idDiff)){
+                        $this->taskModel->removeUser($id,$idDiff);
+                    }else{
+                        $this->taskModel->assignUser($id,$idDiff);
+                    }
+                }
+
+                header('Location: index.php?route=task/index');
             } else {
                 $task = $this->taskModel->getById($id);
-                $employees = $this->taskModel->getEmployeesByTask($id);
+                $employees = $this->taskModel->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
+
+                $assignedEmployees = $this->taskModel->getEmployeesByTask($id);
+                $idsAssigned = array();
+                foreach($assignedEmployees as $idAssigned){
+                    array_push($idsAssigned,$idAssigned["Id_Usuario"]);
+                }
                 require __DIR__ . '/../views/task_edit.php';
             }
         }

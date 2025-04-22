@@ -18,11 +18,14 @@
     </p>
     <p>
         <label for="empleados">Elige a los encargados:</label>
-            <?php foreach ($employees as $employee): 
-                // ! NO RECOGE LOS USUARIOS
-                ?>
-                <input type="checkbox" name="empleado[]" value="<?php echo $employee['Id_Usuario']; ?>" checked/>
-                <label for="empleado[]"><?php echo $employee['Nombre']; ?></label>
+            <?php foreach ($employees as $employee): ?>
+                <?php if(in_array($employee["Id_Usuario"],$idsAssigned)):?>
+                    <input type="checkbox" name="empleado[]" value="<?php echo $employee['Id_Usuario']; ?>" checked/>
+                    <label for="empleado[]"><?php echo $employee['Nombre']; ?></label>
+                <?php else:?>
+                    <input type="checkbox" name="empleado[]" value="<?php echo $employee['Id_Usuario']; ?>"/>
+                    <label for="empleado[]"><?php echo $employee['Nombre']; ?></label>
+                <?php endif; ?>
             <?php endforeach; ?>
     </p>
     <p>
