@@ -45,6 +45,11 @@
         }
         
 
+        public function getAssigned($userId){
+            $sql = "SELECT * FROM Tarea WHERE Id_Tarea IN (SELECT Tarea_Id_Tarea FROM Tarea_Asignadas WHERE Usuario_Id_Usuario=$userId);";
+            return $this->query($sql)->fetchAll();
+        }
+
         // Recoger usuarios de tarea
         /**
          * @param $idTask int

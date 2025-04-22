@@ -40,7 +40,11 @@
          */ 
         public function index() {
 
-            $tasks = $this->getAll();
+            if($_SESSION["loginData"]["Privilegios"]==1){
+                $tasks = $this->getAll();
+            }else{
+                $tasks = $this->getAssigned($_SESSION["loginData"]["Id_Usuario"]);
+            }
 
             require __DIR__ . '/../views/task_list.php';
         } 
@@ -56,7 +60,7 @@
                 $idCreador = $_SESSION["loginData"]["Id_Usuario"];
                 $fechaCreacion = date("Y-m-d");
                 $fechaEstimada = str_replace("T"," ",$_POST["fechaEstimada"]).":00";
-                
+
                 $this->taskModel->create(['Id_Creador_Tarea' => $idCreador,'Fecha_Creación' => $fechaCreacion,'Tiempo_Estimado' => $fechaEstimada,'Nombre_Tarea' => $_POST["nombreTarea"],'Detalles' => $_POST["detalles"]]);
                 $lastId = $this->taskModel->getLastId();
 
@@ -130,5 +134,15 @@
         public function delete($id) {
             $this->taskModel->delete($id);
             header('Location: index.php?route=task/index');
+        }
+
+        // Recoger Tareas Asignadas
+        /**
+         * @param $iduser int
+         * 
+         * Usando la id del usuario recogemos las tareas que se le han asignado
+         */
+        public function getAssigned($idUser){
+            return $this->taskModel->getAssigned($idUser);
         }
     }

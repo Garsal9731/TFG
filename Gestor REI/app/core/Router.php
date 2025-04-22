@@ -37,7 +37,11 @@
             $users = $userController->getAll();
             $employees = $userController->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
             $items = $itemController->getAll();
-            $tasks = $taskController->getAll();
+            if($_SESSION["loginData"]["Privilegios"]==1){
+                $tasks = $taskController->getAll();
+            }else{
+                $tasks = $taskController->getAssigned($_SESSION["loginData"]["Id_Usuario"]);
+            }
             require __DIR__ . '/../views/index_view.php';
         }
 
