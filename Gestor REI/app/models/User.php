@@ -45,18 +45,6 @@
             $this->query($sql);
         }
 
-        // Recoger usuarios de Institución
-        /**
-         * @param $idInst int
-         * 
-         * Usamos la id de la institución para recoger a todos los usuarios que trabajan en ella
-         */
-        public function getAllByInst($idInst){
-            $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Usuario_Id_Usuario FROM Trabajadores_Institución WHERE Institución_Id_Institución=$idInst);";
-            $users = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            return $users;
-        }
-
         // Registrar Empleados
         /**
          * @param $idJefe int

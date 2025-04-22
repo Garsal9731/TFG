@@ -128,6 +128,18 @@
             $this->query($sql, [$id]);
         }
 
+        // Recoger empleados
+        /**
+         * @param $idJefe int
+         * 
+         * Recogemos los usuarios que son empleados del Jefe pasado
+         */
+        public function getEmployees($idJefe){
+            $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Id_Usuario FROM Jefes WHERE Id_Jefe=$idJefe);";
+            $employees = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            return $employees;
+        }
+
         // Recoger Institución del usuario actúal
         /**
          * @param $id int
@@ -140,15 +152,19 @@
             return $inst;
         }
 
-        // Recoger empleados
+        // Recoger usuarios de Institución
         /**
-         * @param $idJefe int
+         * @param $idInst int
          * 
-         * Recogemos los usuarios que son empleados del Jefe pasado
+         * Usamos la id de la institución para recoger a todos los usuarios que trabajan en ella
          */
-        public function getEmployees($idJefe){
-            $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Id_Usuario FROM Jefes WHERE Id_Jefe=$idJefe);";
-            $employees = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            return $employees;
+        public function getAllByInst($idInst){
+            if($_SESSION["loginData"]["Privilegios"]!==3){
+                $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Usuario_Id_Usuario FROM Trabajadores_Institución WHERE Institución_Id_Institución=$idInst);";
+            }else{
+                $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Usuario_Id_Usuario FROM Trabajadores_Institución WHERE Institución_Id_Institución=1) AND Privilegios !=3;";
+            }
+            $users = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+            return $users;
         }
     }

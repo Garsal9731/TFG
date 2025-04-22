@@ -70,7 +70,11 @@
 
                 header('Location: index.php?route=task/index');
             } else {
-                $employees = $this->taskModel->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
+                if($_SESSION["loginData"]["Privilegios"]!==3){
+                    $employees = $this->taskModel->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
+                }else{
+                    $employees = $this->taskModel->getAllByInst($this->taskModel->getUserInst($_SESSION["loginData"]["Id_Usuario"])["Id_Institución"]);
+                }
                 require __DIR__ . '/../views/task_create.php';
             }
         }
