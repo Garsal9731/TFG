@@ -10,6 +10,8 @@
     * [X] **RF1.8** Gestión de los datos del los usuarios en BD
     * [ ] **RF1.9** Crear jerarquía varios usuarios
     * [ ] **RNF1.1** Crear Promedios de los datos del usuario (tareas completadas, etc)
+    * [ ] **RNF1.2** Gestión de expresiones regulares.
+    * [ ] **RNF1.2** Gestión seguridad del usuario.
   * [ ] **RF-2 Tareas**
     * [X] **RF2.1** Registrar tareas
     * [X] **RF2.2** Eliminar tareas
@@ -19,7 +21,7 @@
     * [X] **RF2.6** Dar nombre a la tarea
     * [X] **RF2.7** Dar una descripción a la tarea
     * [X] **RF2.8** Dar un tiempo estimado de la tarea
-    * [ ] **RF2.9** Crear sistema de respuesta de asignado a creador
+    * [ ] **RFN2.1** Crear sistema de respuesta de asignado a creador
   * [ ] **RF-3 Institución**
     * [ ]  **RF3.1** Crear instituciones (o centros)
     * [ ]  **RF3.2** Dar de baja instituciones

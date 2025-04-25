@@ -3,13 +3,15 @@
     // Definimos el namespace Public
     namespace App\Public;
 
+    session_start();
+   
     // Llamamos a los controladores que vamos a usar
     require_once __DIR__ . '/../app/core/Router.php';
+    require_once __DIR__ . '/../vendor/autoload.php';
 
     // Les damos alias al namespace
     use App\Core\Router as Router;
 
-    session_start();
     $router = new Router();
 
     if(!isset($_COOKIE["session"]) || $_COOKIE["session"]==0){

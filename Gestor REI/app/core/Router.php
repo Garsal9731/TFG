@@ -62,7 +62,7 @@
         }
 
         public function logoff(){
-            $_SESSION["loginData"] = $userData;
+            session_destroy();
             setcookie("session", 0, time() + (86400 * 30), "/");
             header('Location: index.php?route=core/index');
         }
