@@ -127,44 +127,4 @@
             $sql = "DELETE FROM {$this->table} WHERE {$this->primaryKey} = ?";
             $this->query($sql, [$id]);
         }
-
-        // Recoger empleados
-        /**
-         * @param $idJefe int
-         * 
-         * Recogemos los usuarios que son empleados del Jefe pasado
-         */
-        public function getEmployees($idJefe){
-            $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Id_Usuario FROM Jefes WHERE Id_Jefe=$idJefe);";
-            $employees = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            return $employees;
-        }
-
-        // Recoger Institución del usuario actúal
-        /**
-         * @param $id int
-         * 
-         * Recoge la id de la institución en la que trabaja el usuario usando una consulta preparada (en EmptyModel porque lo usan varias clases)
-         */
-        public function getUserInst($id) {
-            $sql = "SELECT * FROM Institución WHERE Id_Institución = (SELECT Institución_Id_Institución FROM Trabajadores_Institución WHERE Usuario_Id_Usuario = $id);";
-            $inst = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
-            return $inst;
-        }
-
-        // Recoger usuarios de Institución
-        /**
-         * @param $idInst int
-         * 
-         * Usamos la id de la institución para recoger a todos los usuarios que trabajan en ella
-         */
-        public function getAllByInst($idInst){
-            if($_SESSION["loginData"]["Privilegios"]!==3){
-                $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Usuario_Id_Usuario FROM Trabajadores_Institución WHERE Institución_Id_Institución=$idInst);";
-            }else{
-                $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Usuario_Id_Usuario FROM Trabajadores_Institución WHERE Institución_Id_Institución=1) AND Privilegios !=3;";
-            }
-            $users = $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-            return $users;
-        }
     }

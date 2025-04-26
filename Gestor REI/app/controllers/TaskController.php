@@ -3,12 +3,22 @@
     // Definimos el namespace de los controladores
     namespace App\Controllers;
 
-    // Llamamos al archivo con el modelo tarea
+    // Llamamos al archivo con el modelo tarea y traits
     require_once __DIR__ . '/../models/Task.php';
-
+    require_once __DIR__ . '/../models/traits/getEmployees.php';
+    require_once __DIR__ . '/../models/traits/getUserInst.php';
+    require_once __DIR__ . '/../models/traits/getAllByInst.php';
+    
     use App\Models\Task as Task;
+    use App\Models\Traits\getEmployees as getEmployees;
+    use App\Models\Traits\getUserInst as getUserInst;
+    use App\Models\Traits\getAllByInst as getAllByInst;
+
 
     class TaskController {
+
+        use getEmployees, getAllByInst, getUserInst;
+
         private $taskModel;
 
         // Constructor
@@ -71,9 +81,9 @@
                 header('Location: index.php?route=task/index');
             } else {
                 if($_SESSION["loginData"]["Privilegios"]!==3){
-                    $employees = $this->taskModel->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
+                    $employees = $this->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
                 }else{
-                    $employees = $this->taskModel->getAllByInst($this->taskModel->getUserInst($_SESSION["loginData"]["Id_Usuario"])["Id_Institución"]);
+                    $employees = $this->getAllByInst($this->getUserInst($_SESSION["loginData"]["Id_Usuario"])["Id_Institución"]);
                 }
                 require __DIR__ . '/../views/task_create.php';
             }
@@ -118,7 +128,7 @@
                 header('Location: index.php?route=task/index');
             } else {
                 $task = $this->taskModel->getById($id);
-                $employees = $this->taskModel->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
+                $employees = $this->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
 
                 $assignedEmployees = $this->taskModel->getEmployeesByTask($id);
                 $idsAssigned = array();

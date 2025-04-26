@@ -3,12 +3,17 @@
     // Definimos el namespace de los controladores
     namespace App\Controllers;
 
-    // Llamamos al archivo con el modelo objeto
+    // Llamamos al archivo con el modelo objeto y traits
     require_once __DIR__ . '/../models/Item.php';
+    require_once __DIR__ . '/../models/traits/getUserInst.php';
 
     use App\Models\Item as Item;
+    use App\Models\Traits\getUserInst as getUserInst;
 
     class ItemController {
+
+        use getUserInst;
+
         private $itemModel;
 
         // Constructor
@@ -54,7 +59,7 @@
         public function create() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $idUser = $_SESSION["loginData"]["Id_Usuario"]; 
-                $idInst = $this->itemModel->getUserInst($idUser)["Id_Institución"];
+                $idInst = $this->getUserInst($idUser)["Id_Institución"];
                 $this->itemModel->create(['Nombre' => $_POST['nombre'],'Estado' => $_POST["estado"],'Descripción_Avería' => $_POST['descAveria'],'Institución_Id_Institución' => $idInst]);
                 header('Location: index.php?route=item/index');
             } else {

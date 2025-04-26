@@ -20,7 +20,6 @@
         private function __construct() {
             $host = 'localhost';
             $dbName = 'gestor_rei';
-            // $dbName = 'mvc_example';
             $user = 'root';
             $password = '123456';
 

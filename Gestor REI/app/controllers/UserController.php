@@ -3,12 +3,20 @@
     // Definimos el namespace de los controladores
     namespace App\Controllers;
 
-    // Llamamos al archivo con el modelo User
+    // Llamamos al archivo con el modelo User y traits
     require_once __DIR__ . '/../models/User.php';
+    require_once __DIR__ . '/../models/traits/getEmployees.php';
+    require_once __DIR__ . '/../models/traits/getUserInst.php';
+    require_once __DIR__ . '/../models/traits/getAllByInst.php';
 
     use App\Models\User as User;
+    use App\Models\Traits\getEmployees as getEmployees;
+    use App\Models\Traits\getUserInst as getUserInst;
+    use App\Models\Traits\getAllByInst as getAllByInst;
 
     class UserController {
+
+        use getEmployees, getUserInst, getAllByInst;
 
         private $userModel;
 
@@ -79,7 +87,7 @@
 
                     // Rcogemos la id del usuario actual y la usamos para encontrar a que institución pertenece y después recogemos la id de la institución
                     $idUser = $_SESSION["loginData"]["Id_Usuario"]; 
-                    $idInst = $this->userModel->getUserInst($idUser)["Id_Institución"];
+                    $idInst = $this->getUserInst($idUser)["Id_Institución"];
 
                     // Registramos al usuario en la misma institución (los admin de cada institución solo pueden registrar en su institución)
                     $this->userModel->registerUserInst($lastId,$idInst);
@@ -138,16 +146,11 @@
                 }
                 header('Location: index.php?route=user/index');
             }else{
-                $instInfo = $this->userModel->getUserInst($idUser);
+                $instInfo = $this->getUserInst($idUser);
                 $idInst = $instInfo["Id_Institución"];
                 $instName = $instInfo["Nombre_Institución"];
-                $users = $this->userModel->getAllByInst($idInst);
+                $users = $this->getAllByInst($idInst);
                 require __DIR__ . '/../views/user_manage.php';
             }
-        }
-
-        public function getEmployees($idJefe){
-            $employees = $this->userModel->getEmployees($idJefe);
-            return $employees;
         }
     }
