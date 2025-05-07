@@ -51,7 +51,7 @@
         <?php endforeach; ?>
     </ul>
 <?php }?>
-<?php if($_SESSION["loginData"]["Privilegios"]==1){?>
+<?php if($_SESSION["loginData"]["Privilegios"]==1 || $_SESSION["loginData"]["Privilegios"]==2){?>
     <h2>Lista de Empleados</h2>
     <ul>
         <?php foreach ($employees as $employee): ?>
@@ -60,11 +60,29 @@
             </li>
         <?php endforeach; ?>
     </ul>
+    <?php if($_SESSION["loginData"]["Privilegios"]==1){?>
     <p>
         <a href="index.php?route=user/manage">Asignar Empleados</a>
     </p>
+    <?php }?>
 <?php }?>
 
+<label for="ejemplo">Ejemplo select multiple:</label>
+<select id="ejemplo" name="ejemplo" data-placeholder="Elige un usuario" multiple data-multi-select>
+<?php foreach ($users as $user): ?>
+    <option value="<?php echo $user['Nombre'];?>"><?php echo $user['Nombre'];?></option>
+<?php endforeach; ?>
+</select>
+<script src="./JS/MultiSelect.js"></script>
+
+<script src="./JS/Ajax.js"></script>
+            <div>
+                <h1>Ajax</h1>
+                <form action="" autocomplete="off">
+                    <input type="text" name="ajax" onkeyup="buscarProducto(this.value)">
+                </form>
+                <p>Resultados: <span id="resultados_busqueda"></span></p>
+            </div>
 <p>
     <a href="index.php?route=core/logoff">Cerrar Sesión</a>
 </p>

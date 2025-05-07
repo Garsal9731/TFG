@@ -141,8 +141,8 @@
         public function bossManage($idUser){
 
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                foreach($_POST["empleado"] as $empleado){
-                    $this->userModel->employeeRegister($_POST["jefe"],$empleado);
+                foreach($_POST["empleados"] as $empleado){
+                    $this->userModel->employeeRegister($_POST["jefe"][0],$empleado);
                 }
                 header('Location: index.php?route=user/index');
             }else{

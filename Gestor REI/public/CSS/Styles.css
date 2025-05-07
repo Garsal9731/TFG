@@ -1,0 +1,69 @@
+/* Álvaro García Salvatierra */
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+:root{
+    /* Fondo */
+    --gris:#D7DFDF;
+    
+    /* Otros */
+    --azulosc:#232F4A;
+    
+    /* Call Of Action */
+    --dorado:#DE6F2E;
+
+    /* Errores y otros */
+    --rojo:#D63939;
+    
+    /* Texto Alternativo */
+    --azulcla:#344A7A;
+
+    /* Bordes y texto */
+    --negro:#000000;
+}
+
+body{
+    background-color: var(--gris);
+
+    /* Titulo */
+    & >div.titulo{
+        display: flex;
+        background-color: var(--azulosc);
+        height: 8vh;
+        align-items: center;
+
+        & a{
+            text-decoration: none;
+            color: var(--gris);
+        }
+    }
+
+    & >div.contenido{
+        display: flex;
+
+        & >div.barraLateral{
+            display: flex;
+            background-color: var(--azulosc);
+
+            /* Junto al main hacen 100vw */
+            min-width: 6vw;
+
+            overflow: auto;
+        }
+    
+        /* Main donde se ve el contenido de la página */
+        & main{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            /* La barra lateral es 6vw */
+            width: 94vw;
+            height:100%;
+            padding: 1%;
+        }
+    }
+}

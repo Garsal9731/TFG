@@ -1,0 +1,8 @@
+Fondo: #D7DFDF
+Otros: #232F4A
+COA: #DE6F2E
+Errores otros: #D63939
+Texto: #D7DFDF, #344A7A
+Bordes y otros: #000000
+
+Tipo de letra: https://fonts.google.com/specimen/Roboto

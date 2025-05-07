@@ -11,8 +11,8 @@
 <form  method="POST" autocomplete="off">
     <p>
         <label for="jefe">Elige el Jefe:</label>
-        <select name="jefe">
-            <option value="" disabled selected>Elige un Jefe</option>
+        <select id="jefe" name="jefe" data-placeholder="Elige un jefe..." multiple data-multi-select selectAll="false" data-max="1" required>
+
             <?php foreach ($users as $user): ?>
                 <option value="<?php echo $user['Id_Usuario']; ?>"><?php echo $user['Nombre']; ?></option>
             <?php endforeach; ?>
@@ -20,17 +20,18 @@
     </p>
     <p>
         <label for="empleados">Elige a los empleados:</label>
+        <select id="empleados" name="empleados" data-placeholder="Elige un usuario..." multiple data-multi-select required>
             <?php foreach ($users as $user): ?>
                 <?php if($_SESSION["loginData"]["Id_Usuario"]==$user["Id_Usuario"]):?>
-                    <input type="checkbox" name="empleado[]" value="<?php echo $user['Id_Usuario']; ?>" disabled/>
-                    <label for="empleado[]"><?php echo $user['Nombre']; ?></label>
+                    <option value="<?php echo $user['Id_Usuario'];?>"><?php echo $user['Nombre'];?></option>
                 <?php else:?>
                     <?php if($user["Privilegios"]!==3):?>
-                        <input type="checkbox" name="empleado[]" value="<?php echo $user['Id_Usuario']; ?>" />
-                        <label for="empleado[]"><?php echo $user['Nombre']; ?></label>
+                        <option value="<?php echo $user['Id_Usuario'];?>"><?php echo $user['Nombre'];?></option>
                     <?php endif;?>
                 <?php endif;?>
             <?php endforeach; ?>
+        </select>
+        <script src="./JS/MultiSelect.js"></script>
     </p>
     <input type="submit" value="Asignar empleados">
 </form>
