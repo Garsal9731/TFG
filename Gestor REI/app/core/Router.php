@@ -89,10 +89,16 @@
                     break;
 
                 case 'user/index':
+
+                    // Exclusivo para admin
+                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=core/index');}
                     $userController->index();
                     break;
 
                 case 'user/create':
+
+                    // Exclusivo para admin
+                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=core/index');}
                     $userController->create();
                     break;
 
@@ -101,42 +107,44 @@
                     break;
 
                 case 'user/delete':
-                    $userController->delete($this->id);
-                    break;
 
-                case 'user/index':
-                    $userController->index();
-                    break;
-
-                case 'user/create':
-                    $userController->create();
-                    break;
-
-                case 'user/edit':
-                    $userController->edit($this->id);
-                    break;
-
-                case 'user/delete':
+                    // Exclusivo para admin
+                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=core/index');}
                     $userController->delete($this->id);
                     break;
 
                 case 'user/manage':
+
+                    // Exclusivo para admin
+                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=core/index');}
                     $userController->bossManage($_SESSION["loginData"]["Id_Usuario"]);
                     break;
                     
                 case 'item/index':
+
+                    // Exclusivo para admin y tecnico
+                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=core/index');}
                     $itemController->index();
                     break;
     
                 case 'item/create':
+
+                    // Exclusivo para admin y tecnico
+                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=core/index');}
                     $itemController->create();
                     break;
     
                 case 'item/edit':
+
+                    // Exclusivo para admin y tecnico
+                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=core/index');}
                     $itemController->edit($this->id);
                     break;
     
                 case 'item/delete':
+
+                    // Exclusivo para admin
+                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=core/index');}
                     $itemController->delete($this->id);
                     break;
 

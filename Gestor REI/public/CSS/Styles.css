@@ -13,7 +13,7 @@
     --azulosc:#232F4A;
     
     /* Call Of Action */
-    --dorado:#DE6F2E;
+    --naranja:#DE6F2E;
 
     /* Errores y otros */
     --rojo:#D63939;
@@ -25,33 +25,96 @@
     --negro:#000000;
 }
 
+body, html{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    min-height: fit-content;
+    min-width: fit-content;
+}
+
 body{
     background-color: var(--gris);
+    display: flex;
+    flex-direction: column;
 
     /* Titulo */
     & >div.titulo{
         display: flex;
         background-color: var(--azulosc);
-        height: 8vh;
+        height: 10%;
         align-items: center;
 
         & a{
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            color: var(--gris);
+            margin-left: 2.5%;
+
+            & i{
+                transition: 0.4s ease-in-out;
+                font-size: 3.5em;
+                color: var(--naranja);
+            }
+
+            & h1{
+                transition: 0.4s ease-in-out;
+                color: var(--gris);
+                font-size: 3em;
+                text-wrap: nowrap;
+                margin-left: 5%;
+            }
         }
+
+        & a:hover{
+
+            & i{
+                color: var(--gris);
+            }
+
+            & h1{
+                color: var(--naranja);
+            }
+        }
+        
     }
 
+    /* Cuerpo principal */
     & >div.contenido{
         display: flex;
+        justify-content: center;
+        height: 90%;
 
         & >div.barraLateral{
             display: flex;
             background-color: var(--azulosc);
-
-            /* Junto al main hacen 100vw */
-            min-width: 6vw;
-
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
             overflow: auto;
+            width: 8%;
+            height: 100%;
+
+            & a.botonEnlace{
+                text-decoration: none;
+                color: var(--gris);
+                font-size: 2.5vw;
+                background-color: var(--naranja);
+                border-radius: 50%;
+                width: 60%;
+                height: 12%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: 0.4s ease-in-out;
+            }
+
+            & a.botonEnlace:hover{
+                background-color: var(--gris);
+                color: var(--naranja);
+
+            }
+
         }
     
         /* Main donde se ve el contenido de la página */
@@ -59,10 +122,13 @@ body{
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 92%;
+            height: 100%;
+
 
             /* La barra lateral es 6vw */
-            width: 94vw;
-            height:100%;
+            /* width: 94vw;
+            height:100%; */
             padding: 1%;
         }
     }
