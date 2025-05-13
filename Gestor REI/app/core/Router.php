@@ -28,24 +28,6 @@
             $this->id = $_GET['id'] ?? null;
         }
 
-        // ! REVISAR INDEX Y EMPEZAR CON BOCETOS, Y CAMBIAR PARA NO RECOGER TODO DE TODO
-        public function index(){
-            $userController = new UserController();
-            $itemController = new ItemController();
-            $taskController = new TaskController();
-
-            $users = $userController->getAll();
-            $employees = $userController->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
-            $items = $itemController->getAll();
-            if($_SESSION["loginData"]["Privilegios"]==1){
-                $tasks = $taskController->getAll();
-            }else{
-                $tasks = $taskController->getAssigned($_SESSION["loginData"]["Id_Usuario"]);
-            }
-            require __DIR__ . '/../views/index_view.php';
-        }
-
-
         public function login($data){
             $userController = new UserController();
             $userData = $userController->getByMail($data["correo"]);
@@ -55,7 +37,7 @@
                 setcookie("session", 1, time() + (86400 * 30), "/");
                 header('Location: index.php?route=core/index');
             }else{
-                // ! AÑADIR RECOGIDA DE ERRORES EN CONDICIONES
+                // ! AÑADIR RECOGIDA DE ERRORES EN CONDICIONES A JAVASCRIPT
                 echo "Contraseña Invalida";
                 // header('Location: index.php?route=core/index');
             }
@@ -81,7 +63,7 @@
             
             switch ($this->route){
                 case 'core/index':
-                    $this->index();
+                    require __DIR__ . '/../views/index_view.php';
                     break;
                 
                 case 'core/logoff':

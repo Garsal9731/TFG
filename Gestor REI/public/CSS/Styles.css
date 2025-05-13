@@ -64,16 +64,16 @@ body{
                 text-wrap: nowrap;
                 margin-left: 5%;
             }
-        }
 
-        & a:hover{
+            &:hover{
 
-            & i{
-                color: var(--gris);
-            }
+                & i{
+                    color: var(--gris);
+                }
 
-            & h1{
-                color: var(--naranja);
+                & h1{
+                    color: var(--naranja);
+                }
             }
         }
         
@@ -107,14 +107,12 @@ body{
                 align-items: center;
                 justify-content: center;
                 transition: 0.4s ease-in-out;
+
+                &:hover{
+                    background-color: var(--gris);
+                    color: var(--naranja);
+                }
             }
-
-            & a.botonEnlace:hover{
-                background-color: var(--gris);
-                color: var(--naranja);
-
-            }
-
         }
     
         /* Main donde se ve el contenido de la página */
@@ -122,14 +120,210 @@ body{
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             width: 92%;
             height: 100%;
-
-
-            /* La barra lateral es 6vw */
-            /* width: 94vw;
-            height:100%; */
             padding: 1%;
+
+            /* Formulario Login */
+            & form.login{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+
+                background-color: var(--azulosc);
+                border-radius:20px;
+                width: 30%;
+                height: 50%;
+
+                & p{
+                    display: flex;
+                    flex-direction: column;
+                    color: var(--gris);
+
+                    & label{
+                        font-size: 1.8em;
+                        padding: 1%;
+                    }
+
+                    & input{
+                        border: 0px;
+                        border-radius: 10px;
+                        font-size: 1.5em;
+                        padding: 1%;
+                    }
+                }
+
+                & input[type=submit]{
+                    background-color: var(--naranja);
+                    color: var(--gris);
+                    font-size: 1.8em;
+                    border-radius: 10px;
+                    padding: 2%;
+                    border: 0px;
+                    transition: 0.4s ease-in-out;
+
+                    &:hover{
+                        cursor: pointer;
+                        background-color: var(--gris);
+                        color: var(--naranja);
+                    }
+                }
+            }
+
+            /* Contenedor dentro del main si lo hay */
+            & div.contenedor{
+                background-color: var(--azulosc);
+                color: var(--gris);
+                padding: 5%;
+                border-radius: 20px;
+                width: 80%;
+                height: 85%;
+            }
+
+            /* Estilo de Ajax de Usuarios */
+            & .ajaxUsuarios{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                /* Titulo de la pagina */
+                & >h1{
+                    font-size: 3em;
+                    color: var(--azulcla);
+                }
+
+                /* Cabecera con el buscador y boton de creación */
+                & form{
+                    width: 100%;
+                    height: 12%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding-top: 1%;
+                    padding-bottom: 1%;
+
+                    /* Barra de buscador */
+                    & div.buscador{
+                        height: 100%;
+                        width: 25%;
+                        display: flex;
+                        align-items: center;
+                        background-color: var(--azulcla);
+                        color: var(--gris);
+
+                        /* Buscador en si */
+                        & input#buscador{
+                        background-color: var(--azulcla);
+                        color: var(--gris);
+                        border: none;
+                        width: 85%;
+                        height: 100%;
+                        margin-left: 2%;
+                        font-size: 1.2em;
+
+                            &:focus{
+                                outline: none;
+                                border: none;
+                            }
+                            &::placeholder{
+                                color: var(--gris);
+                            }
+                        }
+
+                        /* Icono del buscador */
+                        & i{
+                            margin-right: 2%;
+                            color: var(--naranja);
+                            font-size: 1.2em;
+                        }
+                    }
+
+                    /* Botón de creación */
+                    & a{
+                        width: 20%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-decoration: none;
+                        border: 2px solid var(--gris);
+                        outline: 2px solid var(--naranja);
+                        border-radius: 10px;
+                        font-size: 1.2em;
+                        color: var(--gris);
+                        background-color: var(--naranja);
+                        transition: 0.4s ease-in-out;
+                        text-wrap: nowrap;
+
+                        &:hover{
+                            border: 2px solid var(--naranja);
+                            outline: 2px solid var(--gris);
+                            color: var(--naranja);
+                            background-color: var(--gris);
+                        }
+                    }
+                }
+
+                /* Contenedor con los resultados del ajax */
+                & div#resultados_busqueda{
+                    width: 100%;
+                    height: 87%;
+                    margin-top: 1%;
+                    overflow-y: auto;
+                    transition: all 0.8s ease-in-out;
+
+                    /* Para evitar un parpadeo que ocurre al generar resultados le damos clases para hacer visible e invisible con transiciones el elemento */
+                    &.invisible{
+                        opacity: 0;
+                        &>*{
+                            opacity: 0;
+                        }
+                    }
+                    &.visible{
+                        opacity: 1;
+                        &>*{
+                            opacity: 1;
+                        }
+                    }
+
+                    /* Resultado de ajax */
+                    & .resultado{
+                        width: 100%;
+                        height: 20%;
+                        background-color: var(--azulcla);
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 1%;
+                        color: var(--gris);
+                        font-weight: bold;
+                        border: 1px solid var(--gris);
+                        transition: 0.8s ease-in-out;
+                        font-size: 1.5em;
+                
+                        /* Enlaces dentro de los resultados */
+                        & div.divBotones{
+                            width: 20%;
+                            display: flex;
+                            justify-content: space-between;
+                            margin-right: 2%;
+                            
+                            & a{
+                                text-decoration: none;
+                                color: var(--naranja);
+
+                                &.eliminar{
+                                    color: var(--rojo);
+                                }
+                            }
+                        }
+                    }
+                }
+            } 
         }
     }
 }

@@ -6,6 +6,7 @@
     // ! RELLENAR CON LOS CAMPOS RESTANTES Y EMPEZAR CON LA CREACIÓN DE LAS TAREAS
     ob_start();
 ?>
+<div class="contenedor">
 <h2>Editar Objeto</h2>
 <form  method="POST" autocomplete="off">
     <p>
@@ -30,6 +31,7 @@
     </p>
     <input type="submit" value="Editar Objeto">
 </form>
+</div>
 <?php
     $content = ob_get_clean();
     require "layouts/main.php";

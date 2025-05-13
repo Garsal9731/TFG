@@ -52,6 +52,17 @@
             return $data;
         }
 
+        // Ajax del correo de los usuarios
+        /**
+         * @param $mail
+         * 
+         * Recogemos los datos del usuario usando el correo como referencia
+         */
+        public function ajaxMail($mail){
+            $data = $this->userModel->ajaxMail($mail);
+            return $data;
+        }
+
         // Indice
         /**
          * @param VOID NULL

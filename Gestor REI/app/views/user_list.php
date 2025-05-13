@@ -5,19 +5,17 @@
      */
     ob_start();
 ?>
-    
-<h2>Lista de Usuarios</h2>
-<a href="index.php?route=user/create">Crear Usuario</a>
-<ul>
-    <?php foreach ($users as $user): ?>
-        <li>
-            <?php echo $user['Nombre']; ?>
-            <a href="index.php?route=user/edit&id=<?php echo $user['Id_Usuario']; ?>">Editar</a>
-            <a href="index.php?route=user/delete&id=<?php echo $user['Id_Usuario']; ?>">Eliminar</a>
-        </li>
-    <?php endforeach; ?>
-</ul>
-    
+    <div class="ajaxUsuarios">
+        <h1>Usuarios</h1>
+        <form action="" autocomplete="off">
+            <div class="buscador">
+                <input id="buscador" type="text" placeholder="Buscar Usuario..." name="ajax" onkeyup="buscarAjax(this.value,'Usuario')"><i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <a href="index.php?route=user/create">Registrar Usuario</a>
+        </form>
+        <div id="resultados_busqueda" class="invisible"></div>
+    </div>
+    <script src="./JS/Ajax.js"></script>
 <?php
     $content = ob_get_clean();
     require "layouts/main.php";

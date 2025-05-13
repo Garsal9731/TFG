@@ -33,6 +33,17 @@
             return $data;
         }
 
+        // Recoger datos por correo
+        /**
+         * @param $mail string
+         * 
+         * Recoge el correo y la contraseña del usuario usando el correo como referencia
+         */
+        public function ajaxMail($mail){
+            $sql = 'SELECT Id_Usuario,Nombre,Correo FROM Usuario WHERE Correo LIKE "'.$mail.'%";';
+            return $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        }
+
         // Registrar usuarios en Institución
         /**
          * @param $idUser int
