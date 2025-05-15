@@ -5,14 +5,14 @@
      */
     ob_start();
 ?>
-    <div class="ajaxUsuarios">
+    <div class="ajax">
         <h1>Usuarios</h1>
-        <form action="" autocomplete="off">
+        <div class="ajax">
             <div class="buscador">
                 <input id="buscador" type="text" placeholder="Buscar Usuario..." name="ajax" onkeyup="buscarAjax(this.value,'Usuario')"><i class="fa-solid fa-magnifying-glass"></i>
             </div>
             <a href="index.php?route=user/create">Registrar Usuario</a>
-        </form>
+        </div>
         <div id="resultados_busqueda" class="invisible"></div>
     </div>
     <script src="./JS/Ajax.js"></script>

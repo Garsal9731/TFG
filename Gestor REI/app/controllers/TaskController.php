@@ -42,6 +42,19 @@
             return $tasks;
         }
 
+        // Busqueda Ajax
+        /**
+         * @param $peticion string
+         * @param $idUser int
+         * @param $status string
+         * 
+         * Recoge las tareas del usuario en funcion a si están completas o no y a el nombre de la tarea
+         */
+        public function ajax($peticion,$idUser,$status){
+            $tasks = $this->taskModel->ajax($peticion,$idUser,$status);
+            return $tasks;
+        }
+
         // Indice
         /**
          * @param VOID NULL
@@ -71,7 +84,7 @@
                 $fechaCreacion = date("Y-m-d");
                 $fechaEstimada = str_replace("T"," ",$_POST["fechaEstimada"]).":00";
 
-                $this->taskModel->create(['Id_Creador_Tarea' => $idCreador,'Fecha_Creación' => $fechaCreacion,'Tiempo_Estimado' => $fechaEstimada,'Nombre_Tarea' => $_POST["nombreTarea"],'Detalles' => $_POST["detalles"]]);
+                $this->taskModel->create(['Id_Creador_Tarea' => $idCreador,'Fecha_Creación' => $fechaCreacion,'Tiempo_Estimado' => $fechaEstimada,'Nombre_Tarea' => $_POST["nombreTarea"],'Detalles' => $_POST["detalles"],'Estado' => $_POST["estado"]]);
                 $lastId = $this->taskModel->getLastId();
 
                 foreach($_POST["empleado"] as $employeeId){

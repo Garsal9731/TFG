@@ -33,14 +33,14 @@
             return $data;
         }
 
-        // Recoger datos por correo
+        // Recoger datos por correo para el ajax
         /**
          * @param $mail string
          * 
          * Recoge el correo y la contraseña del usuario usando el correo como referencia
          */
         public function ajaxMail($mail){
-            $sql = 'SELECT Id_Usuario,Nombre,Correo FROM Usuario WHERE Correo LIKE "'.$mail.'%";';
+            $sql = 'SELECT Id_Usuario,Nombre,Correo,Nombre_Privilegio FROM Usuario INNER JOIN Privilegios ON Usuario.Privilegios=Privilegios.id_Privilegios WHERE Correo LIKE "'.$mail.'%";';
             return $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         }
 

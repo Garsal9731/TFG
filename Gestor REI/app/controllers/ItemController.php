@@ -48,7 +48,18 @@
             $items = $this->getAll();
 
             require __DIR__ . '/../views/item_list.php';
-        } 
+        }
+
+        // Recoger datos de Objetos para el ajax
+        /**
+         * @param $peticion string
+         * 
+         * Busca la peticion en la bd usando una consulta preparada
+         */
+        public function ajaxObjetos($peticion){
+            $data = $this->itemModel->ajaxObjetos($peticion);
+            return $data;
+        }
 
         // Crear 
         /**

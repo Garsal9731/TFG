@@ -8,7 +8,6 @@
     // Le damos un alias a EmptyModel
     use App\Core\EmptyModel as EmptyModel;
 
-    // ! Añadir funciones extras de los objetos
     class Item extends EmptyModel {
     
         // Constructor
@@ -19,5 +18,16 @@
          */
         public function __construct() {
             parent::__construct('Objeto');
+        }
+
+        // Recoger datos de Objetos para el ajax
+        /**
+         * @param $peticion string
+         * 
+         * Busca la peticion en la bd usando una consulta preparada
+         */
+        public function ajaxObjetos($peticion){
+            $sql = 'SELECT Id_Objeto,Nombre,Estado FROM Objeto WHERE Nombre LIKE "'.$peticion.'%";';
+            return $this->query($sql)->fetchAll();
         }
     }

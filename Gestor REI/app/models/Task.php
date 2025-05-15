@@ -55,6 +55,27 @@
             return $this->query($sql)->fetchAll();
         }
 
+        // Busqueda Ajax
+        /**
+         * @param $peticion string
+         * @param $idUser int
+         * @param $status string
+         * 
+         * Recoge las tareas del usuario en funcion a si están completas o no y a el nombre de la tarea
+         */
+        public function ajax($peticion,$idUser,$status){
+
+            if($status=="P"){
+                $sql = "SELECT *  FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea WHERE Nombre_Tarea LIKE '".$peticion."%' AND Estado='Pendiente' AND Usuario_Id_Usuario=".$idUser.";";
+            }elseif($status=="C"){
+                $sql = "SELECT *  FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea WHERE Nombre_Tarea LIKE '".$peticion."%' AND Estado='Completada' AND Usuario_Id_Usuario=".$idUser.";";
+            }else{
+                $sql = "SELECT *  FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea WHERE Nombre_Tarea LIKE '".$peticion."%' AND Usuario_Id_Usuario=".$idUser.";";
+            }
+
+            return $this->query($sql)->fetchAll();
+        }
+
         // Recoger usuarios de tarea
         /**
          * @param $idTask int

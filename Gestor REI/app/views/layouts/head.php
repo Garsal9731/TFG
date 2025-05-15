@@ -5,8 +5,9 @@
      */
 ?>
 <head>
-    <meta charset="UTF-8">
     <title>Gestor Rei</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <link href="./CSS/MultiSelect.css" rel="stylesheet" type="text/css">
     <link href="./CSS/Styles.css" rel="stylesheet" type="text/css">

@@ -52,13 +52,13 @@ body{
             margin-left: 2.5%;
 
             & i{
-                transition: 0.4s ease-in-out;
+                transition: all 0.4s ease-in-out;
                 font-size: 3.5em;
                 color: var(--naranja);
             }
 
             & h1{
-                transition: 0.4s ease-in-out;
+                transition: all 0.4s ease-in-out;
                 color: var(--gris);
                 font-size: 3em;
                 text-wrap: nowrap;
@@ -106,7 +106,7 @@ body{
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                transition: 0.4s ease-in-out;
+                transition: all 0.4s ease-in-out;
 
                 &:hover{
                     background-color: var(--gris);
@@ -162,7 +162,7 @@ body{
                     border-radius: 10px;
                     padding: 2%;
                     border: 0px;
-                    transition: 0.4s ease-in-out;
+                    transition: all 0.4s ease-in-out;
 
                     &:hover{
                         cursor: pointer;
@@ -174,7 +174,7 @@ body{
 
             /* Contenedor dentro del main si lo hay */
             & div.contenedor{
-                background-color: var(--azulosc);
+                background-color: var(--azulcla);
                 color: var(--gris);
                 padding: 5%;
                 border-radius: 20px;
@@ -182,8 +182,8 @@ body{
                 height: 85%;
             }
 
-            /* Estilo de Ajax de Usuarios */
-            & .ajaxUsuarios{
+            /* Estilo de Ajax General */
+            & .ajax{
                 width: 100%;
                 height: 100%;
                 display: flex;
@@ -197,10 +197,11 @@ body{
                 }
 
                 /* Cabecera con el buscador y boton de creación */
-                & form{
+                & div.ajax{
                     width: 100%;
                     height: 12%;
                     display: flex;
+                    flex-direction: row;
                     justify-content: space-between;
                     align-items: center;
                     padding-top: 1%;
@@ -212,6 +213,7 @@ body{
                         width: 25%;
                         display: flex;
                         align-items: center;
+                        justify-content: space-evenly;
                         background-color: var(--azulcla);
                         color: var(--gris);
 
@@ -256,7 +258,7 @@ body{
                         font-size: 1.2em;
                         color: var(--gris);
                         background-color: var(--naranja);
-                        transition: 0.4s ease-in-out;
+                        transition: all 0.4s ease-in-out;
                         text-wrap: nowrap;
 
                         &:hover{
@@ -302,7 +304,7 @@ body{
                         color: var(--gris);
                         font-weight: bold;
                         border: 1px solid var(--gris);
-                        transition: 0.8s ease-in-out;
+                        transition: all 0.8s ease-in-out;
                         font-size: 1.5em;
                 
                         /* Enlaces dentro de los resultados */
@@ -315,6 +317,225 @@ body{
                             & a{
                                 text-decoration: none;
                                 color: var(--naranja);
+                                transition: all 0.4s ease-in-out;
+
+                                &:hover{
+                                    font-size: 1.3em;
+                                }
+
+                                &.eliminar{
+                                    color: var(--rojo);
+                                }
+                            }
+                        }
+                    }
+                }
+            } 
+
+            /* Estilo de Ajax de tareas */
+            & .ajaxTareas{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                /* La cabecera esta vez no es solo el titulo, sino que el boton va incluido junto a él */
+                & div.cabeza{
+                    width: 100%;
+                    display: grid;
+                    grid-template-columns: 6fr 1fr;
+
+                     /* Titulo de la pagina */
+                    & h1{
+                        font-size: 3em;
+                        color: var(--azulcla);
+                        justify-self: center;
+                    }
+
+                    /* Botón de creación */
+                    & a{
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        text-decoration: none;
+                        border: 2px solid var(--gris);
+                        outline: 2px solid var(--naranja);
+                        border-radius: 10px;
+                        font-size: 1.2em;
+                        color: var(--gris);
+                        background-color: var(--naranja);
+                        transition: all 0.4s ease-in-out;
+                        text-wrap: nowrap;
+
+                        &:hover{
+                            border: 2px solid var(--naranja);
+                            outline: 2px solid var(--gris);
+                            color: var(--naranja);
+                            background-color: var(--gris);
+                        }
+                    }
+
+                }
+
+                & div.cuerpo{
+                    width: 100%;
+                    height: 100%;
+                    margin-top: 1%;
+                    display: flex;
+                    flex-direction: column;
+
+                    /* Barras desplegables */
+                    & .barra{
+                        width: 100%;
+                        height: 10%;
+                        display: grid;
+                        grid-template-columns: 1fr 6fr;
+                        align-items: center;
+                        background-color: var(--azulcla);
+                        color: var(--gris);
+                        font-size: 1.8em;
+                        border: 1px solid var(--gris);
+                        
+                        /* Parrafo con el nombre */
+                        & p.nombre{
+                            text-align: center;
+                        }
+
+                        & i.fa-greater-than{
+                            width: fit-content;
+                            margin-left: 40%;
+                            transition: all 0.4s ease-in-out;
+
+                            &:hover{
+                                cursor: pointer;
+                            }
+                        }
+
+                        & i.rotado{
+                            transform: rotate(90deg);
+                        }
+
+                        &+div{
+                            transition: all 0.4s ease-in-out;
+                            border: 1px solid var(--gris);
+                            opacity: 0;
+                            height: 0%;
+
+                            &.visible{
+                                width: 100%;
+                                height: 40%;
+                                opacity: 1;
+                                transition: all 0.4s ease-in-out;
+                            }
+                        }
+                    }
+                }                
+
+                & div.ajax{
+                    width: 100%;
+                    height: 25%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding-top: 1%;
+                    padding-bottom: 1%;
+
+                    /* Barra de buscador */
+                    & div.buscador{
+                        height: 100%;
+                        width: 25%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-evenly;
+                        background-color: var(--azulcla);
+                        color: var(--gris);
+
+                        /* Buscador en si */
+                        & input#buscador{
+                        background-color: var(--azulcla);
+                        color: var(--gris);
+                        border: none;
+                        width: 85%;
+                        height: 100%;
+                        margin-left: 2%;
+                        font-size: 1.2em;
+
+                            &:focus{
+                                outline: none;
+                                border: none;
+                            }
+                            &::placeholder{
+                                color: var(--gris);
+                            }
+                        }
+
+                        /* Icono del buscador */
+                        & i{
+                            margin-right: 2%;
+                            color: var(--naranja);
+                            font-size: 1.2em;
+                        }
+                    }
+                }
+
+                /* Contenedor con los resultados del ajax */
+                & div#resultados_busqueda_C,div#resultados_busqueda_P{
+                    width: 100%;
+                    height: 72%;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    margin-top: 1%;
+                    overflow-y: auto;
+                    transition: all 0.8s ease-in-out;
+
+                    /* Para evitar un parpadeo que ocurre al generar resultados le damos clases para hacer visible e invisible con transiciones el elemento */
+                    &.invisible{
+                        opacity: 0;
+                        &>*{
+                            opacity: 0;
+                        }
+                    }
+                    &.visible{
+                        opacity: 1;
+                        &>*{
+                            opacity: 1;
+                        }
+                    }
+
+                    /* Resultado de ajax */
+                    & .resultado{
+                        /* ! TERMINAR VISTA DE LOS RESULTADOS PARA DEJARLO COMO EL MOCKUP */
+                        width: 100%;
+                        height: 100%;
+                        background-color: var(--azulcla);
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 1%;
+                        color: var(--gris);
+                        font-weight: bold;
+                        border: 1px solid var(--gris);
+                        transition: all 0.8s ease-in-out;
+                        font-size: 1.5em;
+                
+                        /* Enlaces dentro de los resultados */
+                        & div.divBotones{
+                            width: 20%;
+                            display: flex;
+                            justify-content: space-between;
+                            margin-right: 2%;
+                            
+                            & a{
+                                text-decoration: none;
+                                color: var(--naranja);
+                                transition: all 0.4s ease-in-out;
+
+                                &:hover{
+                                    font-size: 1.3em;
+                                }
 
                                 &.eliminar{
                                     color: var(--rojo);

@@ -3,6 +3,9 @@
   // Ponemos el namespace y los alias de los namespace que vamos a utilizar
   namespace App\Core;
   use App\Controllers\UserController as UserController;
+  use App\Controllers\ItemController as ItemController;
+  use App\Controllers\TaskController as TaskController;
+
 
   // Recogemos la petición enviada y la tabla por GET
   $peticion = $_GET["peticion"];
@@ -10,6 +13,15 @@
 
   // Preestablecemos el resultado para evitar errores
   $resultado = "";
+
+  // Ya que el buscador de las tablas tiene las mismas dependencias pero cambia la query usada vamos a filtrar segun la letra para saber si son tareas Pendientes o Completadas
+  if($tabla=="TareaP"||$tabla=="TareaC"){
+
+    session_start();
+    $array = str_split($tabla,5);
+    $tabla = $array[0];
+    $letra = $array[1];
+  }
 
   // Usando la tabla pasada por parametro recogemos los recursos necesarios para hacer las consultas que queremos recoger con el Ajax 
   switch ($tabla) {
@@ -21,6 +33,23 @@
         $users = $userController->ajaxMail($peticion);
         $resultado = $users;
       break;
+
+    case 'Objeto' :
+        require_once __DIR__.'/../controllers/ItemController.php';
+        $itemController = new ItemController();
+        $items =  $itemController->ajaxObjetos($peticion);
+        $resultado = $items;
+      break;
+    
+    case 'Tarea' :
+        require_once __DIR__.'/../controllers/TaskController.php';
+        $taskController = new TaskController();
+        $idUsuario = $_SESSION["loginData"]["Id_Usuario"];
+
+        // Mandamos al ajax la petición junto a la id del usuario y la letra para filtrar si la tarea a sido completada o no
+        $tasks = $taskController->ajax($peticion,$idUsuario,$letra);
+        $resultado = $tasks;
+        break;
   }
 
   // Codificamos el resultado en JSON y lo "enviamos" para recogerlo con la promesa en JS

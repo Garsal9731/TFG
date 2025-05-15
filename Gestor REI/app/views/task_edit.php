@@ -4,7 +4,7 @@
      * 
      */
     ob_start();
-    // ! COMPROBAR QUE FUNCIONA LA EDICIÓN
+    // ! AÑADIR NUEVO CAMPO Y AÑADIR EL MULTISELECT A ESTA PAGINA
 ?>
 <div class="contenedor">
     <h2>Modificar Tarea</h2>

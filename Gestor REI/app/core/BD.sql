@@ -76,7 +76,8 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Tarea` (
   `Fecha_Creación` DATE NOT NULL,
   `Tiempo_Estimado` DATETIME NOT NULL,
   `Nombre_Tarea` VARCHAR(100) NOT NULL,
-  `Detalles` VARCHAR(200) NULL)
+  `Detalles` VARCHAR(200) NULL,
+  `Estado` ENUM("Pendiente", "Completada") NOT NULL)
 ENGINE = InnoDB;
 
 
