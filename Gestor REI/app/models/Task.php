@@ -66,13 +66,13 @@
         public function ajax($peticion,$idUser,$status){
 
             if($status=="P"){
-                $sql = "SELECT *  FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea WHERE Nombre_Tarea LIKE '".$peticion."%' AND Estado='Pendiente' AND Usuario_Id_Usuario=".$idUser.";";
+                $sql ="SELECT Id_Tarea,Nombre,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Nombre_Tarea LIKE '".$peticion."%' AND Estado='Pendiente' AND Usuario_Id_Usuario=".$idUser.";";
             }elseif($status=="C"){
-                $sql = "SELECT *  FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea WHERE Nombre_Tarea LIKE '".$peticion."%' AND Estado='Completada' AND Usuario_Id_Usuario=".$idUser.";";
-            }else{
-                $sql = "SELECT *  FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea WHERE Nombre_Tarea LIKE '".$peticion."%' AND Usuario_Id_Usuario=".$idUser.";";
-            }
+                $sql ="SELECT Id_Tarea,Nombre,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Nombre_Tarea LIKE '".$peticion."%' AND Estado='Completada' AND Usuario_Id_Usuario=".$idUser.";";
 
+            }else{
+                $sql ="SELECT Id_Tarea,Nombre,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Nombre_Tarea LIKE '".$peticion."%' AND Usuario_Id_Usuario=".$idUser.";";
+            }
             return $this->query($sql)->fetchAll();
         }
 

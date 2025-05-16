@@ -116,7 +116,6 @@ function buscarAjax(hilo,tabla){
             });
             // Creamos el parrafo con el resultado creado
             let parrafo = document.createElement("p");
-            parrafo.textContent = texto;
             parrafo.className = "resultado";
 
             // Creamos un div donde meter los enlaces
@@ -133,6 +132,7 @@ function buscarAjax(hilo,tabla){
             switch (tabla) {
                 case "Usuario":
 
+                    parrafo.textContent = texto;
                     enlace_edit.textContent = "Editar";
 
                     // Creamos los enlaces de editar y borrar el usuario, les damos el enlace y un texto
@@ -141,10 +141,14 @@ function buscarAjax(hilo,tabla){
                     
                     // Los metemos en el parrafo que hemos creado
                     div.append(enlace_edit,enlace_elim);
+
+                    // Añadimos el div con los botones creados al parrafo
+                    parrafo.append(div);
                     break;
             
                 case "Objeto":
         
+                    parrafo.textContent = texto;
                     enlace_edit.textContent = "Editar";
 
                     // Creamos los enlaces de editar y borrar el usuario, les damos el enlace y un texto
@@ -153,24 +157,68 @@ function buscarAjax(hilo,tabla){
                     
                     // Los metemos en el parrafo que hemos creado
                     div.append(enlace_edit,enlace_elim);
+
+                    // Añadimos el div con los botones creados al parrafo
+                    parrafo.append(div);
                     break;
                 case "Tarea":
-                    // ! AÑADIR CAMPOS CUSTOMIZADOS PARA LAS TAREAS
-                    console.log("tarea");
+                    div_cuerpo = document.createElement("div");
+                    div_cuerpo.setAttribute("class","cuerpoTarjeta");
+
+                    claves.forEach(clave => {
+                        switch (clave) {
+                            case "Nombre_Tarea":
+                                div_cabecera = document.createElement("div");
+                                div_cabecera.setAttribute("class","cabecera");
+
+                                titulo = document.createElement("h3");
+                                titulo.textContent = dato[clave];
+                                div_cabecera.append(titulo);
+                                break;
+                            case "Nombre":
+                                parrafoNombre = document.createElement("p");
+                                parrafoNombre.setAttribute("class","parrafoNombre");
+
+                                label = document.createElement("label");
+                                label.setAttribute("for","nombre");
+                                label.textContent = "Creador de la Tarea:";
+
+                                nombre = document.createElement("h5");
+                                nombre.textContent = dato[clave];
+
+                                parrafoNombre.append(label,nombre);
+
+                                break;
+                            case "Detalles":
+                                parrafoDesc = document.createElement("p");
+                                parrafoDesc.setAttribute("class","parrafoDesc");
+
+                                label = document.createElement("label");
+                                label.setAttribute("for","descripcion");
+                                label.textContent = "Detalles de la tarea:";
+
+                                descripcion = document.createElement("textarea");
+                                descripcion.setAttribute("id","descripcion");
+                                descripcion.setAttribute("readonly","");
+                                descripcion.textContent = dato[clave];
+
+                                parrafoDesc.append(label,descripcion);
+                                break;
+                        }
+                    });
             
                     enlace_edit.textContent = "Revisar";
                 
                     // ! AÑADIR VISTA PARA VER DETALLES DE LAS TAREAS (task details/review), OBJETOS Y AÑADIR ACCESO EDITAR EL USUARIO(SOLO PARA EL ADMIN Y EL PROPIO USUARIO)
                     enlace_edit.setAttribute("href","index.php?route=task/edit&id="+id);
                     div.append(enlace_edit);
+                    div_cuerpo.append(parrafoDesc,parrafoNombre);
+                    parrafo.append(div_cabecera,div_cuerpo,div);
                     break;
                 default:
                     console.log("No se ha podido encontrar la tabla");
                     break;
             }
-
-            // Añadimos el div con los botones creados al parrafo
-            parrafo.append(div);
 
             // Y lo añadimos como hijo al elemento donde se encuentran nuestros resultados
             document.getElementById(parrafoResultados).append(parrafo);        
