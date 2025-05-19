@@ -18,4 +18,4 @@
     <script src="./JS/Ajax.js"></script>
 <?php
     $content = ob_get_clean();
-    require "layouts/main.php";
+    include "layouts/main.php";

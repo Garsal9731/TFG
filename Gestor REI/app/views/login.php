@@ -9,7 +9,7 @@
 <form class="login" method="POST" autocomplete="off">
     <p>
         <label for="correo">Correo:</label>
-        <input type="text" name="correo" placeholder="Correo" required>
+        <input type="email" id="Correo" name="correo" placeholder="Correo" onkeyup="Comprobar(this.value,'Correo')" required>
     </p>
     <p>
         <label for="contra">Contraseña:</label>
@@ -17,7 +17,7 @@
     </p>
     <input type="submit" value="Iniciar Sesión">
 </form>
-
+<script src="./JS/Regexp.js"></script>
 <?php
     $content = ob_get_clean();
-    require "layouts/main.php";
+    include "layouts/main.php";

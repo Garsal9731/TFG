@@ -79,6 +79,14 @@ function buscarAjax(hilo,tabla){
             tabla = "Tarea";
         }
 
+        // En caso de que el resultado salga vacío debido a una falta de datos en la BD mostramos este mensaje
+        if(resultado.length==0){
+            let mensaje = document.createElement("p");
+            mensaje.textContent = "No se ha encontrado nada.";
+            mensaje.setAttribute("class","mensaje");
+            document.getElementById(parrafoResultados).append(mensaje);
+        }
+
         // Tratamos cada resultado generado
         resultado.forEach(dato => {
 

@@ -295,6 +295,16 @@ body{
                         }
                     }
 
+                    /* Mensaje por si el ajax no ecuentra nada */
+                    & .mensaje{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.8em;
+                        font-weight: bold;
+                        color: var(--azulosc);
+                    }
+
                     /* Resultado de ajax */
                     & .resultado{
                         width: 100%;
@@ -509,6 +519,18 @@ body{
                         &>*{
                             opacity: 1;
                         }
+                    }
+
+                    /* Mensaje por si el ajax no ecuentra nada */
+                    & .mensaje{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.8em;
+                        font-weight: bold;
+                        color: var(--azulosc);
+                        grid-column-start: 1;
+                        grid-column-end: 3;
                     }
 
                     /* Resultado de ajax */

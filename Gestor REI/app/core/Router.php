@@ -7,11 +7,13 @@
     require_once __DIR__ . '/../controllers/UserController.php';
     require_once __DIR__ . '/../controllers/ItemController.php';
     require_once __DIR__ . '/../controllers/TaskController.php';
+    require_once __DIR__ . '/security.php';
 
     // Les damos alias a sus namespace
     use App\Controllers\UserController as UserController;
     use App\Controllers\ItemController as ItemController;
     use App\Controllers\TaskController as TaskController;
+    use App\Core\Security as Security;
 
     class Router {
         protected $route;
@@ -24,29 +26,8 @@
          * Es el constructor de la clase
          */
         public function __construct() {
-            $this->route = $_GET['route'] ?? 'core/index';
+            $this->route = $_GET['route'] ?? 'landing';
             $this->id = $_GET['id'] ?? null;
-        }
-
-        public function login($data){
-            $userController = new UserController();
-            $userData = $userController->getByMail($data["correo"]);
-
-            if(password_verify($data["contra"],$userData["Contraseña"])){
-                $_SESSION["loginData"] = $userData;
-                setcookie("session", 1, time() + (86400 * 30), "/");
-                header('Location: index.php?route=core/index');
-            }else{
-                // ! AÑADIR RECOGIDA DE ERRORES EN CONDICIONES A JAVASCRIPT
-                echo "Contraseña Invalida";
-                // header('Location: index.php?route=core/index');
-            }
-        }
-
-        public function logoff(){
-            session_destroy();
-            setcookie("session", 0, time() + (86400 * 30), "/");
-            header('Location: index.php?route=core/index');
         }
 
         // Enrutador
@@ -62,25 +43,25 @@
             $taskController = new TaskController();
             
             switch ($this->route){
-                case 'core/index':
+                case 'landing':
                     require __DIR__ . '/../views/index_view.php';
                     break;
                 
                 case 'core/logoff':
-                    $this->logoff();
+                    Security::logoff();
                     break;
 
                 case 'user/index':
 
                     // Exclusivo para admin
-                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=core/index');}
+                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=landing');}
                     $userController->index();
                     break;
 
                 case 'user/create':
 
                     // Exclusivo para admin
-                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=core/index');}
+                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=landing');}
                     $userController->create();
                     break;
 
@@ -91,42 +72,42 @@
                 case 'user/delete':
 
                     // Exclusivo para admin
-                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=core/index');}
+                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=landing');}
                     $userController->delete($this->id);
                     break;
 
                 case 'user/manage':
 
                     // Exclusivo para admin
-                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=core/index');}
+                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=landing');}
                     $userController->bossManage($_SESSION["loginData"]["Id_Usuario"]);
                     break;
                     
                 case 'item/index':
 
                     // Exclusivo para admin y tecnico
-                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=core/index');}
+                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=landing');}
                     $itemController->index();
                     break;
     
                 case 'item/create':
 
                     // Exclusivo para admin y tecnico
-                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=core/index');}
+                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=landing');}
                     $itemController->create();
                     break;
     
                 case 'item/edit':
 
                     // Exclusivo para admin y tecnico
-                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=core/index');}
+                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=landing');}
                     $itemController->edit($this->id);
                     break;
     
                 case 'item/delete':
 
                     // Exclusivo para admin
-                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=core/index');}
+                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=landing');}
                     $itemController->delete($this->id);
                     break;
 
