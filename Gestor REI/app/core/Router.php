@@ -7,12 +7,14 @@
     require_once __DIR__ . '/../controllers/UserController.php';
     require_once __DIR__ . '/../controllers/ItemController.php';
     require_once __DIR__ . '/../controllers/TaskController.php';
+    require_once __DIR__ . '/../controllers/InstController.php';
     require_once __DIR__ . '/security.php';
 
     // Les damos alias a sus namespace
     use App\Controllers\UserController as UserController;
     use App\Controllers\ItemController as ItemController;
     use App\Controllers\TaskController as TaskController;
+    use App\Controllers\InstController as InstController;
     use App\Core\Security as Security;
 
     class Router {
@@ -41,6 +43,7 @@
             $userController = new UserController();
             $itemController = new ItemController();
             $taskController = new TaskController();
+            $instController = new InstController();
             
             switch ($this->route){
                 case 'landing':
@@ -54,60 +57,68 @@
                 case 'user/index':
 
                     // Exclusivo para admin
-                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=landing');}
+                    Security::secureRoutes("Alta");
                     $userController->index();
                     break;
 
                 case 'user/create':
 
-                    // Exclusivo para admin
-                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=landing');}
-                    $userController->create();
+                    Security::secureRoutes("Alta");
+                    if($_SESSION["loginData"]["Privilegios"]==4){$insts=$instController->getAll();}
+                    $userController->create($insts);
                     break;
 
                 case 'user/edit':
-                    $userController->edit($this->id);
+                    // 10 es el owner, no editable bajo ninguna circunstancia
+                    if($_GET["id"]==10){
+                        header('Location: index.php?route=landing');
+                    }else{
+                        $userController->edit($this->id);
+                    }
                     break;
 
                 case 'user/delete':
 
-                    // Exclusivo para admin
-                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=landing');}
+                    Security::secureRoutes("Alta");
                     $userController->delete($this->id);
                     break;
 
                 case 'user/manage':
 
-                    // Exclusivo para admin
-                    if($_SESSION["loginData"]["Privilegios"]!==1){ header('Location: index.php?route=landing');}
+                    Security::secureRoutes("Alta");
+
+                    // Cada admin administra los permisos de su organización
+                    if($_SESSION["loginData"]["Privilegios"]==4){header('Location: index.php?route=landing');}
                     $userController->bossManage($_SESSION["loginData"]["Id_Usuario"]);
+                    break;
+
+                case 'user/stats':
+                    
+                    Security::secureRoutes("Alta");
+                    require __DIR__ . '/../views/user_stats.php';
                     break;
                     
                 case 'item/index':
 
-                    // Exclusivo para admin y tecnico
-                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=landing');}
+                    Security::secureRoutes("Media");
                     $itemController->index();
                     break;
     
                 case 'item/create':
 
-                    // Exclusivo para admin y tecnico
-                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=landing');}
+                    Security::secureRoutes("Alta");
                     $itemController->create();
                     break;
     
                 case 'item/edit':
 
-                    // Exclusivo para admin y tecnico
-                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=landing');}
+                    Security::secureRoutes("Media");
                     $itemController->edit($this->id);
                     break;
     
                 case 'item/delete':
 
-                    // Exclusivo para admin
-                    if($_SESSION["loginData"]["Privilegios"]==3){ header('Location: index.php?route=landing');}
+                    Security::secureRoutes("Media");
                     $itemController->delete($this->id);
                     break;
 
@@ -122,13 +133,33 @@
                 case 'task/edit':
                     $taskController->edit($this->id);
                     break;
+
+                case 'task/check' :
+                    $taskController->check($this->id);
+                    break;
         
                 case 'task/delete':
                     $taskController->delete($this->id);
                     break;
+
+                case 'inst/index':
+                    Security::secureRoutes("Alta");
+                    $instController->index();
+                    break;
+
+                case 'inst/create':
+                    Security::secureRoutes("Alta");
+                    $instController->create();
+                    break;
+
+                case 'inst/delete':
+                    Security::secureRoutes("Alta");
+                    $instController->delete($this->id);
+                    break;
     
                 default:
                     echo "Ruta no encontrada.";
+                    die();
             }
         }
 

@@ -26,8 +26,12 @@
          * 
          * Busca la peticion en la bd usando una consulta preparada
          */
-        public function ajaxObjetos($peticion){
-            $sql = 'SELECT Id_Objeto,Nombre,Estado FROM Objeto WHERE Nombre LIKE "'.$peticion.'%";';
+        public function ajaxObjetos($peticion,$idInst){
+            if ($_SESSION["loginData"]["Privilegios"]==4) {
+                $sql = 'SELECT Id_Objeto,Nombre,Estado FROM Objeto WHERE Nombre LIKE "'.$peticion.'%";';
+            }else{
+                $sql = 'SELECT Id_Objeto,Nombre,Estado FROM Objeto WHERE Nombre LIKE "'.$peticion.'%" AND Institución_Id_Institución="'.$idInst.'";';
+            }
             return $this->query($sql)->fetchAll();
         }
     }

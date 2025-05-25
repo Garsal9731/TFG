@@ -7,6 +7,7 @@
 
     // Anclamos el archivo con la clase que usa la BD
     require_once __DIR__ .'/./Database.php';
+    require_once __DIR__ .'/./security.php';
 
     // Le damos un alias a la ruta del namespace de la base de datos
     use App\Core\Database as Database;
@@ -39,9 +40,13 @@
          * Manda consultas ya preparadas a la base de datos y devuelve la respuesta si hay una
          */
         protected function query($sql, $params = []) {
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute($params);
-            return $stmt;
+            try{
+                $stmt = $this->db->prepare($sql);
+                $stmt->execute($params);
+                return $stmt;
+            }catch(Exception $error){
+                Security::generateErrors("consulta");
+            }
         }
 
         // Recoger Primaria

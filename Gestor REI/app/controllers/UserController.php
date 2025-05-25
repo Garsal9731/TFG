@@ -8,11 +8,14 @@
     require_once __DIR__ . '/../models/traits/getEmployees.php';
     require_once __DIR__ . '/../models/traits/getUserInst.php';
     require_once __DIR__ . '/../models/traits/getAllByInst.php';
+    require_once __DIR__ . '/../core/security.php';
+
 
     use App\Models\User as User;
     use App\Models\Traits\getEmployees as getEmployees;
     use App\Models\Traits\getUserInst as getUserInst;
     use App\Models\Traits\getAllByInst as getAllByInst;
+    use App\Core\Security as Security;
 
     class UserController {
 
@@ -59,7 +62,7 @@
          * Recogemos los datos del usuario usando el correo como referencia
          */
         public function ajaxMail($mail){
-            $data = $this->userModel->ajaxMail($mail);
+            $data = $this->userModel->ajaxMail($mail,$this->getUserInst($_SESSION["loginData"]["Id_Usuario"])["Id_Institución"]);
             return $data;
         }
 
@@ -70,7 +73,6 @@
          * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los usuarios y llamamos a la vista
          */ 
         public function index() {
-            $users = $this->getAll();
             require __DIR__ . '/../views/user_list.php';
         }
 
@@ -80,7 +82,7 @@
          * 
          * Usamos el metodo crear del EmptyModel y recogemos los datos por POST
          */ 
-        public function create() {
+        public function create($insts) {
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -98,15 +100,20 @@
 
                     // Rcogemos la id del usuario actual y la usamos para encontrar a que institución pertenece y después recogemos la id de la institución
                     $idUser = $_SESSION["loginData"]["Id_Usuario"]; 
-                    $idInst = $this->getUserInst($idUser)["Id_Institución"];
+
+                    if($_POST["institucion"]!==null){
+                        $idInst = $_POST["institucion"];
+                    }else{
+                        $idInst = $this->getUserInst($idUser)["Id_Institución"];
+                    }
+                    var_dump($idInst);
 
                     // Registramos al usuario en la misma institución (los admin de cada institución solo pueden registrar en su institución)
                     $this->userModel->registerUserInst($lastId,$idInst);
 
                     header('Location: index.php?route=user/index');
                 }else{
-                    // ! AÑADIR CONTROL DE ERRORES EN CONDICIONES
-                    echo "CORREO YA EXISTE";
+                    Security::generateErrors("El correo ya existe");
                 }
             } else {
                 require __DIR__ . '/../views/user_create.php';
@@ -119,7 +126,6 @@
          * 
          * Usamos el metodo editar del EmptyModel, recogemos los datos por POST y le pasamos la id para actualizar el registro
          */
-        // ! CAMBIAR PARA AÑADIR OTROS CAMPOS
         public function edit($id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $contra = password_hash($_POST["contra"], PASSWORD_DEFAULT);

@@ -17,9 +17,7 @@
     $router = new Router();
 
     if($_SESSION["loginData"]==null){
-        // header("Refresh:0");
-            require_once __DIR__ . '/../app/views/login.php';
-
+        require_once __DIR__ . '/../app/views/login.php';
     }
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && $_SESSION["loginData"]==null && count($_POST)==2){
@@ -42,3 +40,6 @@
 
             break;
     }
+?>
+<script src="JS/RecogidaError.js"></script>
+<script src="JS/desplegableMovil.js"></script>

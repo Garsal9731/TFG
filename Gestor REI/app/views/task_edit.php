@@ -4,7 +4,6 @@
      * 
      */
     ob_start();
-    // ! AÑADIR NUEVO CAMPO Y AÑADIR EL MULTISELECT A ESTA PAGINA
 ?>
 <div class="contenedor">
     <h2>Modificar Tarea</h2>
@@ -19,15 +18,11 @@
         </p>
         <p>
             <label for="empleados">Elige a los encargados:</label>
+            <select id="empleados" name="empleados" data-placeholder="Elige un usuario..." multiple data-multi-select required>
                 <?php foreach ($employees as $employee): ?>
-                    <?php if(in_array($employee["Id_Usuario"],$idsAssigned)):?>
-                        <input type="checkbox" name="empleado[]" value="<?php echo $employee['Id_Usuario']; ?>" checked/>
-                        <label for="empleado[]"><?php echo $employee['Nombre']; ?></label>
-                    <?php else:?>
-                        <input type="checkbox" name="empleado[]" value="<?php echo $employee['Id_Usuario']; ?>"/>
-                        <label for="empleado[]"><?php echo $employee['Nombre']; ?></label>
-                    <?php endif; ?>
+                    <option value="<?php echo $employee['Id_Usuario'];?>" selected><?php echo $employee['Nombre'];?></option>
                 <?php endforeach; ?>
+            </select>
         </p>
         <p>
             <label for="fechaEstimada">Fecha Estimada para terminar:</label>
@@ -36,6 +31,7 @@
         <input type="submit" value="Modificar Tarea">
     </form>
 </div>
+<script src="./JS/MultiSelect.js"></script>
 <?php
     $content = ob_get_clean();
     include "layouts/main.php";

@@ -15,14 +15,18 @@
          * Recogemos los usuarios que son empleados del Jefe pasado
          */
         public function getEmployees($idJefe){
-            $db = Database::getInstance()->getConnection();
+            try{
+                $db = Database::getInstance()->getConnection();
 
-            $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Id_Usuario FROM Jefes WHERE Id_Jefe=$idJefe);";
+                $sql = "SELECT * FROM Usuario WHERE Id_Usuario IN (SELECT Id_Usuario FROM Jefes WHERE Id_Jefe=$idJefe);";
 
-            $stmt = $db->prepare($sql);
-            $stmt->execute($params);
-            $employees = $stmt->fetchAll();
+                $stmt = $db->prepare($sql);
+                $stmt->execute($params);
+                $employees = $stmt->fetchAll();
 
-            return $employees;
+                return $employees;
+            }catch(Exception $error){
+                Security::generateErrors("consulta");
+            }
         }
     }

@@ -5,6 +5,7 @@
   use App\Controllers\UserController as UserController;
   use App\Controllers\ItemController as ItemController;
   use App\Controllers\TaskController as TaskController;
+  use App\Controllers\InstController as InstController;
 
 
   // Recogemos la petición enviada y la tabla por GET
@@ -50,6 +51,12 @@
         $tasks = $taskController->ajax($peticion,$idUsuario,$letra);
         $resultado = $tasks;
         break;
+    case 'Institucion' :
+        require_once __DIR__.'/../controllers/InstController.php';
+        $instController = new InstController();
+        $insts = $instController->ajax($peticion);
+        $resultado = $insts;
+      break;
   }
 
   // Codificamos el resultado en JSON y lo "enviamos" para recogerlo con la promesa en JS

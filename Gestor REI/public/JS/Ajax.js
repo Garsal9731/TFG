@@ -1,11 +1,14 @@
 // Por defecto en carga de la pagina lanzará una busqueda para recoger todos los resultados y mostrarlos, esto es necesario ya que quiero que por defecto se muestren todos los resultados al cargar la página (NO HAY OTRA MANERA DE HACERLO)
-let clase = document.location["href"].split("=")[1].split("/")[0]
+let clase = document.location["href"].split("=")[1].split("/")[0];
 switch (clase) {
     case "user":
         window.onload=buscarAjax('','Usuario');
         break;
     case "item":
         window.onload=buscarAjax('','Objeto');
+        break;
+    case "inst":
+        window.onload=buscarAjax('','Institucion');
         break;
     case "task":
         window.onload=buscarAjax('','TareaP');
@@ -116,7 +119,7 @@ function buscarAjax(hilo,tabla){
                     // Si la clave es igual a la ultima clave no añade espacio, en cualquier otro caso si añadirá espacio
                     if (clave==claves.length-1) {
                         texto = texto.concat(dato[clave]);
-                    } else {
+                    }else{
                         texto = texto.concat(dato[clave]+" ");
                     }
                     
@@ -135,7 +138,6 @@ function buscarAjax(hilo,tabla){
             enlace_elim.textContent = "Eliminar";
             enlace_elim.setAttribute("class","eliminar");
 
-
             // Dependiendo de la tabla cambiamos algunos elementos
             switch (tabla) {
                 case "Usuario":
@@ -146,14 +148,17 @@ function buscarAjax(hilo,tabla){
                     // Creamos los enlaces de editar y borrar el usuario, les damos el enlace y un texto
                     enlace_edit.setAttribute("href","index.php?route=user/edit&id="+id);
                     enlace_elim.setAttribute("href","index.php?route=user/delete&id="+id);
+
+                    enlace_stats = document.createElement("a");
+                    enlace_stats.setAttribute("href","index.php?route=user/stats&id="+id);
+                    enlace_stats.textContent = "Ver Estats.";
                     
                     // Los metemos en el parrafo que hemos creado
-                    div.append(enlace_edit,enlace_elim);
+                    div.append(enlace_stats,enlace_edit,enlace_elim);
 
                     // Añadimos el div con los botones creados al parrafo
                     parrafo.append(div);
-                    break;
-            
+                    break; 
                 case "Objeto":
         
                     parrafo.textContent = texto;
@@ -217,11 +222,21 @@ function buscarAjax(hilo,tabla){
             
                     enlace_edit.textContent = "Revisar";
                 
-                    // ! AÑADIR VISTA PARA VER DETALLES DE LAS TAREAS (task details/review), OBJETOS Y AÑADIR ACCESO EDITAR EL USUARIO(SOLO PARA EL ADMIN Y EL PROPIO USUARIO)
-                    enlace_edit.setAttribute("href","index.php?route=task/edit&id="+id);
+                    enlace_edit.setAttribute("href","index.php?route=task/check&id="+id);
                     div.append(enlace_edit);
                     div_cuerpo.append(parrafoDesc,parrafoNombre);
                     parrafo.append(div_cabecera,div_cuerpo,div);
+                    break;
+                case "Institucion":
+                    parrafo.textContent = texto;
+
+                    enlace_elim.setAttribute("href","index.php?route=inst/delete&id="+id);
+                    
+                    // Los metemos en el parrafo que hemos creado
+                    div.append(enlace_elim);
+
+                    // Añadimos el div con los botones creados al parrafo
+                    parrafo.append(div);
                     break;
                 default:
                     console.log("No se ha podido encontrar la tabla");

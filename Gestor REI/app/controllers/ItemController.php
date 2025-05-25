@@ -57,7 +57,8 @@
          * Busca la peticion en la bd usando una consulta preparada
          */
         public function ajaxObjetos($peticion){
-            $data = $this->itemModel->ajaxObjetos($peticion);
+            $idInst = $this->getUserInst($_SESSION["loginData"]["Id_Usuario"])["Id_Institución"];
+            $data = $this->itemModel->ajaxObjetos($peticion,$idInst);
             return $data;
         }
 

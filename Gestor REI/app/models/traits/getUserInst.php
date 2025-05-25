@@ -15,15 +15,19 @@
          * Recoge la id de la institución en la que trabaja el usuario usando una consulta preparada (en EmptyModel porque lo usan varias clases)
          */
         public function getUserInst($id) {
-            $db = Database::getInstance()->getConnection();
+            try{
+                $db = Database::getInstance()->getConnection();
 
-            $params = [];
-            $sql = "SELECT * FROM Institución WHERE Id_Institución = (SELECT Institución_Id_Institución FROM Trabajadores_Institución WHERE Usuario_Id_Usuario = $id);";
+                $params = [];
+                $sql = "SELECT * FROM Institución WHERE Id_Institución = (SELECT Institución_Id_Institución FROM Trabajadores_Institución WHERE Usuario_Id_Usuario = $id);";
 
-            $stmt = $db->prepare($sql);
-            $stmt->execute($params);
-            $inst = $stmt->fetch();       
-                
-            return $inst;
+                $stmt = $db->prepare($sql);
+                $stmt->execute($params);
+                $inst = $stmt->fetch();       
+                    
+                return $inst;
+            }catch(Exception $error){
+                Security::generateErrors("consulta");
+            }
         }
     }

@@ -31,8 +31,7 @@
                 );
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $error) {
-                echo "No se ha podido establecer conexión con el servidor de bases de datos.<br>";
-                die("Error de conexión: " . $error->getMessage());
+                echo "<p id='mensajeError' hidden>".$error->getMessage()."</p>";
             }
         }
 

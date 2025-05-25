@@ -16,18 +16,18 @@
             <label for="correo">Correo Usuario:</label>
             <input type="text" name="correo" value="<?php echo $user['Correo']; ?>" disabled />
         </p>
-        <!-- COMPROBAR QUE LAS CONTRASEÑA COINCIDEN CON JS -->
         <p>
             <label for="contra">Contraseña Usuario:</label>
-            <input type="password" name="contra" />
+            <input type="password" id="contra" name="contra" onkeyup="revisar()"/>
         </p>
         <p>
             <label for="contracon">Confirmar Contraseña Usuario:</label>
-            <input type="password" name="contracon" />
+            <input type="password" id="contracon" name="contracon" onkeyup="revisar()"/>
         </p>
-        <button type="submit">Guardar</button>
+        <input type="submit" id="guardar" value="Guardar" disabled></input>
     </form>
 </div>
+<script src="JS/pass.js"></script>
 <?php
     $content = ob_get_clean();
     include 'layouts/main.php';

@@ -163,19 +163,42 @@ ENGINE = InnoDB;
 INSERT INTO Privilegios VALUES 
   (1, "admin"),
   (2, "técnico"),
-  (3, "usuario")
+  (3, "usuario"),
+  (4, "owner")
 ;
 
 INSERT INTO Institución (Nombre_Institución) VALUES 
   ("Escuela"),
   ("Instituto"),
   ("Hospital"),
-  ("Ayuntamiento")
+  ("Ayuntamiento"),
+  ("Academia"),
+  ("Biblioteca")
 ;
 
 -- La contraseña de las cuentas base son 1234
 INSERT INTO Usuario (Nombre,Contraseña,Correo,Privilegios) VALUES
-  ("Admin","$2y$10$jaPNr8/4L18u0xlL2PF0mOwcGPJEmFJedaxSv6UXR/ir.orl7qWjC","admin@correo.es",1)
+  ("Admin","$2y$10$jaPNr8/4L18u0xlL2PF0mOwcGPJEmFJedaxSv6UXR/ir.orl7qWjC","admin@correo.es",1),
+  ("tecnico","$2y$10$/IVtCLkoyC22aDOqwPMCAOco9GTXfdIT2nYHAGjV3hHZQKSu82RbS","tecnico@correo.es",2),
+  ("usuario ","$2y$10$iTxw38WV8D2IRb5OpXrNtOjCGwpMOroeiHSWvGvLV02hB1OYTS7.e","usuario@correo.es",3),
+  ("tecnico2","$2y$10$olsEItRnCguM0.R1rxWfTuW90AXnt/KE4Hxv9Rmx4/atXuqYtJul.","tecnico2@correo.es",2),
+  ("tecnico3","$2y$10$gIY3qdrSmHXH2iai8xiQoO5m/3S9WJ8Q1RmlMVSAtpPyGEKHcOvp.","tecnico3@correo.es",2),
+  ("tecnico4","$2y$10$gIY3qdrSmHXH2iai8xiQoO5m/3S9WJ8Q1RmlMVSAtpPyGEKHcOvp.","tecnico3@correo.es",2),
+  ("Tecnico5","$2y$10$IecB9BIIkq6iVqGvx9EuzeCVPXzjXKqal6ChUb47GRnvQK86SyzrK","tecnico5@correo.es",2),
+  ("prueba","$2y$10$roDhFHMevaYxGi3/fudDt.CFnLmqqwqPdkTMzB8naAPEdYz6C8LIO","prueba@correo.es",3),
+  ("test","$2y$10$Id0fW1.c9locyTTYFbIAxesqtokJak7Q0Fk4qPCLlDfgWsD85BxAu","test@correo.es",3),
+  ("alvaro","$2y$10$4SHEwiqKSLtKclJISxGT9eWFRaDyG6VjB7sop4BaPKt5vTk6DlI7K","alvaro@correo.es",4),
+  ("adminbib","$2y$10$/ebl6nS3t3bb/FtvB5.Cd.K1VgJpZgHTDN13fmqNHJ2rQ9dBQM4/C","adminbib@correo.es",1)
 ;
 
-INSERT INTO Trabajadores_Institución VALUES (1,1);
+INSERT INTO Trabajadores_Institución VALUES 
+(1,1),
+(2,1),
+(3,1),
+(4,1),
+(6,1),
+(7,1),
+(8,1),
+(9,1),
+(11,6)
+;

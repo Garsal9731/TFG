@@ -152,6 +152,18 @@
             }
         }
 
+        public function check($id){
+            $task = $this->taskModel->getById($id);
+            $employees = $this->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
+
+            $assignedEmployees = $this->taskModel->getEmployeesByTask($id);
+            $idsAssigned = array();
+            foreach($assignedEmployees as $idAssigned){
+                array_push($idsAssigned,$idAssigned["Id_Usuario"]);
+            }
+            require __DIR__ . '/../views/task_check.php';
+        }
+
         // Borrar
         /**
          * @param $id int
