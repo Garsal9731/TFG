@@ -5,7 +5,7 @@
      */
     ob_start();
 ?>
-<div class="contenedor">
+<div class="contenedor formulario">
     <h2>Crear Usuario</h2>
     <form  method="POST" autocomplete="off">
         <p>

@@ -18,10 +18,14 @@
          * Crea la conexión a la base de datos usando los datos de la propia
          */
         private function __construct() {
-            $host = 'localhost';
-            $dbName = 'gestor_rei';
-            $user = 'root';
-            $password = '123456';
+            // $host = 'localhost';
+            // $dbName = 'gestor_rei';
+            // $user = 'root';
+            // $password = '123456';
+            $host = 'mysql.cifpceuta.es';
+            $dbName = 'gestorei';
+            $user = 'gestorei';
+            $password = 'f#7v58e3L';
 
             try {
                 $this->pdo = new PDO(

@@ -6,7 +6,7 @@
     ob_start();
     // ! CREAR CHECKEO PARA REVISAR SI EL USUARIO SELECCIONADO YA ES JEFE DE CADA 1 DE LOS OTROS USUARIOS
 ?>
-<div class="contenedor">
+<div class="contenedor formulario">
     <h2>Lista de Usuarios de <?php echo $instName?></h2>
     <form  method="POST" autocomplete="off">
         <p>

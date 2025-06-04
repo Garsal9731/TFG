@@ -1,20 +1,20 @@
 -- -----------------------------------------------------
--- Schema gestor_rei
+-- Schema gestorei
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `gestor_rei` ;
+-- DROP SCHEMA IF EXISTS `gestorei` ;
 
-CREATE SCHEMA IF NOT EXISTS `gestor_rei` 
-DEFAULT CHARACTER SET UTF8 COLLATE utf8_spanish_ci;
+-- CREATE SCHEMA IF NOT EXISTS `gestorei` 
+-- DEFAULT CHARACTER SET UTF8 COLLATE utf8_spanish_ci;
 
-CREATE DATABASE IF NOT EXISTS `gestor_rei`;
-USE `gestor_rei`;
+CREATE DATABASE IF NOT EXISTS `gestorei`;
+USE `gestorei`;
 
 -- -----------------------------------------------------
--- Table `gestor_rei`.`Privilegios`
+-- Table `gestorei`.`Privilegios`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `gestor_rei`.`Privilegios` ;
+DROP TABLE IF EXISTS `gestorei`.`Privilegios` ;
 
-CREATE TABLE IF NOT EXISTS `gestor_rei`.`Privilegios` (
+CREATE TABLE IF NOT EXISTS `gestorei`.`Privilegios` (
   `id_Privilegios` INT NOT NULL,
   `Nombre_Privilegio` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_Privilegios`),
@@ -23,11 +23,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `gestor_rei`.`Usuario`
+-- Table `gestorei`.`Usuario`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `gestor_rei`.`Usuario` ;
+DROP TABLE IF EXISTS `gestorei`.`Usuario` ;
 
-CREATE TABLE IF NOT EXISTS `gestor_rei`.`Usuario` (
+CREATE TABLE IF NOT EXISTS `gestorei`.`Usuario` (
   `Id_Usuario` INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `Contraseña` VARCHAR(100) NOT NULL,
@@ -36,41 +36,41 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Usuario` (
   INDEX `fk_Usuario_Privilegios1_idx` (`Privilegios` ASC) VISIBLE,
   CONSTRAINT `fk_Usuario_Privilegios1`
     FOREIGN KEY (`Privilegios`)
-    REFERENCES `gestor_rei`.`Privilegios` (`id_Privilegios`)
+    REFERENCES `gestorei`.`Privilegios` (`id_Privilegios`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `gestor_rei`.`Jefes`
+-- Table `gestorei`.`Jefes`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `gestor_rei`.`Jefes` ;
+DROP TABLE IF EXISTS `gestorei`.`Jefes` ;
 
-CREATE TABLE IF NOT EXISTS `gestor_rei`.`Jefes` (
+CREATE TABLE IF NOT EXISTS `gestorei`.`Jefes` (
   `Id_Jefe` INT NULL,
   `Id_Usuario` INT NULL,
   INDEX `fk_Usuario_has_Usuario_Usuario1_idx` (`Id_Jefe` ASC) VISIBLE,
   INDEX `fk_Usuario_has_Usuario_Usuario_idx` (`Id_Usuario` ASC) VISIBLE,
   CONSTRAINT `fk_Usuario_has_Usuario_Usuario`
     FOREIGN KEY (`Id_Usuario`)
-    REFERENCES `gestor_rei`.`Usuario` (`Id_Usuario`)
+    REFERENCES `gestorei`.`Usuario` (`Id_Usuario`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_has_Usuario_Usuario1`
     FOREIGN KEY (`Id_Jefe`)
-    REFERENCES `gestor_rei`.`Usuario` (`Id_Usuario`)
+    REFERENCES `gestorei`.`Usuario` (`Id_Usuario`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `gestor_rei`.`Tarea`
+-- Table `gestorei`.`Tarea`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `gestor_rei`.`Tarea` ;
+DROP TABLE IF EXISTS `gestorei`.`Tarea` ;
 
-CREATE TABLE IF NOT EXISTS `gestor_rei`.`Tarea` (
+CREATE TABLE IF NOT EXISTS `gestorei`.`Tarea` (
   `Id_Tarea` INT PRIMARY KEY AUTO_INCREMENT,
   `Id_Creador_Tarea` INT NOT NULL,
   `Fecha_Creación` DATE NOT NULL,
@@ -82,11 +82,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `gestor_rei`.`Tarea_Asignadas`
+-- Table `gestorei`.`Tarea_Asignadas`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `gestor_rei`.`Tarea_Asignadas` ;
+DROP TABLE IF EXISTS `gestorei`.`Tarea_Asignadas` ;
 
-CREATE TABLE IF NOT EXISTS `gestor_rei`.`Tarea_Asignadas` (
+CREATE TABLE IF NOT EXISTS `gestorei`.`Tarea_Asignadas` (
   `Tarea_Id_Tarea` INT NOT NULL,
   `Usuario_Id_Usuario` INT NOT NULL,
   PRIMARY KEY (`Tarea_Id_Tarea`, `Usuario_Id_Usuario`),
@@ -94,23 +94,23 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Tarea_Asignadas` (
   INDEX `fk_Tarea_has_Usuario_Tarea1_idx` (`Tarea_Id_Tarea` ASC) VISIBLE,
   CONSTRAINT `fk_Tarea_has_Usuario_Tarea1`
     FOREIGN KEY (`Tarea_Id_Tarea`)
-    REFERENCES `gestor_rei`.`Tarea` (`Id_Tarea`)
+    REFERENCES `gestorei`.`Tarea` (`Id_Tarea`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Tarea_has_Usuario_Usuario1`
     FOREIGN KEY (`Usuario_Id_Usuario`)
-    REFERENCES `gestor_rei`.`Usuario` (`Id_Usuario`)
+    REFERENCES `gestorei`.`Usuario` (`Id_Usuario`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `gestor_rei`.`Institución`
+-- Table `gestorei`.`Institución`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `gestor_rei`.`Institución` ;
+DROP TABLE IF EXISTS `gestorei`.`Institución` ;
 
-CREATE TABLE IF NOT EXISTS `gestor_rei`.`Institución` (
+CREATE TABLE IF NOT EXISTS `gestorei`.`Institución` (
   `Id_Institución` INT PRIMARY KEY AUTO_INCREMENT,
   `Nombre_Institución` VARCHAR(60) NOT NULL,
   UNIQUE INDEX `Nombre_Institución_UNIQUE` (`Nombre_Institución` ASC) VISIBLE)
@@ -118,11 +118,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `gestor_rei`.`Trabajadores_Institución`
+-- Table `gestorei`.`Trabajadores_Institución`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `gestor_rei`.`Trabajadores_Institución` ;
+DROP TABLE IF EXISTS `gestorei`.`Trabajadores_Institución` ;
 
-CREATE TABLE IF NOT EXISTS `gestor_rei`.`Trabajadores_Institución` (
+CREATE TABLE IF NOT EXISTS `gestorei`.`Trabajadores_Institución` (
   `Usuario_Id_Usuario` INT NOT NULL,
   `Institución_Id_Institución` INT NOT NULL,
   PRIMARY KEY (`Usuario_Id_Usuario`, `Institución_Id_Institución`),
@@ -130,23 +130,23 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Trabajadores_Institución` (
   INDEX `fk_Usuario_has_Institución_Usuario1_idx` (`Usuario_Id_Usuario` ASC) VISIBLE,
   CONSTRAINT `fk_Usuario_has_Institución_Usuario1`
     FOREIGN KEY (`Usuario_Id_Usuario`)
-    REFERENCES `gestor_rei`.`Usuario` (`Id_Usuario`)
+    REFERENCES `gestorei`.`Usuario` (`Id_Usuario`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuario_has_Institución_Institución1`
     FOREIGN KEY (`Institución_Id_Institución`)
-    REFERENCES `gestor_rei`.`Institución` (`Id_Institución`)
+    REFERENCES `gestorei`.`Institución` (`Id_Institución`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `gestor_rei`.`Objeto`
+-- Table `gestorei`.`Objeto`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `gestor_rei`.`Objeto` ;
+DROP TABLE IF EXISTS `gestorei`.`Objeto` ;
 
-CREATE TABLE IF NOT EXISTS `gestor_rei`.`Objeto` (
+CREATE TABLE IF NOT EXISTS `gestorei`.`Objeto` (
   `Id_Objeto` INT PRIMARY KEY AUTO_INCREMENT NOT NULL ,
   `Nombre` VARCHAR(45) NOT NULL,
   `Estado` ENUM("Alta", "Baja", "Inactivo", "Averiado") NOT NULL,
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `gestor_rei`.`Objeto` (
   INDEX `fk_Objeto_Institución1_idx` (`Institución_Id_Institución` ASC) VISIBLE,
   CONSTRAINT `fk_Objeto_Institución1`
     FOREIGN KEY (`Institución_Id_Institución`)
-    REFERENCES `gestor_rei`.`Institución` (`Id_Institución`)
+    REFERENCES `gestorei`.`Institución` (`Id_Institución`)
     ON DELETE CASCADE
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -201,4 +201,48 @@ INSERT INTO Trabajadores_Institución VALUES
 (8,1),
 (9,1),
 (11,6)
+;
+
+INSERT INTO Jefes VALUES
+(1,2),
+(1,5),
+(1,6),
+(1,7),
+(2,5),
+(2,6),
+(7,2),
+(7,5)
+;
+
+INSERT INTO Tarea VALUE
+(6,1,"2025-04-21","2025-04-25 12:05:00","terminar trabajo AHORA","no habeis accabado","Pendiente"),
+(9,1,"2025-04-22","2025-04-26 12:53:00","revisar papeleo","","Pendiente"),
+(10,1,"2025-04-26","2025-05-02 14:28:00","dadad","adadadada","Pendiente"),
+(11,1,"2025-05-15","2025-05-24 11:27:00","prueba completa","esta prueba está completa","Completada"),
+(12,1,"2025-05-15","2025-05-29 12:00:00","prueba 1","","Pendiente"),
+(13,1,"2025-05-15","2025-05-17 12:00:00","prueba 2","","Pendiente"),
+(14,1,"2025-05-15","2025-05-23 12:01:00","prueba 3","esto es una prueba","Pendiente"),
+(15,1,"2025-05-15","2025-05-22 12:01:00","prueba 4","esto es una prueba","Completada"),
+(16,1,"2025-05-15","2025-05-24 12:01:00","prueba 5","esto es una prueba","Completada"),
+(17,1,"2025-05-15","2025-05-28 12:50:00","prueba 7","esto es una prueba","Pendiente")
+;
+
+INSERT INTO Tarea_Asignadas VALUES
+(6,2),
+(12,2),
+(13,2),
+(14,2),
+(15,2),
+(16,2),
+(17,2),
+(6,5),
+(11,5),
+(6,6),
+(10,6),
+(9,7),
+(10,7)
+;
+
+INSERT INTO Objeto VALUES
+(3,"pc no patata","Alta","",1)
 ;

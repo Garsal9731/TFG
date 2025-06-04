@@ -6,7 +6,7 @@
     // ! RELLENAR CON LOS CAMPOS RESTANTES Y EMPEZAR CON LA CREACIÓN DE LAS TAREAS
     ob_start();
 ?>
-<div class="contenedor">
+<div class="contenedor formulario">
 <h2>Editar Objeto</h2>
 <form  method="POST" autocomplete="off">
     <p>

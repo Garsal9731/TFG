@@ -1048,11 +1048,11 @@ body{
                 & a.botonEnlace{
                     text-decoration: none;
                     color: var(--gris);
-                    font-size: 2em;
+                    font-size: 1.5em;
                     background-color: var(--naranja);
                     border-radius: 50%;
-                    width: 35%;
-                    height: 40%;
+                    width: 50px;
+                    height: 50px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -1177,7 +1177,10 @@ body{
                 border-radius: 20px;
                 width: 90%;
                 height: 94%;
-                overflow: auto;
+
+                &.formulario{
+                    overflow: auto;
+                }
 
                 & .cuerpoInicial{
 
@@ -1202,7 +1205,7 @@ body{
                         grid-template-columns: 1fr;
                         justify-content: space-evenly;
                         margin-top: 6%;
-                        height: 50%;
+                        height: 54%;
 
                         & div.boton{
                             display: flex;
@@ -1214,11 +1217,11 @@ body{
                             & a{
                                 text-decoration: none;
                                 color: var(--gris);
-                                font-size: 1.2em;
+                                font-size: 1em;
                                 background-color: var(--naranja);
                                 border-radius: 50%;
-                                width: 20%;
-                                height: 100%;
+                                width: 35px;
+                                height: 35px;
                                 display: flex;
                                 align-items: center;
                                 justify-content: center;
