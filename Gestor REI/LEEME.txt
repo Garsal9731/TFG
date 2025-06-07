@@ -1,0 +1,19 @@
+Para iniciar el proyecto simplemente cargar index.php (Gestor REI/public/index.php) con el servidor PHP de elección.
+
+Todas las contraseñas por defectos son 1234 excepto la del owner alvaro@correo.es que es "admin", y todos los correos son elnombredelusuario@correo.es
+
+Los usuarios siendo:
+usuario
+técnico (del 2 al 3, empezando por técnico hasta tecnico5)
+prueba
+test
+adminbib
+Admin
+
+Para acceder a la página web se puede acceder desde:
+http://agar.cifpceuta.com
+
+La base de datos está en la página:
+https://east1-phpmyadmin.dreamhost.com/signon.php?pma_servername=mysql.cifpceuta.es
+
+Con el usuario "gestorei", y la contraseña: f#7v58e3L

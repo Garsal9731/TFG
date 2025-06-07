@@ -18,10 +18,6 @@
          * Crea la conexión a la base de datos usando los datos de la propia
          */
         private function __construct() {
-            // $host = 'localhost';
-            // $dbName = 'gestor_rei';
-            // $user = 'root';
-            // $password = '123456';
             $host = 'mysql.cifpceuta.es';
             $dbName = 'gestorei';
             $user = 'gestorei';

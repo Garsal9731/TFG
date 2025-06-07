@@ -184,7 +184,7 @@ INSERT INTO Usuario (Nombre,Contraseña,Correo,Privilegios) VALUES
   ("tecnico2","$2y$10$olsEItRnCguM0.R1rxWfTuW90AXnt/KE4Hxv9Rmx4/atXuqYtJul.","tecnico2@correo.es",2),
   ("tecnico3","$2y$10$gIY3qdrSmHXH2iai8xiQoO5m/3S9WJ8Q1RmlMVSAtpPyGEKHcOvp.","tecnico3@correo.es",2),
   ("tecnico4","$2y$10$gIY3qdrSmHXH2iai8xiQoO5m/3S9WJ8Q1RmlMVSAtpPyGEKHcOvp.","tecnico3@correo.es",2),
-  ("Tecnico5","$2y$10$IecB9BIIkq6iVqGvx9EuzeCVPXzjXKqal6ChUb47GRnvQK86SyzrK","tecnico5@correo.es",2),
+  ("tecnico5","$2y$10$IecB9BIIkq6iVqGvx9EuzeCVPXzjXKqal6ChUb47GRnvQK86SyzrK","tecnico5@correo.es",2),
   ("prueba","$2y$10$roDhFHMevaYxGi3/fudDt.CFnLmqqwqPdkTMzB8naAPEdYz6C8LIO","prueba@correo.es",3),
   ("test","$2y$10$Id0fW1.c9locyTTYFbIAxesqtokJak7Q0Fk4qPCLlDfgWsD85BxAu","test@correo.es",3),
   ("alvaro","$2y$10$4SHEwiqKSLtKclJISxGT9eWFRaDyG6VjB7sop4BaPKt5vTk6DlI7K","alvaro@correo.es",4),
