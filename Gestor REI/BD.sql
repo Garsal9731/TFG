@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `gestorei`.`Tarea` (
   `Id_Tarea` INT PRIMARY KEY AUTO_INCREMENT,
   `Id_Creador_Tarea` INT NOT NULL,
   `Fecha_Creación` DATE NOT NULL,
-  `Tiempo_Estimado` DATETIME NOT NULL,
+  `Tiempo_Estimado` DATE NOT NULL,
   `Nombre_Tarea` VARCHAR(100) NOT NULL,
   `Detalles` VARCHAR(200) NULL,
   `Estado` ENUM("Pendiente", "Completada") NOT NULL)
@@ -215,16 +215,16 @@ INSERT INTO Jefes VALUES
 ;
 
 INSERT INTO Tarea VALUE
-(6,1,"2025-04-21","2025-04-25 12:05:00","terminar trabajo AHORA","no habeis accabado","Pendiente"),
-(9,1,"2025-04-22","2025-04-26 12:53:00","revisar papeleo","","Pendiente"),
-(10,1,"2025-04-26","2025-05-02 14:28:00","dadad","adadadada","Pendiente"),
-(11,1,"2025-05-15","2025-05-24 11:27:00","prueba completa","esta prueba está completa","Completada"),
-(12,1,"2025-05-15","2025-05-29 12:00:00","prueba 1","","Pendiente"),
-(13,1,"2025-05-15","2025-05-17 12:00:00","prueba 2","","Pendiente"),
-(14,1,"2025-05-15","2025-05-23 12:01:00","prueba 3","esto es una prueba","Pendiente"),
-(15,1,"2025-05-15","2025-05-22 12:01:00","prueba 4","esto es una prueba","Completada"),
-(16,1,"2025-05-15","2025-05-24 12:01:00","prueba 5","esto es una prueba","Completada"),
-(17,1,"2025-05-15","2025-05-28 12:50:00","prueba 7","esto es una prueba","Pendiente")
+(6,1,"2025-04-21","2025-04-25","terminar trabajo AHORA","no habeis accabado","Pendiente"),
+(9,1,"2025-04-22","2025-04-26","revisar papeleo","","Pendiente"),
+(10,1,"2025-04-26","2025-05-02","dadad","adadadada","Pendiente"),
+(11,1,"2025-05-15","2025-05-24","prueba completa","esta prueba está completa","Completada"),
+(12,1,"2025-05-15","2025-05-29","prueba 1","","Pendiente"),
+(13,1,"2025-05-15","2025-05-17","prueba 2","","Pendiente"),
+(14,1,"2025-05-15","2025-05-23","prueba 3","esto es una prueba","Pendiente"),
+(15,1,"2025-05-15","2025-05-22","prueba 4","esto es una prueba","Completada"),
+(16,1,"2025-05-15","2025-05-24","prueba 5","esto es una prueba","Completada"),
+(17,1,"2025-05-15","2025-05-28","prueba 7","esto es una prueba","Pendiente")
 ;
 
 INSERT INTO Tarea_Asignadas VALUES
