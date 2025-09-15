@@ -7,22 +7,22 @@
 }
 :root{
     /* Fondo */
-    --gris:#12181D;
+    --gris:#D7DFDF;
     
     /* Otros */
-    --azulosc:#E5E2DD;
+    --azulosc:#232F4A;
     
     /* Call Of Action */
-    --naranja:#486FE0;
+    --naranja:#DE6F2E;
 
     /* Errores y otros */
     --rojo:#D63939;
     
     /* Texto Alternativo */
-    --azulcla:#2144ad;
+    --azulcla:#344A7A;
 
     /* Bordes y texto */
-    --negro:#12181D;
+    --negro:#000000;
 }
 
 body, html{
@@ -141,7 +141,7 @@ body{
             & a.botonEnlace{
                 text-decoration: none;
                 color: var(--gris);
-                font-size: 7pt;
+                font-size: 2.5vw;
                 background-color: var(--naranja);
                 border-radius: 50%;
                 width: 60%;
