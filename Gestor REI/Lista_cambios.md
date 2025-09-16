@@ -12,6 +12,6 @@
 * [ ] Fade in al Focus de botón de menús barra lateral
 * [ ] Implementar sistema de feedback mediante avisos al usuario (avisar si se ha creado correctamente un objeto o realizado una acción)
 * [ ] Revisar MAIN para optimización
-* [ ] Revisar Index_View para optimización
+* [X] Revisar Index_View para optimización
 * [ ] Rehacer página de inicio de sesión
 * [ ] Hacer checkeo de user_manage
