@@ -44,7 +44,7 @@
             $this->query($sql);
         }
         
-        // Recoger Usuarios Asignados
+        // Recoger Tareas Asignadas
         /**
          * @param $userId int
          * 
@@ -52,6 +52,17 @@
          */
         public function getAssigned($userId){
             $sql = "SELECT * FROM Tarea WHERE Id_Tarea IN (SELECT Tarea_Id_Tarea FROM Tarea_Asignadas WHERE Usuario_Id_Usuario=$userId);";
+            return $this->query($sql)->fetchAll();
+        }
+
+        // Recoger Tareas Completadas
+        /**
+         * @param $userId int
+         * 
+         * Recoge las tareas que se le han asignado al usuario y se han completado
+         */
+        public function getComplete($userId){
+            $sql = "SELECT * FROM Tarea WHERE Id_Tarea IN (SELECT Tarea_Id_Tarea FROM Tarea_Asignadas WHERE Usuario_Id_Usuario=$userId) AND Estado='Completada';";
             return $this->query($sql)->fetchAll();
         }
 

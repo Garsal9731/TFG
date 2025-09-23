@@ -72,6 +72,22 @@
             require __DIR__ . '/../views/task_list.php';
         } 
 
+        // Completadas
+        /**
+         * @param VOID NULL
+         * 
+         * Vista de tareas completadas
+         */ 
+        public function completed() {
+            if($_SESSION["loginData"]["Privilegios"]==1){
+                $tasks = $this->getAll();
+            }else{
+                $tasks = $this->getComplete($_SESSION["loginData"]["Id_Usuario"]);
+            }
+
+            require __DIR__ . '/../views/task_done.php';
+        }
+
         // Crear 
         /**
          * @param VOID NULL
@@ -82,7 +98,7 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $idCreador = $_SESSION["loginData"]["Id_Usuario"];
                 $fechaCreacion = date("Y-m-d");
-                $fechaEstimada = str_replace("T"," ",$_POST["fechaEstimada"]).":00";
+                $fechaEstimada = str_replace("T"," ",$_POST["fechaEstimada"]);
 
                 $this->taskModel->create(['Id_Creador_Tarea' => $idCreador,'Fecha_Creación' => $fechaCreacion,'Tiempo_Estimado' => $fechaEstimada,'Nombre_Tarea' => $_POST["nombreTarea"],'Detalles' => $_POST["detalles"],'Estado' => $_POST["estado"]]);
                 $lastId = $this->taskModel->getLastId();
@@ -183,5 +199,15 @@
          */
         public function getAssigned($idUser){
             return $this->taskModel->getAssigned($idUser);
+        }
+
+        // Recoger Tareas Completadas
+        /**
+         * @param $iduser int
+         * 
+         * Usando la id del usuario recogemos las tareas que se han completado
+         */
+        public function getComplete($idUser){
+            return $this->taskModel->getComplete($idUser);
         }
     }

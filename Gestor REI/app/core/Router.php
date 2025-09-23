@@ -125,6 +125,10 @@
                 case 'task/index':
                     $taskController->index();
                     break;
+                    
+                case 'task/completed':
+                    $taskController->completed();
+                    break;
         
                 case 'task/create':
                     $taskController->create();
