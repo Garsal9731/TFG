@@ -9,7 +9,7 @@
         <h1>Usuarios</h1>
         <div class="ajax">
             <div class="buscador">
-                <input id="buscador" type="text" placeholder="Buscar Usuario..." name="ajax" onkeyup="buscarAjax(this.value,'Usuario')"><i class="fa-solid fa-magnifying-glass"></i>
+                <input id="buscador" type="text" placeholder="Buscar Usuario..." name="ajax"><i id="lupa" class="fa-solid fa-magnifying-glass"></i>
             </div>
             <a href="index.php?route=user/create">Registrar Usuario</a>
         </div>

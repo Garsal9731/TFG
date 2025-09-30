@@ -1,19 +1,76 @@
+// ! ARREGLAR BUG QUE HACE QUE LOS RESULTADOS
+    
+// document.getElementById("buscador").addEventListener("keypress", function(event) {
+//   console.log("ENTER");
+//   buscarAjax('TareaP');
+// }); 
+
+      
+
 // Por defecto en carga de la pagina lanzará una busqueda para recoger todos los resultados y mostrarlos, esto es necesario ya que quiero que por defecto se muestren todos los resultados al cargar la página (NO HAY OTRA MANERA DE HACERLO)
 let clase = document.location["href"].split("=")[1].split("/")[0];
+let tabla = null;
 switch (clase) {
     case "user":
-        window.onload=buscarAjax('','Usuario');
+        tabla = 'Usuario';
         break;
     case "item":
-        window.onload=buscarAjax('','Objeto');
+        tabla = 'Objeto';
         break;
     case "inst":
-        window.onload=buscarAjax('','Institucion');
+        tabla = 'Institucion';
         break;
     case "task":
-        window.onload=buscarAjax('','TareaP');
-        window.onload=buscarAjax('','TareaC');
+        
+        // Sacamos el tipo de letra, ya que al dividirse en otras páginas puede ocurrir errores de no dividirse la query de busqueda
+        let tipoTarea = document.location["href"].split("=")[1].split("/")[1];
+            switch(tipoTarea){
+                case "index":
+                    tabla = 'TareaP';
+                    break;
+                case "completed":
+                    tabla = 'TareaC';
+                    break;
+                case "completed":
+                    tabla = 'TareaD';
+                    break; 
+            }
         break;
+}
+
+// Recogemos el icono de la lupa y l
+let lupa = document.getElementById("lupa");
+lupa.style.cursor = "pointer";
+lupa.addEventListener("click",function() {
+  buscarAjax(tabla);
+});
+
+function keyListener(event){ 
+
+    // Recogemos y capturamos el evento y la tecla que se ha pulsado
+    event = event || window.event;
+    var key = event.key || event.which || event.keyCode;
+
+    // Si la tecla tocada es la tecla "Enter" buscamos en la tabla de esta página con el ajax
+    if(key=="Enter"){
+        buscarAjax(tabla);
+    }
+}
+
+// Cuando cargue la página activa la busqueda del ajax automaticamente
+window.onload=buscarAjax(tabla);
+      
+// Recogemos el elemnto al que vamos a añadir el evento
+var buscador = document.getElementById("buscador");
+    
+// Le damos un nombre al evento
+var eventName = 'keypress';
+      
+// Añadimos un evento con addEventListener y con attachEvent en caso de que no funcionase (Inclusividad de Edge) y llamamos a la función
+if (buscador.addEventListener) {
+    buscador.addEventListener(eventName, keyListener, false); 
+}else if (el.attachEvent){
+    buscador.attachEvent('on'+eventName, keyListener);
 }
 
 // Tareas al ser 2 campos diferentes usan distintas IDs y para evitar problemas con las otras paginas hay un por defecto, esto ayuda a visualizar los resultados del ajax
@@ -28,14 +85,20 @@ function sacarParrafoResultados(letra){
         if(letra=="C"){
             var parrafoResultados = "resultados_busqueda_C";
         }
+        if(letra=="D"){
+            var parrafoResultados = "resultados_busqueda_D";
+        }
     }
     return parrafoResultados
 }
 
-function buscarAjax(hilo,tabla){
+async function buscarAjax(tabla){
+
+    // Recogemos del buscador el valor a buscar del buscador
+    let hilo = document.getElementById("buscador").value;
     
     // Sacamos la letra del parrafo que vamos a usar para mostrar los resultados (Si son la pagina de Tareas), si no lo es lo dejamos nulo para poder sacar la respuesta por defecto
-    if(tabla=="TareaP" || tabla=="TareaC"){
+    if(tabla=="TareaP" || tabla=="TareaC" || tabla=="TareaD"){
         letra = tabla.split("",6)[5];
     }else{
         letra = null;
@@ -49,7 +112,7 @@ function buscarAjax(hilo,tabla){
         document.getElementById(parrafoResultados).setAttribute("class","invisible");
     }
 
-    // Si el hilo está vacio o es 0 mostramos vacío el elemento en el que vamos a colocar los datos y no buscamos 
+    // Si el hilo está vacio o es 0 mostramos vacío el buscador en el que vamos a colocar los datos y no buscamos 
     if(hilo.length == 0 || hilo==null){ 
         hilo = "%";
     }
@@ -81,6 +144,8 @@ function buscarAjax(hilo,tabla){
         if(tabla=="TareaP" || tabla=="TareaC"){
             tabla = "Tarea";
         }
+
+        // borrarResultados(parrafoResultados);
 
         // En caso de que el resultado salga vacío debido a una falta de datos en la BD mostramos este mensaje
         if(resultado.length==0){
@@ -243,7 +308,7 @@ function buscarAjax(hilo,tabla){
                     break;
             }
 
-            // Y lo añadimos como hijo al elemento donde se encuentran nuestros resultados
+            // Y lo añadimos como hijo al buscador donde se encuentran nuestros resultados
             document.getElementById(parrafoResultados).append(parrafo);        
         });
 

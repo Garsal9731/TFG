@@ -9,7 +9,7 @@
         <h1>Objetos</h1>
         <div class="ajax">
             <div class="buscador">
-                <input id="buscador" type="text" placeholder="Buscar Objeto..." name="ajax" onkeyup="buscarAjax(this.value,'Objeto')"><i class="fa-solid fa-magnifying-glass"></i>
+                <input id="buscador" type="text" placeholder="Buscar Objeto..." name="ajax"><i id="lupa" class="fa-solid fa-magnifying-glass"></i>
             </div>
             <a href="index.php?route=item/create">Crear Objeto</a>
         </div>

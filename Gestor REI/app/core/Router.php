@@ -129,6 +129,10 @@
                 case 'task/completed':
                     $taskController->completed();
                     break;
+                
+                case 'task/created':
+                    $taskController->created();
+                    break;
         
                 case 'task/create':
                     $taskController->create();

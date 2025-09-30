@@ -9,7 +9,7 @@
         <h1>Instituciones</h1>
         <div class="ajax">
             <div class="buscador">
-                <input id="buscador" type="text" placeholder="Buscar Institución..." name="ajax" onkeyup="buscarAjax(this.value,'Institucion')"><i class="fa-solid fa-magnifying-glass"></i>
+                <input id="buscador" type="text" placeholder="Buscar Institución..." name="ajax"><i id="lupa" class="fa-solid fa-magnifying-glass"></i>
             </div>
             <a href="index.php?route=inst/create">Registrar Institución</a>
         </div>

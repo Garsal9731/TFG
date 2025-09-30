@@ -88,6 +88,22 @@
             require __DIR__ . '/../views/task_done.php';
         }
 
+        // Creadas
+        /**
+         * @param VOID NULL
+         * 
+         * Vista de tareas completadas
+         */ 
+        public function created() {
+            if($_SESSION["loginData"]["Privilegios"]==1){
+                $tasks = $this->getAll();
+            }else{
+                $tasks = $this->getCreated($_SESSION["loginData"]["Id_Usuario"]);
+            }
+
+            require __DIR__ . '/../views/task_created.php';
+        }
+
         // Crear 
         /**
          * @param VOID NULL
@@ -209,5 +225,15 @@
          */
         public function getComplete($idUser){
             return $this->taskModel->getComplete($idUser);
+        }
+
+        // Recoger Tareas Creadas
+        /**
+         * @param $iduser int
+         * 
+         * Usando la id del usuario recogemos las tareas que se han creado por el usuario
+         */
+        public function getCreated($idUser){
+            return $this->taskModel->getCreated($idUser);
         }
     }
