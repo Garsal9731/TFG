@@ -4,6 +4,20 @@
      * 
      */
     ob_start();
+        if(isset($_COOKIE["status"])){
+        switch ($_COOKIE["status"]) {
+            case 'creado':
+                echo "<p id='mensajeError' hidden>"."Se ha creado el objeto"."</p>";
+                break;
+            case 'borrado':
+                echo "<p id='mensajeError' hidden>"."Se ha borrado el objeto"."</p>";
+                break;
+            case 'mod':
+                echo "<p id='mensajeError' hidden>"."Se ha editado el objeto"."</p>";
+                break;
+        }
+        setcookie("status", "", time() - 3600, "/");
+    }
 ?>
     <div class="ajax">
         <h1>Objetos</h1>

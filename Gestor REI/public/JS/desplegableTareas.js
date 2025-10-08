@@ -7,9 +7,9 @@ function cambiarClase(clase) {
     cuerpo.classList.toggle("visible");
     if (cuerpo.classList.contains("visible")) {
         cuerpo.style.height = "0%";
-        cuerpo.style.height = "40%";
+        cuerpo.style.height = "100%";
     } else {
-        cuerpo.style.height = "40%";
+        cuerpo.style.height = "100%";
         cuerpo.style.height = "0%";
     }
     

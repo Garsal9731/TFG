@@ -4,12 +4,13 @@
      * 
      */
     ob_start();
-    var_dump($tasks);
 ?>
 <div class="ajaxTareas">
     <div class="cabeza">
         <h1>Lista de Tareas Completadas</h1>
         <a href="index.php?route=task/create">Crear Tarea</a>
+        <a href="index.php?route=task/completed">Tareas Completadas</a>
+        <a href="index.php?route=task/created">Tareas Creadas</a>
     </div>
     <div class="cuerpo">
         <div class="barra"><i id="completo" class="fa-solid fa-greater-than" onclick="cambiarClase('completo')"></i><p class="nombre">Tareas Completadas</p></div>

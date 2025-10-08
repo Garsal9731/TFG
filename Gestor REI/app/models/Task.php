@@ -32,6 +32,23 @@
             $this->query($sql);
         }
 
+        // Asignar tarea a usuario
+        /**
+         * @param VOID
+         * 
+         * Recoge la id de la ultima tarea creada
+         */
+        public function getLastId(){
+            $sql = "SELECT Id_Tarea FROM Tarea ORDER BY Id_Tarea DESC LIMIT 1;";
+            $lastId = $this->query($sql)->fetch();
+            return $lastId;
+        }
+
+        public function getById($id){
+            $sql = "SELECT * FROM Tarea WHERE Id_Tarea=$id;";
+            return $this->query($sql)->fetch();
+        }
+
         // Deasignar tarea a usuario
         /**
          * @param $taskId int
@@ -42,28 +59,6 @@
         public function removeUser($taskId,$employeeId){
             $sql = "DELETE FROM Tarea_Asignadas WHERE Tarea_Id_Tarea=$taskId AND Usuario_Id_Usuario=$employeeId;";
             $this->query($sql);
-        }
-        
-        // Recoger Tareas Asignadas
-        /**
-         * @param $userId int
-         * 
-         * Recoge las tareas que se le han asignado al usuario
-         */
-        public function getAssigned($userId){
-            $sql = "SELECT * FROM Tarea WHERE Id_Tarea IN (SELECT Tarea_Id_Tarea FROM Tarea_Asignadas WHERE Usuario_Id_Usuario=$userId);";
-            return $this->query($sql)->fetchAll();
-        }
-
-        // Recoger Tareas Completadas
-        /**
-         * @param $userId int
-         * 
-         * Recoge las tareas que se le han asignado al usuario y se han completado
-         */
-        public function getComplete($userId){
-            $sql = "SELECT * FROM Tarea WHERE Id_Tarea IN (SELECT Tarea_Id_Tarea FROM Tarea_Asignadas WHERE Usuario_Id_Usuario=$userId) AND Estado='Completada';";
-            return $this->query($sql)->fetchAll();
         }
 
         // Busqueda Ajax
@@ -76,13 +71,19 @@
          */
         public function ajax($peticion,$idUser,$status){
 
-            if($status=="P"){
-                $sql ="SELECT Id_Tarea,Nombre,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Nombre_Tarea LIKE '".$peticion."%' AND Estado='Pendiente' AND Usuario_Id_Usuario=".$idUser.";";
-            }elseif($status=="C"){
-                $sql ="SELECT Id_Tarea,Nombre,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Nombre_Tarea LIKE '".$peticion."%' AND Estado='Completada' AND Usuario_Id_Usuario=".$idUser.";";
-
-            }else{
-                $sql ="SELECT Id_Tarea,Nombre,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Nombre_Tarea LIKE '".$peticion."%' AND Usuario_Id_Usuario=".$idUser.";";
+            switch ($status) {
+                case 'P':
+                    $sql ="SELECT Id_Tarea,Nombre,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Nombre_Tarea LIKE '".$peticion."%' AND Estado='Pendiente' AND Usuario_Id_Usuario=".$idUser.";";
+                    break;
+                case 'C':
+                    $sql ="SELECT Id_Tarea,Nombre,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Nombre_Tarea LIKE '".$peticion."%' AND Estado='Completada' AND Usuario_Id_Usuario=".$idUser.";";
+                    break;
+                case 'D':
+                    $sql ="SELECT Id_Tarea,Nombre,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Id_Creador_Tarea=".$idUser." AND Nombre_Tarea LIKE '".$peticion."%' ORDER BY Estado DESC;";
+                    break;
+                default:
+                    $sql ="SELECT Id_Tarea,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Nombre_Tarea LIKE '".$peticion."%' AND Usuario_Id_Usuario=".$idUser.";";
+                    break;
             }
             return $this->query($sql)->fetchAll();
         }

@@ -1,12 +1,3 @@
-// ! ARREGLAR BUG QUE HACE QUE LOS RESULTADOS
-    
-// document.getElementById("buscador").addEventListener("keypress", function(event) {
-//   console.log("ENTER");
-//   buscarAjax('TareaP');
-// }); 
-
-      
-
 // Por defecto en carga de la pagina lanzará una busqueda para recoger todos los resultados y mostrarlos, esto es necesario ya que quiero que por defecto se muestren todos los resultados al cargar la página (NO HAY OTRA MANERA DE HACERLO)
 let clase = document.location["href"].split("=")[1].split("/")[0];
 let tabla = null;
@@ -31,7 +22,7 @@ switch (clase) {
                 case "completed":
                     tabla = 'TareaC';
                     break;
-                case "completed":
+                case "created":
                     tabla = 'TareaD';
                     break; 
             }
@@ -141,7 +132,7 @@ async function buscarAjax(tabla){
     .then(async (resultado) => {
 
         // Cambiamos la tabla a Tarea a secas (la letra se usa como un identificador para el ajax, a estas alturas ya tenemos el resultado asi que es mejor generalizar como "Tareas" a secas)
-        if(tabla=="TareaP" || tabla=="TareaC"){
+        if(tabla=="TareaP" || tabla=="TareaC" || tabla=="TareaD"){
             tabla = "Tarea";
         }
 

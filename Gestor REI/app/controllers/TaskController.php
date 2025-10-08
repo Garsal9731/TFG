@@ -62,13 +62,6 @@
          * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los usuarios
          */ 
         public function index() {
-
-            if($_SESSION["loginData"]["Privilegios"]==1){
-                $tasks = $this->getAll();
-            }else{
-                $tasks = $this->getAssigned($_SESSION["loginData"]["Id_Usuario"]);
-            }
-
             require __DIR__ . '/../views/task_list.php';
         } 
 
@@ -79,12 +72,6 @@
          * Vista de tareas completadas
          */ 
         public function completed() {
-            if($_SESSION["loginData"]["Privilegios"]==1){
-                $tasks = $this->getAll();
-            }else{
-                $tasks = $this->getComplete($_SESSION["loginData"]["Id_Usuario"]);
-            }
-
             require __DIR__ . '/../views/task_done.php';
         }
 
@@ -92,15 +79,9 @@
         /**
          * @param VOID NULL
          * 
-         * Vista de tareas completadas
+         * Vista de tareas creadas
          */ 
         public function created() {
-            if($_SESSION["loginData"]["Privilegios"]==1){
-                $tasks = $this->getAll();
-            }else{
-                $tasks = $this->getCreated($_SESSION["loginData"]["Id_Usuario"]);
-            }
-
             require __DIR__ . '/../views/task_created.php';
         }
 
@@ -117,12 +98,16 @@
                 $fechaEstimada = str_replace("T"," ",$_POST["fechaEstimada"]);
 
                 $this->taskModel->create(['Id_Creador_Tarea' => $idCreador,'Fecha_Creación' => $fechaCreacion,'Tiempo_Estimado' => $fechaEstimada,'Nombre_Tarea' => $_POST["nombreTarea"],'Detalles' => $_POST["detalles"],'Estado' => $_POST["estado"]]);
+                
+                // Recogemos la ultima ID de las tareas que se haya registrado, en este caso será la de la tarea que acabamos de crear
                 $lastId = $this->taskModel->getLastId();
 
-                foreach($_POST["empleado"] as $employeeId){
-                    $this->taskModel->assignUser($lastId,$employeeId);
+                foreach($_POST["empleados"] as $employeeId){
+                    $this->taskModel->assignUser($lastId["Id_Tarea"],$employeeId);
                 }
 
+                // Creamos una cookie para mandar el aviso de que se ha creado la tarea
+                setcookie("status", "creado", time() + (86400 * 30), "/");
                 header('Location: index.php?route=task/index');
             } else {
                 if($_SESSION["loginData"]["Privilegios"]!==3){
@@ -170,6 +155,9 @@
                     }
                 }
 
+                // Creamos una cookie para mandar el aviso de que se ha modificado la tarea
+                setcookie("status", "mod", time() + (86400 * 30), "/");
+
                 header('Location: index.php?route=task/index');
             } else {
                 $task = $this->taskModel->getById($id);
@@ -187,7 +175,6 @@
         public function check($id){
             $task = $this->taskModel->getById($id);
             $employees = $this->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
-
             $assignedEmployees = $this->taskModel->getEmployeesByTask($id);
             $idsAssigned = array();
             foreach($assignedEmployees as $idAssigned){
@@ -204,36 +191,9 @@
          */
         public function delete($id) {
             $this->taskModel->delete($id);
+
+            // Creamos una cookie para mandar el aviso de que se ha borrado la tarea
+            setcookie("status", "borrado", time() + (86400 * 30), "/");
             header('Location: index.php?route=task/index');
-        }
-
-        // Recoger Tareas Asignadas
-        /**
-         * @param $iduser int
-         * 
-         * Usando la id del usuario recogemos las tareas que se le han asignado
-         */
-        public function getAssigned($idUser){
-            return $this->taskModel->getAssigned($idUser);
-        }
-
-        // Recoger Tareas Completadas
-        /**
-         * @param $iduser int
-         * 
-         * Usando la id del usuario recogemos las tareas que se han completado
-         */
-        public function getComplete($idUser){
-            return $this->taskModel->getComplete($idUser);
-        }
-
-        // Recoger Tareas Creadas
-        /**
-         * @param $iduser int
-         * 
-         * Usando la id del usuario recogemos las tareas que se han creado por el usuario
-         */
-        public function getCreated($idUser){
-            return $this->taskModel->getCreated($idUser);
         }
     }

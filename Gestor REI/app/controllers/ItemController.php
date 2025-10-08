@@ -33,7 +33,6 @@
          * Llamamos al modelo objeto y recogemos todos los objetos 
          */
         public function getAll(){
-            $items = $this->itemModel->getAll();
             return $items;
         }
 
@@ -44,9 +43,6 @@
          * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los objetos
          */ 
         public function index() {
-
-            $items = $this->getAll();
-
             require __DIR__ . '/../views/item_list.php';
         }
 
@@ -73,6 +69,9 @@
                 $idUser = $_SESSION["loginData"]["Id_Usuario"]; 
                 $idInst = $this->getUserInst($idUser)["Id_Institución"];
                 $this->itemModel->create(['Nombre' => $_POST['nombre'],'Estado' => $_POST["estado"],'Descripción_Avería' => $_POST['descAveria'],'Institución_Id_Institución' => $idInst]);
+
+                // Creamos una cookie para mandar el aviso de que se ha creado el objeto
+                setcookie("status", "creado", time() + (86400 * 30), "/");
                 header('Location: index.php?route=item/index');
             } else {
                 require __DIR__ . '/../views/item_create.php';
@@ -90,6 +89,9 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 settype($id, "int");
                 $this->itemModel->update(['Nombre' => $_POST['nombre'],'Estado'=>$_POST['estado'],'Descripción_Avería'=>$_POST['descAveria']], $id);
+                
+                // Creamos una cookie para mandar el aviso de que se ha modificado el objeto
+                setcookie("status", "mod", time() + (86400 * 30), "/");
                 header('Location: index.php?route=item/index');
             } else {
                 $item = $this->itemModel->getById($id);
@@ -105,6 +107,9 @@
          */
         public function delete($id) {
             $this->itemModel->delete($id);
+
+            // Creamos una cookie para mandar el aviso de que se ha borrado el objeto
+            setcookie("status", "borrado", time() + (86400 * 30), "/");
             header('Location: index.php?route=item/index');
         }
     }

@@ -56,11 +56,14 @@
 
         // Registramos la institución
         /**
-         * 
+         * @param VOID
          */
         public function create(){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $this->instModel->create(['Nombre_Institución' => ucfirst($_POST["nombre"])]);
+                                
+                // Creamos una cookie para mandar el aviso de que se ha creado la institución
+                setcookie("status", "creado", time() + (86400 * 30), "/");
 
                 header('Location: index.php?route=inst/index');
             } else {
@@ -76,6 +79,9 @@
          */
         public function delete($id) {
             $this->instModel->delete($id);
+
+            // Creamos una cookie para mandar el aviso de que se ha borrado la institución
+            setcookie("status", "borrado", time() + (86400 * 30), "/");
             header('Location: index.php?route=inst/index');
         }
     }

@@ -26,7 +26,7 @@
         </p>
         <p>
             <label for="fechaEstimada">Fecha Estimada para terminar:</label>
-            <input type="datetime-local" name="fechaEstimada" min="<?php echo date("Y-m-d")."T".date("h:i");?>" value="<?php echo str_replace(" ","T",substr($task["Tiempo_Estimado"],0,16));?>"required>
+            <input type="date" name="fechaEstimada" min="<?php echo date("Y-m-d");?>" value="<?php echo $task["Tiempo_Estimado"];?>"required>
         </p>
     </form>
 </div>

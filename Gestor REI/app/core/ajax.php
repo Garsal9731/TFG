@@ -16,7 +16,7 @@
   $resultado = "";
 
   // Ya que el buscador de las tablas tiene las mismas dependencias pero cambia la query usada vamos a filtrar segun la letra para saber si son tareas Pendientes o Completadas
-  if($tabla=="TareaP"||$tabla=="TareaC"){
+  if($tabla=="TareaP"||$tabla=="TareaC"||$tabla=="TareaD"){
 
     session_start();
     $array = str_split($tabla,5);

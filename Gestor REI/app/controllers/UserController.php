@@ -106,10 +106,12 @@
                     }else{
                         $idInst = $this->getUserInst($idUser)["Id_Institución"];
                     }
-                    var_dump($idInst);
 
                     // Registramos al usuario en la misma institución (los admin de cada institución solo pueden registrar en su institución)
                     $this->userModel->registerUserInst($lastId,$idInst);
+
+                    // Creamos una cookie para mandar el aviso de que se ha modificado la tarea
+                    setcookie("status", "creado", time() + (86400 * 30), "/");
 
                     header('Location: index.php?route=user/index');
                 }else{
@@ -131,6 +133,9 @@
                 $contra = password_hash($_POST["contra"], PASSWORD_DEFAULT);
 
                 $this->userModel->update(['Nombre' => $_POST['nombre'],'Contraseña' => $contra], $id);
+
+                // Creamos una cookie para mandar el aviso de que se ha modificado la tarea
+                setcookie("status", "mod", time() + (86400 * 30), "/");
                 header('Location: index.php?route=user/index');
             } else {
                 $user = $this->userModel->getById($id);
@@ -146,6 +151,9 @@
          */
         public function delete($id) {
             $this->userModel->delete($id);
+
+            // Creamos una cookie para mandar el aviso de que se dado de baja al usuario
+            setcookie("status", "borrado", time() + (86400 * 30), "/");
             header('Location: index.php?route=user/index');
         }
 
@@ -161,6 +169,9 @@
                 foreach($_POST["empleados"] as $empleado){
                     $this->userModel->employeeRegister($_POST["jefe"][0],$empleado);
                 }
+
+                // Creamos una cookie para mandar el aviso de que se han asignado los permisos al usuario
+                setcookie("status", "asignado", time() + (86400 * 30), "/");
                 header('Location: index.php?route=user/index');
             }else{
                 $instInfo = $this->getUserInst($idUser);

@@ -4,6 +4,14 @@
      * 
      */
     ob_start();
+    if(isset($_COOKIE["status"])){
+        if($_COOKIE["status"]=="creado") {
+            echo "<p id='mensajeError' hidden>"."Se ha creado la institución"."</p>";
+        }elseif($_COOKIE["status"]=="borrado"){
+            echo "<p id='mensajeError' hidden>"."Se ha borrado la institución"."</p>";
+        }
+        setcookie("status", "", time() - 3600, "/");
+    }
 ?>
     <div class="ajax">
         <h1>Instituciones</h1>
@@ -16,6 +24,7 @@
         <div id="resultados_busqueda" class="invisible"></div>
     </div>
     <script src="./JS/Ajax.js"></script>
+    <script src="./JS/RecogidaError.js"></script>
 <?php
     $content = ob_get_clean();
     include "layouts/main.php";
