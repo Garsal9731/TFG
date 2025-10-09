@@ -1,4 +1,3 @@
-// ! COMPROBAR NO SE GENERAN CHARTS
 // Sacamos la id del usuario de la URL y cargamos el Script automaticamente
 let userId = document.location["href"].split("&")[1].split("=")[1];
 window.onload=generateChart(userId);

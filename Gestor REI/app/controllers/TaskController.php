@@ -196,4 +196,14 @@
             setcookie("status", "borrado", time() + (86400 * 30), "/");
             header('Location: index.php?route=task/index');
         }
+        
+        // Recoger Tareas Asignadas
+        /**
+         * @param $iduser int
+         * 
+         * Usando la id del usuario recogemos las tareas que se le han asignado
+         */
+        public function getAssigned($idUser){
+            return $this->taskModel->getAssigned($idUser);
+        }
     }
