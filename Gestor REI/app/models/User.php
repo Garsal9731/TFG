@@ -88,4 +88,22 @@
                 return true;
             }
         }
+
+        // Revisar si el permiso ya se ha asignado anteriormente
+        /**
+         * @param $idJefe int
+         * @param $empleado int
+         * 
+         * Mandamos una query para revisar si el permiso de un usuario sobre otro ya se ha asignado anteriormente para evitar fallos y repetición
+         */
+        public function checkPermits($idJefe,$empleado){
+            $sql = "SELECT * FROM Jefes WHERE Id_Jefe=".$idJefe." AND Id_Usuario=".$empleado.";";
+            $query = $this->query($sql)->fetch(PDO::FETCH_ASSOC);
+            
+            if($query==false){
+                return false;
+            }else{
+                return true;
+            }
+        }
     }

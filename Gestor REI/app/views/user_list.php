@@ -15,9 +15,6 @@
             case 'mod':
                 echo "<p id='mensajeError' hidden>"."Se ha modificado el usuario"."</p>";
                 break;
-            case 'asignado':
-                echo "<p id='mensajeError' hidden>"."Se ha asignado el usuario"."</p>";
-                break;
         }
         setcookie("status", "", time() - 3600, "/");
     }

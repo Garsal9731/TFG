@@ -166,13 +166,30 @@
         public function bossManage($idUser){
 
             if($_SERVER['REQUEST_METHOD'] === 'POST'){
-                foreach($_POST["empleados"] as $empleado){
-                    $this->userModel->employeeRegister($_POST["jefe"][0],$empleado);
-                }
 
-                // Creamos una cookie para mandar el aviso de que se han asignado los permisos al usuario
-                setcookie("status", "asignado", time() + (86400 * 30), "/");
-                header('Location: index.php?route=user/index');
+                foreach($_POST["empleados"] as $empleado){
+
+                    if($_POST["jefe"][0]==$empleado){
+
+                        // Creamos una cookie de fallo para avisar de que no se ha podido completar el proceso
+                        setcookie("status", "fallo", time() + (86400 * 30), "/");
+                    }else{
+                        $rep = $this->userModel->checkPermits($_POST["jefe"][0],$empleado);
+                        var_dump($rep);
+
+                        // Si la repetición es falsa entonces pasamos a crear el registro de permisos
+                        if($rep==false){
+                            $this->userModel->employeeRegister($_POST["jefe"][0],$empleado);
+                            
+                            // Creamos una cookie para mandar el aviso de que se han asignado los permisos al usuario
+                            setcookie("status", "asignado", time() + (86400 * 30), "/");
+                        }else{
+                            setcookie("status", "fallo", time() + (86400 * 30), "/");
+                        }
+                    }
+                }
+                
+                header('Location: index.php?route=user/manage');
             }else{
                 $instInfo = $this->getUserInst($idUser);
                 $idInst = $instInfo["Id_Institución"];
