@@ -3,11 +3,7 @@
     // Definimos el namespace (Será heredado por el resto de clases que se enlacen a este archivo)
     namespace App\Core;
 
-    // Llamamos a los controladores que vamos a usar
-    require_once __DIR__ . '/../controllers/UserController.php';
-    require_once __DIR__ . '/../controllers/ItemController.php';
-    require_once __DIR__ . '/../controllers/TaskController.php';
-    require_once __DIR__ . '/../controllers/InstController.php';
+    // Llamamos a la clase de seguridad
     require_once __DIR__ . '/security.php';
 
     // Les damos alias a sus namespace
@@ -21,29 +17,55 @@
         protected $route;
         protected $id;
 
-        // Constructor
         /**
-         * @param VOID NULL
+         * Constructor
          * 
-         * Es el constructor de la clase
+         * Es el constructor de la clase Router.
+         *
+         * @param void
+         * 
+         * @return void
          */
         public function __construct() {
             $this->route = $_GET['route'] ?? 'landing';
             $this->id = $_GET['id'] ?? null;
         }
 
-        // Enrutador
         /**
+         * Enrutador
          * 
-         * Usa la ruta y la id para llamar a las metodos de los controladores
+         * Usa la ruta y la id para llamar a las metodos de los controladores.
+         * 
+         * @param void
+         * 
+         * @return void
          */
         public function enroute(){
-            
-            // Creamos nuevos controladores como objetos y los metemos en variables
-            $userController = new UserController();
-            $itemController = new ItemController();
-            $taskController = new TaskController();
-            $instController = new InstController();
+
+            // Sacamos la primera parte de la ruta para saber a que controlador tenemos que llamar e instanciar.
+            $ruta = explode("/",$this->route);
+            switch ($ruta[0]) {
+                case 'user':
+                    require_once __DIR__ . '/../controllers/UserController.php';
+                    $userController = new UserController();
+                    break;
+                case 'permits':
+                    require_once __DIR__ . '/../controllers/UserController.php';
+                    $userController = new UserController();
+                    break;
+                case 'item':
+                    require_once __DIR__ . '/../controllers/ItemController.php';
+                    $itemController = new ItemController();
+                    break;
+                case 'task':
+                    require_once __DIR__ . '/../controllers/TaskController.php';
+                    $taskController = new TaskController();
+                    break;
+                case 'inst':
+                    require_once __DIR__ . '/../controllers/InstController.php';
+                    $instController = new InstController();
+                    break;
+            }
             
             switch ($this->route){
                 case 'landing':
@@ -55,14 +77,12 @@
                     break;
 
                 case 'user/index':
-
                     // Exclusivo para admin
                     Security::secureRoutes("Alta");
                     $userController->index();
                     break;
 
                 case 'user/create':
-
                     Security::secureRoutes("Alta");
                     if($_SESSION["loginData"]["Privilegios"]==4){$insts=$instController->getAll();}
                     $userController->create($insts);
@@ -78,26 +98,34 @@
                     break;
 
                 case 'user/delete':
-
                     Security::secureRoutes("Alta");
                     $userController->delete($this->id);
                     break;
 
-                case 'user/manage':
-
+                case 'user/permits':
                     Security::secureRoutes("Alta");
 
                     // Cada admin administra los permisos de su organización
                     if($_SESSION["loginData"]["Privilegios"]==4){header('Location: index.php?route=landing');}
                     $userController->bossManage($_SESSION["loginData"]["Id_Usuario"]);
                     break;
+                case 'user/manage':
+                    Security::secureRoutes("Alta");
 
+                    // Cada admin administra los permisos de su organización
+                    if($_SESSION["loginData"]["Privilegios"]==4){header('Location: index.php?route=landing');}
+                    $userController->permitsManage($_SESSION["loginData"]["Id_Usuario"]);
+                    break;
                 case 'user/stats':
                     
                     Security::secureRoutes("Alta");
                     require __DIR__ . '/../views/user_stats.php';
                     break;
-                    
+                case 'permits/delete':
+
+                    Security::secureRoutes("Alta");
+                    $userController->deletePermits($_GET["jefe"],$_GET["empleado"]);
+                    break;    
                 case 'item/index':
 
                     Security::secureRoutes("Media");
@@ -170,5 +198,4 @@
                     die();
             }
         }
-
     }

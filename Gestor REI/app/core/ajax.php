@@ -7,7 +7,6 @@
   use App\Controllers\TaskController as TaskController;
   use App\Controllers\InstController as InstController;
 
-
   // Recogemos la petición enviada y la tabla por GET
   $peticion = $_GET["peticion"];
   $tabla = $_GET["tabla"];
@@ -33,6 +32,19 @@
         $userController = new UserController();
         $users = $userController->ajaxMail($peticion);
         $resultado = $users;
+      break;
+
+    case 'Permisos':
+        require_once __DIR__.'/../controllers/UserController.php';
+        
+        $userController = new UserController();
+        
+        // Recogemos la info de la institución a la que pertenece el usuario y sacamos su ID para usarla en la query de los permisos
+        $instInfo = $userController->getUserInst($_SESSION["loginData"]["Id_Usuario"]);
+        $idInst = $instInfo["Id_Institución"];
+
+        $permits = $userController->getPermits($idInst,$peticion);
+        $resultado = $permits;
       break;
 
     case 'Objeto' :

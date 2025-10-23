@@ -23,64 +23,83 @@
 
         private $userModel;
 
-        // Constructor
         /**
-         * @param VOID NULL
+         * Constructor
          * 
          * El constructor crea un usuario nuevo usando el constructor del usuario
+         *
+         * @param void
+         * 
+         * @return void
          */
         public function __construct() {
             $this->userModel = new User();
         }
 
-        // Recoger Todo
         /**
-         * @param VOID NULL
+         * Recoger Todo
          * 
          * Llamamos al modelo usuario y recogemos todos los usuarios 
+         * 
+         * @param void
+         * 
+         * @return array $users Datos de todos los usuarios
          */
         public function getAll(){
             $users = $this->userModel->getAll();
             return $users;
         }
 
-        // Recoger Todo usando correo como referencia
         /**
-         * @param $mail
+         * Recoger Usuario usando correo
          * 
-         * Recogemos los datos del usuario usando el correo como referencia
+         * Recogemos los datos del usuario usando el correo como referencia.
+         * 
+         * @param string $mail Correo del usuario.
+         * 
+         * @return array $data Datos del usuario.
          */
         public function getByMail($mail){
             $data = $this->userModel->getByMail($mail);
             return $data;
         }
 
-        // Ajax del correo de los usuarios
         /**
-         * @param $mail
+         * Ajax del correo de los usuarios
          * 
-         * Recogemos los datos del usuario usando el correo como referencia
+         * Recogemos los datos del usuario usando el correo y la institución que pertenece como referencia podemos localizar al usuario.
+         * 
+         * @param string $mail Correo a buscar en la base de datos.
+         * 
+         * @return array $data Datos del usuario.
          */
         public function ajaxMail($mail){
             $data = $this->userModel->ajaxMail($mail,$this->getUserInst($_SESSION["loginData"]["Id_Usuario"])["Id_Institución"]);
             return $data;
         }
 
-        // Indice
         /**
-         * @param VOID NULL
+         * Indice
          * 
          * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los usuarios y llamamos a la vista
+         * 
+         * @param void
+         * 
+         * @return void
          */ 
         public function index() {
             require __DIR__ . '/../views/user_list.php';
         }
 
-        // Crear 
         /**
-         * @param VOID NULL
+         * Crear Usuario
+         *
+         * Recogemos los datos recogidos por POST y los usamos para dar de alta al usuario.
+         * De no haber datos por POST llamamos a la vista con el formulario.
          * 
-         * Usamos el metodo crear del EmptyModel y recogemos los datos por POST
+         * @param array $insts Array con las instituciones, no se usa en la propia función, pero si en la vista llamada.
+         * 
+         * @return void
          */ 
         public function create($insts) {
 
@@ -122,11 +141,15 @@
             }
         }
 
-        // Editar
         /**
-         * @param $id int
+         * Editar
          * 
          * Usamos el metodo editar del EmptyModel, recogemos los datos por POST y le pasamos la id para actualizar el registro
+         * De no haber datos por POST llamamos a la vista con el formulario.
+         * 
+         * @param int $id Id del usuario que queremos editar.
+         * 
+         * @return void
          */
         public function edit($id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -143,11 +166,14 @@
             }
         }
 
-        // Borrar
         /**
-         * @param $id int
+         * Borrar Usuario
          * 
-         * Usamos el metodo borrar del EmptyModel y borramos el registro usando la id
+         * Usamos el metodo borrar del EmptyModel y borramos el registro usando la id.
+         * 
+         * @param int $id Id del usuario que vamos a dar de baja.
+         * 
+         * @return void
          */
         public function delete($id) {
             $this->userModel->delete($id);
@@ -157,11 +183,15 @@
             header('Location: index.php?route=user/index');
         }
 
-        // Manejar usuarios
         /**
-         * @param $idUser int
+         * Manejar usuarios
          * 
-         * Usamos la id del usuario para 
+         * Registramos los datos enviados por formulario, creando relación de Jefe-Empleado entre varios usuarios seleccionados.
+         * De no haber datos por POST llamamos a la vista con el formulario.
+         * 
+         * @param int $idUser Usamos la id del usuario para registrar los permisos en la institución a la que pertenece.
+         * 
+         * @return void
          */
         public function bossManage($idUser){
 
@@ -197,5 +227,56 @@
                 $users = $this->getAllByInst($idInst);
                 require __DIR__ . '/../views/user_manage.php';
             }
+        }
+
+        /**
+         * Manejar usuarios
+         * 
+         * Usamos la id del usuario para comprobar a que institución pertenece.
+         * 
+         * @param int $idUser id del usuario que está entrando en la página.
+         * 
+         * @return void
+         */
+        public function permitsManage($idUser){
+            $instInfo = $this->getUserInst($idUser);
+            $idInst = $instInfo["Id_Institución"];
+            require __DIR__ . '/../views/user_permits.php';
+            
+        }
+
+        /**
+         * Manejar usuarios
+         * 
+         * Usamos la id de la institución para buscar quien es jefe de quien.
+         * 
+         * @param int $idInst Id de la institución a la que pertenece el usuario.
+         * @param string $peticion Hilo de texto enviado que se usa en la query del ajax para buscar en la base de datos.
+         * 
+         * @return array $permits array con los permisos de que usuario es jefe de quien.
+         */
+        public function getPermits($idInst,$peticion){
+            $permits = $this->userModel->getBosses($idInst,$peticion);
+            return $permits;
+        }
+
+        /**
+         * Borrar permisos
+         * 
+         * Usamos la id del jefe y la del empleado para borrar sus permisos sobre el empleado.
+         * 
+         * @param int $idJefe Id del usuario que manda sobre otro usuario.
+         * @param int $idEmpleado Id del usuario "subordinado".
+         * 
+         * @return void
+         */
+        public function deletePermits($idJefe,$idEmpleado){
+            if($this->userModel->deletePermits($idJefe,$idEmpleado)){
+                setcookie("status", "borrado", time() + (86400 * 30), "/");
+            }else{
+                setcookie("status", "fallo", time() + (86400 * 30), "/");
+            }
+
+            header('Location: index.php?route=user/manage');
         }
     }

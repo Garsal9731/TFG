@@ -3,7 +3,13 @@ let clase = document.location["href"].split("=")[1].split("/")[0];
 let tabla = null;
 switch (clase) {
     case "user":
-        tabla = 'Usuario';
+
+        // Si estamos en la página de permisos de los usuarios cambiamos la busqueda para que sean los permisos
+        if (document.location["href"].split("=")[1].split("/")[1]=="manage") {
+            tabla = 'Permisos';
+        }else{
+            tabla = 'Usuario';
+        }
         break;
     case "item":
         tabla = 'Objeto';
@@ -29,7 +35,7 @@ switch (clase) {
         break;
 }
 
-// Recogemos el icono de la lupa y l
+// Recogemos el icono de la lupa y le damos un evento para buscar usando el valor escrito del buscador
 let lupa = document.getElementById("lupa");
 lupa.style.cursor = "pointer";
 lupa.addEventListener("click",function() {
@@ -136,8 +142,6 @@ async function buscarAjax(tabla){
             tabla = "Tarea";
         }
 
-        // borrarResultados(parrafoResultados);
-
         // En caso de que el resultado salga vacío debido a una falta de datos en la BD mostramos este mensaje
         if(resultado.length==0){
             let mensaje = document.createElement("p");
@@ -214,7 +218,19 @@ async function buscarAjax(tabla){
 
                     // Añadimos el div con los botones creados al parrafo
                     parrafo.append(div);
-                    break; 
+                    break;
+                case "Permisos":
+                    parrafo.textContent = texto;
+
+                    // Creamos un enlace en caso de que sea necesario borrar el permiso del usuario
+                    enlace_elim.setAttribute("href","index.php?route=permits/delete&jefe="+dato["Id_Jefe"]+"&empleado="+dato["Id_Usuario"]);
+                    
+                    // Los metemos en el parrafo que hemos creado
+                    div.append(enlace_elim);
+
+                    // Añadimos el div con los botones creados al parrafo
+                    parrafo.append(div);
+                    break;
                 case "Objeto":
         
                     parrafo.textContent = texto;
