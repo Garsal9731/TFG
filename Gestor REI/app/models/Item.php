@@ -10,21 +10,28 @@
 
     class Item extends EmptyModel {
     
-        // Constructor
         /**
-         * @param VOID NULL
+         * Constructor Objeto
          * 
-         * Extiende el constructor de EmptyModel usando la tabla de objeto como referencia
+         * Extiende el constructor de EmptyModel usando la tabla de objeto como referencia.
+         * 
+         * @param void
+         * 
+         * @return void
          */
         public function __construct() {
             parent::__construct('Objeto');
         }
 
-        // Recoger datos de Objetos para el ajax
         /**
-         * @param $peticion string
+         * Recoger datos de Objetos para el ajax
          * 
-         * Busca la peticion en la bd usando una consulta preparada
+         * Busca la peticion en la base de datos usando una consulta preparada.
+         * 
+         * @param string $peticion Nombre del objeto que vamos a buscar.
+         * @param int $idInst Id de la institución a la que pertenece el objeto.
+         * 
+         * @return array Array de los resultados de la busqueda.
          */
         public function ajaxObjetos($peticion,$idInst){
             if ($_SESSION["loginData"]["Privilegios"]==4) {

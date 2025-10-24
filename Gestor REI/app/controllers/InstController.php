@@ -10,53 +10,71 @@
 
     class InstController {
 
-
         private $instModel;
 
-        // Constructor
         /**
-         * @param VOID NULL
+         * Constructor Instituciones
          * 
-         * El constructor crea un objeto nuevo usando el constructor del controlador
+         * El constructor crea una nueva institución usando el modelo de institución como referencia.
+         *
+         * @param void
+         * 
+         * @return void
          */
         public function __construct() {
             $this->instModel = new Inst();
         }
 
-        // Recoger Todo
         /**
-         * @param VOID NULL
+         * Recoger Instituciones
          * 
-         * Llamamos al modelo objeto y recogemos todos los objetos 
+         * Recoger todas las instituciones.
+         * 
+         * @param void
+         * 
+         * @return array $insts Array con todas las instituciones creadas.
          */
         public function getAll(){
             $insts = $this->instModel->getAll();
             return $insts;
         }
 
-        // Indice
         /**
-         * @param VOID NULL
+         * Indice Instituciones
          * 
-         * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los objetos
+         * Vista con una lista de las instituciones existentes.
+         * 
+         * @param void
+         * 
+         * @return void
          */ 
         public function index() {
             require __DIR__ . '/../views/inst_list.php';
         }
 
-        // Buscamos con el ajax
         /**
-         * @param $peticion string
+         * Ajax Instituciones
          * 
+         * Usamos la petición para buscar la institución por su nombre.
+         * 
+         * @param string $peticion Nombre de la institución.
+         * 
+         * @return array $data Datos de la institución buscados con el ajax.
          */
         public function ajax($peticion){
             $data = $this->instModel->ajaxInstitucion($peticion);
             return $data;
         }
 
-        // Registramos la institución
         /**
-         * @param VOID
+         * Registrar Institución
+         * 
+         * Recogemos los datos del POST y los usamos para crear un nuevo registro en la base de datos.
+         * De no haber datos por POST llamamos a la vista con el formulario.
+         * 
+         * @param void
+         * 
+         * @return void
          */
         public function create(){
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -71,11 +89,14 @@
             }
         }
 
-        // Borrar
         /**
-         * @param $id int
+         * Borrar Institución
          * 
-         * Usamos el metodo borrar del EmptyModel y borramos el registro usando la id
+         * Usamos la Id de la institución para borrar su registro de la base de datos.
+         * 
+         * @param int $id Id de la institución que vamos a borrar.
+         * 
+         * @return void
          */
         public function delete($id) {
             $this->instModel->delete($id);

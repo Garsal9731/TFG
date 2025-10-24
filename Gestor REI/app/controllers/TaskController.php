@@ -21,75 +21,96 @@
 
         private $taskModel;
 
-        // Constructor
         /**
-         * @param VOID NULL
+         * Constructor Tareas
          * 
-         * El constructor crea una tarea nueva usando el constructor del controlador
+         * El constructor crea una nueva tarea usando el modelo Tarea.
+         *
+         * @param void
+         * 
+         * @return void
          */
         public function __construct() {
             $this->taskModel = new Task();
         }
 
-        // Recoger Todo
         /**
-         * @param VOID NULL
+         * Recoger Todas las tareas.
          * 
-         * Llamamos al modelo usuario y recogemos todos los usuarios 
+         * Recogemos todas las tareas y las devolvemos en un array.
+         * 
+         * @param void
+         * 
+         * @return array $tasks Array con todas las tareas.
          */
         public function getAll(){
             $tasks = $this->taskModel->getAll();
             return $tasks;
         }
 
-        // Busqueda Ajax
         /**
-         * @param $peticion string
-         * @param $idUser int
-         * @param $status string
+         * Busqueda Ajax
          * 
-         * Recoge las tareas del usuario en funcion a si están completas o no y a el nombre de la tarea
+         * Recoge las tareas del usuario en funcion a si están completas o no y a el nombre de la tarea.
+         * 
+         * @param string $peticion Petición a buscar con el ajax.
+         * @param int $idUser Id del usuario, usada para filtrar los resultado a tareas que se hayan asignado a este usuario.
+         * @param string $status Estado de la tarea.
+         * 
+         * @return array $tasks Array con los resultados del ajax.
          */
         public function ajax($peticion,$idUser,$status){
             $tasks = $this->taskModel->ajax($peticion,$idUser,$status);
             return $tasks;
         }
 
-        // Indice
         /**
-         * @param VOID NULL
+         * Indice Tareas
          * 
-         * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los usuarios
+         * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los usuarios.
+         * 
+         * @param void
+         * 
+         * @return void
          */ 
         public function index() {
             require __DIR__ . '/../views/task_list.php';
         } 
 
-        // Completadas
         /**
-         * @param VOID NULL
+         * Tareas Completadas
          * 
-         * Vista de tareas completadas
+         * Vista de tareas completadas.
+         * 
+         * @param void
+         * 
+         * @return void
          */ 
         public function completed() {
             require __DIR__ . '/../views/task_done.php';
         }
 
-        // Creadas
         /**
-         * @param VOID NULL
+         * Tareas Creadas
          * 
-         * Vista de tareas creadas
+         * Vista de tareas creadas.
+         * @param void
+         * 
+         * @return void
          */ 
         public function created() {
             require __DIR__ . '/../views/task_created.php';
         }
 
-        // Crear 
         /**
-         * @param VOID NULL
+         * Crear Tarea
          * 
-         * Usamos el metodo crear del EmptyModel y recogemos los datos por POST
+         * Recogemos los datos del POST y los registramos como una nueva tarea en la base de datos.
+         * De no haber datos por POST llamamos a la vista con el formulario.
+         * 
+         * @param void
+         * 
+         * @return void
          */ 
         public function create() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -119,11 +140,15 @@
             }
         }
 
-        // Editar
         /**
-         * @param $id int
+         * Editar Tarea
          * 
-         * Usamos el metodo editar del EmptyModel, recogemos los datos por POST y le pasamos la id para actualizar el registro
+         * Usamos la id de la tarea para sobreescribir su registro en la base de datos con los datos recogidos del formulario.
+         * De no haber datos por POST llamamos a la vista con el formulario.
+         * 
+         * @param int $id Id de la tarea que vamos a editar.
+         * 
+         * @return void
          */
 
         public function edit($id) {
@@ -172,6 +197,15 @@
             }
         }
 
+        /**
+         * Comprobar Tarea
+         * 
+         * Usando la Id de la tarea para recoger los usuarios que la tienen asignada, mostrandolos en la vista.
+         * 
+         * @param int $id Id de la tarea que vamos a comprobar.
+         * 
+         * @return void
+         */
         public function check($id){
             $task = $this->taskModel->getById($id);
             $employees = $this->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
@@ -183,11 +217,14 @@
             require __DIR__ . '/../views/task_check.php';
         }
 
-        // Borrar
         /**
-         * @param $id int
+         * Borrar Tarea
          * 
-         * Usamos el metodo borrar del EmptyModel y borramos el registro usando la id
+         * Usamos el metodo borrar del EmptyModel y borramos el registro usando la id.
+         * 
+         * @param int $id Id de la tarea a borrar.
+         * 
+         * @return void
          */
         public function delete($id) {
             $this->taskModel->delete($id);
@@ -196,12 +233,15 @@
             setcookie("status", "borrado", time() + (86400 * 30), "/");
             header('Location: index.php?route=task/index');
         }
-        
-        // Recoger Tareas Asignadas
+
         /**
-         * @param $iduser int
+         * Recoger Tareas Asignadas
          * 
-         * Usando la id del usuario recogemos las tareas que se le han asignado
+         * Usando la id del usuario recogemos las tareas que se le han asignado.
+         * 
+         * @param int $iduser Id del usuario activo.
+         * 
+         * @return array Array de las tareas asignadas al usuario.
          */
         public function getAssigned($idUser){
             return $this->taskModel->getAssigned($idUser);

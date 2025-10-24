@@ -16,41 +16,53 @@
 
         private $itemModel;
 
-        // Constructor
         /**
-         * @param VOID NULL
+         * Constructor Objetos
          * 
-         * El constructor crea un objeto nuevo usando el constructor del controlador
+         * El constructor crea un nuevo objeto usando como base el modelo de objetos.
+         *
+         * @param void
+         * 
+         * @return void
          */
         public function __construct() {
             $this->itemModel = new Item();
         }
 
-        // Recoger Todo
         /**
-         * @param VOID NULL
+         * Recoger todos los objetos.
          * 
-         * Llamamos al modelo objeto y recogemos todos los objetos 
+         * Recogemos todos los objetos.
+         * 
+         * @param void
+         * 
+         * @return array $items Array con todos los objetos.
          */
         public function getAll(){
             return $items;
         }
 
-        // Indice
         /**
-         * @param VOID NULL
+         * Indice Objetos
          * 
-         * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los objetos
+         * Vista del indice de los objetos.
+         * 
+         * @param void
+         * 
+         * @return void
          */ 
         public function index() {
             require __DIR__ . '/../views/item_list.php';
         }
 
-        // Recoger datos de Objetos para el ajax
         /**
-         * @param $peticion string
+         * Ajax Objetos
          * 
-         * Busca la peticion en la bd usando una consulta preparada
+         * Filtramos el objeto buscandolo por su nombre y la institución del usuario activo.
+         * 
+         * @param string $peticion Nombre del objeto que vamos a buscar.
+         * 
+         * @return array $data Array con los datos del objeto. 
          */
         public function ajaxObjetos($peticion){
             $idInst = $this->getUserInst($_SESSION["loginData"]["Id_Usuario"])["Id_Institución"];
@@ -58,11 +70,15 @@
             return $data;
         }
 
-        // Crear 
         /**
-         * @param VOID NULL
+         * Crear Objeto
          * 
-         * Usamos el metodo crear del EmptyModel y recogemos los datos por POST
+         * Recogemos los datos del formulario y los usamos para crear un nuevo registro en la base de datos.
+         * De no haber datos por POST llamamos a la vista con el formulario.
+         * 
+         * @param void
+         * 
+         * @return void
          */ 
         public function create() {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -78,11 +94,15 @@
             }
         }
 
-        // Editar
         /**
-         * @param $id int
+         * Editar Objeto
          * 
-         * Usamos el metodo editar del EmptyModel, recogemos los datos por POST y le pasamos la id para actualizar el registro
+         * Recogemos los datos del formulario y usando la Id del objeto reescribimos su registro en la base de datos.
+         * De no haber datos por POST llamamos a la vista con el formulario.
+         * 
+         * @param int $id
+         * 
+         * @return void
          */
 
         public function edit($id) {
@@ -99,11 +119,14 @@
             }
         }
 
-        // Borrar
         /**
-         * @param $id int
+         * Borrar Objeto
          * 
-         * Usamos el metodo borrar del EmptyModel y borramos el registro usando la id
+         * Usamos la Id del objeto para borrarlo y creamos una cookie de aviso.
+         * 
+         * @param int $id Id del objeto a borrar.
+         * 
+         * @return void
          */
         public function delete($id) {
             $this->itemModel->delete($id);

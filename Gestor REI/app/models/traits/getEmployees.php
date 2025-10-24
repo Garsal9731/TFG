@@ -8,11 +8,15 @@
     use App\Core\Database as Database;
 
     trait getEmployees{
-        // Recoger empleados
+
         /**
-         * @param $idJefe int
+         * Recoger empleados
          * 
          * Recogemos los usuarios que son empleados del Jefe pasado
+         * 
+         * @param int $idJefe Id del jefe de los empleados que buscamos.
+         * 
+         * @return array $employees Array con los empleados cuyo jefe es el indicado.
          */
         public function getEmployees($idJefe){
             try{

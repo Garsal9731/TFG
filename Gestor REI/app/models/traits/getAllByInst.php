@@ -9,11 +9,14 @@
 
     trait getAllByInst{
         
-        // Recoger usuarios de Institución
         /**
-         * @param $idInst int
+         * Recoger usuarios de Institución
          * 
-         * Usamos la id de la institución para recoger a todos los usuarios que trabajan en ella
+         * Usamos la id de la institución para recoger a todos los usuarios que trabajan en ella.
+         * 
+         * @param int $idInst Id de la institución en la que vamos a buscar Usuarios.
+         * 
+         * @return array $users Array con los usuarios de la institución.
          */
         public function getAllByInst($idInst){
             try{

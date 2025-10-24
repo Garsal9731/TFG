@@ -19,12 +19,15 @@
         protected $table;
         protected $primaryKey;
 
-        // Constructor
         /**
-         * @param $tabla string
-         * @param $clavePrimaria string
+         * Constructor Base de Datos
          * 
-         * Es el constructor de la clase
+         * Constructor de la base de datos.
+         * 
+         * @param string $tabla Nombre de la tabla a buscar en la base de datos.
+         * @param string $primaryKey Por defecto la clave primaria de todas las tablas es "id", pero se actualiza automaticamente usando el nombre de la tabla.
+         * 
+         * @return void
          */
         public function __construct($table, $primaryKey = 'id') {
             $this->db = Database::getInstance()->getConnection();
@@ -32,12 +35,15 @@
             $this->primaryKey = $this->getPrimary($table);
         }
 
-        // Realizar Consulta
         /**
-         * @param $sql string
-         * @param $params array
+         * Realizar Consulta
          * 
          * Manda consultas ya preparadas a la base de datos y devuelve la respuesta si hay una
+         * 
+         * @param string $sql Hilo a buscar en la base de datos.
+         * @param array $params Array de parametros para usar en la busqueda.
+         * 
+         * @return array $stmt Array de resultados de la busqueda.
          */
         protected function query($sql, $params = []) {
             try{
@@ -49,11 +55,14 @@
             }
         }
 
-        // Recoger Primaria
         /**
-         * @param $table string
+         * Recoger Primaria
          * 
-         * Manda una consulta a la base de datos y recoge la clave primaria de la tabla
+         * Manda una consulta a la base de datos y recoge la clave primaria de la tabla.
+         * 
+         * @param string $table Nombre de la tabla.
+         * 
+         * @return string Nombre de la clave principal de la tabla actual.
          */
         public function getPrimary($table){
             $sql = "SHOW KEYS FROM $table WHERE Key_name = 'PRIMARY';";
@@ -61,11 +70,14 @@
             return $keys["Column_name"];
         }
 
-        // Recoger última id
         /**
-         * @param VOID NULL
+         * Recoger última id
          * 
-         * Manda una consulta a la base de datos y recoge el último registro de la clave primaria
+         * Manda una consulta a la base de datos y recoge el último registro de la clave primaria.
+         * 
+         * @param void
+         * 
+         * @return int $lastId Ultima Id registrada de la tabla actual.
          */
         public function getLastId(){
             $sql = "SELECT {$this->primaryKey} FROM {$this->table} ORDER BY {$this->primaryKey} DESC LIMIT 1;";
@@ -73,33 +85,42 @@
             return $lastId["{$this->primaryKey}"];
         }
 
-        // Recoger todo
         /**
-         * @param VOID NULL
+         * Recoger todo
          * 
-         * Recoge todos los registros de la tabla actual
+         * Recoge todos los registros de la tabla actual.
+         * 
+         * @param void
+         * 
+         * @return array Array con todos los registros de la tabla actual.
          */
         public function getAll(){
             $sql = "SELECT * FROM {$this->table}";
             return $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        // Registros por principal
         /**
-         * @param $id int
+         * Registros por principal
          * 
-         * Recoge el registro completo usando la id principal de la tabla
+         * Recoge el registro completo usando la id principal de la tabla. 
+         * 
+         * @param int $id id del registro a buscar.
+         * 
+         * @return array Array con los datos del registro.
          */
         public function getById($id) {
             $sql = "SELECT * FROM {$this->table} WHERE {$this->primaryKey} = ?";
             return $this->query($sql, [$id])->fetch(PDO::FETCH_ASSOC);
         }
 
-        // Crear registro
         /**
-         * @param $datos string
+         * Crear registro
          * 
-         * Divide el string de datos usando la , y los coloca de manera que se pueden convertir en un registro y añadirse a la base de datos
+         * Divide el string de datos usando la , y los coloca de manera que se pueden convertir en un registro y añadirse a la base de datos.
+         * 
+         * @param string $datos Datos con los que vamos a crear el registro.
+         * 
+         * @return int Ultima Id insertada de la tabla actual.
          */
         public function create($data) {
             $fields = implode(', ', array_keys($data));
@@ -109,12 +130,15 @@
             return $this->db->lastInsertId();
         }
 
-        // Actualizar usando primaria
         /**
-         * @param $datos string
-         * @param $id int
+         * Actualizar usando primaria
          * 
-         * Divide el string de datos para adaptarlos a un registro y lo actualiza usando la id principal
+         * Divide el string de datos para adaptarlos a un registro y lo actualiza usando la id principal.
+         * 
+         * @param string $datos Datos a actualizar en el registro de la base de datos.
+         * @param int $id Id del registro a actualizar.
+         * 
+         * @return void
          */
         public function update($data, $id) {
             $setClause = implode(', ', array_map(fn($field) => "{$field} = ?", array_keys($data)));
@@ -122,11 +146,14 @@
             $this->query($sql, array_merge(array_values($data), [$id]));
         }
 
-        // Eliminar un registro por clave primaria
         /**
-         * @param $id int
+         * Eliminar un registro por clave primaria
          * 
-         * Borra el registro de la tabla actual usando la id
+         * Borra el registro de la tabla actual usando la id.
+         * 
+         * @param int $id Id del registro a borrar.
+         * 
+         * @return void
          */
         public function delete($id) {
             $sql = "DELETE FROM {$this->table} WHERE {$this->primaryKey} = ?";

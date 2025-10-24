@@ -11,11 +11,14 @@
         private static $instance = null;
         private $pdo;
 
-        // Constructor
         /**
-         * @param VOID NULL
+         * Constructor Base de datos
          * 
-         * Crea la conexión a la base de datos usando los datos de la propia
+         * Crea la conexión a la base de datos usando los datos de la propia.
+         * 
+         * @param void
+         * 
+         * @return void
          */
         private function __construct() {
             $host = 'mysql.cifpceuta.es';
@@ -35,11 +38,14 @@
             }
         }
 
-        // Recoger Instancia
         /**
-         * @param VOID NULL
+         * Recoger Instancia
          * 
-         * Recoge la conexión a base de datos actual, la instancia y si no la hay llama al constructor
+         * Recogemos la instancia de la conexión a la base de datos si existe, de no existir creamos una nueva.
+         * 
+         * @param void
+         * 
+         * @return array $instance Instancia de la conexión a la base de datos.
          */
         public static function getInstance() {
 
@@ -50,11 +56,14 @@
             return self::$instance;
         }
 
-        // Recoger Conexión
-         /**
-         * @param VOID NULL
+        /**
+         * Recoger Conexión
          * 
-         * Recoger la conexión a base de datos actual
+         * Recogemos el PDO de la base de datos.
+         * 
+         * @param void
+         * 
+         * @return array $pdo PDO de la base de datos.
          */
         public function getConnection() {
             return $this->pdo;

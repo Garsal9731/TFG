@@ -8,11 +8,15 @@
     use App\Core\Database as Database;
 
     trait getUserInst{
-        // Recoger Institución del usuario actúal
+
         /**
-         * @param $id int
+         * Recoger Institución del usuario actual
          * 
-         * Recoge la id de la institución en la que trabaja el usuario usando una consulta preparada (en EmptyModel porque lo usan varias clases)
+         * Recoge la id de la institución en la que trabaja el usuario usando una consulta preparada (en EmptyModel porque lo usan varias clases).
+         * 
+         * @param int $id Id del usuario del que buscar la institución.
+         * 
+         * @return array $inst Array con los datos de la institución a la que pertenece el usuario. 
          */
         public function getUserInst($id) {
             try{

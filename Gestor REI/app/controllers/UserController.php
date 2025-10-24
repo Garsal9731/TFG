@@ -10,7 +10,6 @@
     require_once __DIR__ . '/../models/traits/getAllByInst.php';
     require_once __DIR__ . '/../core/security.php';
 
-
     use App\Models\User as User;
     use App\Models\Traits\getEmployees as getEmployees;
     use App\Models\Traits\getUserInst as getUserInst;
@@ -24,9 +23,9 @@
         private $userModel;
 
         /**
-         * Constructor
+         * Constructor Usuario
          * 
-         * El constructor crea un usuario nuevo usando el constructor del usuario
+         * El constructor crea un usuario nuevo usando el constructor del usuario.
          *
          * @param void
          * 
@@ -39,7 +38,7 @@
         /**
          * Recoger Todo
          * 
-         * Llamamos al modelo usuario y recogemos todos los usuarios 
+         * Llamamos al modelo usuario y recogemos todos los usuarios.
          * 
          * @param void
          * 
@@ -79,9 +78,9 @@
         }
 
         /**
-         * Indice
+         * Indice Usuarios
          * 
-         * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los usuarios y llamamos a la vista
+         * Usa el metodo de recoger todos los registros de la base de datos para recoger todos los usuarios y llamamos a la vista.
          * 
          * @param void
          * 
@@ -142,7 +141,7 @@
         }
 
         /**
-         * Editar
+         * Editar Usuario
          * 
          * Usamos el metodo editar del EmptyModel, recogemos los datos por POST y le pasamos la id para actualizar el registro
          * De no haber datos por POST llamamos a la vista con el formulario.
@@ -184,7 +183,7 @@
         }
 
         /**
-         * Manejar usuarios
+         * Manejar permisos
          * 
          * Registramos los datos enviados por formulario, creando relación de Jefe-Empleado entre varios usuarios seleccionados.
          * De no haber datos por POST llamamos a la vista con el formulario.
@@ -232,7 +231,7 @@
         /**
          * Manejar usuarios
          * 
-         * Usamos la id del usuario para comprobar a que institución pertenece.
+         * Usamos la id del usuario para comprobar a que institución pertenece y llamamos al formulario para asignar los nuevos permisos.
          * 
          * @param int $idUser id del usuario que está entrando en la página.
          * 
@@ -242,11 +241,10 @@
             $instInfo = $this->getUserInst($idUser);
             $idInst = $instInfo["Id_Institución"];
             require __DIR__ . '/../views/user_permits.php';
-            
         }
 
         /**
-         * Manejar usuarios
+         * Recoger Permisos
          * 
          * Usamos la id de la institución para buscar quien es jefe de quien.
          * 

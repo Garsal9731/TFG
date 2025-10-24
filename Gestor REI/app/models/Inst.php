@@ -10,21 +10,27 @@
 
     class Inst extends EmptyModel {
     
-        // Constructor
         /**
-         * @param VOID NULL
+         * Constructor Institución
          * 
-         * Extiende el constructor de EmptyModel usando la tabla de institución como referencia
+         * Extiende el constructor de EmptyModel usando la tabla de institución como referencia.
+         * 
+         * @param void
+         * 
+         * @return void
          */
         public function __construct() {
             parent::__construct('Institución');
         }
 
-        // Recoger datos de Instituciones para el ajax
         /**
-         * @param $peticion string
+         * Recoger datos de Instituciones para el ajax
          * 
-         * Busca la peticion en la bd usando una consulta preparada
+         * Busca la peticion en la bd usando una consulta preparada.
+         * 
+         * @param string $peticion Petición que vamos a buscar en la base de datos.
+         * 
+         * @return array Array con los datos recogidos tras la busqueda.
          */
         public function ajaxInstitucion($peticion){
             $sql = 'SELECT * FROM Institución WHERE Nombre_Institución LIKE "'.$peticion.'%";';
