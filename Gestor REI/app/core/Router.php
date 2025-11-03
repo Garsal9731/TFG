@@ -178,6 +178,10 @@
                     $taskController->delete($this->id);
                     break;
 
+                case 'task/all':
+                    $taskController->getCreated($_GET["id"]);
+                    break;
+
                 case 'inst/index':
                     Security::secureRoutes("Alta");
                     $instController->index();

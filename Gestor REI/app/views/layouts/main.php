@@ -24,22 +24,22 @@
                 <?php }else{ ?>
                     <div id="barraLateral" class="barraLateral">
                 <?php }; ?>
-                    <a class="botonEnlace" href="index.php?route=task/index">Tareas<i class="fa-solid fa-file"></i></a>
+                    <a class="botonEnlace" href="index.php?route=task/index">Tareas <i class="fa-solid fa-file"></i></a>
 
                     <!-- Botones para técnicos y admins -->
                     <?php if($_SESSION["loginData"]["Privilegios"]==1 || $_SESSION["loginData"]["Privilegios"]==2){?>
-                        <a class="botonEnlace" href="index.php?route=item/index">Objetos<i class="fa-solid fa-boxes-stacked"></i></a>
+                        <a class="botonEnlace" href="index.php?route=item/index">Objetos <i class="fa-solid fa-boxes-stacked"></i></a>
                     <?php };?>
 
                     <!-- Botones Admin -->
                     <?php if($_SESSION["loginData"]["Privilegios"]==1 || $_SESSION["loginData"]["Privilegios"]==4){?>
 
-                        <a class="botonEnlace" href="index.php?route=user/index">Usuarios<i class="fa-solid fa-users"></i></a>
+                        <a class="botonEnlace" href="index.php?route=user/index">Usuarios <i class="fa-solid fa-users"></i></a>
 
-                        <a class="botonEnlace" href="index.php?route=user/manage">Permisos<i class="fa-solid fa-user-plus"></i></a>
+                        <a class="botonEnlace" href="index.php?route=user/manage">Permisos <i class="fa-solid fa-user-plus"></i></a>
                     <?php };?>
 
-                    <a class="botonEnlace" href="index.php?route=core/logoff">Cerrar Sesión<i class="fa-solid fa-door-open"></i></a>
+                    <a class="botonEnlace" href="index.php?route=core/logoff">Cerrar Sesión <i class="fa-solid fa-door-open"></i></a>
                 </div>
             <?php };?>
             <main>

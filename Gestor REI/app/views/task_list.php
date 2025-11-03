@@ -23,8 +23,8 @@
     
 ?>
 <div class="ajaxTareas">
+    <h1>Lista de Tareas</h1>
     <div class="cabeza">
-        <h1>Lista de Tareas</h1>
         <a href="index.php?route=task/create">Crear Tarea</a>
         <a href="index.php?route=task/completed">Tareas Completadas</a>
         <a href="index.php?route=task/created">Tareas Creadas</a>

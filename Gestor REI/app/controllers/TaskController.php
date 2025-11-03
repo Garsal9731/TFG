@@ -246,4 +246,18 @@
         public function getAssigned($idUser){
             return $this->taskModel->getAssigned($idUser);
         }
+
+        /**
+         * Recoger Tareas Creadas
+         * 
+         * Recoge las tareas que ha creado el usuario
+         * 
+         * @param int $userId Id del usuario.
+         * 
+         * @return array Array con las tareas que se le ha creado al usuario.
+         */
+        public function getCreated($userId){
+            $tareas = $this->taskModel->getCreated($userId);
+            require __DIR__ . '/../views/task_all.php';
+        }
     }

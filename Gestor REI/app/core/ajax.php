@@ -15,7 +15,7 @@
   $resultado = "";
 
   // Ya que el buscador de las tablas tiene las mismas dependencias pero cambia la query usada vamos a filtrar segun la letra para saber si son tareas Pendientes o Completadas
-  if($tabla=="TareaP"||$tabla=="TareaC"||$tabla=="TareaD"){
+  if($tabla=="TareaP"||$tabla=="TareaC"||$tabla=="TareaD"||$tabla=="TareaU"){
 
     session_start();
     $array = str_split($tabla,5);
@@ -57,7 +57,13 @@
     case 'Tarea' :
         require_once __DIR__.'/../controllers/TaskController.php';
         $taskController = new TaskController();
-        $idUsuario = $_SESSION["loginData"]["Id_Usuario"];
+
+        if(isset($_COOKIE["userSearch"])){
+          $idUsuario = $_COOKIE["userSearch"];
+          setcookie("userSearch", "", time() - 3600, "/");
+        }else{
+          $idUsuario = $_SESSION["loginData"]["Id_Usuario"];
+        }
 
         // Mandamos al ajax la petición junto a la id del usuario y la letra para filtrar si la tarea a sido completada o no
         $tasks = $taskController->ajax($peticion,$idUsuario,$letra);

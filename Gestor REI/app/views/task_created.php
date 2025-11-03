@@ -6,14 +6,14 @@
     ob_start();
 ?>
 <div class="ajaxTareas">
+    <h1>Lista de Tareas Creadas</h1>
     <div class="cabeza">
-        <h1>Lista de Tareas Creadas</h1>
         <a href="index.php?route=task/create">Crear Tarea</a>
         <a href="index.php?route=task/completed">Tareas Completadas</a>
         <a href="index.php?route=task/created">Tareas Creadas</a>
     </div>
     <div class="cuerpo">
-        <div class="barra"><i id="creado" class="fa-solid fa-greater-than" onclick="cambiarClase('creado')"></i><p class="nombre">Tareas Creadas</p></div>
+        <div class="barra"><i id="creado" class="fa-solid fa-greater-than rotado" onclick="cambiarClase('creado')"></i><p class="nombre">Tareas Creadas</p></div>
         <div id="cuerpo_creado" class="visible">
             <div class="ajax">
                 <div class="buscador">

@@ -105,6 +105,9 @@
                 case 'D':
                     $sql ="SELECT Id_Tarea,Nombre,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Id_Creador_Tarea=".$idUser." AND Nombre_Tarea LIKE '".$peticion."%' ORDER BY Estado DESC;";
                     break;
+                case 'U':
+                    $sql = "SELECT Id_Tarea, Id_Creador_Tarea, Fecha_Creación, Tiempo_Estimado, Nombre_Tarea, Detalles, Estado, (SELECT Nombre FROM Usuario WHERE Id_Usuario=$idUser) AS 'Nombre_Usuario' FROM Tarea INNER JOIN Tarea_Asignadas ON Tarea_Asignadas.Tarea_Id_Tarea=Tarea.Id_Tarea  WHERE Tarea.Nombre_Tarea LIKE '".$peticion."%' AND Tarea.Id_Creador_Tarea=$idUser OR Tarea_Asignadas.Usuario_Id_Usuario=$idUser;";
+                    break;
                 default:
                     $sql ="SELECT Id_Tarea,Nombre_Tarea,Detalles FROM Tarea INNER JOIN Tarea_Asignadas ON Id_Tarea=Tarea_Id_Tarea INNER JOIN Usuario ON Id_Creador_Tarea=Id_Usuario WHERE Nombre_Tarea LIKE '".$peticion."%' AND Usuario_Id_Usuario=".$idUser.";";
                     break;
@@ -159,6 +162,20 @@
          */
         public function getAssigned($userId){
             $sql = "SELECT * FROM Tarea WHERE Id_Tarea IN (SELECT Tarea_Id_Tarea FROM Tarea_Asignadas WHERE Usuario_Id_Usuario=$userId);";
+            return $this->query($sql)->fetchAll();
+        }
+
+        /**
+         * Recoger Tareas Creadas
+         * 
+         * Recoge las tareas que ha creado el usuario
+         * 
+         * @param int $userId Id del usuario.
+         * 
+         * @return array Array con las tareas que se le ha creado al usuario.
+         */
+        public function getCreated($userId){
+            $sql = "SELECT Id_Tarea, Id_Creador_Tarea, Fecha_Creación, Tiempo_Estimado, Nombre_Tarea, Detalles, Estado, (SELECT Nombre FROM Usuario WHERE Id_Usuario=$userId) AS 'Nombre_Usuario' FROM Tarea INNER JOIN Tarea_Asignadas ON Tarea_Asignadas.Tarea_Id_Tarea=Tarea.Id_Tarea  WHERE Tarea.Id_Creador_Tarea=$userId OR Tarea_Asignadas.Usuario_Id_Usuario=$userId;";
             return $this->query($sql)->fetchAll();
         }
     }

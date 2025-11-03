@@ -31,6 +31,9 @@ switch (clase) {
                 case "created":
                     tabla = 'TareaD';
                     break; 
+                case "all&id":
+                    tabla = 'TareaU';
+                    break;
             }
         break;
 }
@@ -76,14 +79,20 @@ function sacarParrafoResultados(letra){
         var parrafoResultados = "resultados_busqueda";
         
     }else{
-        if(letra=="P"){
-            var parrafoResultados = "resultados_busqueda_P";
-        }
-        if(letra=="C"){
-            var parrafoResultados = "resultados_busqueda_C";
-        }
-        if(letra=="D"){
-            var parrafoResultados = "resultados_busqueda_D";
+        switch (letra) {
+            case "P":
+                var parrafoResultados = "resultados_busqueda_P";
+                break;
+            case "C":
+                var parrafoResultados = "resultados_busqueda_C";
+                break;
+            case "D":
+                var parrafoResultados = "resultados_busqueda_D";
+                break;
+            case "U":
+                var parrafoResultados = "resultados_busqueda_U";
+                document.cookie = "userSearch="+document.location["href"].split("=")[2]+";expires=Thu, 18 Dec 3000 12:00:00 UTC; path=/"; 
+                break;
         }
     }
     return parrafoResultados
@@ -95,7 +104,7 @@ async function buscarAjax(tabla){
     let hilo = document.getElementById("buscador").value;
     
     // Sacamos la letra del parrafo que vamos a usar para mostrar los resultados (Si son la pagina de Tareas), si no lo es lo dejamos nulo para poder sacar la respuesta por defecto
-    if(tabla=="TareaP" || tabla=="TareaC" || tabla=="TareaD"){
+    if(tabla=="TareaP" || tabla=="TareaC" || tabla=="TareaD" || tabla=="TareaU"){
         letra = tabla.split("",6)[5];
     }else{
         letra = null;
@@ -138,7 +147,7 @@ async function buscarAjax(tabla){
     .then(async (resultado) => {
 
         // Cambiamos la tabla a Tarea a secas (la letra se usa como un identificador para el ajax, a estas alturas ya tenemos el resultado asi que es mejor generalizar como "Tareas" a secas)
-        if(tabla=="TareaP" || tabla=="TareaC" || tabla=="TareaD"){
+        if(tabla=="TareaP" || tabla=="TareaC" || tabla=="TareaD" || tabla=="TareaU"){
             tabla = "Tarea";
         }
 
@@ -182,7 +191,6 @@ async function buscarAjax(tabla){
                     }else{
                         texto = texto.concat(dato[clave]+" ");
                     }
-                    
                 }
             });
             // Creamos el parrafo con el resultado creado
@@ -274,6 +282,20 @@ async function buscarAjax(tabla){
                                 parrafoNombre.append(label,nombre);
 
                                 break;
+                            case "Nombre_Usuario":
+                                parrafoNombre = document.createElement("p");
+                                parrafoNombre.setAttribute("class","parrafoNombre");
+
+                                label = document.createElement("label");
+                                label.setAttribute("for","nombre");
+                                label.textContent = "Creador de la Tarea:";
+
+                                nombre = document.createElement("h5");
+                                nombre.textContent = dato[clave];
+
+                                parrafoNombre.append(label,nombre);
+
+                                break;
                             case "Detalles":
                                 parrafoDesc = document.createElement("p");
                                 parrafoDesc.setAttribute("class","parrafoDesc");
@@ -293,8 +315,12 @@ async function buscarAjax(tabla){
                     });
             
                     enlace_edit.textContent = "Revisar";
-                
-                    enlace_edit.setAttribute("href","index.php?route=task/check&id="+id);
+
+                    if(parrafoResultados=="resultados_busqueda_U"){
+                        enlace_edit.setAttribute("href","index.php?route=task/check&id="+dato[0]);
+                    }else{
+                        enlace_edit.setAttribute("href","index.php?route=task/check&id="+id);
+                    }
                     div.append(enlace_edit);
                     div_cuerpo.append(parrafoDesc,parrafoNombre);
                     parrafo.append(div_cabecera,div_cuerpo,div);
