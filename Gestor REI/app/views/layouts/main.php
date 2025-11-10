@@ -35,10 +35,12 @@
                     <?php if($_SESSION["loginData"]["Privilegios"]==1 || $_SESSION["loginData"]["Privilegios"]==4){?>
 
                         <a class="botonEnlace" href="index.php?route=user/index">Usuarios <i class="fa-solid fa-users"></i></a>
-
                         <a class="botonEnlace" href="index.php?route=user/manage">Permisos <i class="fa-solid fa-user-plus"></i></a>
                     <?php };?>
 
+                    <?php if($_SESSION["loginData"]["Privilegios"]==4){?>
+                        <a class="botonEnlace" href="index.php?route=inst/index">Insituciones<i class="fa-solid fa-building"></i></a>
+                    <?php };?>
                     <a class="botonEnlace" href="index.php?route=core/logoff">Cerrar Sesión <i class="fa-solid fa-door-open"></i></a>
                 </div>
             <?php };?>

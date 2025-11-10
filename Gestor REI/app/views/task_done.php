@@ -13,7 +13,7 @@
         <a href="index.php?route=task/created">Tareas Creadas</a>
     </div>
     <div class="cuerpo">
-        <div class="barra"><i id="completo" class="fa-solid fa-greater-than" onclick="cambiarClase('completo')"></i><p class="nombre">Tareas Completadas</p></div>
+        <div class="barra"><i id="completo" class="fa-solid fa-greater-than rotado" onclick="cambiarClase('completo')"></i><p class="nombre">Tareas Completadas</p></div>
         <div id="cuerpo_completo" class="visible">
             <div class="ajax">
                 <div class="buscador">

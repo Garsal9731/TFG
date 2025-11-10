@@ -7,22 +7,31 @@
 }
 :root{
     /* Fondo */
-    --gris:#12181D;
-    
+    /* --fondo:#12181D; */
+    --fondo:#304371;
+
     /* Otros */
-    --azulosc:#E5E2DD;
+    /* --fondoSeg:#E5E2DD; */
+    --fondoSeg:#F5F3F5;
     
     /* Call Of Action */
-    --naranja:#486FE0;
+    /* --COA:#486FE0; */
+    --COA:#6589dd;
 
     /* Errores y otros */
+    /* --rojo:#D63939; */
     --rojo:#D63939;
     
     /* Texto Alternativo */
-    --azulcla:#2144ad;
+    /* --fondoMain:#2144ad; */
+    --fondoMain:#274690;
 
     /* Bordes y texto */
-    --negro:#12181D;
+    /* --negro:#12181D; */
+    --negro:#171d22;
+/* ! CAMBIAR MAIN INDEX PARA QUE SEA COMO EL RESTO */
+    /* Texto alternativo */
+    --blanco:#fff;
 }
 
 body, html{
@@ -35,13 +44,13 @@ body, html{
 }
 
 body{
-    background-color: var(--gris);
+    background-color: var(--fondo);
     display: flex;
     flex-direction: column;
 
     & .mensajeError{
-        background-color: var(--gris);
-        border: 1px solid var(--azulosc);
+        background-color: var(--fondoMain);
+        border: 1px solid var(--fondoSeg);
         color: var(--rojo);
         display: flex;
         align-items: center;
@@ -56,6 +65,7 @@ body{
         top: -15%;
         transition: all 1s ease-in-out;
         text-align:  center;
+        z-index: 5;
 
         &.visible{
             top: 12%;
@@ -65,7 +75,7 @@ body{
     /* Titulo */
     & >div.titulo{
         display: flex;
-        background-color: var(--azulosc);
+        background-color: var(--fondoSeg);
         height: 10%;
         align-items: center;
         z-index: 1;
@@ -80,12 +90,12 @@ body{
             & i{
                 transition: all 0.4s ease-in-out;
                 font-size: 3.5em;
-                color: var(--naranja);
+                color: var(--COA);
             }
 
             & h1{
                 transition: all 0.4s ease-in-out;
-                color: var(--gris);
+                color: var(--negro);
                 font-size: 3em;
                 text-wrap: nowrap;
                 margin-left: 5%;
@@ -94,15 +104,14 @@ body{
             &:hover{
 
                 & i{
-                    color: var(--gris);
+                    color: var(--fondo);
                 }
 
                 & h1{
-                    color: var(--naranja);
+                    color: var(--COA);
                 }
             }
         }
-        
     }
 
     /* Cuerpo principal */
@@ -113,7 +122,7 @@ body{
 
         & >div.barraLateral{
             display: flex;
-            background-color: var(--azulosc);
+            background-color: var(--fondoSeg);
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
@@ -129,33 +138,33 @@ body{
             }
 
             &.admin{
-                background-color: var(--naranja);
+                background-color: var(--COA);
                 & a.botonEnlace{
-                    background-color: var(--azulosc);
+                    background-color: var(--fondoSeg);
 
                     &:hover{
-                        background-color: var(--gris);
-                        color: var(--azulcla);
+                        background-color: var(--fondo);
+                        color: var(--blanco);
                     }
                 }
             }
 
             & a.botonEnlace{
                 text-decoration: none;
-                color: var(--gris);
-                font-size: 8.2pt;
-                background-color: var(--naranja);
-                border-radius: 50%;
-                width: 85px;
-                height: 85px;
+                color: var(--negro);
+                font-size: 11pt;
+                background-color: var(--COA);
+                width: 100%;
+                height: 10%;
                 display: flex;
                 align-items: center;
                 justify-content: space-evenly;
                 transition: all 0.4s ease-in-out;
+                min-height: 18px;
 
                 &:hover{
-                    background-color: var(--gris);
-                    color: var(--naranja);
+                    background-color: var(--fondo);
+                    color: var(--COA);
                 }
             }
         }
@@ -177,7 +186,7 @@ body{
                 align-items: center;
                 justify-content: space-evenly;
 
-                background-color: var(--azulosc);
+                background-color: var(--fondoSeg);
                 border-radius:20px;
                 width: 40%;
                 height: 50%;
@@ -187,7 +196,7 @@ body{
                 & p{
                     display: flex;
                     flex-direction: column;
-                    color: var(--gris);
+                    color: var(--negro);
                     width: 90%;
 
                     & label{
@@ -204,8 +213,8 @@ body{
                 }
 
                 & input[type=submit]{
-                    background-color: var(--naranja);
-                    color: var(--gris);
+                    background-color: var(--COA);
+                    color: var(--blanco);
                     font-size: 1.8em;
                     border-radius: 10px;
                     padding: 2%;
@@ -215,8 +224,7 @@ body{
 
                     &:hover{
                         cursor: pointer;
-                        background-color: var(--gris);
-                        color: var(--naranja);
+                        background-color: var(--fondo);
                     }
                 }
             }
@@ -224,7 +232,7 @@ body{
             & .stats{
                 width: 100%;
                 height: 100%;
-                background-color: var(--azulcla);
+                background-color: var(--fondoMain);
             }
 
             & div#chart_div{
@@ -235,7 +243,7 @@ body{
                     justify-content: center;
                     font-size: 1.8em;
                     font-weight: bold;
-                    color: var(--gris);
+                    color: var(--fondo);
                     margin: 2%;
                 }
             }
@@ -248,9 +256,9 @@ body{
                 & a{
                     text-decoration: none;
                     padding: 2%;
-                    color: var(--gris);
+                    color: var(--fondo);
                     font-size: 1.8em;
-                    background-color: var(--naranja);
+                    background-color: var(--COA);
                     border-radius: 20px;
                     width: 20%;
                     height: 18%;
@@ -261,21 +269,19 @@ body{
                     margin-top: 2%;
 
                     &:hover{
-                        background-color: var(--gris);
-                        color: var(--naranja);
+                        background-color: var(--fondo);
+                        color: var(--COA);
                     }
                 }
             }
 
             /* Contenedor dentro del main si lo hay */
             & div.contenedor{
-                background-color: var(--azulcla);
-                color: var(--gris);
+                background-color: var(--COA);
+                color: var(--blanco);
                 padding: 4%;
                 border-radius: 20px;
                 width: 80%;
-                height: 85%;
-                min-height: 510px;
 
                 & .cuerpoInicial{
 
@@ -315,9 +321,9 @@ body{
 
                             & a{
                                 text-decoration: none;
-                                color: var(--gris);
+                                color: var(--blanco);
                                 font-size: 1.5vw;
-                                background-color: var(--naranja);
+                                background-color: var(--fondoMain);
                                 border-radius: 50%;
                                 width: 55%;
                                 height: 100%;
@@ -327,8 +333,8 @@ body{
                                 transition: all 0.4s ease-in-out;
 
                                 &:hover{
-                                    background-color: var(--gris);
-                                    color: var(--naranja);
+                                    background-color: var(--fondo);
+                                    color: var(--COA);
                                 }
                             }
                         }
@@ -429,8 +435,8 @@ body{
                     & input[type=submit]{
                         width: 30%;
                         height: 70%;
-                        background-color: var(--naranja);
-                        color: var(--gris);
+                        background-color: var(--COA);
+                        color: var(--fondo);
                         font-size: 1.2em;
                         border-radius: 10px;
                         padding: 1%;
@@ -441,8 +447,8 @@ body{
 
                         &:hover{
                             cursor: pointer;
-                            background-color: var(--gris);
-                            color: var(--naranja);
+                            background-color: var(--fondo);
+                            color: var(--COA);
                         }
 
                         &:disabled{
@@ -466,7 +472,7 @@ body{
                 /* Titulo de la pagina */
                 & >h1{
                     font-size: 3em;
-                    color: var(--azulcla);
+                    color: var(--blanco);
                 }
 
                 /* Cabecera con el buscador y boton de creación */
@@ -477,7 +483,6 @@ body{
                     flex-direction: row;
                     justify-content: space-between;
                     align-items: center;
-                    padding-top: 1%;
                     padding-bottom: 1%;
 
                     /* Barra de buscador */
@@ -487,33 +492,50 @@ body{
                         display: flex;
                         align-items: center;
                         justify-content: space-evenly;
-                        background-color: var(--azulcla);
-                        color: var(--gris);
+                        background-color: var(--COA);
+                        color: var(--negro);
+
+                        &:hover{
+                            & input#buscador{
+                                color: var(--blanco);
+
+                                &::placeholder{
+                                    color: var(--blanco);
+                                }
+                            }
+                        }
 
                         /* Buscador en si */
                         & input#buscador{
-                        background-color: var(--azulcla);
-                        color: var(--gris);
-                        border: none;
-                        width: 85%;
-                        height: 100%;
-                        margin-left: 2%;
-                        font-size: 1.2em;
+                            background-color: var(--COA);
+                            color: var(--negro);
+                            border: none;
+                            width: 85%;
+                            height: 100%;
+                            margin-left: 2%;
+                            font-size: 1.2em;
+                            transition: all 0.4s ease-in-out;
 
                             &:focus{
                                 outline: none;
                                 border: none;
                             }
                             &::placeholder{
-                                color: var(--gris);
+                                transition: all 0.4s ease-in-out;
+                                color: var(--negro);
                             }
                         }
 
                         /* Icono del buscador */
                         & i{
                             margin-right: 2%;
-                            color: var(--naranja);
+                            color: var(--negro);
                             font-size: 1.2em;
+                            transition: all 0.4s ease-in-out;
+
+                            &:hover{
+                                color: var(--blanco);
+                            }
                         }
                     }
 
@@ -525,20 +547,20 @@ body{
                         align-items: center;
                         justify-content: center;
                         text-decoration: none;
-                        border: 2px solid var(--gris);
-                        outline: 2px solid var(--naranja);
+                        border: 2px solid var(--fondo);
+                        outline: 2px solid var(--COA);
                         border-radius: 10px;
                         font-size: 1.2em;
-                        color: var(--gris);
-                        background-color: var(--naranja);
+                        color: var(--negro);
+                        background-color: var(--COA);
                         transition: all 0.4s ease-in-out;
                         text-wrap: nowrap;
 
                         &:hover{
-                            border: 2px solid var(--naranja);
-                            outline: 2px solid var(--gris);
-                            color: var(--naranja);
-                            background-color: var(--gris);
+                            border: 2px solid var(--COA);
+                            outline: 2px solid var(--fondo);
+                            color: var(--blanco);
+                            background-color: var(--fondo);
                         }
                     }
                 }
@@ -572,21 +594,21 @@ body{
                         justify-content: center;
                         font-size: 1.8em;
                         font-weight: bold;
-                        color: var(--azulosc);
+                        color: var(--fondoSeg);
                     }
 
                     /* Resultado de ajax */
                     & .resultado{
                         width: 100%;
                         height: 20%;
-                        background-color: var(--azulcla);
+                        background-color: var(--COA);
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
                         padding: 1%;
-                        color: var(--gris);
+                        color: var(--negro);
                         font-weight: bold;
-                        border: 1px solid var(--gris);
+                        border: 1px solid var(--fondo);
                         transition: all 0.8s ease-in-out;
                         font-size: 1.5em;
                 
@@ -599,11 +621,12 @@ body{
                             
                             & a{
                                 text-decoration: none;
-                                color: var(--naranja);
+                                color: var(--blanco);
                                 transition: all 0.4s ease-in-out;
 
                                 &:hover{
                                     font-size: 1.3em;
+                                    color: var(--fondo);
                                 }
 
                                 &.eliminar{
@@ -626,7 +649,7 @@ body{
                 /* Titulo de la pagina */
                 &>h1{
                     font-size: 3em;
-                    color: var(--azulcla);
+                    color: var(--blanco);
                     padding: 1%;
                 }
 
@@ -644,24 +667,23 @@ body{
                         align-items: center;
                         justify-content: center;
                         text-decoration: none;
-                        border: 2px solid var(--gris);
-                        outline: 2px solid var(--naranja);
+                        border: 2px solid var(--fondo);
+                        outline: 2px solid var(--COA);
                         border-radius: 10px;
                         font-size: 1.2em;
-                        color: var(--gris);
-                        background-color: var(--naranja);
+                        color: var(--negro);
+                        background-color: var(--COA);
                         transition: all 0.4s ease-in-out;
                         text-wrap: nowrap;
                         justify-self: center;
 
                         &:hover{
-                            border: 2px solid var(--naranja);
-                            outline: 2px solid var(--gris);
-                            color: var(--naranja);
-                            background-color: var(--gris);
+                            border: 2px solid var(--COA);
+                            outline: 2px solid var(--fondo);
+                            color: var(--blanco);
+                            background-color: var(--fondo);
                         }
                     }
-
                 }
 
                 & div.cuerpo{
@@ -678,10 +700,10 @@ body{
                         display: grid;
                         grid-template-columns: 1fr 6fr;
                         align-items: center;
-                        background-color: var(--azulcla);
-                        color: var(--gris);
+                        background-color: var(--COA);
+                        color: var(--negro);
                         font-size: 1.8em;
-                        border: 1px solid var(--gris);
+                        border: 1px solid var(--fondo);
                         min-height: 34px;
 
                         /* Parrafo con el nombre */
@@ -689,6 +711,7 @@ body{
                             text-align: center;
                         }
 
+                        /* Icono de > */
                         & i.fa-greater-than{
                             width: fit-content;
                             margin-left: 40%;
@@ -696,6 +719,7 @@ body{
 
                             &:hover{
                                 cursor: pointer;
+                                color: var(--blanco);
                             }
                         }
 
@@ -705,7 +729,7 @@ body{
 
                         &+div{
                             transition: all 0.4s ease-in-out;
-                            border: 1px solid var(--gris);
+                            border: 1px solid var(--fondo);
                             opacity: 0;
                             height: 0%;
 
@@ -736,33 +760,50 @@ body{
                         display: flex;
                         align-items: center;
                         justify-content: space-evenly;
-                        background-color: var(--azulcla);
-                        color: var(--gris);
+                        background-color: var(--COA);
+                        color: var(--negro);
+                        transition: all 0.4s ease-in-out;
+
+                        &:hover{
+                            & input#buscador{
+                                color: var(--blanco);
+
+                                &::placeholder{
+                                    color: var(--blanco);
+                                }
+                            }
+                        }
 
                         /* Buscador en si */
                         & input#buscador{
-                        background-color: var(--azulcla);
-                        color: var(--gris);
-                        border: none;
-                        width: 85%;
-                        height: 100%;
-                        margin-left: 2%;
-                        font-size: 1.2em;
+                            background-color: var(--COA);
+                            color: var(--negro);
+                            border: none;
+                            width: 85%;
+                            height: 100%;
+                            margin-left: 2%;
+                            font-size: 1.2em;
+                            transition: all 0.4s ease-in-out;
 
                             &:focus{
                                 outline: none;
                                 border: none;
                             }
                             &::placeholder{
-                                color: var(--gris);
+                                color: var(--negro);
                             }
                         }
 
                         /* Icono del buscador */
                         & i{
                             margin-right: 2%;
-                            color: var(--naranja);
+                            color: var(--negro);
                             font-size: 1.2em;
+                            transition: all 0.4s ease-in-out;
+
+                            &:hover{
+                                color: var(--blanco);
+                            }
                         }
                     }
                 }
@@ -800,7 +841,7 @@ body{
                         justify-content: center;
                         font-size: 1.8em;
                         font-weight: bold;
-                        color: var(--azulosc);
+                        color: var(--fondoSeg);
                         grid-column-start: 1;
                         grid-column-end: 3;
                     }
@@ -809,15 +850,15 @@ body{
                     & .resultado{
                         width: 82%;
                         height: 100%;
-                        background-color: var(--azulcla);
+                        background-color: var(--COA);
                         display: flex;
                         flex-direction: column;
                         align-items: center;
                         justify-content: space-between;
                         padding: 1%;
-                        color: var(--gris);
+                        color: var(--negro);
                         font-weight: bold;
-                        border: 1px solid var(--gris);
+                        border: 1px solid var(--fondo);
                         transition: all 0.8s ease-in-out;
                         font-size: 1.5em;
                         border-radius: 10px;
@@ -863,7 +904,7 @@ body{
                             
                             & a{
                                 text-decoration: none;
-                                color: var(--naranja);
+                                color: var(--fondo);
                                 transition: all 0.4s ease-in-out;
 
                                 &:hover{
@@ -887,8 +928,8 @@ body{
     body{
 
         & .mensajeError{
-            background-color: var(--gris);
-            border: 1px solid var(--azulosc);
+            background-color: var(--fondoMain);
+            border: 1px solid var(--fondoSeg);
             color: var(--rojo);
             display: flex;
             align-items: center;
@@ -898,20 +939,20 @@ body{
             font-weight: bold;
             border-radius: 20px;
             position: fixed;
-            width: 25%;
-            height: 15%;
-            left: 37.5%;
+            width: 55%;
+            height: 10%;
+            left: 23.5%;
             top: -15%;
             transition: all 1s ease-in-out;
 
             &.visible{
-                top: 12%;
+                top: 15%;
             }
         }
 
         & >div.titulo{
             display: flex;
-            background-color: var(--azulosc);
+            background-color: var(--fondoSeg);
             height: 10%;
             align-items: center;
             z-index: 10;
@@ -925,12 +966,12 @@ body{
                 & i{
                     transition: all 0.4s ease-in-out;
                     font-size: 3.5em;
-                    color: var(--naranja);
+                    color: var(--COA);
                 }
 
                 & h1{
                     transition: all 0.4s ease-in-out;
-                    color: var(--gris);
+                    color: var(--fondo);
                     font-size: 2.5em;
                     text-wrap: nowrap;
                     margin-left: 5%;
@@ -939,11 +980,11 @@ body{
                 &:hover{
 
                     & i{
-                        color: var(--gris);
+                        color: var(--fondo);
                     }
 
                     & h1{
-                        color: var(--naranja);
+                        color: var(--COA);
                     }
                 }
             }
@@ -955,7 +996,7 @@ body{
                 width: 40px;
                 height: 5px;
                 margin-bottom: 8px;
-                background: var(--gris);
+                background: var(--fondo);
                 border-radius: 3px; 
             }
 
@@ -968,15 +1009,15 @@ body{
 
             /* Añadimos un fondo y lo redondeamos, ademas de cambiar un poco el ancho y alto */
             .icono_cruz{
-                background-color: var(--azulosc);
-                border: 2px solid var(--gris);
+                background-color: var(--fondoSeg);
+                border: 2px solid var(--fondo);
                 border-radius: 50%;
 
 
                 /* * Spans dentro del icono */
                 & > span{
                     transition: 0.4s ease-in-out;
-                    background-color: var(--gris);
+                    background-color: var(--fondo);
 
                     /* La primera barra baja un poco, se mueve un poco a la derecha, gira contrarreloj y se hace pequeño */
                     &.primerabarra{
@@ -1002,7 +1043,7 @@ body{
 
                 /* Tamaños fijos para que al empequeñecerse no se pegue al borde de la pantalla */
                 position: absolute;
-                top: 11px; 
+                top: 18px; 
                 right: 13px;
                 z-index: 10;
 
@@ -1021,12 +1062,11 @@ body{
 
             & >div.barraLateral{
             
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                background-color: var(--azulosc);
+                display: flex;
+                background-color: var(--fondoSeg);
                 overflow: auto;
-                width: 100vw;
-                height: 90vh;
+                width: 100%;
+                height: 90%;
                 z-index: 1;
                 position: absolute;
                 transition: all 0.4s ease-in-out;
@@ -1042,39 +1082,39 @@ body{
                     width: auto;
                     height: auto;
                     font-size: 1.5em;
-                    color: var(--gris);
+                    color: var(--fondo);
                     text-align: end;
                     margin: 2%;
                 }
 
                 &.admin{
-                    background-color: var(--naranja);
+                    background-color: var(--COA);
                     & a.botonEnlace{
-                        background-color: var(--azulosc);
+                        background-color: var(--fondoSeg);
 
                         &:hover{
-                            background-color: var(--gris);
-                            color: var(--azulcla);
+                            background-color: var(--fondo);
+                            color: var(--blanco);
                         }
                     }
                 }
 
                 & a.botonEnlace{
                     text-decoration: none;
-                    color: var(--gris);
-                    font-size: 1.5em;
-                    background-color: var(--naranja);
-                    border-radius: 50%;
-                    width: 50px;
-                    height: 50px;
+                    color: var(--fondo);
+                    font-size: 11pt;
+                    background-color: var(--COA);
+                    width: 70%;
+                    height: 15%;
                     display: flex;
                     align-items: center;
-                    justify-content: center;
+                    justify-content: space-evenly;
                     transition: all 0.4s ease-in-out;
+                    min-height: 18px;
 
                     &:hover{
-                        background-color: var(--gris);
-                        color: var(--naranja);
+                        background-color: var(--fondo);
+                        color: var(--blanco);
                     }
                 }
             }
@@ -1088,171 +1128,170 @@ body{
                 height: 100%;
                 padding: 1%;
 
-            /* Formulario Login */
-            & form.login{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-evenly;
-
-                background-color: var(--azulosc);
-                border-radius:20px;
-                width: 90%;
-                height: 80%;
-
-                & p{
+                /* Formulario Login */
+                & form.login{
                     display: flex;
                     flex-direction: column;
-                    color: var(--gris);
-
-                    & label{
-                        font-size: 1.8em;
-                        padding: 1%;
-                    }
-
-                    & input{
-                        border: 0px;
-                        border-radius: 10px;
-                        font-size: 1.5em;
-                        padding: 1%;
-                    }
-                }
-
-                & input[type=submit]{
-                    background-color: var(--naranja);
-                    color: var(--gris);
-                    font-size: 1.8em;
-                    border-radius: 10px;
-                    padding: 2%;
-                    border: 0px;
-                    transition: all 0.4s ease-in-out;
-                    width: 80%;
-                    text-wrap: wrap;
-
-                    &:hover{
-                        cursor: pointer;
-                        background-color: var(--gris);
-                        color: var(--naranja);
-                    }
-                }
-            }
-
-            & .stats{
-                width: 100%;
-                height: 100%;
-                background-color: var(--azulcla);
-            }
-            & div#chart_div{
-
-                & .mensaje{
-                    display: flex;
                     align-items: center;
-                    justify-content: center;
-                    font-size: 1.8em;
-                    font-weight: bold;
-                    color: var(--gris);
-                    margin: 2%;
-                }
-            }
+                    justify-content: space-evenly;
 
-            & div.chart_body{
-                display: flex;
-                align-items: flex-start;
-                justify-content: space-evenly;
+                    background-color: var(--fondoSeg);
+                    border-radius:20px;
+                    width: 90%;
 
-                & a{
-                    text-decoration: none;
-                    padding: 2%;
-                    color: var(--gris);
-                    font-size: 1.8em;
-                    background-color: var(--naranja);
-                    border-radius: 20px;
-                    width: 20%;
-                    height: 18%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    transition: all 0.4s ease-in-out;
-                    margin-top: 2%;
+                    & p{
+                        display: flex;
+                        flex-direction: column;
+                        color: var(--negro);
 
-                    &:hover{
-                        background-color: var(--gris);
-                        color: var(--naranja);
-                    }
-                }
-            }
+                        & label{
+                            font-size: 1.8em;
+                            padding: 1%;
+                        }
 
-
-            /* Contenedor dentro del main si lo hay */
-            & div.contenedor{
-                background-color: var(--azulcla);
-                color: var(--gris);
-                padding: 4%;
-                border-radius: 20px;
-                width: 90%;
-                height: 94%;
-
-                &.formulario{
-                    overflow: auto;
-                }
-
-                & .cuerpoInicial{
-
-                    width: 100%;
-                    height: 80%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-
-                    &>p{
-                        font-size: 1.2em;
-                        text-align:justify;
-
-                        &:first-of-type{
-                            text-align: center;
+                        & input{
+                            border: 0px;
+                            border-radius: 10px;
+                            font-size: 1.5em;
+                            padding: 1%;
                         }
                     }
 
-                    & div.botones{
-                        
-                        display: grid;
-                        grid-template-columns: 1fr;
-                        justify-content: space-evenly;
-                        margin-top: 6%;
-                        height: 54%;
+                    & input[type=submit]{
+                        background-color: var(--COA);
+                        color: var(--blanco);
+                        font-size: 1.8em;
+                        border-radius: 10px;
+                        padding: 2%;
+                        border: 0px;
+                        transition: all 0.4s ease-in-out;
+                        width: 80%;
+                        text-wrap: wrap;
 
-                        & div.boton{
-                            display: flex;
-                            flex-direction: column;
-                            align-items: center;
-                            font-size: 1.4em;
-                            height: 100%;
+                        &:hover{
+                            cursor: pointer;
+                            background-color: var(--fondo);
+                        }
+                    }
+                }
 
-                            & a{
-                                text-decoration: none;
-                                color: var(--gris);
-                                font-size: 1em;
-                                background-color: var(--naranja);
-                                border-radius: 50%;
-                                width: 35px;
-                                height: 35px;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                transition: all 0.4s ease-in-out;
+                & .stats{
+                    width: 100%;
+                    height: 100%;
+                    background-color: var(--fondoMain);
+                }
 
-                                &:hover{
-                                    background-color: var(--gris);
-                                    color: var(--naranja);
-                                }
-                            }
+                & div#chart_div{
 
-                            & p{
+                    & .mensaje{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 1.8em;
+                        font-weight: bold;
+                        color: var(--fondo);
+                        margin: 2%;
+                    }
+                }
+
+                & div.chart_body{
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-evenly;
+
+                    & a{
+                        text-decoration: none;
+                        padding: 2%;
+                        color: var(--fondo);
+                        font-size: 1.8em;
+                        background-color: var(--COA);
+                        border-radius: 20px;
+                        width: 20%;
+                        height: 18%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: all 0.4s ease-in-out;
+                        margin-top: 2%;
+
+                        &:hover{
+                            background-color: var(--fondo);
+                            color: var(--COA);
+                        }
+                    }
+                }
+
+
+                /* Contenedor dentro del main si lo hay */
+                & div.contenedor{
+                    background-color: var(--COA);
+                    color: var(--blanco);
+                    padding: 4% 4% 0% 4%;;
+                    border-radius: 20px;
+                    width: 90%;
+                    height: 94%;
+
+                    &.formulario{
+                        height: 66%;
+                        overflow: auto;
+                    }
+
+                    & .cuerpoInicial{
+
+                        width: 100%;
+                        height: 0%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+
+                        &>p{
+                            font-size: 1.2em;
+                            text-align:justify;
+
+                            &:first-of-type{
                                 text-align: center;
                             }
                         }
+
+                        & div.botones{
+                            
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            margin-top: 6%;
+                            height: 54%;
+
+                            & div.boton{
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                font-size: 1.4em;
+
+                                & a{
+                                    text-decoration: none;
+                                    color: var(--blanco);
+                                    font-size: 1em;
+                                    background-color: var(--fondoMain);
+                                    border-radius: 50%;
+                                    width: 70px;
+                                    height: 70px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    transition: all 0.4s ease-in-out;
+
+                                    &:hover{
+                                        background-color: var(--fondo);
+                                        color: var(--COA);
+                                    }
+                                }
+
+                                & p{
+                                    text-align: center;
+                                }
+                            }
+                        }
                     }
-                }
 
                 &>h2{
                     text-align: center;
@@ -1260,14 +1299,10 @@ body{
                 }
 
                 & form{
-                    height: 100%;
-                    /* display: grid;
-                    grid-template-columns: 1fr;
-                    column-gap: 4%;
-                    justify-items: center; */
+                    height: 80%;
                     display: flex;
                     flex-direction: column;
-                    overflow-y: auto;
+                    overflow-y: hidden;
                     overflow-x: hidden;
 
                     &.inst{
@@ -1288,6 +1323,8 @@ body{
                             height: 20%;
                             width: 50%;
                             text-wrap: wrap;
+                            color: var(--negro);
+                            background-color: var(--fondo);
                         }
                     }
 
@@ -1340,16 +1377,16 @@ body{
                         &.estadoTarea{
                             grid-column-start: 1;
                             grid-column-end: 3;
-                            align-items: center;
+                            align-items: baseline;
                             
                             & select{
-                                width: 50%;
+                                width: 95%;
                                 height: 50%;
                                 font-size: 1em;
                             }
 
                             & label{
-                                width: 50%;
+                                width: 100%;
                                 text-align: left;
                             }
                         }
@@ -1357,9 +1394,9 @@ body{
 
                     & input[type=submit]{
                         width: 100%;
-                        height: 20%;
-                        background-color: var(--naranja);
-                        color: var(--gris);
+                        height: 10%;
+                        background-color: var(--fondoMain);
+                        color: var(--negro);
                         font-size: 1.2em;
                         border-radius: 10px;
                         padding: 1%;
@@ -1372,8 +1409,8 @@ body{
 
                         &:hover{
                             cursor: pointer;
-                            background-color: var(--gris);
-                            color: var(--naranja);
+                            background-color: var(--fondo);
+                            color: var(--blanco);
                         }
 
                         &:disabled{
@@ -1381,442 +1418,454 @@ body{
                             user-select: none;
                         }
                     }
+                }  
                 }
 
-                
-            }
-
-            /* Estilo de Ajax General */
-            & .ajax{
-                width: 100%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                /* Titulo de la pagina */
-                & >h1{
-                    font-size: 3em;
-                    color: var(--azulcla);
-                }
-
-                /* Cabecera con el buscador y boton de creación */
-                & div.ajax{
+                /* Estilo de Ajax General */
+                & .ajax{
                     width: 100%;
-                    height: 12%;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding-top: 1%;
-                    padding-bottom: 1%;
-
-                    /* Barra de buscador */
-                    & div.buscador{
-                        height: 100%;
-                        width: 60%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-evenly;
-                        background-color: var(--azulcla);
-                        color: var(--gris);
-
-                        /* Buscador en si */
-                        & input#buscador{
-                            background-color: var(--azulcla);
-                            color: var(--gris);
-                            border: none;
-                            width: 85%;
-                            height: 100%;
-                            margin-left: 2%;
-                            font-size: 1.2em;
-                            text-wrap: wrap;
-
-                            &:focus{
-                                outline: none;
-                                border: none;
-                            }
-                            &::placeholder{
-                                color: var(--gris);
-                            }
-                        }
-
-                        /* Icono del buscador */
-                        & i{
-                            margin-right: 2%;
-                            color: var(--naranja);
-                            font-size: 1.2em;
-                        }
-                    }
-
-                    /* Botón de creación */
-                    & a{
-                        width: 20%;
-                        height: 100%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        text-decoration: none;
-                        border: 2px solid var(--gris);
-                        outline: 2px solid var(--naranja);
-                        border-radius: 10px;
-                        font-size: 0.8em;
-                        color: var(--gris);
-                        background-color: var(--naranja);
-                        transition: all 0.4s ease-in-out;
-                        text-wrap: wrap;
-                        text-align: center;
-
-                        &:hover{
-                            border: 2px solid var(--naranja);
-                            outline: 2px solid var(--gris);
-                            color: var(--naranja);
-                            background-color: var(--gris);
-                        }
-                    }
-                }
-
-                /* Contenedor con los resultados del ajax */
-                & div#resultados_busqueda{
-                    width: 100%;
-                    height: 87%;
-                    margin-top: 1%;
-                    overflow-y: auto;
-                    transition: all 0.8s ease-in-out;
-
-                    /* Para evitar un parpadeo que ocurre al generar resultados le damos clases para hacer visible e invisible con transiciones el elemento */
-                    &.invisible{
-                        opacity: 0;
-                        &>*{
-                            opacity: 0;
-                        }
-                    }
-                    &.visible{
-                        opacity: 1;
-                        &>*{
-                            opacity: 1;
-                        }
-                    }
-
-                    /* Mensaje por si el ajax no ecuentra nada */
-                    & .mensaje{
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 1.8em;
-                        font-weight: bold;
-                        color: var(--azulosc);
-                    }
-
-                    /* Resultado de ajax */
-                    & .resultado{
-                        width: 100%;
-                        height: 42%;
-                        background-color: var(--azulcla);
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: space-between;
-                        padding: 1%;
-                        color: var(--gris);
-                        font-weight: bold;
-                        border: 1px solid var(--gris);
-                        transition: all 0.8s ease-in-out;
-                        font-size: 1.5em;
-                
-                        /* Enlaces dentro de los resultados */
-                        & div.divBotones{
-                            width: 40%;
-                            display: flex;
-                            justify-content: space-between;
-                            flex-direction: column;
-                            margin-right: 2%;
-                            
-                            & a{
-                                text-decoration: none;
-                                color: var(--naranja);
-                                transition: all 0.4s ease-in-out;
-                                margin: 2%;
-                                width: 100%;
-
-                                &:hover{
-                                    font-size: 1.3em;
-                                }
-
-                                &.eliminar{
-                                    color: var(--rojo);
-                                }
-                            }
-                        }
-                    }
-                }
-            } 
-
-            /* Estilo de Ajax de tareas */
-            & .ajaxTareas{
-                width: 100%;
-                height: 100%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                /* La cabecera esta vez no es solo el titulo, sino que el boton va incluido junto a él */
-                & div.cabeza{
-                    width: 100%;
-                    display: grid;
-                    grid-template-columns: 6fr 1fr;
-                    align-items: center;
-
-                     /* Titulo de la pagina */
-                    & h1{
-                        font-size: 3em;
-                        color: var(--azulcla);
-                        justify-self: center;
-                    }
-
-                    /* Botón de creación */
-                    & a{
-                        width: 100%;
-                        height: 100%;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        text-decoration: none;
-                        border: 2px solid var(--gris);
-                        outline: 2px solid var(--naranja);
-                        border-radius: 10px;
-                        font-size: 0.8em;
-                        color: var(--gris);
-                        background-color: var(--naranja);
-                        transition: all 0.4s ease-in-out;
-                        text-wrap: wrap;
-                        text-align: center;
-
-                        &:hover{
-                            border: 2px solid var(--naranja);
-                            outline: 2px solid var(--gris);
-                            color: var(--naranja);
-                            background-color: var(--gris);
-                        }
-                    }
-
-                }
-
-                & div.cuerpo{
-                    width: 100%;
-                    height: 92%;
-                    margin-top: 1%;
+                    height: 100%;
                     display: flex;
                     flex-direction: column;
+                    align-items: center;
 
-                    /* Barras desplegables */
-                    & .barra{
+                    /* Titulo de la pagina */
+                    & >h1{
+                        font-size: 3em;
+                        color: var(--blanco);
+                    }
+
+                    /* Cabecera con el buscador y boton de creación */
+                    & div.ajax{
                         width: 100%;
-                        height: 10%;
-                        display: grid;
-                        grid-template-columns: 1fr 6fr;
+                        height: 12%;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
                         align-items: center;
-                        background-color: var(--azulcla);
-                        color: var(--gris);
-                        font-size: 1.8em;
-                        border: 1px solid var(--gris);
-                        
-                        /* Parrafo con el nombre */
-                        & p.nombre{
-                            text-align: center;
+                        padding-top: 1%;
+                        padding-bottom: 1%;
+
+                        /* Barra de buscador */
+                        & div.buscador{
+                            height: 100%;
+                            width: 60%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-evenly;
+                            background-color: var(--COA);
+                            color: var(--negro);
+
+                            /* Buscador en si */
+                            & input#buscador{
+                                background-color: var(--COA);
+                                color: var(--negro);
+                                border: none;
+                                width: 85%;
+                                height: 100%;
+                                margin-left: 2%;
+                                font-size: 1.2em;
+                                text-wrap: wrap;
+
+                                &:focus{
+                                    outline: none;
+                                    border: none;
+                                }
+                                &::placeholder{
+                                    color: var(--negro);
+                                }
+                            }
+
+                            /* Icono del buscador */
+                            & i{
+                                margin-right: 2%;
+                                color: var(--negro);
+                                font-size: 1.2em;
+                            }
                         }
 
-                        & i.fa-greater-than{
-                            width: fit-content;
-                            margin-left: 40%;
+                        /* Botón de creación */
+                        & a{
+                            width: 20%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            text-decoration: none;
+                            border: 2px solid var(--fondo);
+                            outline: 2px solid var(--COA);
+                            border-radius: 10px;
+                            font-size: 0.8em;
+                            color: var(--fondo);
+                            background-color: var(--COA);
                             transition: all 0.4s ease-in-out;
+                            text-wrap: wrap;
+                            text-align: center;
 
                             &:hover{
-                                cursor: pointer;
-                            }
-                        }
-
-                        & i.rotado{
-                            transform: rotate(90deg);
-                        }
-
-                        &+div{
-                            transition: all 0.4s ease-in-out;
-                            border: 1px solid var(--gris);
-                            opacity: 0;
-                            height: 0%;
-
-                            &.visible{
-                                width: 100%;
-                                height: 40%;
-                                opacity: 1;
-                                transition: all 0.4s ease-in-out;
+                                border: 2px solid var(--COA);
+                                outline: 2px solid var(--fondo);
+                                color: var(--COA);
+                                background-color: var(--fondo);
                             }
                         }
                     }
-                }                
 
-                & div.ajax{
-                    width: 100%;
-                    height: 25%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    padding-top: 1%;
-                    padding-bottom: 1%;
-
-                    /* Barra de buscador */
-                    & div.buscador{
-                        height: 100%;
-                        width: 90%;
-                        min-height: 25px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-evenly;
-                        background-color: var(--azulcla);
-                        color: var(--gris);
-
-                        /* Buscador en si */
-                        & input#buscador{
-                        background-color: var(--azulcla);
-                        color: var(--gris);
-                        border: none;
-                        width: 85%;
-                        height: 100%;
-                        margin-left: 2%;
-                        font-size: 0.8em;
-
-                            &:focus{
-                                outline: none;
-                                border: none;
-                            }
-                            &::placeholder{
-                                color: var(--gris);
-                            }
-                        }
-
-                        /* Icono del buscador */
-                        & i{
-                            margin-right: 2%;
-                            color: var(--naranja);
-                            font-size: 1.2em;
-                        }
-                    }
-                }
-
-                /* Contenedor con los resultados del ajax */
-                & div#resultados_busqueda_C,div#resultados_busqueda_P,#resultados_busqueda_D,#resultados_busqueda_U{
-                    width: 100%;
-                    height: 70%;
-                    display: grid;
-                    grid-template-columns: 1fr;
-                    grid-row-gap: 25%;
-                    justify-items: center;
-                    margin-top: 1%;
-                    overflow-y: auto;
-                    transition: all 0.8s ease-in-out;
-
-                    /* Para evitar un parpadeo que ocurre al generar resultados le damos clases para hacer visible e invisible con transiciones el elemento */
-                    &.invisible{
-                        opacity: 0;
-                        &>*{
-                            opacity: 0;
-                        }
-                    }
-                    &.visible{
-                        opacity: 1;
-                        &>*{
-                            opacity: 1;
-                        }
-                    }
-
-                    /* Mensaje por si el ajax no ecuentra nada */
-                    & .mensaje{
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 1.8em;
-                        font-weight: bold;
-                        color: var(--azulosc);
-                        grid-column-start: 1;
-                        grid-column-end: 3;
-                    }
-
-                    /* Resultado de ajax */
-                    & .resultado{
-                        width: 82%;
-                        height: 100%;
-                        min-width: 300px;
-                        background-color: var(--azulcla);
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: space-between;
-                        padding: 1%;
-                        color: var(--gris);
-                        font-weight: bold;
-                        border: 1px solid var(--gris);
+                    /* Contenedor con los resultados del ajax */
+                    & div#resultados_busqueda{
+                        width: 100%;
+                        height: 86%;
+                        margin-top: 1%;
+                        overflow-y: auto;
                         transition: all 0.8s ease-in-out;
-                        font-size: 1.5em;
-                        border-radius: 10px;
 
-                        & div.cabecera{
-                            width: 100%;
-                            margin: 2%;
+                        /* Para evitar un parpadeo que ocurre al generar resultados le damos clases para hacer visible e invisible con transiciones el elemento */
+                        &.invisible{
+                            opacity: 0;
+                            &>*{
+                                opacity: 0;
+                            }
+                        }
+                        &.visible{
+                            opacity: 1;
+                            &>*{
+                                opacity: 1;
+                            }
                         }
 
-                        & div.cuerpoTarjeta{
+                        /* Mensaje por si el ajax no ecuentra nada */
+                        & .mensaje{
                             display: flex;
-                            justify-content: space-between;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 1.8em;
+                            font-weight: bold;
+                            color: var(--fondoSeg);
+                        }
+
+                        /* Resultado de ajax */
+                        & .resultado{
+                            width: 100%;
+                            height: 30%;
+                            background-color: var(--COA);
+                            display: flex;
                             flex-direction: column;
-
-                            & p.parrafoDesc{
-                                width: 50%;
-
-                                & textarea{
-                                    resize: none;
+                            align-items: center;
+                            justify-content: space-between;
+                            padding: 1%;
+                            color: var(--negro);
+                            font-weight: bold;
+                            border: 1px solid var(--fondo);
+                            transition: all 0.8s ease-in-out;
+                            font-size: 1.5em;
+                    
+                            /* Enlaces dentro de los resultados */
+                            & div.divBotones{
+                                width: 100%;
+                                display: flex;
+                                justify-content: space-between;
+                                flex-direction: row;
+                                margin-right: 2%;
+                                
+                                & a{
+                                    text-decoration: none;
+                                    color: var(--fondoMain);
+                                    text-align: center;
+                                    transition: all 0.4s ease-in-out;
+                                    margin: 2%;
                                     width: 100%;
-                                    border-radius: 10px;
-                                    cursor: default;
-                                    padding: 1%;
-                                    
-                                    &:focus{
-                                        outline: none;
+
+                                    &:hover{
+                                        font-size: 1.3em;
+                                    }
+
+                                    &.eliminar{
+                                        color: var(--rojo);
                                     }
                                 }
                             }
+                        }
+                    }
+                } 
 
-                            & p.parrafoNombre>label{
-                                text-wrap: nowrap;
+                /* Estilo de Ajax de tareas */
+                & .ajaxTareas{
+                    width: 92%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+
+                    & > h1{
+                        font-size: 2.8em;
+                        color: var(--blanco);
+                        padding: 1%;
+                    }
+
+                    /* La cabecera esta vez no es solo el titulo, sino que el boton va incluido junto a él */
+                    & div.cabeza{
+                        width: 100%;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr;
+                        align-items: center;
+
+                        /* Titulo de la pagina */
+                        & h1{
+                            font-size: 3em;
+                            color: var(--fondoMain);
+                            justify-self: center;
+                        }
+
+                        /* Botón de creación */
+                        & a{
+                            width: 92%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            text-decoration: none;
+                            border: 2px solid var(--fondo);
+                            outline: 2px solid var(--COA);
+                            border-radius: 10px;
+                            font-size: 1em;
+                            color: var(--negro);
+                            background-color: var(--COA);
+                            transition: all 0.4s ease-in-out;
+                            text-wrap: wrap;
+                            text-align: center;
+
+                            &:hover{
+                                border: 2px solid var(--COA);
+                                outline: 2px solid var(--fondo);
+                                color: var(--blanco);
+                                background-color: var(--fondo);
                             }
                         }
-                
-                        /* Enlaces dentro de los resultados */
-                        & div.divBotones{
-                            width: 20%;
-                            display: flex;
-                            justify-content: center;
+
+                    }
+
+                    & div.cuerpo{
+                        width: 100%;
+                        height: 100%;
+                        margin-top: 1%;
+                        display: flex;
+                        flex-direction: column;
+
+                        /* Barras desplegables */
+                        & .barra{
+                            width: 100%;
+                            height: 10%;
+                            display: grid;
+                            grid-template-columns: 1fr 6fr;
                             align-items: center;
-                            margin-right: 2%;
+                            background-color: var(--COA);
+                            color: var(--negro);
+                            font-size: 1.8em;
+                            border: 1px solid var(--fondo);
                             
-                            & a{
-                                text-decoration: none;
-                                color: var(--naranja);
+                            /* Parrafo con el nombre */
+                            & p.nombre{
+                                text-align: center;
+                            }
+
+                            & i.fa-greater-than{
+                                width: fit-content;
+                                margin-left: 40%;
                                 transition: all 0.4s ease-in-out;
 
                                 &:hover{
-                                    font-size: 1.3em;
+                                    cursor: pointer;
                                 }
+                            }
 
-                                &.eliminar{
-                                    color: var(--rojo);
+                            & i.rotado{
+                                transform: rotate(90deg);
+                            }
+
+                            &+div{
+                                transition: all 0.4s ease-in-out;
+                                border: 1px solid var(--fondo);
+                                opacity: 0;
+                                height: 0%;
+
+                                &.visible{
+                                    width: 100%;
+                                    opacity: 1;
+                                    transition: all 0.4s ease-in-out;
+                                }
+                            }
+                        }
+                    }                
+
+                    & div.ajax{
+                        width: 100%;
+                        height: 5%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding-top: 1%;
+                        padding-bottom: 1%;
+
+                        /* Barra de buscador */
+                        & div.buscador{
+                            height: 100%;
+                            width: 90%;
+                            min-height: 25px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-evenly;
+                            background-color: var(--COA);
+                            color: var(--negro);
+
+                            /* Buscador en si */
+                            & input#buscador{
+                                background-color: var(--COA);
+                                color: var(--negro);
+                                border: none;
+                                width: 85%;
+                                height: 100%;
+                                margin-left: 2%;
+                                font-size: 0.8em;
+
+                                &:focus{
+                                    outline: none;
+                                    border: none;
+                                }
+                                &::placeholder{
+                                    color: var(--negro);
+                                }
+                            }
+
+                            /* Icono del buscador */
+                            & i{
+                                margin-right: 2%;
+                                color: var(--negro);
+                                font-size: 1.2em;
+                                &:hover{
+                                    color: var(--blanco);
+                                }
+                            }
+
+                            &:hover{
+                                &::placeholder{
+                                    color: var(--blanco);
                                 }
                             }
                         }
                     }
-                }
-            } 
-        }
+
+                    /* Contenedor con los resultados del ajax */
+                    & div#resultados_busqueda_C,div#resultados_busqueda_P,#resultados_busqueda_D,#resultados_busqueda_U{
+                        width: 100%;
+                        height: 70%;
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        grid-row-gap: 5%;
+                        justify-items: center;
+                        margin-top: 1%;
+                        overflow-y: auto;
+                        transition: all 0.8s ease-in-out;
+
+                        /* Para evitar un parpadeo que ocurre al generar resultados le damos clases para hacer visible e invisible con transiciones el elemento */
+                        &.invisible{
+                            opacity: 0;
+                            &>*{
+                                opacity: 0;
+                            }
+                        }
+                        &.visible{
+                            opacity: 1;
+                            &>*{
+                                opacity: 1;
+                            }
+                        }
+
+                        /* Mensaje por si el ajax no ecuentra nada */
+                        & .mensaje{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 1.8em;
+                            font-weight: bold;
+                            color: var(--fondoSeg);
+                            grid-column-start: 1;
+                            grid-column-end: 3;
+                        }
+
+                        /* Resultado de ajax */
+                        & .resultado{
+                            width: 82%;
+                            height: 100%;
+                            min-width: 300px;
+                            background-color: var(--COA);
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: space-between;
+                            padding: 1%;
+                            color: var(--negro);
+                            font-weight: bold;
+                            border: 1px solid var(--fondo);
+                            transition: all 0.8s ease-in-out;
+                            font-size: 1.5em;
+                            border-radius: 10px;
+
+                            & div.cabecera{
+                                width: 100%;
+                                margin: 2%;
+                            }
+
+                            & div.cuerpoTarjeta{
+                                display: flex;
+                                justify-content: space-between;
+                                flex-direction: column;
+
+                                & p.parrafoDesc{
+                                    width: 50%;
+
+                                    & textarea{
+                                        resize: none;
+                                        width: 100%;
+                                        border-radius: 10px;
+                                        cursor: default;
+                                        padding: 1%;
+                                        
+                                        &:focus{
+                                            outline: none;
+                                        }
+                                    }
+                                }
+
+                                & p.parrafoNombre>label{
+                                    text-wrap: nowrap;
+                                }
+                            }
+                    
+                            /* Enlaces dentro de los resultados */
+                            & div.divBotones{
+                                width: 20%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                margin-right: 2%;
+                                
+                                & a{
+                                    text-decoration: none;
+                                    color: var(--fondo);
+                                    transition: all 0.4s ease-in-out;
+
+                                    &:hover{
+                                        font-size: 1.3em;
+                                    }
+                                    &.eliminar{
+                                        color: var(--rojo);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
         }
     }
 }
