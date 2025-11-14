@@ -5,7 +5,13 @@
      */
     ob_start();
 ?>
-
+<div class="banner">
+    <div class="fondo">
+        <i class="fa-solid fa-crown"></i>
+        <h3>¡Bienvenido al Gestor REI!</h3>
+        <p>El Gestor REI consiste en un gestor de inventariado y tareas. Gracias al cual puedes organizar a tus empleados o llevar la cuenta de que objetos se encuentran en el inventario de tu empresa y/o institución.</p>
+    </div>
+</div>
 <form class="login" method="POST" autocomplete="off">
     <p>
         <label for="Correo">Correo:</label>

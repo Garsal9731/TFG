@@ -13,7 +13,7 @@
         <a href="index.php?route=task/created">Tareas Creadas</a>
     </div>
     <div class="cuerpo">
-        <div class="barra"><i id="creado" class="fa-solid fa-greater-than rotado" onclick="cambiarClase('creado')"></i><p class="nombre">Tareas Creadas</p></div>
+        <div class="barra"><p class="nombre">Mis Tareas Creadas</p></div>
         <div id="cuerpo_creado" class="visible">
             <div class="ajax">
                 <div class="buscador">
@@ -24,7 +24,6 @@
         </div>
     </div>
     <script src="./JS/Ajax.js"></script>
-    <script src="./JS/desplegableTareas.js"></script>
 </div>
 <?php
     $content = ob_get_clean();

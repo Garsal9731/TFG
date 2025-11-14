@@ -35,9 +35,9 @@
          */
         public function ajaxObjetos($peticion,$idInst){
             if ($_SESSION["loginData"]["Privilegios"]==4) {
-                $sql = 'SELECT Id_Objeto,Nombre,Estado FROM Objeto WHERE Nombre LIKE "'.$peticion.'%";';
+                $sql = 'SELECT Id_Objeto,Nombre,Estado FROM Objeto WHERE Nombre LIKE "'.$peticion.'%" ORDER BY Id_Objeto DESC;';
             }else{
-                $sql = 'SELECT Id_Objeto,Nombre,Estado FROM Objeto WHERE Nombre LIKE "'.$peticion.'%" AND Institución_Id_Institución="'.$idInst.'";';
+                $sql = 'SELECT Id_Objeto,Nombre,Estado FROM Objeto WHERE Nombre LIKE "'.$peticion.'%" AND Institución_Id_Institución="'.$idInst.'" ORDER BY Id_Objeto DESC;';
             }
             return $this->query($sql)->fetchAll();
         }

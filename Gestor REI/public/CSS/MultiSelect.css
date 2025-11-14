@@ -42,14 +42,14 @@
 .multi-select .multi-select-header .multi-select-header-option {
   display: inline-flex;
   align-items: center;
-  background-color: #DE6F2E;
+  background-color: #6589dd;
   font-size: 14px;
   padding: 3px 8px;
   border-radius: 5px;
 }
 .multi-select .multi-select-header .multi-select-header-max {
   font-size: 14px;
-  color: #DE6F2E;
+  color: #274690;
 }
 .multi-select .multi-select-options {
   display: none;
@@ -163,7 +163,7 @@
   align-items: center;
   width: 100%;
   font-size: 16px;
-  color: #212529;
+  color: #fff;
   background-color: #344A7A;
   transition: all 0.4s ease-out;
 }

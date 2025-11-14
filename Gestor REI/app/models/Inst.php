@@ -33,7 +33,7 @@
          * @return array Array con los datos recogidos tras la busqueda.
          */
         public function ajaxInstitucion($peticion){
-            $sql = 'SELECT * FROM Institución WHERE Nombre_Institución LIKE "'.$peticion.'%";';
+            $sql = 'SELECT * FROM Institución WHERE Nombre_Institución LIKE "'.$peticion.'%" ORDER BY Id_Institución DESC;';
             return $this->query($sql)->fetchAll();
         }
     }

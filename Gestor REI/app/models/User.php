@@ -50,9 +50,9 @@
          */
         public function ajaxMail($mail,$idInst){
             if($_SESSION["loginData"]["Privilegios"]==4){
-                $sql = 'SELECT Id_Usuario,Nombre,Correo,Nombre_Privilegio FROM Usuario INNER JOIN Privilegios ON Usuario.Privilegios=Privilegios.id_Privilegios WHERE Correo LIKE "'.$mail.'%";';
+                $sql = 'SELECT Id_Usuario,Nombre,Correo,Nombre_Privilegio FROM Usuario INNER JOIN Privilegios ON Usuario.Privilegios=Privilegios.id_Privilegios WHERE Correo LIKE "'.$mail.'%" ORDER BY Id_Usuario DESC;';
             }else{
-                $sql = 'SELECT Id_Usuario,Nombre,Correo,Nombre_Privilegio FROM Usuario INNER JOIN Privilegios ON Usuario.Privilegios=Privilegios.id_Privilegios INNER JOIN Trabajadores_Institución ON Usuario.Id_Usuario=Usuario_Id_Usuario WHERE Correo LIKE "'.$mail.'%" AND Institución_Id_Institución='.$idInst.';';
+                $sql = 'SELECT Id_Usuario,Nombre,Correo,Nombre_Privilegio FROM Usuario INNER JOIN Privilegios ON Usuario.Privilegios=Privilegios.id_Privilegios INNER JOIN Trabajadores_Institución ON Usuario.Id_Usuario=Usuario_Id_Usuario WHERE Correo LIKE "'.$mail.'%" AND Institución_Id_Institución='.$idInst.' ORDER BY Id_Usuario DESC;';
             }
             return $this->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         }

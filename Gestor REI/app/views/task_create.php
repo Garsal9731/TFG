@@ -26,7 +26,7 @@
         </p>
         <p>
             <label for="fechaEstimada">Fecha Estimada para terminar:</label>
-            <input type="date" id="fechaEstimada" name="fechaEstimada" min="<?php echo date("Y-m-d");?>" required>
+            <input type="date" id="fechaEstimada" onmousedown="this.showPicker()" name="fechaEstimada" min="<?php echo date("Y-m-d");?>" required>
         </p>
         <p class="estadoTarea">
             <label for="estado">Estado de la tarea:</label>

@@ -219,7 +219,7 @@ async function buscarAjax(tabla){
 
                     enlace_stats = document.createElement("a");
                     enlace_stats.setAttribute("href","index.php?route=user/stats&id="+id);
-                    enlace_stats.textContent = "Ver Estats.";
+                    enlace_stats.textContent = "Ver Stats.";
                     
                     // Los metemos en el parrafo que hemos creado
                     div.append(enlace_stats,enlace_edit,enlace_elim);

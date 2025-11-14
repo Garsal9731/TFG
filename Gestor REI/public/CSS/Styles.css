@@ -17,6 +17,7 @@
     /* Call Of Action */
     /* --COA:#486FE0; */
     --COA:#6589dd;
+    --COAOscuro:#6589dd77;
 
     /* Errores y otros */
     /* --rojo:#D63939; */
@@ -48,30 +49,158 @@ body{
     display: flex;
     flex-direction: column;
 
+    & .invisible{
+        opacity: 0;
+        &>*{
+            opacity: 0;
+        }
+    }
+    & .visible{
+        opacity: 1;
+        &>*{
+            opacity: 1;
+        }
+    }
+
+    & input:focus::placeholder {
+        color: transparent;
+    }
+
     & .mensajeError{
-        background-color: var(--fondoMain);
-        border: 1px solid var(--fondoSeg);
+        background-color: var(--blanco);
+        border: 2px solid var(--COA);
         color: var(--rojo);
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 1.2em;
         font-weight: bold;
-        border-radius: 20px;
         position: fixed;
-        width: 25%;
-        height: 15%;
-        left: 37.5%;
-        top: -15%;
+        width: 20%;
+        height: 8%;
+        left: 112%;
+        top: 88%;
         transition: all 1s ease-in-out;
         text-align:  center;
         z-index: 5;
 
         &.visible{
-            top: 12%;
+            top: 88%;
+            left: 75%;
         }
     }
 
+    & >div.tituloInicio{
+        height: 0%;
+        width: 0%;
+        opacity: 0%;
+    }
+    & >div.contenidoInicio{
+        display: flex;
+        justify-content: center;
+        height: 100%;
+
+        & main{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+
+            & div.banner{
+                height: 100%;
+                width: 60%;
+                background-color: var(--fondoSeg);
+                opacity: 0.8;
+                background-image:  linear-gradient(30deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(150deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(30deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(150deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(60deg, var(--COAOscuro) 25%, transparent 25.5%, transparent 75%, var(--COAOscuro) 75%, var(--COAOscuro)), linear-gradient(60deg, var(--COAOscuro) 25%, transparent 25.5%, transparent 75%, var(--COAOscuro) 75%, var(--COAOscuro));
+                background-size: 80px 140px;
+                background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+
+                display: flex;
+                flex-direction: column;
+                align-content: center;
+                justify-content: center;
+                align-items: center;
+
+                & div.fondo{
+                    background: #F5F3F5ED;
+                    width: 60%;
+                    height: 60%;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    align-items: center;
+
+                    & i{
+                        font-size: 5em;
+                        width: 140px;
+                        height: 140px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 50%;
+                        background-color: var(--COA);
+                    }
+
+                    & h3{
+                        font-size: 3em;
+                    }
+
+                    & p{
+                        width: 90%;
+                        font-size: 1.2em;
+                        text-align: justify;
+                    }
+                }
+            }
+
+            /* Formulario Login */
+            & form.login{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-evenly;
+
+                background-color: var(--fondoSeg);
+                width: 40%;
+                height: 100%;
+                min-height: 300px;
+                z-index: 0;
+
+                & p{
+                    display: flex;
+                    flex-direction: column;
+                    color: var(--negro);
+                    width: 90%;
+
+                    & label{
+                        font-size: 1.8em;
+                        padding: 1%;
+                    }
+
+                    & input{
+                        border: 0px;
+                        border-radius: 10px;
+                        font-size: 1.5em;
+                        padding: 1%;
+                    }
+                }
+
+                & input[type=submit]{
+                    background-color: var(--COA);
+                    color: var(--blanco);
+                    font-size: 1.8em;
+                    border-radius: 10px;
+                    padding: 2%;
+                    border: 0px;
+                    transition: all 0.4s ease-in-out;
+                    width: 80%;
+                }
+            }
+        }
+    }
     /* Titulo */
     & >div.titulo{
         display: flex;
@@ -124,8 +253,7 @@ body{
             display: flex;
             background-color: var(--fondoSeg);
             flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
+            justify-content: center;
             overflow: auto;
             width: 8%;
             height: 100%;
@@ -161,6 +289,8 @@ body{
                 justify-content: space-evenly;
                 transition: all 0.4s ease-in-out;
                 min-height: 18px;
+                margin-top: 1%;
+                margin-bottom: 1%;
 
                 &:hover{
                     background-color: var(--fondo);
@@ -179,60 +309,10 @@ body{
             height: 100%;
             padding: 1%;
 
-            /* Formulario Login */
-            & form.login{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-evenly;
-
-                background-color: var(--fondoSeg);
-                border-radius:20px;
-                width: 40%;
-                height: 50%;
-                min-height: 300px;
-                z-index: 0;
-
-                & p{
-                    display: flex;
-                    flex-direction: column;
-                    color: var(--negro);
-                    width: 90%;
-
-                    & label{
-                        font-size: 1.8em;
-                        padding: 1%;
-                    }
-
-                    & input{
-                        border: 0px;
-                        border-radius: 10px;
-                        font-size: 1.5em;
-                        padding: 1%;
-                    }
-                }
-
-                & input[type=submit]{
-                    background-color: var(--COA);
-                    color: var(--blanco);
-                    font-size: 1.8em;
-                    border-radius: 10px;
-                    padding: 2%;
-                    border: 0px;
-                    transition: all 0.4s ease-in-out;
-                    width: 80%;
-
-                    &:hover{
-                        cursor: pointer;
-                        background-color: var(--fondo);
-                    }
-                }
-            }
-
             & .stats{
                 width: 100%;
                 height: 100%;
-                background-color: var(--fondoMain);
+                background-color: var(--COA);
             }
 
             & div#chart_div{
@@ -243,7 +323,7 @@ body{
                     justify-content: center;
                     font-size: 1.8em;
                     font-weight: bold;
-                    color: var(--fondo);
+                    color: var(--blanco);
                     margin: 2%;
                 }
             }
@@ -256,9 +336,9 @@ body{
                 & a{
                     text-decoration: none;
                     padding: 2%;
-                    color: var(--fondo);
+                    color: var(--COA);
                     font-size: 1.8em;
-                    background-color: var(--COA);
+                    background-color: var(--fondo);
                     border-radius: 20px;
                     width: 20%;
                     height: 18%;
@@ -269,8 +349,7 @@ body{
                     margin-top: 2%;
 
                     &:hover{
-                        background-color: var(--fondo);
-                        color: var(--COA);
+                        background-color: var(--fondoMain);
                     }
                 }
             }
@@ -300,43 +379,33 @@ body{
                         }
                     }
 
+                    & a{
+                        text-decoration: none;
+                        color: var(--blanco);
+                        transition: all 0.4s ease-in-out;
+                        font-size: 1.4em;
+                        margin: 0.2%;
+
+                        &:hover{
+                            color: var(--COA);
+                        }
+                    }
+
                     & div.botones{
                         display: flex;
-                        justify-content: space-evenly;
-                        margin-top: 6%;
+                        justify-content: center;
+                        align-items: center;
                         height: 25%;
 
                         & div.boton{
                             display: flex;
                             flex-direction: column;
                             align-items: center;
-                            font-size: 1.4em;
+                            justify-content: center;
                             height: 110px;
-                            width: 144px;
-
-                            & p{
-                                margin: 1%;
-                                text-wrap: nowrap;
-                            }
-
-                            & a{
-                                text-decoration: none;
-                                color: var(--blanco);
-                                font-size: 1.5vw;
-                                background-color: var(--fondoMain);
-                                border-radius: 50%;
-                                width: 55%;
-                                height: 100%;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                transition: all 0.4s ease-in-out;
-
-                                &:hover{
-                                    background-color: var(--fondo);
-                                    color: var(--COA);
-                                }
-                            }
+                            width: 110px;
+                            text-align: center;
+                            background-color: var(--fondoMain);
                         }
                     }
                 }
@@ -386,7 +455,6 @@ body{
                             margin: 1%;
                             width: 70%;
                             height: 36%;
-                            border-radius: 10px;
                             outline: none;
                             border: none;
                             padding: 1%;
@@ -397,6 +465,7 @@ body{
                             width: 70%;
                             height: 36%;
                             font-size: 1em;
+                            border-radius: 0;
                         }
 
                         & textarea{
@@ -407,6 +476,9 @@ body{
 
                             &:focus{
                                 outline: none;
+                                &::placeholder {
+                                    color: transparent;
+                                }
                             }
 
                             &::placeholder{
@@ -418,6 +490,7 @@ body{
                             grid-column-start: 1;
                             grid-column-end: 3;
                             align-items: center;
+                            border: 0px;
                             
                             & select{
                                 width: 50%;
@@ -435,10 +508,9 @@ body{
                     & input[type=submit]{
                         width: 30%;
                         height: 70%;
-                        background-color: var(--COA);
-                        color: var(--fondo);
+                        background-color: var(--fondo);
+                        color: var(--blanco);
                         font-size: 1.2em;
-                        border-radius: 10px;
                         padding: 1%;
                         border: 0px;
                         transition: all 0.4s ease-in-out;
@@ -447,8 +519,7 @@ body{
 
                         &:hover{
                             cursor: pointer;
-                            background-color: var(--fondo);
-                            color: var(--COA);
+                            background-color: var(--fondoMain);
                         }
 
                         &:disabled{
@@ -457,8 +528,6 @@ body{
                         }
                     }
                 }
-
-                
             }
 
             /* Estilo de Ajax General */
@@ -478,7 +547,7 @@ body{
                 /* Cabecera con el buscador y boton de creación */
                 & div.ajax{
                     width: 100%;
-                    height: 16%;
+                    height: 10%;
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
@@ -524,6 +593,9 @@ body{
                                 transition: all 0.4s ease-in-out;
                                 color: var(--negro);
                             }
+                            &:focus::placeholder {
+                                color: transparent;
+                            }
                         }
 
                         /* Icono del buscador */
@@ -549,7 +621,6 @@ body{
                         text-decoration: none;
                         border: 2px solid var(--fondo);
                         outline: 2px solid var(--COA);
-                        border-radius: 10px;
                         font-size: 1.2em;
                         color: var(--negro);
                         background-color: var(--COA);
@@ -568,7 +639,7 @@ body{
                 /* Contenedor con los resultados del ajax */
                 & div#resultados_busqueda{
                     width: 100%;
-                    height: 87%;
+                    height: 90%;
                     margin-top: 1%;
                     overflow-y: auto;
                     transition: all 0.8s ease-in-out;
@@ -625,7 +696,6 @@ body{
                                 transition: all 0.4s ease-in-out;
 
                                 &:hover{
-                                    font-size: 1.3em;
                                     color: var(--fondo);
                                 }
 
@@ -669,13 +739,13 @@ body{
                         text-decoration: none;
                         border: 2px solid var(--fondo);
                         outline: 2px solid var(--COA);
-                        border-radius: 10px;
                         font-size: 1.2em;
                         color: var(--negro);
                         background-color: var(--COA);
                         transition: all 0.4s ease-in-out;
                         text-wrap: nowrap;
                         justify-self: center;
+                        padding: 1%;
 
                         &:hover{
                             border: 2px solid var(--COA);
@@ -697,34 +767,18 @@ body{
                     & .barra{
                         width: 100%;
                         height: 10%;
-                        display: grid;
-                        grid-template-columns: 1fr 6fr;
-                        align-items: center;
                         background-color: var(--COA);
                         color: var(--negro);
                         font-size: 1.8em;
                         border: 1px solid var(--fondo);
                         min-height: 34px;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
 
                         /* Parrafo con el nombre */
                         & p.nombre{
                             text-align: center;
-                        }
-
-                        /* Icono de > */
-                        & i.fa-greater-than{
-                            width: fit-content;
-                            margin-left: 40%;
-                            transition: all 0.4s ease-in-out;
-
-                            &:hover{
-                                cursor: pointer;
-                                color: var(--blanco);
-                            }
-                        }
-
-                        & i.rotado{
-                            transform: rotate(90deg);
                         }
 
                         &+div{
@@ -745,7 +799,7 @@ body{
 
                 & div.ajax{
                     width: 100%;
-                    height: 12%;
+                    height: 10%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -788,6 +842,9 @@ body{
                             &:focus{
                                 outline: none;
                                 border: none;
+                                &::placeholder {
+                                    color: transparent;
+                                }
                             }
                             &::placeholder{
                                 color: var(--negro);
@@ -811,7 +868,7 @@ body{
                 /* Contenedor con los resultados del ajax */
                 & div#resultados_busqueda_C,div#resultados_busqueda_P,#resultados_busqueda_D,#resultados_busqueda_U{
                     width: 100%;
-                    height: 70%;
+                    height: 90%;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     grid-row-gap: 12%;
@@ -884,6 +941,9 @@ body{
                                     
                                     &:focus{
                                         outline: none;
+                                        &::placeholder {
+                                            color: transparent;
+                                        }
                                     }
                                 }
                             }
@@ -904,12 +964,10 @@ body{
                             
                             & a{
                                 text-decoration: none;
-                                color: var(--fondo);
+                                color: var(--blanco);
+                                background-color: var(--fondo);
+                                padding: 12%;
                                 transition: all 0.4s ease-in-out;
-
-                                &:hover{
-                                    font-size: 1.3em;
-                                }
 
                                 &.eliminar{
                                     color: var(--rojo);
@@ -1066,12 +1124,13 @@ body{
                 background-color: var(--fondoSeg);
                 overflow: auto;
                 width: 100%;
-                height: 90%;
                 z-index: 1;
                 position: absolute;
                 transition: all 0.4s ease-in-out;
                 top: -100%;
                 left: 0;
+                align-items: center;
+                height: 45%;
 
                 &.visible{
                     top: 10%;
@@ -1104,7 +1163,7 @@ body{
                     color: var(--fondo);
                     font-size: 11pt;
                     background-color: var(--COA);
-                    width: 70%;
+                    width: 100%;
                     height: 15%;
                     display: flex;
                     align-items: center;
@@ -1178,7 +1237,7 @@ body{
                 & .stats{
                     width: 100%;
                     height: 100%;
-                    background-color: var(--fondoMain);
+                    background-color: var(--COA);
                 }
 
                 & div#chart_div{
@@ -1575,10 +1634,6 @@ body{
                                     margin: 2%;
                                     width: 100%;
 
-                                    &:hover{
-                                        font-size: 1.3em;
-                                    }
-
                                     &.eliminar{
                                         color: var(--rojo);
                                     }
@@ -1655,31 +1710,17 @@ body{
                         & .barra{
                             width: 100%;
                             height: 10%;
-                            display: grid;
-                            grid-template-columns: 1fr 6fr;
-                            align-items: center;
                             background-color: var(--COA);
                             color: var(--negro);
                             font-size: 1.8em;
                             border: 1px solid var(--fondo);
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
                             
                             /* Parrafo con el nombre */
                             & p.nombre{
                                 text-align: center;
-                            }
-
-                            & i.fa-greater-than{
-                                width: fit-content;
-                                margin-left: 40%;
-                                transition: all 0.4s ease-in-out;
-
-                                &:hover{
-                                    cursor: pointer;
-                                }
-                            }
-
-                            & i.rotado{
-                                transform: rotate(90deg);
                             }
 
                             &+div{
@@ -1730,10 +1771,14 @@ body{
                                 &:focus{
                                     outline: none;
                                     border: none;
+                                    &::placeholder {
+                                        color: transparent;
+                                    }
                                 }
                                 &::placeholder{
                                     color: var(--negro);
                                 }
+                                
                             }
 
                             /* Icono del buscador */
@@ -1854,9 +1899,6 @@ body{
                                     color: var(--fondo);
                                     transition: all 0.4s ease-in-out;
 
-                                    &:hover{
-                                        font-size: 1.3em;
-                                    }
                                     &.eliminar{
                                         color: var(--rojo);
                                     }

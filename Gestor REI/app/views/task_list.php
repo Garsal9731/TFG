@@ -30,7 +30,7 @@
         <a href="index.php?route=task/created">Tareas Creadas</a>
     </div>
     <div class="cuerpo">
-        <div class="barra"><i id="pendiente" class="fa-solid fa-greater-than rotado" onclick="cambiarClase('pendiente')"></i><p class="nombre">Tareas Pendientes</p></div>
+        <div class="barra"></i><p class="nombre">Mis Tareas Pendientes</p></div>
         <div id="cuerpo_pendiente" class="visible">
             <div class="ajax">
                 <div class="buscador">
@@ -41,7 +41,6 @@
         </div>
     </div>
     <script src="./JS/Ajax.js"></script>
-    <script src="./JS/desplegableTareas.js"></script>
     <script src="./JS/RecogidaError.js"></script>
 </div>
 <?php

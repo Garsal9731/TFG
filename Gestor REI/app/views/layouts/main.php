@@ -1,23 +1,31 @@
 <!-- /**
  * Cuerpo principal/main
- * 
+ * Revisamor el GET para saber si se encuentra en la página de inicio, ya que esta es completamente diferente
 */ -->
 <!DOCTYPE html>
 <html lang="es">
     <?php require_once __DIR__ .'/./head.php';?>
     <body>
-        <div class="titulo">
-            <a href="index.php?route=landing">
-                <i class="fa-solid fa-crown"></i>
-                <h1>Gestor Rei</h1>
-            </a>
-            <div class="contenedor_icono_burger icono_barras">
-                <span class="primerabarra"></span>
-                <span class="segundabarra"></span>
-                <span class="tercerabarra"></span>
-            </div>
+        <?php if (count($_GET)==0){?>
+            <div class="tituloInicio"></div>
+            <div class="contenidoInicio">
+            <main>
+                <?php echo $content; // Mostrar el contenido dinámico ?>
+            </main>
         </div>
-        <div class="contenido">
+        <?php }else{?>
+            <div class="titulo">
+                <a href="index.php?route=landing">
+                    <i class="fa-solid fa-crown"></i>
+                    <h1>Gestor Rei</h1>
+                </a>
+                <div class="contenedor_icono_burger icono_barras">
+                    <span class="primerabarra"></span>
+                    <span class="segundabarra"></span>
+                    <span class="tercerabarra"></span>
+                </div>
+            </div>
+            <div class="contenido">
             <?php if($_SESSION["loginData"]!==null && count($_SESSION["loginData"])>2){?>
                 <?php if($_SESSION["loginData"]["Privilegios"]==1 || $_SESSION["loginData"]["Privilegios"]==4){?>
                     <div id="barraLateral" class="barraLateral admin">
@@ -48,6 +56,8 @@
                 <?php echo $content; // Mostrar el contenido dinámico ?>
             </main>
         </div>
+        <?php };?>
+        
 
     </body>
 </html>    
