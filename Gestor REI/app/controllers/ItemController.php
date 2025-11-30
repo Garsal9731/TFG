@@ -84,10 +84,31 @@
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $idUser = $_SESSION["loginData"]["Id_Usuario"]; 
                 $idInst = $this->getUserInst($idUser)["Id_Institución"];
-                $this->itemModel->create(['Nombre' => $_POST['nombre'],'Estado' => $_POST["estado"],'Descripción_Avería' => $_POST['descAveria'],'Institución_Id_Institución' => $idInst]);
 
-                // Creamos una cookie para mandar el aviso de que se ha creado el objeto
-                setcookie("status", "creado", time() + (86400 * 30), "/");
+                $this->itemModel->create(['Nombre' => $_POST['nombre'],'Estado' => $_POST["estado"],'Descripción_Avería' => $_POST['descAveria'],'Institución_Id_Institución' => $idInst,'Foto' => "no"]);
+
+                $array = $this->itemModel->itemLastId();
+                $id = $array["Id_Objeto"];
+
+                if($_FILES["foto"]["type"]!==""){
+                    $extension = ".".explode("/",$_FILES["foto"]["type"])[1];
+                    $nombreFoto = $id.$extension;
+                    if(is_uploaded_file($_FILES["foto"]["tmp_name"])) {
+                        if(move_uploaded_file($_FILES["foto"]["tmp_name"], "IMG/items/" . $nombreFoto)) {
+                            setcookie("status", "creado", time() + (86400 * 30), "/");
+                        }else {
+                            setcookie("status", "fmov", time() + (86400 * 30), "/");
+                        }
+                    }else {
+                        setcookie("status", "fsub", time() + (86400 * 30), "/");
+                    }
+
+                    $this->itemModel->itemPhoto($id,$nombreFoto);
+                }else{
+                    // Creamos una cookie para mandar el aviso de que se ha creado el objeto
+                    setcookie("status", "creado", time() + (86400 * 30), "/");
+                }
+
                 header('Location: index.php?route=item/index');
             } else {
                 require __DIR__ . '/../views/item_create.php';
@@ -108,10 +129,31 @@
         public function edit($id) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 settype($id, "int");
-                $this->itemModel->update(['Nombre' => $_POST['nombre'],'Estado'=>$_POST['estado'],'Descripción_Avería'=>$_POST['descAveria']], $id);
+                $this->itemModel->update(['Nombre' => $_POST['nombre'],'Estado'=>$_POST['estado'],'Descripción_Avería'=>$_POST['descAveria'],'Foto' => "no"], $id);
+
+                if(file_exists("IMG/items/".$_POST["fotoAnt"])){
+                    unlink("IMG/items/".$_POST["fotoAnt"]);
+                }
+
+                if($_FILES["foto"]["type"]!==""){
+                    $extension = ".".explode("/",$_FILES["foto"]["type"])[1];
+                    $nombreFoto = $id.$extension;
+                    if(is_uploaded_file($_FILES["foto"]["tmp_name"])) {
+                        if(move_uploaded_file($_FILES["foto"]["tmp_name"], "IMG/items/" . $nombreFoto)) {
+                            setcookie("status", "mod", time() + (86400 * 30), "/");
+                        }else {
+                            setcookie("status", "fmov", time() + (86400 * 30), "/");
+                        }
+                    }else {
+                        setcookie("status", "fsub", time() + (86400 * 30), "/");
+                    }
+
+                    $this->itemModel->itemPhoto($id,$nombreFoto);
+                }else{
+                    // Creamos una cookie para mandar el aviso de que se ha modificado el objeto
+                    setcookie("status", "mod", time() + (86400 * 30), "/");
+                }
                 
-                // Creamos una cookie para mandar el aviso de que se ha modificado el objeto
-                setcookie("status", "mod", time() + (86400 * 30), "/");
                 header('Location: index.php?route=item/index');
             } else {
                 $item = $this->itemModel->getById($id);

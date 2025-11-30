@@ -185,17 +185,24 @@ async function buscarAjax(tabla){
                     id = dato[clave];
                 }else{
                     
-                    // Si la clave es igual a la ultima clave no añade espacio, en cualquier otro caso si añadirá espacio
-                    if (clave==claves.length-1) {
-                        texto = texto.concat(dato[clave]);
-                    }else{
-                        texto = texto.concat(dato[clave]+" ");
+                    if (clave!=="Foto"){
+                        // Si la clave es igual a la ultima clave no añade espacio, en cualquier otro caso si añadirá espacio
+                        if (clave==claves.length-1) {
+                            texto = texto.concat(dato[clave]);
+                        }else{
+                            texto = texto.concat(dato[clave]+" ");
+                        }
                     }
                 }
             });
+
             // Creamos el parrafo con el resultado creado
             let parrafo = document.createElement("p");
-            parrafo.className = "resultado";
+            if(tabla=="Objeto"){
+                parrafo.className = "resultadoObjeto";
+            }else{
+                parrafo.className = "resultado";
+            }
 
             // Creamos un div donde meter los enlaces
             let div = document.createElement("div");
@@ -244,6 +251,18 @@ async function buscarAjax(tabla){
                     parrafo.textContent = texto;
                     enlace_edit.textContent = "Editar";
 
+                    if(dato["Foto"]!=="no"){
+                        foto = document.createElement("img");
+                        foto.setAttribute("class","fotoObjeto");
+                        foto.setAttribute("alt","Foto Objeto");
+                        foto.setAttribute("src","IMG/items/"+dato["Foto"]);
+                    }else{
+                        foto = document.createElement("img");
+                        foto.setAttribute("class","fotoObjeto");
+                        foto.setAttribute("alt","Foto Objeto");
+                        foto.setAttribute("src","https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg");
+                    }
+
                     // Creamos los enlaces de editar y borrar el usuario, les damos el enlace y un texto
                     enlace_edit.setAttribute("href","index.php?route=item/edit&id="+id);
                     enlace_elim.setAttribute("href","index.php?route=item/delete&id="+id);
@@ -252,7 +271,8 @@ async function buscarAjax(tabla){
                     div.append(enlace_edit,enlace_elim);
 
                     // Añadimos el div con los botones creados al parrafo
-                    parrafo.append(div);
+                    parrafo.append(foto,div);
+                    
                     break;
                 case "Tarea":
                     div_cuerpo = document.createElement("div");
@@ -321,6 +341,23 @@ async function buscarAjax(tabla){
                     }else{
                         enlace_edit.setAttribute("href","index.php?route=task/check&id="+id);
                     }
+
+                    if(parrafoResultados=="resultados_busqueda_D"){
+                        enlace_edit = document.createElement("div");
+                        botonEditar = document.createElement("a");
+                        botonBorrar = document.createElement("a");
+
+                        botonEditar.textContent = "Editar";
+                        botonBorrar.textContent = "Borrar";
+
+                        enlace_edit.setAttribute("class","botonesDone");
+                        botonEditar.setAttribute("href","index.php?route=task/edit&id="+id);
+                        botonBorrar.setAttribute("href","index.php?route=task/delete&id="+id);
+                        botonBorrar.setAttribute("class","botonBorrar");
+
+                        enlace_edit.append(botonEditar,botonBorrar);
+                    }
+
                     div.append(enlace_edit);
                     div_cuerpo.append(parrafoDesc,parrafoNombre);
                     parrafo.append(div_cabecera,div_cuerpo,div);
@@ -345,10 +382,17 @@ async function buscarAjax(tabla){
             document.getElementById(parrafoResultados).append(parrafo);        
         });
 
+        
+
         // Creamos una función con una promesa para retrasar el procesamiento y le asignamos la clase visible (esto evitará el parpadeo a la hora de recoger datos con el ajax)
         const sleep = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
         await sleep(200);
-        document.getElementById(parrafoResultados).setAttribute("class","visible");
+
+        if(tabla=="Objeto"){
+            document.getElementById(parrafoResultados).setAttribute("class","visible Robjeto");
+        }else{
+            document.getElementById(parrafoResultados).setAttribute("class","visible");
+        }
     })
     .catch((error) => {
 

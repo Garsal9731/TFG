@@ -10,6 +10,10 @@
 
     class Security {
         public static function login($data){
+            if (!isset($_COOKIE["cookies"])){
+               Security::logoff();
+            }
+
             $userController = new UserController();
             $userData = $userController->getByMail($data["correo"]);
 
@@ -26,6 +30,7 @@
         public static function logoff(){
             session_destroy();
             header('Location: index.php');
+            die();
         }
 
         public static function secureRoutes($seguridad){

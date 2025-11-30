@@ -1,3 +1,9 @@
+<div class="textoBienvenida">
+    <p>¡Bienvenido! Para Comprobar tus tareas asignadas ve a "Tareas".</p>
+    <p>Para comprobar el inventario ve a "Objetos"</p>
+    <p>Para modificar los usuarios ve a "Usuarios"</p>
+    <p>Para cambiar los permisos que tienen los usuarios sobre otros usuarios ve a "Permisos"</p>
+</div>
 <div class="botones">
     <a class="botonEnlace" href="index.php?route=task/index">
         <div class="boton">            

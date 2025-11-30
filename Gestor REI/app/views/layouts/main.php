@@ -32,6 +32,7 @@
                 <?php }else{ ?>
                     <div id="barraLateral" class="barraLateral">
                 <?php }; ?>
+                    <a class="botonEnlace" href="index.php?route=landing">Inicio <i class="fa-solid fa-house"></i></a>
                     <a class="botonEnlace" href="index.php?route=task/index">Tareas <i class="fa-solid fa-file"></i></a>
 
                     <!-- Botones para técnicos y admins -->
@@ -51,13 +52,13 @@
                     <?php };?>
                     <a class="botonEnlace" href="index.php?route=core/logoff">Cerrar Sesión <i class="fa-solid fa-door-open"></i></a>
                 </div>
+                <script src="./JS/atras.js"></script>
             <?php };?>
             <main>
                 <?php echo $content; // Mostrar el contenido dinámico ?>
             </main>
         </div>
         <?php };?>
-        
-
+        <script src="./JS/cookies.js"></script>
     </body>
 </html>    

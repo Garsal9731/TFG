@@ -33,6 +33,8 @@
 /* ! CAMBIAR MAIN INDEX PARA QUE SEA COMO EL RESTO */
     /* Texto alternativo */
     --blanco:#fff;
+
+    --verde:#50C878;
 }
 
 body, html{
@@ -89,6 +91,71 @@ body{
             left: 75%;
         }
     }
+    & .mensajeCorrecto{
+        background-color: var(--blanco);
+        border: 2px solid var(--COA);
+        color: var(--verde);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2em;
+        font-weight: bold;
+        position: fixed;
+        width: 20%;
+        height: 8%;
+        left: 112%;
+        top: 88%;
+        transition: all 1s ease-in-out;
+        text-align:  center;
+        z-index: 5;
+
+        &.visible{
+            top: 88%;
+            left: 75%;
+        }
+    }
+
+    & .avisoCookies{
+        display: flex;
+        flex-direction: column;
+        background-color: var(--COA);
+        color: var(--blanco);
+        padding: 1%;
+        height: 12%;
+        justify-content: space-evenly;
+        transition: all 0.4s ease-in-out;
+
+        &::after{
+            transition: all 0.4s ease-in-out;
+        }
+
+        &.invisible{
+            opacity: 0;
+            transition: all 0.4s ease-in-out;
+        }
+
+        & .botonesCookies{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            height: 50%;
+
+            & div{
+                cursor: pointer;
+                width: 30%;
+                text-align: center;
+                background-color: var(--fondoMain);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:hover{
+                    background-color: var(--fondo);
+                    transition: all 0.4s ease-in-out;
+                }
+            }
+        }
+    }
 
     & >div.tituloInicio{
         height: 0%;
@@ -127,7 +194,7 @@ body{
                     background: #F5F3F5ED;
                     width: 60%;
                     height: 60%;
-
+                    min-height: 360px;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-evenly;
@@ -146,11 +213,12 @@ body{
 
                     & h3{
                         font-size: 3em;
+                        text-align: center;
                     }
 
                     & p{
                         width: 90%;
-                        font-size: 1.2em;
+                        font-size: 1.5em;
                         text-align: justify;
                     }
                 }
@@ -175,6 +243,11 @@ body{
                     color: var(--negro);
                     width: 90%;
 
+                    &.parrafoCookies{
+                        width: 100%;
+                        font-size: 1.1em;
+                    }
+
                     & label{
                         font-size: 1.8em;
                         padding: 1%;
@@ -192,11 +265,15 @@ body{
                     background-color: var(--COA);
                     color: var(--blanco);
                     font-size: 1.8em;
-                    border-radius: 10px;
                     padding: 2%;
                     border: 0px;
                     transition: all 0.4s ease-in-out;
                     width: 80%;
+                    cursor: pointer;
+                    
+                    &:hover{
+                        background-color: var(--fondoMain);
+                    }
                 }
             }
         }
@@ -259,6 +336,15 @@ body{
             height: 100%;
             overflow-x: hidden;
 
+            & a#flechaAtras{
+                text-decoration: none;
+                font-size: 3em;
+                color: var(--blanco);
+                position: absolute;
+                top: 12%;
+                left: 9%;
+            }
+
             & p{
                 visibility: hidden;
                 width: 0%;
@@ -310,8 +396,8 @@ body{
             padding: 1%;
 
             & .stats{
-                width: 100%;
-                height: 100%;
+                width: 70%;
+                height: 90%;
                 background-color: var(--COA);
             }
 
@@ -336,7 +422,7 @@ body{
                 & a{
                     text-decoration: none;
                     padding: 2%;
-                    color: var(--COA);
+                    color: var(--blanco);
                     font-size: 1.8em;
                     background-color: var(--fondo);
                     border-radius: 20px;
@@ -347,6 +433,7 @@ body{
                     justify-content: center;
                     transition: all 0.4s ease-in-out;
                     margin-top: 2%;
+                    text-align: center;
 
                     &:hover{
                         background-color: var(--fondoMain);
@@ -363,12 +450,28 @@ body{
                 width: 80%;
 
                 & .cuerpoInicial{
-
                     width: 100%;
                     height: 80%;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
+                    align-items: center;
+
+                    & .textoBienvenida{
+                        margin: 6%;
+                        font-size: 1.2em;
+                        width: 100%;
+
+                        & p:first-child{
+                           font-size: 1.2em;
+                            text-align: center;
+                            margin-bottom: 2%;
+                        }
+
+                        & p{
+                            text-align: justify;
+                        }
+                    }
 
                     &>p{
                         font-size: 1.6em;
@@ -383,8 +486,8 @@ body{
                         text-decoration: none;
                         color: var(--blanco);
                         transition: all 0.4s ease-in-out;
-                        font-size: 1.4em;
-                        margin: 0.2%;
+                        font-size: 1em;
+                        margin: 1%;
 
                         &:hover{
                             color: var(--COA);
@@ -392,10 +495,9 @@ body{
                     }
 
                     & div.botones{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 25%;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                        width: 100%;
 
                         & div.boton{
                             display: flex;
@@ -446,6 +548,11 @@ body{
                         margin: 2%;
                         display: flex;
                         flex-direction: column;
+
+                        & .fotoObjeto{
+                            width: 75%;
+                            height: 100%;
+                        }
 
                         & label{
                             font-size: 1.2em;
@@ -636,6 +743,14 @@ body{
                     }
                 }
 
+                & .Robjeto{
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    align-items: center;
+                    justify-items: center;
+                    gap: 15px;
+                }
+
                 /* Contenedor con los resultados del ajax */
                 & div#resultados_busqueda{
                     width: 100%;
@@ -683,6 +798,51 @@ body{
                         transition: all 0.8s ease-in-out;
                         font-size: 1.5em;
                 
+                        /* Enlaces dentro de los resultados */
+                        & div.divBotones{
+                            width: 40%;
+                            display: flex;
+                            justify-content: space-between;
+                            margin-right: 2%;
+                            
+                            & a{
+                                text-decoration: none;
+                                color: var(--blanco);
+                                transition: all 0.4s ease-in-out;
+
+                                &:hover{
+                                    color: var(--fondo);
+                                }
+
+                                &.eliminar{
+                                    color: var(--rojo);
+                                }
+                            }
+                        }
+                    }
+
+                    /* Resultado de ajax OBJETOS */
+                    & .resultadoObjeto{
+                        width: 80%;
+                        height: 100%;
+                        background-color: var(--COA);
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 1%;
+                        color: var(--negro);
+                        font-weight: bold;
+                        border: 1px solid var(--fondo);
+                        transition: all 0.8s ease-in-out;
+                        font-size: 1.5em;
+                        flex-direction: column;
+                
+                        /* Foto de objeto */
+                        & img{
+                            width: 30%;
+                            height: 60%;
+                        }
+
                         /* Enlaces dentro de los resultados */
                         & div.divBotones{
                             width: 40%;
@@ -868,7 +1028,7 @@ body{
                 /* Contenedor con los resultados del ajax */
                 & div#resultados_busqueda_C,div#resultados_busqueda_P,#resultados_busqueda_D,#resultados_busqueda_U{
                     width: 100%;
-                    height: 90%;
+                    height: 70%;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     grid-row-gap: 12%;
@@ -955,12 +1115,10 @@ body{
                 
                         /* Enlaces dentro de los resultados */
                         & div.divBotones{
-                            width: 20%;
+                            width: 60%;
                             display: flex;
                             justify-content: center;
                             align-items: center;
-                            margin-right: 2%;
-                            padding: 2%;
                             
                             & a{
                                 text-decoration: none;
@@ -968,10 +1126,30 @@ body{
                                 background-color: var(--fondo);
                                 padding: 12%;
                                 transition: all 0.4s ease-in-out;
+                                height: 70%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
 
                                 &.eliminar{
                                     color: var(--rojo);
                                 }
+                            }
+                        }
+
+                        & .botonesDone{
+                            display: flex;
+                            justify-content: space-evenly;
+                            width: 80%;
+                            height: 76%;
+
+                            & a{
+                                padding: 0%;
+                            }
+
+                            & .botonBorrar{
+                                background-color: #ffffff00;
+                                color: var(--rojo);
                             }
                         }
                     }
@@ -986,8 +1164,8 @@ body{
     body{
 
         & .mensajeError{
-            background-color: var(--fondoMain);
-            border: 1px solid var(--fondoSeg);
+            background-color: var(--blanco);
+            border: 2px solid var(--COA);
             color: var(--rojo);
             display: flex;
             align-items: center;
@@ -995,16 +1173,131 @@ body{
             justify-content: center;
             font-size: 0.8em;
             font-weight: bold;
-            border-radius: 20px;
             position: fixed;
             width: 55%;
             height: 10%;
-            left: 23.5%;
-            top: -15%;
+            left: -56%;
+            top: 2%;
             transition: all 1s ease-in-out;
 
             &.visible{
-                top: 15%;
+                top: 2%;
+                left: 4%;
+            }
+        }
+        & .avisoCookies{
+            height: 24%;
+        }
+        & >div.tituloInicio{
+            height: 0%;
+            width: 0%;
+            opacity: 0%;
+        }
+        & >div.contenidoInicio{
+            display: flex;
+            justify-content: center;
+            height: 100%;
+
+            & main{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+
+                & div.banner{
+                    height: 100%;
+                    width: 100%;
+                    background-color: var(--fondoSeg);
+                    opacity: 0.8;
+                    background-image:  linear-gradient(30deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(150deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(30deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(150deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(60deg, var(--COAOscuro) 25%, transparent 25.5%, transparent 75%, var(--COAOscuro) 75%, var(--COAOscuro)), linear-gradient(60deg, var(--COAOscuro) 25%, transparent 25.5%, transparent 75%, var(--COAOscuro) 75%, var(--COAOscuro));
+                    background-size: 80px 140px;
+                    background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+
+                    display: flex;
+                    flex-direction: column;
+                    align-content: center;
+                    justify-content: center;
+                    align-items: center;
+
+                    & div.fondo{
+                        background: #F5F3F59E;
+                        width: 100%;
+                        height: 100%;
+
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-evenly;
+                        align-items: center;
+
+                        & i{
+                            font-size: 5em;
+                            width: 140px;
+                            height: 140px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 50%;
+                            background-color: var(--COA);
+                        }
+
+                        & h3{
+                            font-size: 3em;
+                            text-align: center;
+                        }
+
+                        & p{
+                            width: 90%;
+                            font-size: 1.2em;
+                            text-align: justify;
+                        }
+                    }
+                }
+
+                /* Formulario Login */
+                & form.login{
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-evenly;
+
+                    background-color: var(--fondoSeg);
+                    width: 100%;
+                    height: 100%;
+                    min-height: 300px;
+                    z-index: 0;
+
+                    & p{
+                        display: flex;
+                        flex-direction: column;
+                        color: var(--negro);
+                        width: 90%;
+
+                        & label{
+                            font-size: 1.8em;
+                            padding: 1%;
+                        }
+
+                        & input{
+                            border: 0px;
+                            border-radius: 10px;
+                            font-size: 1.5em;
+                            padding: 1%;
+                        }
+                    }
+
+                    & input[type=submit]{
+                        background-color: var(--COA);
+                        color: var(--blanco);
+                        font-size: 1.8em;
+                        border-radius: 10px;
+                        padding: 2%;
+                        border: 0px;
+                        transition: all 0.4s ease-in-out;
+                        width: 80%;
+                    }
+                }
             }
         }
 
@@ -1131,6 +1424,22 @@ body{
                 left: 0;
                 align-items: center;
                 height: 45%;
+
+                & a#flechaAtras{
+                    position: fixed;
+                    top: auto;
+                    left: auto;
+                    bottom: 10%;
+                    right: 5%;
+                    background-color: var(--COA);
+                    border: 2px solid var(--fondoMain);
+                    border-radius: 50%;
+                    width: fit-content;
+                    height: 6%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
 
                 &.visible{
                     top: 10%;
@@ -1291,14 +1600,21 @@ body{
                     height: 94%;
 
                     &.formulario{
-                        height: 66%;
                         overflow: auto;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-evenly;
+
+                        & div.fotos{
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                        }
                     }
 
                     & .cuerpoInicial{
 
                         width: 100%;
-                        height: 0%;
+                        height: 80%;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
@@ -1314,12 +1630,12 @@ body{
 
                         & div.botones{
                             
-                            display: flex;
-                            flex-direction: column;
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            justify-items: center;
                             align-items: center;
-                            margin-top: 6%;
-                            height: 54%;
-
+                            width: 100%;
+                            
                             & div.boton{
                                 display: flex;
                                 flex-direction: column;
@@ -1393,6 +1709,10 @@ body{
                         display: flex;
                         flex-direction: column;
 
+                        & .fotoObjeto{
+                            align-self: center;
+                        }
+
                         & label{
                             font-size: 1.2em;
                         }
@@ -1401,7 +1721,6 @@ body{
                             margin: 1%;
                             width: 94%;
                             height: 50%;
-                            border-radius: 10px;
                             outline: none;
                             border: none;
                             padding: 1%;
@@ -1455,9 +1774,8 @@ body{
                         width: 100%;
                         height: 10%;
                         background-color: var(--fondoMain);
-                        color: var(--negro);
+                        color: var(--blanco);
                         font-size: 1.2em;
-                        border-radius: 10px;
                         padding: 1%;
                         border: 0px;
                         transition: all 0.4s ease-in-out;
@@ -1492,6 +1810,10 @@ body{
                     & >h1{
                         font-size: 3em;
                         color: var(--blanco);
+                    }
+
+                    & .Robjeto{
+                        grid-template-columns: 1fr;
                     }
 
                     /* Cabecera con el buscador y boton de creación */
@@ -1532,6 +1854,7 @@ body{
                                 }
                                 &::placeholder{
                                     color: var(--negro);
+                                    font-size: 1.2em;
                                 }
                             }
 
@@ -1545,18 +1868,13 @@ body{
 
                         /* Botón de creación */
                         & a{
-                            width: 20%;
+                            width: 26%;
                             height: 100%;
                             display: flex;
                             align-items: center;
                             justify-content: center;
                             text-decoration: none;
-                            border: 2px solid var(--fondo);
-                            outline: 2px solid var(--COA);
-                            border-radius: 10px;
-                            font-size: 0.8em;
-                            color: var(--fondo);
-                            background-color: var(--COA);
+                            font-size: 1.2em;
                             transition: all 0.4s ease-in-out;
                             text-wrap: wrap;
                             text-align: center;
@@ -1592,12 +1910,25 @@ body{
                             }
                         }
 
+                         & .resultadoObjeto {
+                            & img{
+                                width: 62%;
+                                height: 74%;
+                            }
+                            
+                            & div.divBotones {
+                                width: 100%;
+                                justify-content: space-evenly;
+                            }
+                        }
+
                         /* Mensaje por si el ajax no ecuentra nada */
                         & .mensaje{
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            font-size: 1.8em;
+                            text-align: center;
+                            font-size: 1.6em;
                             font-weight: bold;
                             color: var(--fondoSeg);
                         }
@@ -1628,7 +1959,7 @@ body{
                                 
                                 & a{
                                     text-decoration: none;
-                                    color: var(--fondoMain);
+                                    color: var(--blanco);
                                     text-align: center;
                                     transition: all 0.4s ease-in-out;
                                     margin: 2%;
@@ -1652,7 +1983,7 @@ body{
                     align-items: center;
 
                     & > h1{
-                        font-size: 2.8em;
+                        font-size: 1.4em;
                         color: var(--blanco);
                         padding: 1%;
                     }
@@ -1660,20 +1991,15 @@ body{
                     /* La cabecera esta vez no es solo el titulo, sino que el boton va incluido junto a él */
                     & div.cabeza{
                         width: 100%;
-                        display: grid;
-                        grid-template-columns: 1fr 1fr 1fr;
+                        height: 10%;
+                        display: flex;
+                        justify-content: space-evenly;
                         align-items: center;
-
-                        /* Titulo de la pagina */
-                        & h1{
-                            font-size: 3em;
-                            color: var(--fondoMain);
-                            justify-self: center;
-                        }
+                        margin: 4%;
 
                         /* Botón de creación */
                         & a{
-                            width: 92%;
+                            width: 30%;
                             height: 100%;
                             display: flex;
                             align-items: center;
@@ -1681,13 +2007,13 @@ body{
                             text-decoration: none;
                             border: 2px solid var(--fondo);
                             outline: 2px solid var(--COA);
-                            border-radius: 10px;
-                            font-size: 1em;
+                            font-size: 0.9em;
                             color: var(--negro);
                             background-color: var(--COA);
                             transition: all 0.4s ease-in-out;
                             text-wrap: wrap;
                             text-align: center;
+                            margin: 1%;
 
                             &:hover{
                                 border: 2px solid var(--COA);
@@ -1777,6 +2103,7 @@ body{
                                 }
                                 &::placeholder{
                                     color: var(--negro);
+                                    font-size: 1.2em;
                                 }
                                 
                             }
@@ -1830,7 +2157,8 @@ body{
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            font-size: 1.8em;
+                            text-align: center;
+                            font-size: 1.6em;
                             font-weight: bold;
                             color: var(--fondoSeg);
                             grid-column-start: 1;
@@ -1862,7 +2190,7 @@ body{
 
                             & div.cuerpoTarjeta{
                                 display: flex;
-                                justify-content: space-between;
+                                justify-content: space-evenly;
                                 flex-direction: column;
 
                                 & p.parrafoDesc{
@@ -1888,7 +2216,7 @@ body{
                     
                             /* Enlaces dentro de los resultados */
                             & div.divBotones{
-                                width: 20%;
+                                width: 100%;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
@@ -1896,7 +2224,6 @@ body{
                                 
                                 & a{
                                     text-decoration: none;
-                                    color: var(--fondo);
                                     transition: all 0.4s ease-in-out;
 
                                     &.eliminar{

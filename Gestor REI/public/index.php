@@ -37,8 +37,15 @@
                     $_SESSION["loginData"] = null;
                 }
             }
-
             break;
+    }
+    
+    $time = 3600;
+    if (isset($_SESSION['time']) && (time() - $_SESSION['time']) > $time) {
+        header('location: core/logoff');
+        exit();
+    } else {
+        $_SESSION['time'] = time();
     }
 ?>
 <script src="JS/RecogidaError.js"></script>

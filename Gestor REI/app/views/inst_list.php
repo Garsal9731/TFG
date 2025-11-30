@@ -6,9 +6,9 @@
     ob_start();
     if(isset($_COOKIE["status"])){
         if($_COOKIE["status"]=="creado") {
-            echo "<p id='mensajeError' hidden>"."Se ha creado la institución"."</p>";
+            echo "<p id='mensajeCorrecto' hidden>"."Se ha creado la institución"."</p>";
         }elseif($_COOKIE["status"]=="borrado"){
-            echo "<p id='mensajeError' hidden>"."Se ha borrado la institución"."</p>";
+            echo "<p id='mensajeCorrecto' hidden>"."Se ha borrado la institución"."</p>";
         }
         setcookie("status", "", time() - 3600, "/");
     }

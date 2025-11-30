@@ -2,12 +2,16 @@
 if(document.getElementById("mensajeError")){
     window.onload=recogerError(document.getElementById("mensajeError"));
 }
+if(document.getElementById("mensajeCorrecto")){
+    window.onload=recogerError(document.getElementById("mensajeCorrecto"));
+}
 
 async function recogerError(mensaje){
+    console.log(mensaje);
 
     // Recogiendo el mensaje de error creamos un div con el mensaje para mostrarlo por pantalla con CSS
     let div=document.createElement("div");
-    div.setAttribute("class","mensajeError");
+    div.setAttribute("class",mensaje.id);
     div.textContent = mensaje.textContent;
 
     // Lo metemos en el cuerpo para verlo

@@ -6,16 +6,15 @@
     ob_start();
 
     if(isset($_COOKIE["status"])){
-        // ! CAMBIAR ESTILO DE CARTEL PARA QUE TENGA COLORES CLAROS
         switch ($_COOKIE["status"]) {
             case 'creado':
-                echo "<p id='mensajeError' hidden>"."Se ha creado la tarea"."</p>";
+                echo "<p id='mensajeCorrecto' hidden>"."Se ha creado la tarea"."</p>";
                 break;
             case 'borrado':
-                echo "<p id='mensajeError' hidden>"."Se ha borrado la tarea"."</p>";
+                echo "<p id='mensajeCorrecto' hidden>"."Se ha borrado la tarea"."</p>";
                 break;
             case 'mod':
-                echo "<p id='mensajeError' hidden>"."Se ha modificado la tarea"."</p>";
+                echo "<p id='mensajeCorrecto' hidden>"."Se ha modificado la tarea"."</p>";
                 break;
         }
         setcookie("status", "", time() - 3600, "/");

@@ -35,10 +35,41 @@
          */
         public function ajaxObjetos($peticion,$idInst){
             if ($_SESSION["loginData"]["Privilegios"]==4) {
-                $sql = 'SELECT Id_Objeto,Nombre,Estado FROM Objeto WHERE Nombre LIKE "'.$peticion.'%" ORDER BY Id_Objeto DESC;';
+                $sql = 'SELECT Id_Objeto,Nombre,Estado,Foto FROM Objeto WHERE Nombre LIKE "'.$peticion.'%" ORDER BY Id_Objeto DESC;';
             }else{
-                $sql = 'SELECT Id_Objeto,Nombre,Estado FROM Objeto WHERE Nombre LIKE "'.$peticion.'%" AND Institución_Id_Institución="'.$idInst.'" ORDER BY Id_Objeto DESC;';
+                $sql = 'SELECT Id_Objeto,Nombre,Estado,Foto FROM Objeto WHERE Nombre LIKE "'.$peticion.'%" AND Institución_Id_Institución="'.$idInst.'" ORDER BY Id_Objeto DESC;';
             }
             return $this->query($sql)->fetchAll();
         }
+
+        /**
+         * Recoger ultima ID registrada
+         * 
+         * Busca la ultima ID del último objeto registrado
+         * 
+         * @param void
+         * 
+         * @return array Array de los resultados de la busqueda.
+         */
+        public function itemLastId(){
+            $sql = 'SELECT Id_Objeto FROM Objeto ORDER BY Id_Objeto DESC LIMIT 1;';
+            
+            return $this->query($sql)->fetch();
+        }
+
+        /**
+         * Cambiar foto objeto
+         * 
+         * Usa el nombre del objeto y su ID para cambiar su registro en la tabla objetos
+         * 
+         * @param void
+         * 
+         * @return array Array de los resultados de la busqueda.
+         */
+        public function itemPhoto($idObjeto,$nombreFoto){
+            $sql = 'UPDATE Objeto SET Foto = "'.$nombreFoto.'" WHERE Id_Objeto = '.$idObjeto.';';
+            
+            $this->query($sql);
+        }
+        
     }

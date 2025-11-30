@@ -7,7 +7,7 @@
 ?>
 <div class="contenedor formulario">
     <h2>Crear Objeto</h2>
-    <form  method="POST" autocomplete="off">
+    <form method="POST" enctype="multipart/form-data" autocomplete="off">
         <p>
             <label for="nombre">Nombre:</label>
             <input type="text" placeholder="Nombre del objeto..." id="nombre" name="nombre" required>
@@ -24,6 +24,10 @@
         <p>
             <label for="descAveria">Descripción Avería:</label>
             <textarea id="descAveria" placeholder="Escribe en detalle la avería..." name="descAveria"></textarea>
+        </p>
+        <p>
+            <label for="foto">Foto Objeto:</label>
+            <input type="file" id="foto" name="foto" accept="image/*" />
         </p>
         <input type="submit" value="Crear Objeto">
     </form>

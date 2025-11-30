@@ -7,13 +7,13 @@
     if(isset($_COOKIE["status"])){
         switch ($_COOKIE["status"]) {
             case 'creado':
-                echo "<p id='mensajeError' hidden>"."Se ha registrado al usuario"."</p>";
+                echo "<p id='mensajeCorrecto' hidden>"."Se ha registrado al usuario"."</p>";
                 break;
             case 'borrado':
-                echo "<p id='mensajeError' hidden>"."Se ha dado de baja al usuario"."</p>";
+                echo "<p id='mensajeCorrecto' hidden>"."Se ha dado de baja al usuario"."</p>";
                 break;
             case 'mod':
-                echo "<p id='mensajeError' hidden>"."Se ha modificado el usuario"."</p>";
+                echo "<p id='mensajeCorrecto' hidden>"."Se ha modificado el usuario"."</p>";
                 break;
         }
         setcookie("status", "", time() - 3600, "/");

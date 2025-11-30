@@ -9,10 +9,10 @@
     <div class="fondo">
         <i class="fa-solid fa-crown"></i>
         <h3>¡Bienvenido al Gestor REI!</h3>
-        <p>El Gestor REI consiste en un gestor de inventariado y tareas. Gracias al cual puedes organizar a tus empleados o llevar la cuenta de que objetos se encuentran en el inventario de tu empresa y/o institución.</p>
+        <p>El Gestor REI es un gestor de inventariado y tareas.<br>¡Con el cual puedes organizar a tus empleados o llevar la cuenta de que objetos se encuentran en el inventario de tu empresa y/o institución!.</p>
     </div>
 </div>
-<form class="login" method="POST" autocomplete="off">
+<form class="login" id="login" method="POST" autocomplete="off">
     <p>
         <label for="Correo">Correo:</label>
         <input type="email" id="Correo" name="correo" placeholder="Correo" onkeyup="Comprobar(this.value,'Correo')" autofocus required>

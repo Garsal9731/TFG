@@ -3,12 +3,15 @@
      * Vista de edición de un objeto
      * 
      */
-    // ! RELLENAR CON LOS CAMPOS RESTANTES Y EMPEZAR CON LA CREACIÓN DE LAS TAREAS
     ob_start();
+
+    // Evita que se guarde la caché de esta página especifica, (Si se guarda las fotos no se actualizan correctamente)
+    header('Cache-Control: no-cache');
+    header('Pragma: no-cache');
 ?>
 <div class="contenedor formulario">
 <h2>Editar Objeto</h2>
-<form  method="POST" autocomplete="off">
+<form  method="POST" enctype="multipart/form-data" autocomplete="off">
     <p>
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" value="<?php echo $item['Nombre'];?>" required>
@@ -29,6 +32,21 @@
         <label for="descAveria">Descripción Avería:</label>
         <textarea name="descAveria"><?php echo $item["Descripción_Avería"];?></textarea>
     </p>
+    <?php if($item["Foto"]!=="no"){?>
+        <div class="fotos">
+        <p>
+            <label for="fotoObjeto">Foto actual objeto:</label>
+            <img  name="fotoObjeto" class="fotoObjeto" src="IMG/items/<?php echo $item["Foto"]?>" alt="Foto Objeto">
+        </p>
+    <?php };?>
+    <p>
+        <label for="foto">Foto Objeto:</label>
+        <input type="file" id="foto" name="foto" accept="image/*" />
+    </p>
+    <?php if($item["Foto"]!=="no"){?>
+        </div>
+    <?php };?>
+    <input type="hidden" id="fotoAnt" name="fotoAnt" value="<?php echo $item["Foto"]?>">
     <input type="submit" value="Editar Objeto">
 </form>
 </div>
