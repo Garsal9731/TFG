@@ -32,7 +32,10 @@
             </select>
             <script src="./JS/MultiSelect.js"></script>
         </p>
-        <input type="submit" value="Asignar empleados">
+        <p class="botonesForm">
+            <input type="submit" value="Asignar empleados">
+            <a class="cancelar" href="index.php?route=user/manage">Cancelar</a>
+        </p>
     </form>
 </div>
 <?php

@@ -8,16 +8,18 @@
     require_once __DIR__ . '/../models/traits/getEmployees.php';
     require_once __DIR__ . '/../models/traits/getUserInst.php';
     require_once __DIR__ . '/../models/traits/getAllByInst.php';
+    require_once __DIR__ . '/../models/traits/getUserName.php';
     
     use App\Models\Task as Task;
     use App\Models\Traits\getEmployees as getEmployees;
     use App\Models\Traits\getUserInst as getUserInst;
     use App\Models\Traits\getAllByInst as getAllByInst;
+    use App\Models\Traits\getUserName as getUserName;
 
 
     class TaskController {
 
-        use getEmployees, getAllByInst, getUserInst;
+        use getEmployees, getAllByInst, getUserInst, getUserName;
 
         private $taskModel;
 
@@ -207,14 +209,33 @@
          * @return void
          */
         public function check($id){
-            $task = $this->taskModel->getById($id);
-            $employees = $this->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
-            $assignedEmployees = $this->taskModel->getEmployeesByTask($id);
-            $idsAssigned = array();
-            foreach($assignedEmployees as $idAssigned){
-                array_push($idsAssigned,$idAssigned["Id_Usuario"]);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $id = $_POST["id"];
+                $fechaActual = date("Y-m-d");
+                $task = $this->taskModel->getById($id);
+
+                $estado = $task["Estado"];
+                if($estado=="Pendiente"){
+                    $actualizado = "Completada";
+                }elseif ($estado=="Completada"){
+                    $actualizado = "Pendiente";
+                }
+                $this->taskModel->updateDate($id,$fechaActual,$actualizado);
+
+                // Creamos una cookie para mandar el aviso de que se ha modificado la tarea
+                setcookie("status", "mod", time() + (86400 * 30), "/");
+
+                header('Location: index.php?route=task/index');
+            }else{
+                $task = $this->taskModel->getById($id);
+                $employees = $this->getEmployees($_SESSION["loginData"]["Id_Usuario"]);
+                $assignedEmployees = $this->taskModel->getEmployeesByTask($id);
+                $idsAssigned = array();
+                foreach($assignedEmployees as $idAssigned){
+                    array_push($idsAssigned,$idAssigned["Id_Usuario"]);
+                }
+                require __DIR__ . '/../views/task_check.php';
             }
-            require __DIR__ . '/../views/task_check.php';
         }
 
         /**
@@ -258,6 +279,23 @@
          */
         public function getCreated($userId){
             $tareas = $this->taskModel->getCreated($userId);
+            $arrayNombre = $this->getUserName($userId);
+            $nombre = $arrayNombre[0];
             require __DIR__ . '/../views/task_all.php';
+        }
+
+        /**
+         * Actualizar fecha
+         * 
+         * Actualiza la fecha final de la tarea y el estado de la tarea
+         * 
+         * @param int $id Id de la tarea.
+         * @param date $fechaActual Fecha de modificación de la tarea.
+         * @param string $actualiado Estado de la tarea, Pendiente a Completa y viceversa.
+         * 
+         * @return void
+         */
+        public function updateDate($id,$fechaActual,$actualizado){
+            $this->taskModel->updateDate($id,$fechaActual,$actualizado);
         }
     }

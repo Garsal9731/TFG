@@ -21,6 +21,7 @@
 ?>
     <div class="ajax">
         <h1>Permisos</h1>
+        <h3>¡Mira que usuario manda a que otro usuario!</h3>
         <div class="ajax">
             <div class="buscador">
                 <input id="buscador" type="text" placeholder="Buscar Permisos..." name="ajax"><i id="lupa" class="fa-solid fa-magnifying-glass"></i>

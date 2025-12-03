@@ -7,6 +7,7 @@
 ?>
 <div class="ajaxTareas">
     <h1>Lista de Tareas Creadas</h1>
+    <h3>¡Todas las tareas que has creado!</h3>
     <div class="cabeza">
         <a href="index.php?route=task/create">Crear Tarea</a>
         <a href="index.php?route=task/completed">Tareas Completadas</a>

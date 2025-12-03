@@ -32,13 +32,20 @@ if(!cookies_documento.includes("cookies")){
     aviso.append(parrafo,botones);
 
     document.getElementById("login").append(aviso);
+
+    modal = document.createElement("div");
+    modal.setAttribute("class","modal");
+    modal.setAttribute("id","modal");
+    document.getElementById("login").append(modal);
 }
 
 async function crearCookie(){
     document.cookie = `cookies=ok; expires=${new Date(new Date().getTime()+1000*60*60*24*365).toGMTString()}; path=/`;
     document.getElementById("avisoCookies").setAttribute("class","invisible");
+    document.getElementById("modal").setAttribute("class","invisible");
 
     const sleep = (ms = 0) => new Promise(resolve => setTimeout(resolve, ms));
     await sleep(400);
     document.getElementById("avisoCookies").remove();
+    document.getElementById("modal").remove();
 }

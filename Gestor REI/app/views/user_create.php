@@ -38,7 +38,10 @@
                 </select>
             </p>
         <?php }?>
-        <input type="submit" value="Crear Usuario">
+        <p class="botonesForm">
+            <input type="submit" value="Crear Usuario">
+            <a class="cancelar" href="index.php?route=user/index">Cancelar</a>
+        </p>
     </form>
 </div> 
 <?php

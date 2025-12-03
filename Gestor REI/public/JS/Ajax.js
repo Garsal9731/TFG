@@ -235,7 +235,8 @@ async function buscarAjax(tabla){
                     parrafo.append(div);
                     break;
                 case "Permisos":
-                    parrafo.textContent = texto;
+                    textoPermiso = texto.split(" ")[0]+" manda a "+texto.split(" ")[1]
+                    parrafo.textContent = textoPermiso;
 
                     // Creamos un enlace en caso de que sea necesario borrar el permiso del usuario
                     enlace_elim.setAttribute("href","index.php?route=permits/delete&jefe="+dato["Id_Jefe"]+"&empleado="+dato["Id_Usuario"]);

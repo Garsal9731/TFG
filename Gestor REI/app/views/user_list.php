@@ -21,6 +21,7 @@
 ?>
     <div class="ajax">
         <h1>Usuarios</h1>
+        <h3>Lista de todos los usuarios registrados en esta institución.</h3>
         <div class="ajax">
             <div class="buscador">
                 <input id="buscador" type="text" placeholder="Buscar Usuario..." name="ajax"><i id="lupa" class="fa-solid fa-magnifying-glass"></i>

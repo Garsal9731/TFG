@@ -40,7 +40,8 @@
     <a class="botonEnlace" href="index.php?route=core/logoff">
         <div class="boton">                
             <p>Cerrar Sesión</p>
-            <i class="fa-solid fa-door-open"></i>
+            <i class="cerrarSesion fa-solid fa-door-open"></i>
         </div>
     </a>
 </div>
+<script src="./JS/evitarAtras.js"></script>

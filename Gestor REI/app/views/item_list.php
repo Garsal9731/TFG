@@ -27,6 +27,7 @@
 ?>
     <div class="ajax">
         <h1>Objetos</h1>
+        <h3>Lista de todos los objetos de la institución.</h3>
         <div class="ajax">
             <div class="buscador">
                 <input id="buscador" type="text" placeholder="Buscar Objeto..." name="ajax"><i id="lupa" class="fa-solid fa-magnifying-glass"></i>

@@ -15,6 +15,7 @@
 ?>
     <div class="ajax">
         <h1>Instituciones</h1>
+        <h3>Lista de todas las instituciones registradas.</h3>
         <div class="ajax">
             <div class="buscador">
                 <input id="buscador" type="text" placeholder="Buscar Institución..." name="ajax"><i id="lupa" class="fa-solid fa-magnifying-glass"></i>

@@ -26,7 +26,12 @@
         </p>
         <p>
             <label for="fechaEstimada">Fecha Estimada para terminar:</label>
-            <input type="date" name="fechaEstimada" min="<?php echo date("Y-m-d");?>" value="<?php echo $task["Tiempo_Estimado"];?>"required>
+            <input type="date" name="fechaEstimada" value="<?php echo $task["Tiempo_Estimado"];?>"required>
+        </p>
+        <input name="id" type="hidden" value="<?php echo $id?>">
+        <p class="botonesForm">
+            <input type="submit" value="Marcar/Desmarcar como completado">
+            <a class="cancelar" href="index.php?route=task/index">Cancelar</a>
         </p>
     </form>
 </div>

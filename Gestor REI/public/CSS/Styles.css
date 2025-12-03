@@ -7,31 +7,24 @@
 }
 :root{
     /* Fondo */
-    /* --fondo:#12181D; */
     --fondo:#304371;
 
     /* Otros */
-    /* --fondoSeg:#E5E2DD; */
     --fondoSeg:#F5F3F5;
     
     /* Call Of Action */
-    /* --COA:#486FE0; */
     --COA:#6589dd;
     --COAOscuro:#6589dd77;
 
     /* Errores y otros */
-    /* --rojo:#D63939; */
     --rojo:#D63939;
     
     /* Texto Alternativo */
-    /* --fondoMain:#2144ad; */
     --fondoMain:#274690;
 
     /* Bordes y texto */
-    /* --negro:#12181D; */
     --negro:#171d22;
-/* ! CAMBIAR MAIN INDEX PARA QUE SEA COMO EL RESTO */
-    /* Texto alternativo */
+
     --blanco:#fff;
 
     --verde:#50C878;
@@ -115,6 +108,15 @@ body{
         }
     }
 
+    & .modal{
+        background-color: rgba(11, 11, 11, 0.5);
+        width: 100%;
+        height: 88%;
+        position: absolute;
+        left: 0%;
+        top: 0%;
+    }
+
     & .avisoCookies{
         display: flex;
         flex-direction: column;
@@ -122,6 +124,11 @@ body{
         color: var(--blanco);
         padding: 1%;
         height: 12%;
+        width: 100%;
+        width: 100%;
+        position: absolute;
+        left: 0%;
+        bottom: 0%;
         justify-content: space-evenly;
         transition: all 0.4s ease-in-out;
 
@@ -180,9 +187,12 @@ body{
                 width: 60%;
                 background-color: var(--fondoSeg);
                 opacity: 0.8;
-                background-image:  linear-gradient(30deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(150deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(30deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(150deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(60deg, var(--COAOscuro) 25%, transparent 25.5%, transparent 75%, var(--COAOscuro) 75%, var(--COAOscuro)), linear-gradient(60deg, var(--COAOscuro) 25%, transparent 25.5%, transparent 75%, var(--COAOscuro) 75%, var(--COAOscuro));
+                /* background-image:  linear-gradient(30deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(150deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(30deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(150deg, var(--COA) 12%, transparent 12.5%, transparent 87%, var(--COA) 87.5%, var(--COA)), linear-gradient(60deg, var(--COAOscuro) 25%, transparent 25.5%, transparent 75%, var(--COAOscuro) 75%, var(--COAOscuro)), linear-gradient(60deg, var(--COAOscuro) 25%, transparent 25.5%, transparent 75%, var(--COAOscuro) 75%, var(--COAOscuro));
                 background-size: 80px 140px;
-                background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+                background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px; */
+                background-image: url(../IMG/fondologin.jpg);
+                background-size: cover;
+                background-repeat: no-repeat;
 
                 display: flex;
                 flex-direction: column;
@@ -208,7 +218,8 @@ body{
                         justify-content: center;
                         align-items: center;
                         border-radius: 50%;
-                        background-color: var(--COA);
+                        background-color: var(--negro);
+                        color: var(--COA);
                     }
 
                     & h3{
@@ -255,7 +266,6 @@ body{
 
                     & input{
                         border: 0px;
-                        border-radius: 10px;
                         font-size: 1.5em;
                         padding: 1%;
                     }
@@ -328,7 +338,7 @@ body{
 
         & >div.barraLateral{
             display: flex;
-            background-color: var(--fondoSeg);
+            background-color: #D2D2D2;
             flex-direction: column;
             justify-content: center;
             overflow: auto;
@@ -369,7 +379,7 @@ body{
                 font-size: 11pt;
                 background-color: var(--COA);
                 width: 100%;
-                height: 10%;
+                height: 8%;
                 display: flex;
                 align-items: center;
                 justify-content: space-evenly;
@@ -377,10 +387,15 @@ body{
                 min-height: 18px;
                 margin-top: 1%;
                 margin-bottom: 1%;
+                text-align: center;
 
                 &:hover{
                     background-color: var(--fondo);
-                    color: var(--COA);
+                    color: var(--blanco);
+                }
+
+                & .cerrarSesion{
+                    padding-right: 12%;
                 }
             }
         }
@@ -446,7 +461,6 @@ body{
                 background-color: var(--COA);
                 color: var(--blanco);
                 padding: 4%;
-                border-radius: 20px;
                 width: 80%;
 
                 & .cuerpoInicial{
@@ -467,15 +481,10 @@ body{
                             text-align: center;
                             margin-bottom: 2%;
                         }
-
-                        & p{
-                            text-align: justify;
-                        }
                     }
 
                     &>p{
                         font-size: 1.6em;
-                        text-align:justify;
 
                         &:first-of-type{
                             text-align: center;
@@ -488,15 +497,18 @@ body{
                         transition: all 0.4s ease-in-out;
                         font-size: 1em;
                         margin: 1%;
-
+                        flex-grow: 1;
+                        width: 100%;
+                        
                         &:hover{
                             color: var(--COA);
                         }
                     }
 
                     & div.botones{
-                        display: grid;
-                        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
                         width: 100%;
 
                         & div.boton{
@@ -505,9 +517,11 @@ body{
                             align-items: center;
                             justify-content: center;
                             height: 110px;
-                            width: 110px;
+                            width: 100%;
                             text-align: center;
                             background-color: var(--fondoMain);
+                            border: 2px solid var(--COA);
+                            outline: 2px solid var(--fondo);
                         }
                     }
                 }
@@ -523,6 +537,31 @@ body{
                     grid-template-columns: 1fr 1fr;
                     column-gap: 4%;
                     justify-items: center;
+
+                    & .botonesForm{
+                        grid-column-start: 1;
+                        grid-column-end: 3;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-evenly;
+                        
+                        & .cancelar{
+                            width: 30%;
+                            height: 70%;
+                            background-color: var(--rojo);
+                            color: var(--blanco);
+                            font-size: 1.2em;
+                            padding: 1%;
+                            border: 0px;
+                            transition: all 0.4s ease-in-out;
+                            margin: 1%;
+                            text-decoration: none;
+                            justify-content: center;
+                            align-content: center;
+                            align-items: center;
+                            display: flex;
+                        }
+                    }
 
                     &.inst{
                         display: flex;
@@ -603,6 +642,7 @@ body{
                                 width: 50%;
                                 height: 50%;
                                 font-size: 1em;
+                                border: none;
                             }
 
                             & label{
@@ -648,6 +688,10 @@ body{
                 /* Titulo de la pagina */
                 & >h1{
                     font-size: 3em;
+                    color: var(--blanco);
+                }
+
+                & h3{
                     color: var(--blanco);
                 }
 
@@ -726,18 +770,17 @@ body{
                         align-items: center;
                         justify-content: center;
                         text-decoration: none;
-                        border: 2px solid var(--fondo);
-                        outline: 2px solid var(--COA);
+                        border: 2px solid var(--COA);
+                        outline: 2px solid var(--fondo);
                         font-size: 1.2em;
-                        color: var(--negro);
-                        background-color: var(--COA);
+                        color: var(--blanco);
+                        background-color: var(--fondoMain);
                         transition: all 0.4s ease-in-out;
                         text-wrap: nowrap;
 
                         &:hover{
-                            border: 2px solid var(--COA);
-                            outline: 2px solid var(--fondo);
-                            color: var(--blanco);
+                            border: 2px solid var(--fondo);
+                            outline: 2px solid var(--COA);
                             background-color: var(--fondo);
                         }
                     }
@@ -882,12 +925,17 @@ body{
                     color: var(--blanco);
                     padding: 1%;
                 }
+                
+                & h3{
+                    color: var(--blanco);
+                }
 
                 /* La cabecera esta vez no es solo el titulo, sino que el boton va incluido junto a él */
                 & div.cabeza{
                     width: 100%;
                     display: grid;
                     grid-template-columns:  1fr 1fr 1fr;
+                    margin-top: 1%;
 
                     /* Botón de creación */
                     & a{
@@ -897,19 +945,19 @@ body{
                         align-items: center;
                         justify-content: center;
                         text-decoration: none;
-                        border: 2px solid var(--fondo);
-                        outline: 2px solid var(--COA);
                         font-size: 1.2em;
-                        color: var(--negro);
-                        background-color: var(--COA);
+                        color: var(--blanco);
                         transition: all 0.4s ease-in-out;
                         text-wrap: nowrap;
                         justify-self: center;
                         padding: 1%;
+                        background-color: var(--fondoMain);
+                        border: 2px solid var(--COA);
+                        outline: 2px solid var(--fondo);
 
                         &:hover{
-                            border: 2px solid var(--COA);
-                            outline: 2px solid var(--fondo);
+                            border: 2px solid var(--fondo);
+                            outline: 2px solid var(--COA);
                             color: var(--blanco);
                             background-color: var(--fondo);
                         }
@@ -1028,7 +1076,7 @@ body{
                 /* Contenedor con los resultados del ajax */
                 & div#resultados_busqueda_C,div#resultados_busqueda_P,#resultados_busqueda_D,#resultados_busqueda_U{
                     width: 100%;
-                    height: 70%;
+                    height: 65%;
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     grid-row-gap: 12%;
@@ -1160,7 +1208,6 @@ body{
 }
 
 @media screen and (max-width:1100px){ 
-
     body{
 
         & .mensajeError{
@@ -1239,7 +1286,6 @@ body{
                             justify-content: center;
                             align-items: center;
                             border-radius: 50%;
-                            background-color: var(--COA);
                         }
 
                         & h3{
@@ -1434,11 +1480,13 @@ body{
                     background-color: var(--COA);
                     border: 2px solid var(--fondoMain);
                     border-radius: 50%;
-                    width: fit-content;
-                    height: 6%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    font-size: 2em;
+                    align-items: center;
+                    height: 6%;
+                    width: 12%;
                 }
 
                 &.visible{
@@ -1469,9 +1517,8 @@ body{
 
                 & a.botonEnlace{
                     text-decoration: none;
-                    color: var(--fondo);
-                    font-size: 11pt;
-                    background-color: var(--COA);
+                    color: var(--negro);
+                    font-size: 16pt;
                     width: 100%;
                     height: 15%;
                     display: flex;
@@ -1479,10 +1526,14 @@ body{
                     justify-content: space-evenly;
                     transition: all 0.4s ease-in-out;
                     min-height: 18px;
+                    margin-bottom: 0%;
 
                     &:hover{
                         background-color: var(--fondo);
                         color: var(--blanco);
+                    }
+                    & .cerrarSesion {
+                        padding-right: 7%;
                     }
                 }
             }
@@ -1595,7 +1646,6 @@ body{
                     background-color: var(--COA);
                     color: var(--blanco);
                     padding: 4% 4% 0% 4%;;
-                    border-radius: 20px;
                     width: 90%;
                     height: 94%;
 
@@ -1628,20 +1678,30 @@ body{
                             }
                         }
 
+                        & a{
+                            margin: 2%;
+                            height: 14%;
+                        }
+
                         & div.botones{
-                            
-                            display: grid;
-                            grid-template-columns: 1fr 1fr;
-                            justify-items: center;
                             align-items: center;
                             width: 100%;
-                            
+                            display: flex;
+                            flex-direction: column;
+                            height: 100%;
+
                             & div.boton{
                                 display: flex;
-                                flex-direction: column;
+                                flex-direction: row;
                                 align-items: center;
                                 font-size: 1.4em;
+                                height: 100%;
+                                justify-content: space-evenly;
 
+                                & .cerrarSesion{
+                                    padding-right: 10%;
+                                }
+                                
                                 & a{
                                     text-decoration: none;
                                     color: var(--blanco);
@@ -1795,8 +1855,22 @@ body{
                             user-select: none;
                         }
                     }
+
+                    & .botonesForm{
+                        flex-direction: column;
+                        height: 20%;
+
+                        & input{
+                            height: 100%;
+                        }
+
+                        & .cancelar{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
                 }  
-                }
+            }
 
                 /* Estilo de Ajax General */
                 & .ajax{
@@ -1809,6 +1883,10 @@ body{
                     /* Titulo de la pagina */
                     & >h1{
                         font-size: 3em;
+                        color: var(--blanco);
+                    }
+
+                    & h3{
                         color: var(--blanco);
                     }
 
@@ -1986,6 +2064,10 @@ body{
                         font-size: 1.4em;
                         color: var(--blanco);
                         padding: 1%;
+                    }
+
+                    & h3{
+                        color: var(--blanco);
                     }
 
                     /* La cabecera esta vez no es solo el titulo, sino que el boton va incluido junto a él */

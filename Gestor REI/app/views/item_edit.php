@@ -46,8 +46,11 @@
     <?php if($item["Foto"]!=="no"){?>
         </div>
     <?php };?>
+    <p class="botonesForm">
+        <input type="submit" value="Editar Objeto">
+        <a class="cancelar" href="index.php?route=item/index">Cancelar</a>
+    </p>
     <input type="hidden" id="fotoAnt" name="fotoAnt" value="<?php echo $item["Foto"]?>">
-    <input type="submit" value="Editar Objeto">
 </form>
 </div>
 <?php

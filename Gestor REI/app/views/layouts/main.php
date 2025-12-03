@@ -50,7 +50,7 @@
                     <?php if($_SESSION["loginData"]["Privilegios"]==4){?>
                         <a class="botonEnlace" href="index.php?route=inst/index">Insituciones<i class="fa-solid fa-building"></i></a>
                     <?php };?>
-                    <a class="botonEnlace" href="index.php?route=core/logoff">Cerrar Sesión <i class="fa-solid fa-door-open"></i></a>
+                    <a class="botonEnlace" href="index.php?route=core/logoff">Cerrar Sesión <i class="cerrarSesion fa-solid fa-door-open"></i></a>
                 </div>
                 <script src="./JS/atras.js"></script>
             <?php };?>

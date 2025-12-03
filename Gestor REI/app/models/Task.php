@@ -178,4 +178,20 @@
             $sql = "SELECT Id_Tarea, Id_Creador_Tarea, Fecha_Creación, Tiempo_Estimado, Nombre_Tarea, Detalles, Estado, (SELECT Nombre FROM Usuario WHERE Id_Usuario=$userId) AS 'Nombre_Usuario' FROM Tarea INNER JOIN Tarea_Asignadas ON Tarea_Asignadas.Tarea_Id_Tarea=Tarea.Id_Tarea  WHERE Tarea.Id_Creador_Tarea=$userId OR Tarea_Asignadas.Usuario_Id_Usuario=$userId ORDER BY Id_Tarea DESC;";
             return $this->query($sql)->fetchAll();
         }
+
+        /**
+         * Actualizar fecha
+         * 
+         * Actualiza la fecha final de la tarea y el estado de la tarea
+         * 
+         * @param int $id Id de la tarea.
+         * @param date $fechaActual Fecha de modificación de la tarea.
+         * @param string $actualiado Estado de la tarea, Pendiente a Completa y viceversa.
+         * 
+         * @return void
+         */
+        public function updateDate($id,$fechaActual,$actualizado){
+            $sql = "UPDATE Tarea SET Fecha_Fin = '$fechaActual', Estado = '$actualizado' WHERE Id_Tarea = $id;";
+            $this->query($sql);
+        }
     }

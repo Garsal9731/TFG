@@ -29,7 +29,10 @@
             <label for="foto">Foto Objeto:</label>
             <input type="file" id="foto" name="foto" accept="image/*" />
         </p>
-        <input type="submit" value="Crear Objeto">
+        <p class="botonesForm">
+            <input type="submit" value="Crear Objeto">
+            <a class="cancelar" href="index.php?route=item/index">Cancelar</a>
+        </p>
     </form>
 </div>
 <?php

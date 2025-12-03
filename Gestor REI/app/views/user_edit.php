@@ -24,7 +24,10 @@
             <label for="contracon">Confirmar Contraseña Usuario:</label>
             <input type="password" id="contracon" name="contracon" onkeyup="revisar()"/>
         </p>
-        <input type="submit" id="guardar" value="Guardar" disabled></input>
+        <p class="botonesForm">
+            <input type="submit" id="guardar" value="Guardar" disabled></input>
+            <a class="cancelar" href="index.php?route=user/index">Cancelar</a>
+        </p>
     </form>
 </div>
 <script src="JS/pass.js"></script>

@@ -1,4 +1,5 @@
 <div class="textoBienvenida">
+    <p>¡Bienvenido al Gestor REI!</p>
     <p>¡Bienvenido! Para Comprobar tus tareas asignadas ve a "Tareas".</p>
     <p>Para comprobar el inventario ve a "Objetos"</p>
     <p>Para modificar los usuarios ve a "Usuarios"</p>
@@ -32,7 +33,8 @@
     <a class="botonEnlace" href="index.php?route=core/logoff">
         <div class="boton">                
             <p>Cerrar Sesión</p>
-            <i class="fa-solid fa-door-open"></i>
+            <i class="cerrarSesion fa-solid fa-door-open"></i>
         </div>
     </a>
 </div>
+<script src="./JS/evitarAtras.js"></script>

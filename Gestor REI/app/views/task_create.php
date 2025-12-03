@@ -35,7 +35,10 @@
                 <option value="Completada">Completada</option>
             </select>
         </p>
-        <input type="submit" value="Crear Tarea">
+        <p class="botonesForm">
+            <input type="submit" value="Crear Tarea">
+            <a class="cancelar" href="index.php?route=task/index">Cancelar</a>
+        </p>
     </form>
 </div>
 <script src="./JS/MultiSelect.js"></script>

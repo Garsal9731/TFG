@@ -12,7 +12,10 @@
             <label for="nombre">Nombre:</label>
             <input type="text" placeholder="Nombre de la institución..." id="nombre" name="nombre" required>
         </p>
-        <input type="submit" value="Crear Institución">
+        <p class="botonesForm">
+            <input type="submit" value="Crear Institución">
+            <a class="cancelar" href="index.php?route=inst/index">Cancelar</a>
+        </p>
     </form>
 </div> 
 <?php

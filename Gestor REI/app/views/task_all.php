@@ -6,14 +6,15 @@
     ob_start();    
 ?>
 <div class="ajaxTareas">
-    <h1>Lista de Tareas de <?php echo $_SESSION["loginData"]["Nombre"];?></h1>
+    <h1>Lista de Tareas de <?php echo $nombre;?></h1>
+    <h3>Todas las tareas relacionadas con <?php echo $nombre;?>.</h3>
     <div class="cabeza">
         <a href="index.php?route=task/create">Crear Tarea</a>
         <a href="index.php?route=task/completed">Tareas Completadas</a>
         <a href="index.php?route=task/created">Tareas Creadas</a>
     </div>
     <div class="cuerpo">
-        <div class="barra"><p class="nombre">Tareas <?php echo $_SESSION["loginData"]["Nombre"];?></p></div>
+        <div class="barra"><p class="nombre">Tareas <?php echo $nombre;?></p></div>
         <div id="cuerpo_pendiente" class="visible">
             <div class="ajax">
                 <div class="buscador">
