@@ -1,4 +1,4 @@
-* [ ] **Proyecto Gestor Rei**:
+* [X] **Proyecto Gestor Rei**:
   * [X] **RF-1 Gestión de usuarios**
     * [X] **RF1.1** Registro Usuarios
     * [X] **RF1.2** Dar baja usuarios Usuarios
@@ -12,7 +12,7 @@
     * [X] **RNF1.1** Crear Promedios de los datos del usuario (tareas completadas, etc)
     * [X] **RNF1.2** Gestión de expresiones regulares.
     * [X] **RNF1.2** Gestión seguridad del usuario.
-  * [ ] **RF-2 Tareas**
+  * [X] **RF-2 Tareas**
     * [X] **RF2.1** Registrar tareas
     * [X] **RF2.2** Eliminar tareas
     * [X] **RF2.3** Cambiar estados tarea
@@ -21,7 +21,7 @@
     * [X] **RF2.6** Dar nombre a la tarea
     * [X] **RF2.7** Dar una descripción a la tarea
     * [X] **RF2.8** Dar un tiempo estimado de la tarea
-    * [ ] **RFN2.1** Crear sistema de respuesta de asignado a creador
+    * [X] **RFN2.1** Crear sistema de respuesta de asignado a creador
   * [X] **RF-3 Institución**
     * [X]  **RF3.1** Crear instituciones (o centros)
     * [X]  **RF3.2** Dar de baja instituciones
