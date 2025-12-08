@@ -1,12 +1,12 @@
-* [ ] Toda la documentación
+* [X] Toda la documentación
 * [X] Interfaz completa
-* [ ] Control de errores
+* [ ] Más Control de errores
 * [X] Tipo de dato en base de datos (datetime a date)
 * [X] Uso para cookies
 * [X] Rehacer versión móvil
 * [X] Reestructurar fichas de objetos.
 * [X] Añadir fotos productos a fichas de objetos (opcional)
-* [ ] Mejorar página de permisos de usuarios.
+* [X] Mejorar página de permisos de usuarios.
 * [X] Hacer que se puedan quitar los permisos de los usuarios
 * [X] Dividir página de tareas en subpaginas de completadas, pendientes y creadas
 * [X] Fade in al Focus de botón de menús barra lateral
